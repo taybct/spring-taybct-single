@@ -1,0 +1,295 @@
+# 服务器配置
+server:
+  port: 9102
+# Spring
+spring:
+  main:
+    #springCloud 的2.1.0以上版本的，将不再默认支持 FeignClient 的name属性 的相同名字。
+    #即 ：多个接口上的@FeignClient(“相同服务名”)会报错，overriding is disabled(覆盖 是 禁止的/关闭的)。
+    allow-bean-definition-overriding: true
+  application:
+    # 应用名称
+    name: gateway
+  profiles:
+    active: dev
+  cloud:
+    # 使用 nacos 注册发现和配置
+    nacos:
+      username: nacos
+      password: nacos
+      discovery:
+        # 服务注册地址
+        server-addr: 127.0.0.1:8848
+        # 命名空间
+        namespace: taybct-3-2-x
+        # 配置分组
+        group: ${spring.profiles.active}
+      config:
+        # 服务注册地址
+        server-addr: 127.0.0.1:8848
+        # 命名空间
+        namespace: taybct-3-2-x
+        # 配置分组
+        group: ${spring.profiles.active}
+        # 配置文件格式
+        file-extension: yml
+        # 共享配置
+        shared-configs:
+          - data-id: ${taybct.config-prefix}.${spring.cloud.nacos.config.file-extension}      # 基本配置
+            group: ${spring.cloud.nacos.config.group}
+            refresh: true
+          - data-id: ${taybct.config-prefix}-global-exception.${spring.cloud.nacos.config.file-extension}     # 全局异常配置
+            group: ${spring.cloud.nacos.config.group}
+            refresh: true
+          - data-id: ${taybct.config-prefix}-redis.${spring.cloud.nacos.config.file-extension}      # redis 缓存
+            group: ${spring.cloud.nacos.config.group}
+            refresh: true
+    sentinel:
+      # 取消控制台懒加载
+      eager: true
+      transport:
+        # 控制台地址
+        dashboard: 127.0.0.1:8718
+        port: 8719
+      # nacos 配置持久化
+      datasource:
+        ds1:
+          # 用文件来定义
+          #file:
+          #  file: classpath:sentinel-taybct-gateway-dev.json
+          #  data-type: json
+          #  rule-type: flow
+          # 用 nacos 管理
+          nacos:
+            username: ${spring.cloud.nacos.username}
+            password: ${spring.cloud.nacos.password}
+            # nacos地址
+            server-addr: ${spring.cloud.nacos.config.server-addr}
+            # nacos 命名空间
+            namespace: ${spring.cloud.nacos.config.namespace}
+            # nacos 分组
+            group-id: ${spring.profiles.active}
+            # nacos中配置文件的data-id
+            data-id: sentinel-${spring.application.name}.json
+            # 规则类型 流控
+            rule-type: flow
+            # 数据类型
+            data-type: json
+            #data-type: custom
+            #converter-class:
+      log:
+        # 日志存放路径
+        dir: ./logs/sentinel/${spring.application.name}/
+    gateway:
+      # 网关跨域配置
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            #是否允许cookie跨域  true允许
+            allowCredentials: true
+            #允许跨域的url * 则允许全部
+            allowedOriginPatterns: '*'
+            # 允许跨域的方法 * 则全部
+            allowedMethods: '*'
+            # 跨域预检时间
+            maxAge: 3600
+      discovery:
+        locator:
+          # 开启从注册中心动态创建路由的功能
+          enabled: true
+          # 使用小写服务名，默认是大写
+          lowerCaseServiceId: true
+      routes:
+        # 鉴权模块
+        - id: auth
+          uri: lb://auth
+          predicates:
+            - Path=/auth/**
+          filters:
+            - StripPrefix=1
+        # 系统模块
+        - id: module-system
+          uri: lb://module-system
+          predicates:
+            - Path=/system/**
+          filters:
+            - StripPrefix=1
+        # 文件服务
+        - id: admin-file
+          uri: lb://admin-file
+          predicates:
+            - Path=/admin-file/**
+          filters:
+            - StripPrefix=1
+        # 日志管理
+        - id: admin-log
+          uri: lb://admin-log
+          predicates:
+            - Path=/admin-log/**
+          filters:
+            - StripPrefix=1
+        # 代理
+        - id: taybct-admin-proxy
+          uri: lb://taybct-admin-proxy
+          predicates:
+            - Path=/admin-proxy/**
+          filters:
+            - StripPrefix=1
+        # 测试模块2
+        - id: module2
+          uri: lb://module2
+          predicates:
+            - Path=/module2/**
+          filters:
+            - StripPrefix=1
+        # 任务调度模块
+        - id: module-scheduling
+          uri: lb://module-scheduling
+          predicates:
+            - Path=/scheduling/**
+          filters:
+            - StripPrefix=1
+        # 流程中心
+        - id: module-logic-flow
+          uri: lb://module-logic-flow
+          predicates:
+            - Path=/lf/**
+          filters:
+            - StripPrefix=1
+taybct:
+  config-prefix: taybct
+  rsa:
+    # resources 目录下的证书
+    resource: rsa.jks
+    # 生成证书的时候配置的 alias
+    alias: rsa
+    # 生成证书的时候配置的 密码
+    password: taybct
+    type:
+      LIMITED:
+        resource: limited.jks
+        alias: limited
+        password: taybct
+        expire-check: true
+  # 安全配置
+  secure:
+    # 不校验白名单
+    ignore:
+      urls:
+        - "/auth/oauth/**"
+        - "/oauth/logout"
+        - "/data/**"
+        - "/login/**"
+        - "/logout/**"
+        - "/admin-file/statics/**"
+        - "/system/v1/params/cache/sys_title"
+        - "/error"
+        # 静态资源
+        - "/csrf"
+        - "/error"
+        - "/static/**"
+        - "/locate/**"
+        - "/favicon.ico"
+        # 文件
+        - "/admin-file/statics/**"
+        # Monitor
+        - "/assets/**"
+        - "/variables.css"
+        - "/login"
+        - "/actuator/**"
+        - "/instances/**"
+        # 验证码
+        - "/captcha"
+        - "/enableCaptcha"
+        # 允许获取公钥接口的访问
+        - "/rsa/publicKey"
+        - "/sm2/publicKey"
+        # swagger
+        - "/*/v3/api-docs"
+        - "/*/v3/api-docs/default"
+        - "/v3/**"
+        - "/doc.html"
+        - "/swagger-ui/**"
+        - "/swagger-resources"
+        - "/swagger-resources/**"
+        - "/webjars/**"
+        - "/swagger-ui.html"
+        # 注册客户端
+        - "/registeredClient"
+        - "/es/**"
+      captcha-grant-type:
+        - "refresh_token" # 刷新令牌不需要验证码
+    captcha-urls: # 需要验证码的请求
+      - "/auth/oauth/token"
+      - "/auth/oauth/login"
+    captcha-authorizations:
+      - "Basic dGF5YmN0X3BjOmUxMGFkYzM5NDliYTU5YWJiZTU2ZTA1N2YyMGY4ODNl"
+    allow-when-no-match: true
+knife4j:
+  gateway:
+    # 是否开启
+    enabled: true
+    # 排序规则(tag/operation排序自4.2.0版本新增)
+    # 取值：alpha-默认排序规则，官方swagger-ui默认实现,order-Knife4j提供的增强排序规则，开发者可扩展x-order，根据数值来自定义排序
+    tags-sorter: order
+    operations-sorter: order
+    # 指定服务发现的模式聚合微服务文档，并且是默认`default`分组
+    strategy: discover
+    discover:
+      enabled: true
+      # 指定版本号(Swagger2|OpenAPI3)
+      version: openapi3
+      # 需要排除的微服务(eg:网关服务)
+      excluded-services:
+        - taybct-gateway
+      # 各个聚合服务的个性化配置，key:注册中心中的服务名称，value：个性化配置
+      service-config:
+        auth:
+          # 排序
+          order: 1
+          # 前端显示名称
+          group-name: 鉴权模块
+          # 重新指定basePath，一般在OpenAPI3规范中需要
+          context-path: /
+        module-system:
+          # 排序
+          order: 2
+          # 前端显示名称
+          group-name: 系统管理
+          # 重新指定basePath，一般在OpenAPI3规范中需要
+          context-path: /
+        module-scheduling:
+          # 排序
+          order: 3
+          # 前端显示名称
+          group-name: 任务调度
+          # 重新指定basePath，一般在OpenAPI3规范中需要
+          context-path: /
+        admin-file:
+          # 排序
+          order: 4
+          # 前端显示名称
+          group-name: 文件管理
+          # 重新指定basePath，一般在OpenAPI3规范中需要
+          context-path: /
+        admin-log:
+          # 排序
+          order: 5
+          # 前端显示名称
+          group-name: 日志管理
+          # 重新指定basePath，一般在OpenAPI3规范中需要
+          context-path: /
+        module-lf:
+          # 排序
+          order: 6
+          # 前端显示名称
+          group-name: 流程引擎
+          # 重新指定basePath，一般在OpenAPI3规范中需要
+          context-path: /
+        module-es:
+          # 排序
+          order: 7
+          # 前端显示名称
+          group-name: 搜索引擎
+          # 重新指定basePath，一般在OpenAPI3规范中需要
+          context-path: /

@@ -1,0 +1,58 @@
+[
+  {
+    "resource": "module-system",
+    "count": 200,
+    "grade": 1,
+    "limitApp": "default",
+    "strategy": 0,
+    "controlBehavior": 0
+  },
+  {
+    "resource": "module-scheduling",
+    "count": 200,
+    "grade": 1,
+    "limitApp": "default",
+    "strategy": 0,
+    "controlBehavior": 0
+  },
+  {
+    "resource": "module-lf",
+    "count": 200,
+    "grade": 1,
+    "limitApp": "default",
+    "strategy": 0,
+    "controlBehavior": 0
+  },
+  {
+    "resource": "module-es",
+    "count": 200,
+    "grade": 1,
+    "limitApp": "default",
+    "strategy": 0,
+    "controlBehavior": 0
+  },
+  {
+    "resource": "auth",
+    "count": 200,
+    "grade": 1,
+    "limitApp": "default",
+    "strategy": 0,
+    "controlBehavior": 0
+  },
+  {
+    "resource": "admin-file",
+    "count": 200,
+    "grade": 1,
+    "limitApp": "default",
+    "strategy": 0,
+    "controlBehavior": 0
+  },
+  {
+    "resource": "admin-log",
+    "count": 200,
+    "grade": 1,
+    "limitApp": "default",
+    "strategy": 0,
+    "controlBehavior": 0
+  }
+]

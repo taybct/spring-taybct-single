@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<settings xmlns="http://maven.apache.org/SETTINGS/1.2.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.2.0 https://maven.apache.org/xsd/settings-1.2.0.xsd">
+    <localRepository>D:/data/maven/repo</localRepository>
+    <!--maven 默认仓库的搜索顺序如下：
+    本地仓库 -> settings>profiles>repo
+    -> pom>profile>repo
+    -> pom>repo
+    -> settings>mirror
+    -> central
+    -->
+    <pluginGroups>
+        <pluginGroup>org.sonatype.plugins</pluginGroup>
+    </pluginGroups>
+    <mirrors>
+        <!--中央仓库配置
+        <mirror>
+            <id>repo2</id>
+            <name>central</name>
+            <mirrorOf>central</mirrorOf>
+            <url>http://repo2.maven.org/maven2</url>
+        </mirror>  	-->
+
+        <!--Maven 中央仓库配置-->
+        <!--还需要在 IDEA 里面配置 -Dmaven.wagon.http.ssl.insecure=true -Dmaven.wagon.http.ssl.allowall=true-->
+        <mirror>
+            <id>central-repos1</id>
+            <name>Central Repository 2</name>
+            <mirrorOf>central</mirrorOf>
+            <url>https://repo1.maven.org/maven2/</url>
+        </mirror>
+        <!--阿里云配置-->
+        <mirror>
+            <id>aliyunmaven-public</id>
+            <name>aliyun google maven repo</name>
+            <!-- 如果找不到包打包这个关闭下面的 gitlab -->
+            <!-- <mirrorOf>*,!github</mirrorOf>-->
+            <!-- 如果找不到包关闭这个打开上面的 github -->
+            <mirrorOf>*,!gitlab,!github</mirrorOf>
+            <url>https://maven.aliyun.com/repository/public</url>
+        </mirror>
+
+    </mirrors>
+    <profiles>
+        <profile>
+            <id>dev</id>
+            <repositories>
+
+                <!--中央仓库配置-->
+                <repository>
+                    <id>central</id>
+                    <url>https://repo1.maven.org/maven2</url>
+                    <releases><enabled>true</enabled></releases>
+                    <snapshots><enabled>true</enabled></snapshots>
+                </repository>
+
+            </repositories>
+            <pluginRepositories>
+
+                <pluginRepository>
+                    <id>alimaven-plugin</id>
+                    <url>https://maven.aliyun.com/repository/public</url>
+                    <layout>default</layout>
+                    <!-- 是否开启 release 版构件下载 -->
+                    <releases>
+                        <enabled>true</enabled>
+                    </releases>
+                    <!-- 是否开启 snapshot 版构件下载 -->
+                    <snapshots>
+                        <enabled>true</enabled>
+                    </snapshots>
+                </pluginRepository>
+
+                <pluginRepository>
+                    <id>central</id>
+                    <url>http://repo2.maven.org/maven2</url>
+                    <releases><enabled>true</enabled></releases>
+                    <snapshots><enabled>true</enabled></snapshots>
+                </pluginRepository>
+
+            </pluginRepositories>
+        </profile>
+    </profiles>
+    <activeProfiles>
+        <activeProfile>dev</activeProfile>
+    </activeProfiles>
+</settings>
+

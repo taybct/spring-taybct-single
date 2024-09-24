@@ -1,0 +1,63 @@
+# swagger 接口文档
+swagger:
+  title: 流程中心
+# 服务器配置
+server:
+  port: 8103
+# Spring
+spring:
+  main:
+    #springCloud 的2.1.0以上版本的，将不再默认支持 FeignClient 的name属性 的相同名字。
+    #即 ：多个接口上的@FeignClient(“相同服务名”)会报错，overriding is disabled(覆盖 是 禁止的/关闭的)。
+    allow-bean-definition-overriding: true
+  application:
+    # 应用名称
+    name: module-lf
+  profiles:
+    active: dev
+  cloud:
+    # 使用 nacos 注册发现和配置
+    nacos:
+      username: nacos
+      password: nacos
+      discovery:
+        # 服务注册地址
+        server-addr: 127.0.0.1:8848
+        # 命名空间
+        namespace: taybct-3-2-x
+        # 配置分组
+        group: ${spring.profiles.active}
+      config:
+        # 服务注册地址
+        server-addr: 127.0.0.1:8848
+        # 命名空间
+        namespace: taybct-3-2-x
+        # 配置分组
+        group: ${spring.profiles.active}
+        # 配置文件格式
+        file-extension: yml
+        # 共享配置
+        shared-configs:
+          - data-id: ${taybct.config-prefix}.${spring.cloud.nacos.config.file-extension}      # 基本配置
+            group: ${spring.cloud.nacos.config.group}
+            refresh: true
+          - data-id: ${taybct.config-prefix}-global-exception.${spring.cloud.nacos.config.file-extension}     # 全局异常配置
+            group: ${spring.cloud.nacos.config.group}
+            refresh: true
+          - data-id: ${taybct.config-prefix}-datasource.${spring.cloud.nacos.config.file-extension}      # 数据源
+            group: ${spring.cloud.nacos.config.group}
+            refresh: true
+          - data-id: ${taybct.config-prefix}-mybatis.${spring.cloud.nacos.config.file-extension}     # mybatis-plus 配置
+            group: ${spring.cloud.nacos.config.group}
+            refresh: true
+          - data-id: ${taybct.config-prefix}-swagger.${spring.cloud.nacos.config.file-extension}     # swagger 配置
+            group: ${spring.cloud.nacos.config.group}
+            refresh: true
+          - data-id: ${taybct.config-prefix}-data-scope.${spring.cloud.nacos.config.file-extension}     # data scope 配置
+            group: ${spring.cloud.nacos.config.group}
+            refresh: true
+          - data-id: ${taybct.config-prefix}-mq.${spring.cloud.nacos.config.file-extension}     # rabbit mq 配置
+            group: ${spring.cloud.nacos.config.group}
+            refresh: true
+taybct:
+  config-prefix: taybct

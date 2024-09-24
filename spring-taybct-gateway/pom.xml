@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>spring-taybct</artifactId>
+        <groupId>io.github.mangocrisp</groupId>
+        <version>3.2.0-alpha.1</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>spring-taybct-gateway</artifactId>
+    <name>${project.artifactId}</name>
+    <packaging>jar</packaging>
+    <description>网关-运行</description>
+    <url>https://github.com/mangocrisp/spring-taybct</url>
+
+    <licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+        </license>
+    </licenses>
+
+    <organization>
+        <name>io.github.mangocrisp</name>
+        <url>https://github.com/mangocrisp</url>
+    </organization>
+
+    <developers>
+        <developer>
+            <id>crisp</id>
+            <name>Mango Crisp</name>
+            <email>15014633363@163.com</email>
+            <url>https://mangocrisp.github.io</url>
+            <roles>
+                <role>Project Manager</role>
+                <role>Architect</role>
+            </roles>
+            <organization>io.github.mangocrisp</organization>
+            <organizationUrl>https://github.com/mangocrisp</organizationUrl>
+            <timezone>Asia/Shanghai</timezone>
+        </developer>
+    </developers>
+
+    <scm>
+        <connection>scm:git:https://github.com/mangocrisp/spring-taybct.git</connection>
+        <developerConnection>scm:git:https://gitee.com/mangocrisp/spring-taybct.git</developerConnection>
+        <url>https://github.com/mangocrisp/spring-taybct</url>
+    </scm>
+
+    <properties>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+    </properties>
+
+    <dependencies>
+
+        <!--公共基础模块-->
+        <dependency>
+            <groupId>io.github.mangocrisp</groupId>
+            <artifactId>spring-taybct-tool-core</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <!--启动模块-->
+        <dependency>
+            <groupId>io.github.mangocrisp</groupId>
+            <artifactId>spring-taybct-tool-launch</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <!-- SpringCloud Gateway -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-gateway</artifactId>
+            <version>${spring-cloud-starter-gateway.version}</version>
+        </dependency>
+
+        <!-- OAuth2资源服务器-->
+        <!--security-->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-config</artifactId>
+            <version>${spring-security-config.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-oauth2-resource-server</artifactId>
+            <version>${spring-security-oauth2-resource-server.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-oauth2-client</artifactId>
+            <version>${spring-security-oauth2-client.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-oauth2-jose</artifactId>
+            <version>${spring-security-oauth2-jose.version}</version>
+        </dependency>
+
+        <!-- spring 客户端负载均衡器 -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-loadbalancer</artifactId>
+            <version>${spring-cloud-starter-loadbalancer.version}</version>
+        </dependency>
+
+        <!-- SpringCloud Alibaba Nacos -->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+            <version>${spring-cloud-alibaba.version}</version>
+        </dependency>
+        <!-- SpringCloud Alibaba Nacos Config -->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
+            <version>${spring-cloud-alibaba.version}</version>
+        </dependency>
+
+        <!-- Sentinel流量控制、熔断降级 -->
+        <!--sentinel gateway-->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-alibaba-sentinel-gateway</artifactId>
+            <version>${spring-cloud-alibaba.version}</version>
+        </dependency>
+        <!-- SpringCloud Alibaba Sentinel -->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-sentinel</artifactId>
+            <version>${spring-cloud-alibaba.version}</version>
+            <!--排除自带的 fastjson 与 nacos 的 fastjson 冲突 解决 nacos 配置 sentinel 规则不生效的问题-->
+            <exclusions>
+                <exclusion>
+                    <groupId>com.alibaba.fastjson2</groupId>
+                    <artifactId>fastjson2</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <!--让 sentinel 的配置可以从 nacos 上拿-->
+        <dependency>
+            <groupId>com.alibaba.csp</groupId>
+            <artifactId>sentinel-datasource-nacos</artifactId>
+            <version>${sentinel-datasource-nacos.version}</version>
+        </dependency>
+        <!--Sentinel网关限流规则会转换为热点规则 天坑呀！-->
+        <!--<dependency>
+            <groupId>com.alibaba.csp</groupId>
+            <artifactId>sentinel-parameter-flow-control</artifactId>
+        </dependency>-->
+
+        <!--Redis-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+            <version>${spring-boot.version}</version>
+        </dependency>
+
+        <!-- SpringBoot Actuator 端点通过 JMX 和HTTP 公开暴露给外界访问-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+            <version>${spring-boot.version}</version>
+            <optional>true</optional>
+            <scope>provided</scope>
+        </dependency>
+        <!-- SpringBoot Admin Client 客户端 -->
+        <dependency>
+            <groupId>de.codecentric</groupId>
+            <artifactId>spring-boot-admin-starter-client</artifactId>
+            <version>${spring-boot-admin.version}</version>
+            <optional>true</optional>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.nimbusds</groupId>
+            <artifactId>nimbus-jose-jwt</artifactId>
+            <version>${nimbus-jose-jwt.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-rsa</artifactId>
+            <version>${spring-security-rsa.version}</version>
+        </dependency>
+
+        <!--公共模块（偏业务）-->
+        <dependency>
+            <groupId>io.github.mangocrisp</groupId>
+            <artifactId>spring-taybct-common</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <!-- knife4j 集成 springdoc-openapi Gateway网关聚合-->
+        <dependency>
+            <groupId>com.github.xiaoymin</groupId>
+            <artifactId>knife4j-gateway-spring-boot-starter</artifactId>
+            <version>${knife4j.version}</version>
+            <optional>true</optional>
+            <scope>provided</scope>
+        </dependency>
+
+    </dependencies>
+
+</project>

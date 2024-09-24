@@ -1,0 +1,146 @@
+# 服务器配置
+server:
+  port: 9000
+# Spring
+spring:
+  main:
+    #springCloud 的2.1.0以上版本的，将不再默认支持 FeignClient 的name属性 的相同名字。
+    #即 ：多个接口上的@FeignClient(“相同服务名”)会报错，overriding is disabled(覆盖 是 禁止的/关闭的)。
+    allow-bean-definition-overriding: true
+  application:
+    # 应用名称
+    name: auth
+  profiles:
+    # 环境配置
+    active: dev
+  cloud:
+    # 使用 nacos 注册发现和配置
+    nacos:
+      username: nacos
+      password: nacos
+      discovery:
+        # 服务注册地址
+        server-addr: 127.0.0.1:8848
+        # 命名空间
+        namespace: taybct-3-2-x
+        # 配置分组
+        group: ${spring.profiles.active}
+      config:
+        # 服务注册地址
+        server-addr: 127.0.0.1:8848
+        # 命名空间
+        namespace: taybct-3-2-x
+        # 配置分组
+        group: ${spring.profiles.active}
+        # 配置文件格式
+        file-extension: yml
+        # 共享配置
+        shared-configs:
+          - data-id: ${taybct.config-prefix}.${spring.cloud.nacos.config.file-extension}      # 基本配置
+            group: ${spring.cloud.nacos.config.group}
+            refresh: true
+          - data-id: ${taybct.config-prefix}-global-exception.${spring.cloud.nacos.config.file-extension}     # 全局异常配置
+            group: ${spring.cloud.nacos.config.group}
+            refresh: true
+          - data-id: ${taybct.config-prefix}-redis.${spring.cloud.nacos.config.file-extension}      # redis 缓存
+            group: ${spring.cloud.nacos.config.group}
+            refresh: true
+          - data-id: ${taybct.config-prefix}-swagger.${spring.cloud.nacos.config.file-extension}     # swagger 配置
+            group: ${spring.cloud.nacos.config.group}
+            refresh: true
+          - data-id: ${taybct.config-prefix}-datasource.${spring.cloud.nacos.config.file-extension}      # 数据源
+            group: ${spring.cloud.nacos.config.group}
+            refresh: true
+          - data-id: ${taybct.config-prefix}-dubbo.${spring.cloud.nacos.config.file-extension}      # 数据源
+            group: ${spring.cloud.nacos.config.group}
+            refresh: true
+taybct:
+  config-prefix: taybct
+  rsa:
+    # resources 目录下的证书
+    resource: rsa.jks
+    # 生成证书的时候配置的 alias
+    alias: rsa
+    # 生成证书的时候配置的 密码
+    password: taybct
+    type:
+      JWT:
+        resource: jwt.jks
+        alias: jwt
+        password: taybct
+        expire-check: true
+  # 安全配置
+  secure:
+    # 不校验白名单
+    ignore:
+      urls:
+        - "/oauth/logout"
+        - "/error"
+        # 静态资源
+        - "/csrf"
+        - "/error"
+        - "/static/**"
+        - "/locate/**"
+        - "/favicon.ico"
+        # 文件
+        - "/admin-file/statics/**"
+        # Monitor
+        - "/assets/**"
+        - "/variables.css"
+        - "/login"
+        - "/actuator/**"
+        - "/instances/**"
+        # 验证码
+        - "/captcha"
+        - "/enableCaptcha"
+        # 允许获取公钥接口的访问
+        - "/rsa/publicKey"
+        - "/sm2/publicKey"
+        # swagger
+        - "/*/v3/api-docs"
+        - "/*/v3/api-docs/default"
+        - "/v3/**"
+        - "/doc.html"
+        - "/swagger-ui/**"
+        - "/swagger-resources"
+        - "/swagger-resources/**"
+        - "/webjars/**"
+        - "/swagger-ui.html"
+        # 注册客户端
+        - "/registeredClient"
+      captcha-grant-type:
+        - "refresh_token" # 刷新令牌不需要验证码
+    captcha-urls: # 需要验证码的请求
+      - "/oauth/login"
+    captcha-authorizations:
+      - "Basic dGF5YmN0X3BjOmUxMGFkYzM5NDliYTU5YWJiZTU2ZTA1N2YyMGY4ODNl"
+    allow-when-no-match: true
+    auth:
+      client:
+        client-id: taybct_pc
+        client-secret: e10adc3949ba59abbe56e057f20f883e
+        client-name: "测试客户端"
+        auto-approve: true
+        web-server-redirect-uri: http://127.0.0.1/authorized
+        authorized-grant-types: authorization_code,taybct,password,refresh_token,sms,wechat_qr_code,client_credentials,pki,taybct_refresh
+        scope: message.read,message.write
+        access-token-validity: 7200
+        refresh-token-validity: 86400
+      user:
+        username: root
+        roles: "000000:ROOT"
+        user-id: 1
+        status: 1
+        password: "07403b4a6e23f1a9a3476f5323a063cffd61fad5183ab7f808054f9211d2ea1b"
+  scheduled:
+    pool-size: 20
+    await-termination-seconds: 60
+    thread-name-prefix: "Scheduler-"
+    wait-for-tasks-to-complete-on-shutdown: true
+    tasks:
+      clearAuthCache:
+        task-key: clearAuthCache
+        cron: 0 0/1 * * * ?
+        description: "清理登录超时用户"
+        auto-start: 1
+        sort: 1
