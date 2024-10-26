@@ -1,5 +1,8 @@
 package ${domain.packageName};
 
+import cn.afterturn.easypoi.excel.annotation.Excel;
+import cn.afterturn.easypoi.excel.annotation.ExcelTarget;
+import cn.afterturn.easypoi.entity.PoiBaseConstants;
 import jakarta.validation.constraints.NotBlank;
 import io.github.mangocrisp.spring.taybct.tool.core.constant.DateConstants;
 import jakarta.validation.constraints.Size;
@@ -20,14 +23,10 @@ import java.io.Serial;
 
 /**
 *
-*
-<pre>
 * ${tableClass.remark!}
-* TableName: ${tableClass.tableName}
-* </pre>
+* <br>TableName: ${tableClass.tableName}
 *
 * @author ${author!}
-* @since ${.now?string('yyyy-MM-dd HH:mm:ss')}
 */
 @TableName(value = "${tableClass.tableName}")
 @Data
@@ -35,17 +34,24 @@ import java.io.Serial;
 @AllArgsConstructor
 @ToString
 @Schema(description = "${tableClass.remark!}")
+@ExcelTarget(value = "${tableClass.remark!}")
 public class ${tableClass.shortClassName} implements Serializable {
 
-@TableField(exist = false)
-@Serial
-private static final long serialVersionUID = 1L;
+    @TableField(exist = false)
+    @Serial
+    private static final long serialVersionUID = 1L;
+
+    @Excel(name = "序号", width = 10, needMerge = true, mergeVertical = true, format = PoiBaseConstants.IS_ADD_INDEX)
+    @TableField(exist = false)
+    @Schema(hidden = true)
+    private Integer easy_poi_excel_index = 1;
 
 <#list tableClass.pkFields as field>
     /**
     * ${field.remark!}
     */<#if !field.nullable || field.jdbcType=="VARCHAR">${"\n    "}</#if><#if !field.nullable><#if field.jdbcType=="VARCHAR">@NotBlank(message="[${field.remark!}]不能为空")<#else>@NotNull(message="[${field.remark!}]不能为空")</#if></#if><#if field.jdbcType=="VARCHAR"><#if !field.nullable>${"\n    "}</#if>@Size(max= ${field.columnLength?c},message="编码长度不能超过${field.columnLength?c}")</#if>
     @Schema(description = "${field.remark!}")<#if field.jdbcType=="VARCHAR">${"\n    "}@Length(max= ${field.columnLength?c},message="编码长度不能超过${field.columnLength?c}")</#if>
+    @Excel(name = "${field.remark!}", width = 25, needMerge = true, mergeVertical = true)
     @TableId(value = "${field.columnName}")<#if field.jdbcType=="BIGINT">${"\n    "}@JsonSerialize(using = ToStringSerializer.class)</#if>
     private ${field.shortTypeName} ${field.fieldName};
 </#list>
@@ -55,6 +61,7 @@ private static final long serialVersionUID = 1L;
     * ${field.remark!}
     */<#if !field.nullable || field.jdbcType=="VARCHAR">${"\n    "}</#if><#if !field.nullable><#if field.jdbcType=="VARCHAR">@NotBlank(message="[${field.remark!}]不能为空")<#else>@NotNull(message="[${field.remark!}]不能为空")</#if></#if><#if field.jdbcType=="VARCHAR"><#if !field.nullable>${"\n    "}</#if>@Size(max= ${field.columnLength?c},message="编码长度不能超过${field.columnLength?c}")</#if>
     @Schema(description = "${field.remark!}")<#if field.jdbcType=="VARCHAR">${"\n    "}@Length(max= ${field.columnLength?c},message="编码长度不能超过${field.columnLength?c}")</#if>
+    @Excel(name = "${field.remark!}"<#if field.jdbcType=="TIMESTAMP">, format = DateConstants.format.YYYY_MM_DD_HH_mm_ss, timezone = "GMT+8"</#if>, width = 25, needMerge = true, mergeVertical = true)
     @TableField(value = "${field.columnName}")<#if field.jdbcType=="TIMESTAMP">${"\n    "}@DateTimeFormat(pattern = DateConstants.format.YYYY_MM_DD_HH_mm_ss)${"\n    "}@JsonFormat(pattern = DateConstants.format.YYYY_MM_DD_HH_mm_ss)</#if><#if field.jdbcType=="BIGINT">${"\n    "}@JsonSerialize(using = ToStringSerializer.class)</#if>
     private ${field.shortTypeName} ${field.fieldName};
 </#list>

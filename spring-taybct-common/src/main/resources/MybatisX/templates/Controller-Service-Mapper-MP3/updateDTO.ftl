@@ -26,8 +26,7 @@ import java.time.LocalDateTime;
 
 /**
 *
-*
-<pre>
+* <pre>
 * ${tableClass.remark!} 修改对象
 * TableName: ${tableClass.tableName} 修改对象
 * </pre>
@@ -43,8 +42,8 @@ import java.time.LocalDateTime;
 @Schema(description = "【${tableClass.remark!}】修改对象")
 public class ${tableClass.shortClassName}UpdateDTO implements Serializable, ModelConvertible<${tableClass.shortClassName}> {
 
-@Serial
-private static final long serialVersionUID = 1L;
+    @Serial
+    private static final long serialVersionUID = 1L;
 
 <#list tableClass.pkFields as field>
     /**
@@ -62,23 +61,23 @@ private static final long serialVersionUID = 1L;
     private ${field.shortTypeName} ${field.fieldName};
 </#list>
 
-@Hidden
-${tableClass.shortClassName} convertedBean;
+    @Hidden
+    ${tableClass.shortClassName} convertedBean;
 
-@Override
-@Hidden
-public void setConvertedBean(${tableClass.shortClassName} convertedBean) {
-throw new BaseException("not support!");
-}
+    @Override
+    @Hidden
+    public void setConvertedBean(${tableClass.shortClassName} convertedBean) {
+        throw new BaseException("not support!");
+    }
 
-@Override
-public ${tableClass.shortClassName} bean(String... ignoreProperties) {
-${tableClass.shortClassName} bean;
-if ((bean = getConvertedBean()) != null) {
-return bean;
-}
-this.convertedBean = (bean = BeanUtil.copyProperties(this, beanClass(), ignoreProperties));
-return bean;
-}
+    @Override
+    public ${tableClass.shortClassName} bean(String... ignoreProperties) {
+        ${tableClass.shortClassName} bean;
+        if ((bean = getConvertedBean()) != null) {
+            return bean;
+        }
+        this.convertedBean = (bean = BeanUtil.copyProperties(this, beanClass(), ignoreProperties));
+        return bean;
+    }
 
 }

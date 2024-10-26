@@ -23,8 +23,7 @@ import java.io.Serial;
 
 /**
 *
-*
-<pre>
+* <pre>
 * ${tableClass.remark!}下载对象
 * </pre>
 *
@@ -41,9 +40,9 @@ import java.io.Serial;
 @ContentFontStyle(fontName = "微软雅黑", fontHeightInPoints = 12)
 public class ${tableClass.shortClassName}ExpVO implements Serializable {
 
-@Serial
-@ExcelIgnore
-private static final long serialVersionUID = 1L;
+    @Serial
+    @ExcelIgnore
+    private static final long serialVersionUID = 1L;
 
 <#list tableClass.pkFields as field>
     /**

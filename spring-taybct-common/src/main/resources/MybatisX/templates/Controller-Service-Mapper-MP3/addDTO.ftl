@@ -26,33 +26,23 @@ import java.time.LocalDateTime;
 
 /**
 *
-*
-<pre>
-* ${tableClass.remark!} 修改对象
-* TableName: ${tableClass.tableName} 修改对象
+* <pre>
+* ${tableClass.remark!} 新增对象
+* TableName: ${tableClass.tableName} 新增对象
 * </pre>
 *
 * @author ${author!}
 * @since ${.now?string('yyyy-MM-dd HH:mm:ss')}
-* @see ${tableClass.fullClassName}
 */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-@Schema(description = "【${tableClass.remark!}】修改对象")
-public class ${tableClass.shortClassName}UpdateDTO implements Serializable, ModelConvertible<${tableClass.shortClassName}> {
+@Schema(description = "【${tableClass.remark!}】新增对象")
+public class ${tableClass.shortClassName}AddDTO implements Serializable, ModelConvertible<${tableClass.shortClassName}> {
 
-@Serial
-private static final long serialVersionUID = 1L;
-
-<#list tableClass.pkFields as field>
-    /**
-    * ${field.remark!}
-    */<#if !field.nullable || field.jdbcType=="VARCHAR">${"\n    "}</#if><#if !field.nullable><#if field.jdbcType=="VARCHAR">@NotBlank(message="[${field.remark!}]不能为空")<#else>@NotNull(message="[${field.remark!}]不能为空")</#if></#if><#if field.jdbcType=="VARCHAR"><#if !field.nullable>${"\n    "}</#if>@Size(max= ${field.columnLength?c},message="编码长度不能超过${field.columnLength?c}")</#if>
-    @Schema(description = "${field.remark!}")<#if field.jdbcType=="VARCHAR">${"\n    "}@Length(max= ${field.columnLength?c},message="编码长度不能超过${field.columnLength?c}")</#if><#if field.jdbcType=="BIGINT">${"\n    "}@JsonSerialize(using = ToStringSerializer.class)</#if>
-    private ${field.shortTypeName} ${field.fieldName};
-</#list>
+    @Serial
+    private static final long serialVersionUID = 1L;
 
 <#list tableClass.baseBlobFields as field>
     /**
@@ -62,23 +52,22 @@ private static final long serialVersionUID = 1L;
     private ${field.shortTypeName} ${field.fieldName};
 </#list>
 
-@Hidden
-${tableClass.shortClassName} convertedBean;
+    @Hidden
+    ${tableClass.shortClassName} convertedBean;
 
-@Override
-@Hidden
-public void setConvertedBean(${tableClass.shortClassName} convertedBean) {
-throw new BaseException("not support!");
-}
+    @Override
+    @Hidden
+    public void setConvertedBean(${tableClass.shortClassName} convertedBean) {
+        throw new BaseException("not support!");
+    }
 
-@Override
-public ${tableClass.shortClassName} bean(String... ignoreProperties) {
-${tableClass.shortClassName} bean;
-if ((bean = getConvertedBean()) != null) {
-return bean;
-}
-this.convertedBean = (bean = BeanUtil.copyProperties(this, beanClass(), ignoreProperties));
-return bean;
-}
-
+    @Override
+    public ${tableClass.shortClassName} bean(String... ignoreProperties) {
+        ${tableClass.shortClassName} bean;
+        if ((bean = getConvertedBean()) != null) {
+            return bean;
+        }
+        this.convertedBean = (bean = BeanUtil.copyProperties(this, beanClass(), ignoreProperties));
+        return bean;
+    }
 }

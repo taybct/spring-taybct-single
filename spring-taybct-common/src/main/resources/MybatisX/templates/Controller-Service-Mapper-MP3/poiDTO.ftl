@@ -24,8 +24,7 @@ import java.io.Serial;
 
 /**
 *
-*
-<pre>
+* <pre>
 * ${tableClass.remark!}上传对象
 * </pre>
 *
@@ -42,9 +41,9 @@ import java.io.Serial;
 @ContentFontStyle(fontName = "微软雅黑", fontHeightInPoints = 12)
 public class ${tableClass.shortClassName}ImpDTO implements Serializable, ModelConvertible<${tableClass.shortClassName}> {
 
-@Serial
-@ExcelIgnore
-private static final long serialVersionUID = 1L;
+    @Serial
+    @ExcelIgnore
+    private static final long serialVersionUID = 1L;
 
 <#list tableClass.baseBlobFields as field>
     /**
@@ -54,23 +53,23 @@ private static final long serialVersionUID = 1L;
     private ${field.shortTypeName} ${field.fieldName};
 </#list>
 
-@Hidden
-@ExcelIgnore
-${tableClass.shortClassName} convertedBean;
+    @Hidden
+    @ExcelIgnore
+    ${tableClass.shortClassName} convertedBean;
 
-@Override
-@Hidden
-public void setConvertedBean(${tableClass.shortClassName} convertedBean) {
-throw new BaseException("not support!");
-}
+    @Override
+    @Hidden
+    public void setConvertedBean(${tableClass.shortClassName} convertedBean) {
+        throw new BaseException("not support!");
+    }
 
-@Override
-public ${tableClass.shortClassName} bean(String... ignoreProperties) {
-${tableClass.shortClassName} bean;
-if ((bean = getConvertedBean()) != null) {
-return bean;
-}
-this.convertedBean = (bean = BeanUtil.copyProperties(this, beanClass(), ignoreProperties));
-return bean;
-}
+    @Override
+    public ${tableClass.shortClassName} bean(String... ignoreProperties) {
+        ${tableClass.shortClassName} bean;
+        if ((bean = getConvertedBean()) != null) {
+            return bean;
+        }
+        this.convertedBean = (bean = BeanUtil.copyProperties(this, beanClass(), ignoreProperties));
+        return bean;
+    }
 }
