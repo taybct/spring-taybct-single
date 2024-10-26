@@ -18,6 +18,13 @@ import java.util.Map;
 public interface ISysNoticeService extends IBaseService<SysNotice> {
 
     /**
+     * 消除消息通知（全部改为已读）
+     *
+     * @return 是否清除成功
+     */
+    boolean clean();
+
+    /**
      * 用户消息分页
      *
      * @param sqlQueryParams sql 查询参数

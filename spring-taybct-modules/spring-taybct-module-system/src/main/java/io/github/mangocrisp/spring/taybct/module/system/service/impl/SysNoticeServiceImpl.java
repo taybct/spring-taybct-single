@@ -1,5 +1,7 @@
 package io.github.mangocrisp.spring.taybct.module.system.service.impl;
 
+import cn.hutool.core.collection.CollectionUtil;
+import cn.hutool.core.convert.Convert;
 import com.alibaba.fastjson2.JSONObject;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
@@ -38,6 +40,20 @@ public class SysNoticeServiceImpl extends BaseServiceImpl<SysNoticeMapper, SysNo
 
     @Autowired(required = false)
     protected ISysNoticeUserService sysNoticeUserService;
+
+    @Override
+    @Transactional(rollbackFor = Throwable.class)
+    public boolean clean() {
+        Long userId = securityUtil.getLoginUser().getUserId();
+        Set<Long> collect = sysNoticeUserService.list(Wrappers.<SysNoticeUser>lambdaQuery()
+                        .eq(SysNoticeUser::getRelatedId, userId)
+                        .eq(SysNoticeUser::getNoticeType, SysDict.NoticeType.USER.getKey()))
+                .stream().map(SysNoticeUser::getNoticeId).collect(Collectors.toSet());
+        if (CollectionUtil.isNotEmpty(collect)) {
+            updateUserNotices(1, collect);
+        }
+        return true;
+    }
 
     @Override
     public IPage<SysNoticeVO> userNoticesPage(Map<String, Object> sqlQueryParams) {
@@ -95,11 +111,8 @@ public class SysNoticeServiceImpl extends BaseServiceImpl<SysNoticeMapper, SysNo
         params.remove("expansion");
         List<SysNoticeVO> list = Collections.emptyList();
         Map<String, String> relatedCondition = new HashMap<>();
-        sysDictService.cache(SysDictConstants.NOTICE_TYPE).forEach(dict -> {
-            Optional.ofNullable(sqlQueryParams.get(dict.getDictVal()))
-                    .map(Object::toString).ifPresent(value ->
-                            relatedCondition.put(dict.getDictKey(), value));
-        });
+        sysDictService.cache(SysDictConstants.NOTICE_TYPE).stream().filter(sysDict -> sysDict.getDictVal().equalsIgnoreCase("userId"))
+                .forEach(dict -> relatedCondition.put(dict.getDictKey(), Convert.toStr(securityUtil.getLoginUser().getUserId())));
 
         long count = baseMapper.countQuery(relatedCondition, MyBatisUtil.humpToUnderline(params));
         if (count > 0) {

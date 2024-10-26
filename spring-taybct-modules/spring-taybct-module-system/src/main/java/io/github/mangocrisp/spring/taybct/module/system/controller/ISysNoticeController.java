@@ -46,6 +46,11 @@ public interface ISysNoticeController extends BaseController<SysNotice, ISysNoti
      */
     @Operation(summary = "用户通知消息分页")
     @GetMapping("userNoticesPage")
+    @Parameters({
+            @Parameter(name = "title", description = "标题搜索", required = true, in = ParameterIn.QUERY),
+            @Parameter(name = "createTime_ge", description = "创建时间范围开始", required = true, in = ParameterIn.QUERY),
+            @Parameter(name = "createTime_le", description = "创建时间范围结束", required = true, in = ParameterIn.QUERY),
+    })
     @WebLog
     default R<IPage<SysNoticeVO>> userNoticesPage(@RequestParam(required = false) Map<String, Object> sqlQueryParams) {
         return R.data(getBaseService().userNoticesPage(sqlQueryParams));
@@ -87,6 +92,14 @@ public interface ISysNoticeController extends BaseController<SysNotice, ISysNoti
     })
     default R<?> updateUserNotices(@Valid @NotNull @PathVariable Integer status, @Valid @NotNull @RequestBody Collection<Long> noticeIds) {
         return getBaseService().updateUserNotices(status, noticeIds) ? R.ok(String.format("操作%s成功！", getResource())) : R.fail(String.format("操作%s失败！", getResource()));
+    }
+
+    @Operation(summary = "消除消息通知（全部改为已读）")
+    @DeleteMapping("clean")
+    @WebLog
+    @ApiLog(title = "消除消息（全部改为已读）", description = "消除消息（全部改为已读）", type = OperateType.DELETE, isSaveRequestData = false, isSaveResultData = false)
+    default R<?> clean(){
+        return getBaseService().clean() ? R.ok(String.format("操作%s成功！", getResource())) : R.fail(String.format("操作%s失败！", getResource()));
     }
 
 }
