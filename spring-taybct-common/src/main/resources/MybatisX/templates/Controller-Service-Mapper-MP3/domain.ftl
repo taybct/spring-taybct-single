@@ -49,8 +49,8 @@ public class ${tableClass.shortClassName} implements Serializable {
 <#list tableClass.pkFields as field>
     /**
     * ${field.remark!}
-    */<#if !field.nullable || field.jdbcType=="VARCHAR">${"\n    "}</#if><#if !field.nullable><#if field.jdbcType=="VARCHAR">@NotBlank(message="[${field.remark!}]不能为空")<#else>@NotNull(message="[${field.remark!}]不能为空")</#if></#if><#if field.jdbcType=="VARCHAR"><#if !field.nullable>${"\n    "}</#if>@Size(max= ${field.columnLength?c},message="编码长度不能超过${field.columnLength?c}")</#if>
-    @Schema(description = "${field.remark!}")<#if field.jdbcType=="VARCHAR">${"\n    "}@Length(max= ${field.columnLength?c},message="编码长度不能超过${field.columnLength?c}")</#if>
+    */<#if !field.nullable || field.jdbcType=="VARCHAR">${"\n    "}</#if><#if !field.nullable><#if field.jdbcType=="VARCHAR">@NotBlank(message="[${field.remark!}]不能为空")<#else>@NotNull(message="[${field.remark!}]不能为空")</#if></#if><#if field.jdbcType=="VARCHAR"><#if !field.nullable>${"\n    "}</#if>@Size(max= ${field.columnLength?c},message="${field.remark!}长度不能超过${field.columnLength?c}")</#if>
+    @Schema(description = "${field.remark!}")<#if field.jdbcType=="VARCHAR">${"\n    "}@Length(max= ${field.columnLength?c},message="${field.remark!}长度不能超过${field.columnLength?c}")</#if>
     @Excel(name = "${field.remark!}", width = 25, needMerge = true, mergeVertical = true)
     @TableId(value = "${field.columnName}")<#if field.jdbcType=="BIGINT">${"\n    "}@JsonSerialize(using = ToStringSerializer.class)</#if>
     private ${field.shortTypeName} ${field.fieldName};
@@ -59,8 +59,8 @@ public class ${tableClass.shortClassName} implements Serializable {
 <#list tableClass.baseBlobFields as field>
     /**
     * ${field.remark!}
-    */<#if !field.nullable || field.jdbcType=="VARCHAR">${"\n    "}</#if><#if !field.nullable><#if field.jdbcType=="VARCHAR">@NotBlank(message="[${field.remark!}]不能为空")<#else>@NotNull(message="[${field.remark!}]不能为空")</#if></#if><#if field.jdbcType=="VARCHAR"><#if !field.nullable>${"\n    "}</#if>@Size(max= ${field.columnLength?c},message="编码长度不能超过${field.columnLength?c}")</#if>
-    @Schema(description = "${field.remark!}")<#if field.jdbcType=="VARCHAR">${"\n    "}@Length(max= ${field.columnLength?c},message="编码长度不能超过${field.columnLength?c}")</#if>
+    */<#if !field.nullable || field.jdbcType=="VARCHAR">${"\n    "}</#if><#if !field.nullable><#if field.jdbcType=="VARCHAR">@NotBlank(message="[${field.remark!}]不能为空")<#else>@NotNull(message="[${field.remark!}]不能为空")</#if></#if><#if field.jdbcType=="VARCHAR"><#if !field.nullable>${"\n    "}</#if>@Size(max= ${field.columnLength?c},message="${field.remark!}长度不能超过${field.columnLength?c}")</#if>
+    @Schema(description = "${field.remark!}")<#if field.jdbcType=="VARCHAR">${"\n    "}@Length(max= ${field.columnLength?c},message="${field.remark!}长度不能超过${field.columnLength?c}")</#if>
     @Excel(name = "${field.remark!}"<#if field.jdbcType=="TIMESTAMP">, format = DateConstants.format.YYYY_MM_DD_HH_mm_ss, timezone = "GMT+8"</#if>, width = 25, needMerge = true, mergeVertical = true)
     @TableField(value = "${field.columnName}")<#if field.jdbcType=="TIMESTAMP">${"\n    "}@DateTimeFormat(pattern = DateConstants.format.YYYY_MM_DD_HH_mm_ss)${"\n    "}@JsonFormat(pattern = DateConstants.format.YYYY_MM_DD_HH_mm_ss)</#if><#if field.jdbcType=="BIGINT">${"\n    "}@JsonSerialize(using = ToStringSerializer.class)</#if>
     private ${field.shortTypeName} ${field.fieldName};
