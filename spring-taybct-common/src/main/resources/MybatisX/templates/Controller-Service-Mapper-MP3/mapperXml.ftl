@@ -146,10 +146,17 @@
         <if test="mo.params.${tableClass.shortClassName?uncap_first}QueryDTO.${field.fieldName} != null<#if field.jdbcType=="VARCHAR"> and mo.params.${tableClass.shortClassName?uncap_first}QueryDTO.${field.fieldName} != ''</#if>">
             and ${tableClass.tableName}.${field.columnName} = ${r'#'}{mo.params.${tableClass.shortClassName?uncap_first}QueryDTO.${field.fieldName}}
         </if>
+        <!--${field.remark!}选择-->
+        <if test="mo.params.${tableClass.shortClassName?uncap_first}QueryDTO.${field.fieldName}Selection != null and mo.params.${tableClass.shortClassName?uncap_first}QueryDTO.${field.fieldName}Selection.size() > 0">
+            and ${tableClass.tableName}.${field.columnName} in
+            <foreach collection="mo.params.${tableClass.shortClassName?uncap_first}QueryDTO.${field.fieldName}Selection" open="(" separator="," close=")" item="id">
+                ${r'#'}{id}
+            </foreach>
+        </if>
         </#list>
         <#list tableClass.baseBlobFields as field>
         <!--${field.remark!}-->
-        <#if field.jdbcType=="TIMESTAMP">
+        <#if field.jdbcType=="TIMESTAMP" || field.jdbcType=="DATE" >
         <if test="mo.params.${tableClass.shortClassName?uncap_first}QueryDTO.${field.fieldName}_ge != null">
             and ${tableClass.tableName}.${field.columnName} ${r'&gt;'}= ${r'#'}{mo.params.${tableClass.shortClassName?uncap_first}QueryDTO.${field.fieldName}_ge}
         </if>
@@ -169,7 +176,7 @@
         <where>
             <if test="mo.conditions != null and mo.conditions.basic != null">
                 and (
-                ${r'$'}{mo.conditions.basic}
+                    ${r'$'}{mo.conditions.basic}
                 )
             </if>
             <#list tableClass.pkFields as field>

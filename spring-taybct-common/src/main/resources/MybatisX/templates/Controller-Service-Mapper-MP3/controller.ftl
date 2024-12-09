@@ -43,6 +43,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Set;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicReference;
 
 /**
 *
@@ -131,6 +132,14 @@ public class ${baseInfo.fileName} implements LongKeyConvertibleController<${tabl
         return LongKeyConvertibleController.super.deleteBatch(ids);
     }
 
+    @PostMapping("total")
+    @WebLog
+    @Operation(summary = "获取总数")
+    @Override
+    public R<Long> total(@RequestBody ${tableClass.shortClassName}QueryBody dto) {
+        return R.data(getBaseService().total(JSONObject.from(dto)));
+    }
+
     @PostMapping("page")
     @WebLog
     @Operation(summary = "获取分页")
@@ -166,11 +175,15 @@ public class ${baseInfo.fileName} implements LongKeyConvertibleController<${tabl
     @WebLog
     @PostMapping("imp")
     @ApiLog(title = "excel 导入数据", description = "excel 导入【${tableClass.remark!}】", type = OperateType.IMPORT, isSaveRequestData = false, isSaveResultData = false)
-    public R<?> imp(MultipartFile file) throws IOException {
+    public R<List<${tableClass.shortClassName}>> imp(MultipartFile file) throws IOException {
+        AtomicReference<List<${tableClass.shortClassName}>> listRef = new AtomicReference<>();
         EasyExcel.read(file.getInputStream()
                 , ${tableClass.shortClassName}ImpDTO.class
-                , new ModelConvertibleListener<${tableClass.shortClassName}>(list -> getBaseService().saveBatch(list))).sheet().doRead();
-        return R.ok();
+                , new ModelConvertibleListener<${tableClass.shortClassName}>(list -> {
+                    listRef.set(list);
+                    getBaseService().saveBatch(list);
+                })).sheet().doRead();
+        return R.data(listRef.get());
     }
 
     @Operation(summary = "excel 导出数据")

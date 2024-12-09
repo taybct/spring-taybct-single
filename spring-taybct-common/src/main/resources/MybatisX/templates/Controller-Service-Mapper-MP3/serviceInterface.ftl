@@ -49,6 +49,15 @@ public interface ${baseInfo.fileName} extends IService<${tableClass.shortClassNa
     <UM extends ModelConvertible<? extends ${tableClass.shortClassName}>, QM extends ModelConvertible<? extends ${tableClass.shortClassName}>> boolean update(UpdateModel<${tableClass.shortClassName}, UM, QM> model);
 
     /**
+     * 查询总数
+     *
+     * @param params         查询条件
+     * @param <E>    结果类型
+     * @return 分页结果
+     */
+    <E extends ${tableClass.shortClassName}> long total(JSONObject params);
+
+    /**
      * 查询分页
      *
      * @param params         查询条件

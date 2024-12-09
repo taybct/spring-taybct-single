@@ -1,5 +1,6 @@
 package ${baseInfo.packageName};
 
+import cn.hutool.core.collection.CollectionUtil;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import ${tableClass.fullClassName};
 import ${serviceInterface.packageName}.${serviceInterface.fileName};
@@ -59,16 +60,28 @@ public class ${baseInfo.fileName} extends ServiceImpl<${mapperInterface.fileName
     }
 
     @Override
+    public <E extends ${tableClass.shortClassName}> long total(JSONObject params) {
+        MybatisOptional<E> mybatisOptional = MyBatisUtil
+                .<E>mybatisOptional()
+                .params(params);
+        return getBaseMapper().total(mybatisOptional);
+    }
+
+    @Override
     public <E extends ${tableClass.shortClassName}> IPage<E> page(JSONObject params, SqlPageParams sqlPageParams) {
         IPage<E> page = sqlPageParams.genPage();
         MybatisOptional<E> mybatisOptional = MyBatisUtil
                 .<E>mybatisOptional()
                 .params(params)
                 .page(sqlPageParams);
-        long total = getBaseMapper().total(mybatisOptional);
-        page.setTotal(total);
-        if (total > 0) {
-            List<? extends ${tableClass.shortClassName}> list = getBaseMapper().page(mybatisOptional);
+        if (sqlPageParams.getCountTotal()){
+            page.setTotal(getBaseMapper().total(mybatisOptional));
+            if (page.getTotal() == 0){
+                return page;
+            }
+        }
+        List<? extends ${tableClass.shortClassName}> list = getBaseMapper().page(mybatisOptional);
+        if (CollectionUtil.isNotEmpty(list)){
             page.setRecords(list.stream().map(e -> (E) e).toList());
         }
         return page;
