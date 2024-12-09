@@ -20,12 +20,13 @@ Authorization 选择 Basic Auth
 
 1. 获取授权码
 
->
-url: http://10.18.80.14:9102/auth/oauth/authorize?response_type=code&client_id=taybct_pc&redirect_uri=https://www.baidu.com
->
-url: http://127.0.0.1:9000/oauth/authorize?response_type=code&client_id=messaging-client&scope=message.read&redirect_uri=http://127.0.0.1:9000/authorized
->
-url: http://127.0.0.1:9000/oauth/authorize?response_type=code&client_id=taybct_pc&scope=all&redirect_uri=https://www.baidu.com
+> 如果是通过网关调用：一定要指定明确的 ip：调用前先用 ipconfig 看一下
+> 
+> url: http://192.168.1.28:9102/auth/oauth/authorize?response_type=code&client_id=taybct_pc&scope=all&redirect_uri=https://www.baidu.com
+
+> 或者是 127.0.0.1，但是只能指定鉴权服务器的端口
+> 
+> url: http://127.0.0.1:9000/oauth/authorize?response_type=code&client_id=taybct_pc&scope=all&redirect_uri=https://www.baidu.com
 
 2. 获取 token
 
