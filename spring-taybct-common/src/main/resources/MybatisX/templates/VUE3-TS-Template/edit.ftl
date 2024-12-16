@@ -8,7 +8,7 @@ import GlobalDialog from '@base-lib/components/GlobalDialog/index.vue'
 import { useToggle } from '@base-lib/hooks/web/useToggle'
 import { Select } from '@base-lib/components/Status'
 import useForm from '@base-lib/hooks/web/useForm'
-import ${tableClass.shortClassName}Api from '@/api/${domain.fileName?uncap_first}-api'
+import ${tableClass.shortClassName}Api from '@/api/${domain.fileName?uncap_first}/${domain.fileName?uncap_first}'
 
 defineOptions({
   name: '${tableClass.shortClassName}Edit'

@@ -6,7 +6,7 @@ import useForm from '@base-lib/hooks/web/useForm'
 import useTableSelection from '@base-lib/hooks/web/useTableSelection'
 import { Select, Tag } from '@base-lib/components/Status'
 import { downloadByData } from '@/utils/download'
-import ${tableClass.shortClassName}Api from '@/api/${domain.fileName?uncap_first}/${domain.fileName?uncap_first}-api'
+import ${tableClass.shortClassName}Api from '@/api/${domain.fileName?uncap_first}/${domain.fileName?uncap_first}'
 
 defineOptions({
   name: '${tableClass.shortClassName}List'

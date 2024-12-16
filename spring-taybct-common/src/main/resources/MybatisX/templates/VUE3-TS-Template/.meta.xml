@@ -26,7 +26,7 @@
     <template>
         <property name="configName" value="api"/>
         <property name="configFile" value="api.ftl"/>
-        <property name="fileName" value="${domain.fileName?uncap_first}-api"/>
+        <property name="fileName" value="${domain.fileName?uncap_first}"/>
         <property name="suffix" value=".ts"/>
         <property name="packageName" value="${domain.basePackage}.api.${domain.fileName?uncap_first}"/>
         <property name="encoding" value="${domain.encoding}"/>
