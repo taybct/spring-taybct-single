@@ -19,15 +19,14 @@ import java.util.Map;
 import java.util.List;
 
 /**
-*
-* <pre>
-* 针对表【${tableClass.tableName}<#if tableClass.remark?has_content>(${tableClass.remark!})</#if>】的数据库操作Service
-* </pre>
-*
-* @author ${author!}
-* @since ${.now?string('yyyy-MM-dd HH:mm:ss')}
-* @see ${tableClass.fullClassName}
-*/
+ * <pre>
+ * 针对表【${tableClass.tableName}<#if tableClass.remark?has_content>(${tableClass.remark!})</#if>】的数据库操作Service
+ * </pre>
+ *
+ * @author ${author!}
+ * @since ${.now?string('yyyy-MM-dd HH:mm:ss')}
+ * @see ${tableClass.fullClassName}
+ */
 public interface ${baseInfo.fileName} extends IService<${tableClass.shortClassName}> {
 
     /**

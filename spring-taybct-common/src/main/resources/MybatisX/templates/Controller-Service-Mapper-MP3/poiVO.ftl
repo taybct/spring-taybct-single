@@ -22,15 +22,14 @@ import lombok.*;
 import java.io.Serial;
 
 /**
-*
-* <pre>
-* ${tableClass.remark!}下载对象
-* </pre>
-*
-* @author ${author!}
-* @since ${.now?string('yyyy-MM-dd HH:mm:ss')}
-* @see ${tableClass.fullClassName}
-*/
+ * <pre>
+ * ${tableClass.remark!}下载对象
+ * </pre>
+ *
+ * @author ${author!}
+ * @since ${.now?string('yyyy-MM-dd HH:mm:ss')}
+ * @see ${tableClass.fullClassName}
+ */
 @Data
 @EqualsAndHashCode
 @HeadRowHeight(25)

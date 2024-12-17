@@ -27,15 +27,14 @@ import java.util.Map;
 import java.util.List;
 
 /**
-*
-* <pre>
-* 针对表【${tableClass.tableName}<#if tableClass.remark?has_content>(${tableClass.remark!})</#if>】的数据库操作Service实现
-* </pre>
-*
-* @author ${author!}
-* @since ${.now?string('yyyy-MM-dd HH:mm:ss')}
-* @see ${tableClass.fullClassName}
-*/
+ * <pre>
+ * 针对表【${tableClass.tableName}<#if tableClass.remark?has_content>(${tableClass.remark!})</#if>】的数据库操作Service实现
+ * </pre>
+ *
+ * @author ${author!}
+ * @since ${.now?string('yyyy-MM-dd HH:mm:ss')}
+ * @see ${tableClass.fullClassName}
+ */
 @AutoConfiguration
 @Service
 public class ${baseInfo.fileName} extends ServiceImpl<${mapperInterface.fileName}, ${tableClass.shortClassName}>

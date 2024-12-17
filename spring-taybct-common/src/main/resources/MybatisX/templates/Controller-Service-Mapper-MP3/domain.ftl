@@ -22,12 +22,13 @@ import lombok.*;
 import java.io.Serial;
 
 /**
-*
-* ${tableClass.remark!}
-* <br>TableName: ${tableClass.tableName}
-*
-* @author ${author!}
-*/
+ * <pre>
+ * ${tableClass.remark!}
+ * TableName: ${tableClass.tableName}
+ * </pre>
+ *
+ * @author ${author!}
+ */
 @TableName(value = "${tableClass.tableName}")
 @Data
 @NoArgsConstructor

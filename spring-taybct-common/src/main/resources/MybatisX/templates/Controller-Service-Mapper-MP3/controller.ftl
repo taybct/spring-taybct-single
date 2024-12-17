@@ -46,14 +46,13 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 
 /**
-*
-* <pre>
-* 针对表【${tableClass.tableName}<#if tableClass.remark?has_content>(${tableClass.remark!})</#if>】的数据库操作 Controller 控制器
-* </pre>
-*
-* @author ${author!}
-* @since ${.now?string('yyyy-MM-dd HH:mm:ss')}
-*/
+ * <pre>
+ * 针对表【${tableClass.tableName}<#if tableClass.remark?has_content>(${tableClass.remark!})</#if>】的数据库操作 Controller 控制器
+ * </pre>
+ *
+ * @author ${author!}
+ * @since ${.now?string('yyyy-MM-dd HH:mm:ss')}
+ */
 @Tag(name = "${tableClass.remark!}控制器")
 @RestController
 @RequestMapping("/v1/${tableClass.shortClassName?uncap_first}")

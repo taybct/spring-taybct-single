@@ -13,15 +13,14 @@ import java.util.List;
 import java.util.Map;
 
 /**
-*
-* <pre>
-* 针对表【${tableClass.tableName}<#if tableClass.remark?has_content>(${tableClass.remark!})</#if>】的数据库操作Mapper
-* </pre>
-*
-* @author ${author!}
-* @since ${.now?string('yyyy-MM-dd HH:mm:ss')}
-* @see ${tableClass.fullClassName}
-*/
+ * <pre>
+ * 针对表【${tableClass.tableName}<#if tableClass.remark?has_content>(${tableClass.remark!})</#if>】的数据库操作Mapper
+ * </pre>
+ *
+ * @author ${author!}
+ * @since ${.now?string('yyyy-MM-dd HH:mm:ss')}
+ * @see ${tableClass.fullClassName}
+ */
 public interface ${mapperInterface.fileName} extends BaseMapper<${tableClass.shortClassName}> {
 
     /**

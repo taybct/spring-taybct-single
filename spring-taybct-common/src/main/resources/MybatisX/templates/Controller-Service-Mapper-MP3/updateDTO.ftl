@@ -26,16 +26,15 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 /**
-*
-* <pre>
-* ${tableClass.remark!} 修改对象
-* TableName: ${tableClass.tableName} 修改对象
-* </pre>
-*
-* @author ${author!}
-* @since ${.now?string('yyyy-MM-dd HH:mm:ss')}
-* @see ${tableClass.fullClassName}
-*/
+ * <pre>
+ * ${tableClass.remark!} 修改对象
+ * TableName: ${tableClass.tableName} 修改对象
+ * </pre>
+ *
+ * @author ${author!}
+ * @since ${.now?string('yyyy-MM-dd HH:mm:ss')}
+ * @see ${tableClass.fullClassName}
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
