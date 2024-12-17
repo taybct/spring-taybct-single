@@ -56,7 +56,7 @@ import java.util.concurrent.atomic.AtomicReference;
 */
 @Tag(name = "${tableClass.remark!}控制器")
 @RestController
-@RequestMapping("/${tableClass.shortClassName?uncap_first}")
+@RequestMapping("/v1/${tableClass.shortClassName?uncap_first}")
 @RequiredArgsConstructor
 public class ${baseInfo.fileName} implements LongKeyConvertibleController<${tableClass.shortClassName}
         , I${tableClass.shortClassName}Service

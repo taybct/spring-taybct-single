@@ -5,7 +5,7 @@ import { GetExportSelectedField } from '@/types/global'
 const request = useAxios()
 
 /**请求对接的接口 */
-const URL = '/${tableClass.shortClassName?uncap_first}'
+const URL = '/${tableClass.shortClassName?uncap_first}/v1'
 
 export default class ${tableClass.shortClassName}Api {
 
