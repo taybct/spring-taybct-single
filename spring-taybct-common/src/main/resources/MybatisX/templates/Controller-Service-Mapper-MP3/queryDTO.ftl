@@ -46,14 +46,14 @@ public class ${tableClass.shortClassName}QueryDTO implements Serializable, Model
 
 <#list tableClass.pkFields as field>
     /**
-    * ${field.remark!}
-    */
+     * ${field.remark!}
+     */
     @Schema(description = "${field.remark!}")<#if field.jdbcType=="BIGINT">${"\n    "}@JsonSerialize(using = ToStringSerializer.class)</#if>
     private ${field.shortTypeName} ${field.fieldName};
 
     /**
-    * ${field.remark!}选择
-    */
+     * ${field.remark!}选择
+     */
     @Schema(description = "${field.remark!}")
     private Collection<${field.shortTypeName}> ${field.fieldName}Selection;
 </#list>
@@ -61,34 +61,34 @@ public class ${tableClass.shortClassName}QueryDTO implements Serializable, Model
 <#list tableClass.baseBlobFields as field>
     <#if field.jdbcType=="TIMESTAMP">
     /**
-    * ${field.remark!}（时间范围开始）
-    */
+     * ${field.remark!}（时间范围开始）
+     */
     @DateTimeFormat(pattern = DateConstants.format.YYYY_MM_DD_HH_mm_ss)${"\n    "}@JsonFormat(pattern = DateConstants.format.YYYY_MM_DD_HH_mm_ss)
     @Schema(description = "${field.remark!}（时间范围开始）")
     private ${field.shortTypeName} ${field.fieldName}_ge;
     /**
-    * ${field.remark!}（时间范围结束）
-    */
+     * ${field.remark!}（时间范围结束）
+     */
     @DateTimeFormat(pattern = DateConstants.format.YYYY_MM_DD_HH_mm_ss)${"\n    "}@JsonFormat(pattern = DateConstants.format.YYYY_MM_DD_HH_mm_ss)
     @Schema(description = "${field.remark!}（时间范围结束）")
     private ${field.shortTypeName} ${field.fieldName}_le;
     <#elseif field.jdbcType=="DATE">
     /**
-    * ${field.remark!}（日期范围开始）
-    */
+     * ${field.remark!}（日期范围开始）
+     */
     @DateTimeFormat(pattern = DateConstants.format.YYYY_MM_DD)${"\n    "}@JsonFormat(pattern = DateConstants.format.YYYY_MM_DD)
     @Schema(description = "${field.remark!}（日期范围开始）")
     private ${field.shortTypeName} ${field.fieldName}_ge;
     /**
-    * ${field.remark!}（日期范围结束）
-    */
+     * ${field.remark!}（日期范围结束）
+     */
     @DateTimeFormat(pattern = DateConstants.format.YYYY_MM_DD)${"\n    "}@JsonFormat(pattern = DateConstants.format.YYYY_MM_DD)
     @Schema(description = "${field.remark!}（日期范围结束）")
     private ${field.shortTypeName} ${field.fieldName}_le;
     <#else>
     /**
-    * ${field.remark!}
-    */
+     * ${field.remark!}
+     */
     @Schema(description = "${field.remark!}")<#if field.jdbcType=="BIGINT">${"\n    "}@JsonSerialize(using = ToStringSerializer.class)</#if>
     private ${field.shortTypeName} ${field.fieldName}<#if field.columnName=="is_deleted"> = 0</#if>;
     </#if>
