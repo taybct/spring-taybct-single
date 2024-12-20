@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.annotation.SqlCondition;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import io.github.mangocrisp.spring.taybct.api.system.handle.PasswordHandler;
 import io.github.mangocrisp.spring.taybct.common.dict.SysDict;
 import io.github.mangocrisp.spring.taybct.tool.core.annotation.EnhanceElement;
 import io.github.mangocrisp.spring.taybct.tool.core.annotation.EnhanceElements;
@@ -91,7 +92,7 @@ public class SysUser extends UniqueDeleteLogic<Long, Long> implements Serializab
     @NotBlank(message = "密码不能为空", groups = {InsertGroup.class})
     @Size(max = 500, message = "密码太长了", groups = {InsertGroup.class, UpdateGroup.class})
     @Length(max = 500, message = "密码太长了", groups = {InsertGroup.class, UpdateGroup.class})
-    @EnhanceElement(parameterHandler = {SM4Coder.En.class}, resultHandler = {SM4Coder.De.class})
+    @EnhanceElement(parameterHandler = {PasswordHandler.En.class}, resultHandler = {PasswordHandler.De.class})
     private String password;
 
     /**

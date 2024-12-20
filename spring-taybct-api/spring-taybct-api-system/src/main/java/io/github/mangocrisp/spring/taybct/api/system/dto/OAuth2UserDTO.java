@@ -1,5 +1,6 @@
 package io.github.mangocrisp.spring.taybct.api.system.dto;
 
+import io.github.mangocrisp.spring.taybct.api.system.handle.PasswordHandler;
 import io.github.mangocrisp.spring.taybct.tool.core.annotation.EnhanceElement;
 import io.github.mangocrisp.spring.taybct.tool.core.annotation.EnhanceElements;
 import io.github.mangocrisp.spring.taybct.tool.core.util.sm.SM4Coder;
@@ -34,7 +35,7 @@ public class OAuth2UserDTO implements Serializable {
     /**
      * 用户密码
      */
-    @EnhanceElement(parameterHandler = {SM4Coder.En.class}, resultHandler = {SM4Coder.De.class})
+    @EnhanceElement(parameterHandler = {PasswordHandler.En.class}, resultHandler = {PasswordHandler.De.class})
     private String password;
 
     /**
