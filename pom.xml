@@ -6,7 +6,7 @@
 
     <groupId>io.github.mangocrisp</groupId>
     <artifactId>spring-taybct</artifactId>
-    <version>3.2.0-alpha.1</version>
+    <version>3.2.0</version>
     <name>Spring TayBct</name>
     <description>Spring TayBct</description>
     <url>https://github.com/mangocrisp/spring-taybct</url>
@@ -148,7 +148,7 @@
         <!-- Sentinel规则持久化至Nacos配置 -->
         <sentinel-datasource-nacos.version>1.8.6</sentinel-datasource-nacos.version>
         <!--基础工具版本-->
-        <project.version>3.2.0-alpha.1</project.version>
+        <project.version>3.2.0</project.version>
         <!--skywalking 日志记录-->
         <skywalking-logback.version>8.14.0</skywalking-logback.version>
         <!--Spring Context Support cache mail scheduling-->

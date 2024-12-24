@@ -11,7 +11,7 @@
 
     <groupId>io.github.mangocrisp</groupId>
     <artifactId>spring-taybct-dependencies</artifactId>
-    <version>3.2.0-alpha.1</version>
+    <version>3.2.0</version>
     <name>Spring TayBct</name>
     <description>Spring TayBct</description>
     <url>https://github.com/mangocrisp/spring-taybct</url>
@@ -57,7 +57,7 @@
         <!--Gpg Signature 插件-->
         <maven-gpg-plugin.version>3.2.5</maven-gpg-plugin.version>
         <!--平台版本-->
-        <project.version>3.2.0-alpha.1</project.version>
+        <project.version>3.2.0</project.version>
     </properties>
 
     <dependencyManagement>
