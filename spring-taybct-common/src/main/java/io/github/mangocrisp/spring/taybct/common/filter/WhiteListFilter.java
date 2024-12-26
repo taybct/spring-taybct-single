@@ -14,9 +14,6 @@ import org.springframework.util.AntPathMatcher;
 import org.springframework.util.PathMatcher;
 
 import java.io.IOException;
-import java.net.InetSocketAddress;
-import java.util.Map;
-import java.util.Set;
 
 /**
  * 黑名单过滤器
@@ -27,7 +24,7 @@ import java.util.Set;
 @Order(Ordered.HIGHEST_PRECEDENCE)
 @AutoConfiguration
 @RequiredArgsConstructor
-public class BlackListFilter implements Filter {
+public class WhiteListFilter implements Filter {
 
     final SecureProp secureProp;
 
@@ -35,19 +32,11 @@ public class BlackListFilter implements Filter {
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
-        PathMatcher pathMatcher = new AntPathMatcher();
-        String requestUri = request.getRequestURI();
-        if (secureProp.getBlackList().getUris().stream()
-                .anyMatch(url -> pathMatcher.match(url, requestUri))) {
-            // 地址在黑名单里面，就直接拦截掉
-            response.setStatus(HttpStatus.FORBIDDEN.value());
-            return;
-        }
         if (StringUtil.isNotBlank(request.getRemoteHost())) {
-            if (secureProp.getBlackList().getUriIpSet().stream().anyMatch(uriIP -> pathMatcher.match(uriIP.getUri().getPath(), requestUri)
-                    // 如果配置上的 url 包含的 ip 是需要被限制的 ip 如果和请求的 ip 匹配上了就要限制访问
+            if (secureProp.getWhiteList().getUriIpSet().stream().noneMatch(uriIP -> new AntPathMatcher().match(uriIP.getUri().getPath(), request.getRequestURI())
+                    // 如果配置上的 url 包含的 ip 是需要被允许的 ip 如果和请求的 ip 匹配上了才能访问
                     && uriIP.getIpSet().contains(request.getRemoteHost()))) {
-                // 地址在黑名单里面，就直接拦截掉
+                // 地址不在白名单里面，就直接拦截掉
                 response.setStatus(HttpStatus.FORBIDDEN.value());
                 return;
             }

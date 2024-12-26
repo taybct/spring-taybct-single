@@ -51,13 +51,13 @@ public class ResourceServerConfig {
     public SecurityWebFilterChain springSecurityFilterChain(ServerHttpSecurity http, KeyPair keyPair) {
         http.csrf().disable().cors();
         http.authorizeExchange(exchanges -> {
-                            if (CollectionUtil.isNotEmpty(secureProp.getBlackList().getUrls())) {
+                            if (CollectionUtil.isNotEmpty(secureProp.getBlackList().getUris())) {
                                 // 黑名单
-                                exchanges.pathMatchers(ArrayUtil.toArray(secureProp.getBlackList().getUrls(), String.class)).denyAll();
+                                exchanges.pathMatchers(ArrayUtil.toArray(secureProp.getBlackList().getUris(), String.class)).denyAll();
                             }
-                            if (CollectionUtil.isNotEmpty(secureProp.getIgnore().getUrls())) {
+                            if (CollectionUtil.isNotEmpty(secureProp.getIgnore().getUris())) {
                                 // 白名单
-                                exchanges.pathMatchers(ArrayUtil.toArray(secureProp.getIgnore().getUrls(), String.class)).permitAll();
+                                exchanges.pathMatchers(ArrayUtil.toArray(secureProp.getIgnore().getUris(), String.class)).permitAll();
                             }
                             // 其他所有的都需要鉴权
                             exchanges.anyExchange().access(authorizationManager)

@@ -83,9 +83,9 @@ public class AuthSecurityConfig {
                             try {
                                 authorize
                                         // 黑名单
-                                        .requestMatchers(ArrayUtil.toArray(secureProp.getBlackList().getUrls(), String.class)).denyAll()
+                                        .requestMatchers(ArrayUtil.toArray(secureProp.getBlackList().getUris(), String.class)).denyAll()
                                         // 白名单
-                                        .requestMatchers(ArrayUtil.toArray(secureProp.getIgnore().getUrls()
+                                        .requestMatchers(ArrayUtil.toArray(secureProp.getIgnore().getUris()
                                                         .stream().map(AntPathRequestMatcher::new).collect(Collectors.toList())
                                                 , AntPathRequestMatcher.class)).permitAll()
                                         .anyRequest()

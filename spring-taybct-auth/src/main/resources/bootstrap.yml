@@ -73,7 +73,7 @@ taybct:
   secure:
     # 不校验白名单
     ignore:
-      urls:
+      uris:
         - "/oauth/logout"
         - "/error"
         # 静态资源

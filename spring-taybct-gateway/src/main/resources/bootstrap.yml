@@ -175,7 +175,7 @@ taybct:
   secure:
     # 不校验白名单
     ignore:
-      urls:
+      uris:
         - "/auth/oauth/**"
         - "/oauth/logout"
         - "/data/**"

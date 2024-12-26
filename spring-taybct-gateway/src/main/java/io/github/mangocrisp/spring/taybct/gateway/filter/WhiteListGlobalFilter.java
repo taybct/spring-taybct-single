@@ -1,7 +1,6 @@
 package io.github.mangocrisp.spring.taybct.gateway.filter;
 
 import io.github.mangocrisp.spring.taybct.common.prop.SecureProp;
-import io.github.mangocrisp.spring.taybct.tool.core.util.StringUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
@@ -18,8 +17,6 @@ import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
 import java.net.InetSocketAddress;
-import java.util.Map;
-import java.util.Set;
 
 /**
  * 黑名单过滤器
@@ -31,7 +28,7 @@ import java.util.Set;
 @AutoConfiguration
 @RequiredArgsConstructor
 @Order(Ordered.HIGHEST_PRECEDENCE)
-public class BlackListGlobalFilter implements GlobalFilter, Ordered {
+public class WhiteListGlobalFilter implements GlobalFilter, Ordered {
 
     final SecureProp secureProp;
 
@@ -41,18 +38,12 @@ public class BlackListGlobalFilter implements GlobalFilter, Ordered {
         ServerHttpResponse response = exchange.getResponse();
         PathMatcher pathMatcher = new AntPathMatcher();
         String requestUri = request.getURI().getPath();
-        if (secureProp.getBlackList().getUris().stream()
-                .anyMatch(url -> pathMatcher.match(url, requestUri))) {
-            // 地址在黑名单里面，就直接拦截掉
-            response.setStatusCode(HttpStatus.NOT_FOUND);
-            return response.setComplete();
-        }
         InetSocketAddress remoteAddress = request.getRemoteAddress();
         if (remoteAddress != null) {
-            if (secureProp.getBlackList().getUriIpSet().stream().anyMatch(uriIP -> pathMatcher.match(uriIP.getUri().getPath(), requestUri)
+            if (secureProp.getWhiteList().getUriIpSet().stream().noneMatch(uriIP -> pathMatcher.match(uriIP.getUri().getPath(), requestUri)
                     // 如果配置上的 url 包含的 ip 是需要被限制的 ip 如果和请求的 ip 匹配上了就要限制访问
                     && uriIP.getIpSet().contains(remoteAddress.getAddress().getHostAddress()))) {
-                // 地址在黑名单里面，就直接拦截掉
+                // 地址不在白名单里面，就直接拦截掉
                 response.setStatusCode(HttpStatus.NOT_FOUND);
                 return response.setComplete();
             }
