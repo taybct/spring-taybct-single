@@ -37,7 +37,7 @@ public class WhiteListFilter implements Filter {
                     // 如果配置上的 url 包含的 ip 是需要被允许的 ip 如果和请求的 ip 匹配上了才能访问
                     && uriIP.getIpSet().contains(request.getRemoteHost()))) {
                 // 地址不在白名单里面，就直接拦截掉
-                response.setStatus(HttpStatus.FORBIDDEN.value());
+                response.setStatus(HttpStatus.NOT_FOUND.value());
                 return;
             }
         }
