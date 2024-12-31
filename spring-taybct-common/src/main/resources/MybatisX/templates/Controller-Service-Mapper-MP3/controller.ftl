@@ -159,6 +159,9 @@ public class ${baseInfo.fileName} implements LongKeyConvertibleController<${tabl
     @WebLog
     @Operation(summary = "查看详情")
     @Override
+    @Parameters({
+        @Parameter(name = "id", description = "主键 id", required = true, in = ParameterIn.PATH)
+    })
     public R<${tableClass.shortClassName}> detail(@PathVariable Long id) {
         return R.data(getBaseService().detail(JSONObject.of("id", id)));
     }
