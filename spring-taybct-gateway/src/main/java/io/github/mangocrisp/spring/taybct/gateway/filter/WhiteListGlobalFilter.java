@@ -1,5 +1,6 @@
 package io.github.mangocrisp.spring.taybct.gateway.filter;
 
+import cn.hutool.core.net.NetUtil;
 import io.github.mangocrisp.spring.taybct.common.prop.SecureProp;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -40,15 +41,23 @@ public class WhiteListGlobalFilter implements GlobalFilter, Ordered {
         String requestUri = request.getURI().getPath();
         InetSocketAddress remoteAddress = request.getRemoteAddress();
         if (remoteAddress != null) {
+            String hostAddress = remoteAddress.getAddress().getHostAddress();
             if (secureProp.getWhiteList().getUriIpSet().stream().noneMatch(uriIP -> pathMatcher.match(uriIP.getUri().getPath(), requestUri)
                     // 如果配置上的 url 包含的 ip 是需要被限制的 ip 如果和请求的 ip 匹配上了就要限制访问
-                    && uriIP.getIpSet().contains(remoteAddress.getAddress().getHostAddress()))) {
+                    && uriIP.getIpSet().stream().anyMatch(ip -> isIpMatch(ip, hostAddress)))) {
                 // 地址不在白名单里面，就直接拦截掉
                 response.setStatusCode(HttpStatus.NOT_FOUND);
                 return response.setComplete();
             }
         }
         return chain.filter(exchange);
+    }
+
+    private static boolean isIpMatch(String cidr, String hostAddress) {
+        if (!cidr.contains("/")){
+            return cidr.equals(hostAddress);
+        }
+        return NetUtil.isInRange(hostAddress, cidr);
     }
 
     @Override

@@ -1,5 +1,6 @@
 package io.github.mangocrisp.spring.taybct.common.filter;
 
+import cn.hutool.core.net.NetUtil;
 import io.github.mangocrisp.spring.taybct.common.prop.SecureProp;
 import io.github.mangocrisp.spring.taybct.tool.core.util.StringUtil;
 import jakarta.servlet.*;
@@ -33,15 +34,23 @@ public class WhiteListFilter implements Filter {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
         if (StringUtil.isNotBlank(request.getRemoteHost())) {
+            String remoteHost = request.getRemoteHost();
             if (secureProp.getWhiteList().getUriIpSet().stream().noneMatch(uriIP -> new AntPathMatcher().match(uriIP.getUri().getPath(), request.getRequestURI())
                     // 如果配置上的 url 包含的 ip 是需要被允许的 ip 如果和请求的 ip 匹配上了才能访问
-                    && uriIP.getIpSet().contains(request.getRemoteHost()))) {
+                    && uriIP.getIpSet().stream().anyMatch(ip->isIpMatch(ip, remoteHost)))) {
                 // 地址不在白名单里面，就直接拦截掉
                 response.setStatus(HttpStatus.NOT_FOUND.value());
                 return;
             }
         }
         chain.doFilter(servletRequest, servletResponse);
+    }
+
+    private static boolean isIpMatch(String cidr, String hostAddress) {
+        if (!cidr.contains("/")){
+            return cidr.equals(hostAddress);
+        }
+        return NetUtil.isInRange(hostAddress, cidr);
     }
 
 }
