@@ -124,6 +124,10 @@ const close = () => {
   iniAddForm();
 }
 
+/**
+ * 加载更新表单
+ * @param data 更新数据
+ */
 const initUpdateForm = (data: ${tableClass.shortClassName}Type.${tableClass.shortClassName}) => {
   const { <#list tableClass.allFields as field>${field.fieldName}<#sep>, </#list> } = data
   // 这里如果是 json 对象，需要拿出他里面的 value 属性的值
@@ -131,6 +135,22 @@ const initUpdateForm = (data: ${tableClass.shortClassName}Type.${tableClass.shor
   actionType.value = 'update'
 }
 
+/**
+ * 重置表单
+ * @param formEl 表单引用
+ */
+const rest = (formEl: FormInstance | undefined | null) => {
+  if (!formEl) return
+  if(actionType.value === 'add'){
+    formEl.resetFields()
+  } else{
+    form.value = restFormFnRef.value();
+  }
+}
+
+/**
+ * 暴露方法
+ */
 defineExpose({
   initUpdateForm
 })
@@ -173,8 +193,9 @@ iniAddForm();
     </ElForm>
     <template #footer>
       <span class="dialog-footer">
-        <el-button :loading="loading" @click="visible = false">取消</el-button>
         <el-button type="primary" :loading="loading" @click="handleSubmit">确定</el-button>
+        <el-button @click="rest(formRef)">重置</el-button>
+        <el-button :loading="loading" @click="visible = false">取消</el-button>
       </span>
     </template>
   </GlobalDialog>
