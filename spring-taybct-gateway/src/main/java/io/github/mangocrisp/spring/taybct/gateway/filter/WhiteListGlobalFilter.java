@@ -42,12 +42,16 @@ public class WhiteListGlobalFilter implements GlobalFilter, Ordered {
         InetSocketAddress remoteAddress = request.getRemoteAddress();
         if (remoteAddress != null) {
             String hostAddress = remoteAddress.getAddress().getHostAddress();
-            if (secureProp.getWhiteList().getUriIpSet().stream().noneMatch(uriIP -> pathMatcher.match(uriIP.getUri().getPath(), requestUri)
+            for (SecureProp.UriIP uriIP : secureProp.getWhiteList().getUriIpSet()) {
+                String path = uriIP.getUri().getPath();
+                if (pathMatcher.match(path, requestUri)){
                     // 如果配置上的 url 包含的 ip 是需要被限制的 ip 如果和请求的 ip 匹配上了就要限制访问
-                    && uriIP.getIpSet().stream().anyMatch(ip -> isIpMatch(ip, hostAddress)))) {
-                // 地址不在白名单里面，就直接拦截掉
-                response.setStatusCode(HttpStatus.NOT_FOUND);
-                return response.setComplete();
+                    if (uriIP.getIpSet().stream().noneMatch(ip -> isIpMatch(ip, hostAddress))){
+                        // 地址不在白名单里面，就直接拦截掉
+                        response.setStatusCode(HttpStatus.NOT_FOUND);
+                        return response.setComplete();
+                    }
+                }
             }
         }
         return chain.filter(exchange);

@@ -43,12 +43,16 @@ public class BlackListFilter implements Filter {
         }
         if (StringUtil.isNotBlank(request.getRemoteHost())) {
             String remoteHost = request.getRemoteHost();
-            if (secureProp.getBlackList().getUriIpSet().stream().anyMatch(uriIP -> pathMatcher.match(uriIP.getUri().getPath(), requestUri)
+            for (SecureProp.UriIP uriIP : secureProp.getBlackList().getUriIpSet()) {
+                String path = uriIP.getUri().getPath();
+                if (pathMatcher.match(path, requestUri)){
                     // 如果配置上的 url 包含的 ip 是需要被限制的 ip 如果和请求的 ip 匹配上了就要限制访问
-                    && uriIP.getIpSet().stream().anyMatch(ip->isIpMatch(ip, remoteHost)))) {
-                // 地址在黑名单里面，就直接拦截掉
-                response.setStatus(HttpStatus.NOT_FOUND.value());
-                return;
+                    if (uriIP.getIpSet().stream().anyMatch(ip->isIpMatch(ip, remoteHost))){
+                        // 地址在黑名单里面，就直接拦截掉
+                        response.setStatus(HttpStatus.NOT_FOUND.value());
+                        return;
+                    }
+                }
             }
         }
         chain.doFilter(servletRequest, servletResponse);
