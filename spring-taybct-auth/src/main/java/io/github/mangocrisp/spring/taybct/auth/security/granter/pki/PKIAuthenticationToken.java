@@ -5,7 +5,7 @@ import io.github.mangocrisp.spring.taybct.auth.security.granter.customize.Custom
 import java.io.Serial;
 
 /**
- * 品高的授权码鉴权 token
+ * PKI的授权码鉴权 token
  *
  * @author xijieyin
  */

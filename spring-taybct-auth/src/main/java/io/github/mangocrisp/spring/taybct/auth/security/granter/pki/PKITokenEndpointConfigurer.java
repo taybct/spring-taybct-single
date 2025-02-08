@@ -21,7 +21,7 @@ import org.springframework.security.oauth2.server.authorization.token.OAuth2Toke
 import java.util.function.Function;
 
 /**
- * 品高的授权码鉴权配置
+ * PKI的授权码鉴权配置
  */
 @RequiredArgsConstructor
 @Slf4j
