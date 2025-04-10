@@ -208,7 +208,7 @@ const exportExcel = (exportForm: AnyObject) => {
   }
   const params = {
     fileName: exportForm.fileName || '${tableClass.remark!}数据导出表',
-    mergeSameStartRow: 3,
+    mergeSameStartRow: 2,
     exportTemplateField: exportForm.exportTemplateField,
     params: exportExcelQueryParams.value,
     sqlPageParams: {
