@@ -208,7 +208,7 @@ const exportExcel = (exportForm: AnyObject) => {
   }
   const params = {
     fileName: exportForm.fileName || '${tableClass.remark!}数据导出表',
-    mergeSameStartRow: 2,
+    mergeSameStartRow: 3,
     exportTemplateField: exportForm.exportTemplateField,
     params: exportExcelQueryParams.value,
     sqlPageParams: {
@@ -399,25 +399,33 @@ onMounted(() => {
 <#if field.jdbcType=="VARCHAR">
         <el-table-column prop="${field.fieldName}" label="${field.remark!}" width="150" >
           <template #default="{ row }">
-            <span :title="row.${field.fieldName}" class="list-table-column-value ellipsis">{{ row.${field.fieldName} }}</span>
+              <ElTooltip :content="row.${field.fieldName}" >
+                <span class="list-table-column-value ellipsis">{{ row.${field.fieldName} }}</span>
+              </ElTooltip>
           </template>
         </el-table-column>
 <#elseif field.jdbcType=="DATE">
         <el-table-column prop="${field.fieldName}" label="${field.remark!}" width="190" >
           <template #default="{ row }">
-            <span :title="row.${field.fieldName}" class="list-table-column-value ellipsis">{{ row.${field.fieldName} }}</span>
+              <ElTooltip :content="row.${field.fieldName}" >
+                <span class="list-table-column-value ellipsis">{{ row.${field.fieldName} }}</span>
+              </ElTooltip>
           </template>
         </el-table-column>
 <#elseif field.jdbcType=="TIMESTAMP">
         <el-table-column prop="${field.fieldName}" label="${field.remark!}" width="190" >
           <template #default="{ row }">
-            <span :title="row.${field.fieldName}" class="list-table-column-value ellipsis">{{ row.${field.fieldName} }}</span>
+              <ElTooltip :content="row.${field.fieldName}" >
+                <span class="list-table-column-value ellipsis">{{ row.${field.fieldName} }}</span>
+              </ElTooltip>
           </template>
         </el-table-column>
 <#else>
         <el-table-column prop="${field.fieldName}" label="${field.remark!}" width="150" >
           <template #default="{ row }">
-            <span :title="row.${field.fieldName}" class="list-table-column-value ellipsis">{{ row.${field.fieldName} }}</span>
+              <ElTooltip :content="row.${field.fieldName}" >
+                <span class="list-table-column-value ellipsis">{{ row.${field.fieldName} }}</span>
+              </ElTooltip>
           </template>
         </el-table-column>
 </#if>
