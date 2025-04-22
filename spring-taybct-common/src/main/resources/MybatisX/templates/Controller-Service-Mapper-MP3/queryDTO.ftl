@@ -11,10 +11,7 @@ import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import io.swagger.v3.oas.annotations.Hidden;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -35,6 +32,7 @@ import java.util.Collection;
  * @see ${tableClass.fullClassName}
  */
 @Data
+@Accessors(chain = true)
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString

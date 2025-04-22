@@ -30,6 +30,7 @@ import java.io.Serial;
  * @author ${author!}
  */
 @TableName(value = "${tableClass.tableName}")
+@Accessors(chain = true)
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
