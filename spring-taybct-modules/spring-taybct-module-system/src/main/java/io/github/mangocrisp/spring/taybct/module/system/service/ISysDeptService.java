@@ -8,6 +8,7 @@ import io.github.mangocrisp.spring.taybct.tool.core.bean.service.IBaseService;
 import io.github.mangocrisp.spring.taybct.tool.core.request.SqlQueryParams;
 
 import java.util.LinkedHashSet;
+import java.util.List;
 
 /**
  * 针对表【sys_dept(部门)】的数据库操作Service
@@ -23,7 +24,7 @@ public interface ISysDeptService extends IBaseService<SysDept> {
      * @param dto 查询参数
      * @return 树结构
      */
-    LinkedHashSet<SysDeptTreeVO> tree(SysDeptQueryDTO dto);
+    List<SysDeptTreeVO> tree(SysDeptQueryDTO dto);
 
     /**
      * 分页查询

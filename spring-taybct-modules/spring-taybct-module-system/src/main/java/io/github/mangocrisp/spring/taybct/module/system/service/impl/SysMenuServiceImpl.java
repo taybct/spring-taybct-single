@@ -90,7 +90,7 @@ public class SysMenuServiceImpl extends BaseServiceImpl<SysMenuMapper, SysMenu>
 
 
     @Override
-    public LinkedHashSet<RouterVO> loadRouterByRoleCode() {
+    public List<RouterVO> loadRouterByRoleCode() {
         Set<String> authorities = checkAuthorities();
         return getBaseMapper().loadRouterByRoleCode(authorities, checkRoot());
     }

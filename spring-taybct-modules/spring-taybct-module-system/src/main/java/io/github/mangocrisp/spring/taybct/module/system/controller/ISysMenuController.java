@@ -11,6 +11,7 @@ import io.github.mangocrisp.spring.taybct.tool.core.annotation.RestControllerReg
 import io.github.mangocrisp.spring.taybct.tool.core.annotation.WebLog;
 import io.github.mangocrisp.spring.taybct.tool.core.bean.controller.QueryBaseController;
 import io.github.mangocrisp.spring.taybct.tool.core.result.R;
+import io.github.mangocrisp.spring.taybct.tool.core.util.CollectionSortUtil;
 import io.github.mangocrisp.spring.taybct.tool.core.util.tree.TreeUtil;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -60,8 +61,8 @@ public interface ISysMenuController extends QueryBaseController<SysMenu, ISysMen
     @Operation(summary = "获取路由")
     @GetMapping("router")
     @WebLog
-    default R<LinkedHashSet<RouterVO>> router() {
-        return R.data(TreeUtil.genTree(getBaseService().loadRouterByRoleCode(), 0L));
+    default R<List<RouterVO>> router() {
+        return R.data(TreeUtil.tree(getBaseService().loadRouterByRoleCode(), CollectionSortUtil.comparingAny(RouterVO::getSort), 0L));
     }
 
     /**

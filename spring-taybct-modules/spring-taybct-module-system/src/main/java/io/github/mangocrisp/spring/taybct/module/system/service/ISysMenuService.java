@@ -37,7 +37,7 @@ public interface ISysMenuService extends IBaseService<SysMenu> {
      * @author xijieyin <br> 2022/12/6 11:23
      * @since 1.0.0
      */
-    LinkedHashSet<RouterVO> loadRouterByRoleCode();
+    List<RouterVO> loadRouterByRoleCode();
 
     /**
      * 获取用户权限

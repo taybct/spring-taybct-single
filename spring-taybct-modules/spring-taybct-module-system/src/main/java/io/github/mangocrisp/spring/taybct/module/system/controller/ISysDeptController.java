@@ -15,6 +15,7 @@ import io.github.mangocrisp.spring.taybct.tool.core.annotation.WebLog;
 import io.github.mangocrisp.spring.taybct.tool.core.bean.controller.QueryBaseController;
 import io.github.mangocrisp.spring.taybct.tool.core.request.SqlQueryParams;
 import io.github.mangocrisp.spring.taybct.tool.core.result.R;
+import io.github.mangocrisp.spring.taybct.tool.core.util.CollectionSortUtil;
 import io.github.mangocrisp.spring.taybct.tool.core.util.MyBatisUtil;
 import io.github.mangocrisp.spring.taybct.tool.core.util.tree.TreeUtil;
 import io.swagger.v3.oas.annotations.Operation;
@@ -57,8 +58,8 @@ public interface ISysDeptController extends QueryBaseController<SysDept, ISysDep
     @Operation(summary = "获取树")
     @PostMapping("tree")
     @WebLog
-    default R<LinkedHashSet<SysDeptTreeVO>> tree(@RequestBody SysDeptQueryDTO dto) {
-        return R.data(TreeUtil.genTree(getBaseService().tree(dto), dto.getParentId(), dto.isIncludeTopParent()));
+    default R<List<SysDeptTreeVO>> tree(@RequestBody SysDeptQueryDTO dto) {
+        return R.data(TreeUtil.tree(getBaseService().tree(dto), CollectionSortUtil.comparingAny(SysDept::getSort), dto.getParentId()));
     }
 
     @Operation(summary = "获取分页")

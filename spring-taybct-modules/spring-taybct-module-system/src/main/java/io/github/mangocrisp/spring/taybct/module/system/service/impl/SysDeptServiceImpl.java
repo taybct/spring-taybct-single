@@ -12,6 +12,7 @@ import io.github.mangocrisp.spring.taybct.tool.core.request.SqlQueryParams;
 import io.github.mangocrisp.spring.taybct.tool.core.util.MyBatisUtil;
 
 import java.util.LinkedHashSet;
+import java.util.List;
 
 /**
  * 针对表【sys_dept(部门)】的数据库操作Service实现
@@ -22,7 +23,7 @@ public class SysDeptServiceImpl extends BaseServiceImpl<SysDeptMapper, SysDept>
         implements ISysDeptService {
 
     @Override
-    public LinkedHashSet<SysDeptTreeVO> tree(SysDeptQueryDTO dto) {
+    public List<SysDeptTreeVO> tree(SysDeptQueryDTO dto) {
         ILoginUser loginUser = securityUtil.getLoginUser();
         return getBaseMapper().tree(dto
                 , loginUser.getUserId()

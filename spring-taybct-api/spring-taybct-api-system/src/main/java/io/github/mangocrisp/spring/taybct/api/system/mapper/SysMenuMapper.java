@@ -38,7 +38,7 @@ public interface SysMenuMapper extends BaseMapper<SysMenu> {
      * @param isRoot      是否是超级管理员
      * @return {@code LinkedHashSet<RouterVO>}
      */
-    LinkedHashSet<RouterVO> loadRouterByRoleCode(@Param("authorities") Set<String> authorities, @Param("isRoot") Integer isRoot);
+    List<RouterVO> loadRouterByRoleCode(@Param("authorities") Set<String> authorities, @Param("isRoot") Integer isRoot);
 
     /**
      * 根据角色 code 获取权限列表

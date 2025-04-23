@@ -9,6 +9,7 @@ import org.apache.ibatis.annotations.Param;
 
 import java.io.Serializable;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -28,7 +29,7 @@ public interface SysDeptMapper extends BaseMapper<SysDept> {
      * @param isRoot      是否是 ROOT 角色
      * @return 部门树
      */
-    LinkedHashSet<SysDeptTreeVO> tree(@Param("dto") SysDeptQueryDTO dto
+    List<SysDeptTreeVO> tree(@Param("dto") SysDeptQueryDTO dto
             , @Param("operator") Serializable operator
             , @Param("authorities") Set<String> authorities
             , @Param("isRoot") Integer isRoot);
