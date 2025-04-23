@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.io.Serializable;
 import java.util.LinkedHashSet;
+import java.util.List;
 
 /**
  * 部门树
@@ -29,6 +30,6 @@ public class SysDeptTreeVO extends SysDept implements Serializable, TreeUtil.Tre
     /**
      * 子集菜单
      */
-    private LinkedHashSet<SysDeptTreeVO> children;
+    private List<SysDeptTreeVO> children;
 
 }

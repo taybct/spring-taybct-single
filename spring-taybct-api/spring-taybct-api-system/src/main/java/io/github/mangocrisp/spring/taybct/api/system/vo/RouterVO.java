@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -97,6 +98,6 @@ public class RouterVO implements Serializable, TreeUtil.Tree<RouterVO> {
     /**
      * 子集菜单
      */
-    private LinkedHashSet<RouterVO> children;
+    private List<RouterVO> children;
 
 }

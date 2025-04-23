@@ -8,7 +8,9 @@ import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
 import java.io.Serial;
+import java.util.ArrayList;
 import java.util.LinkedHashSet;
+import java.util.List;
 
 /**
  * 菜单列表
@@ -35,10 +37,10 @@ public class SysMenuVO extends SysMenu implements TreeUtil.Tree<SysMenuVO> {
     /**
      * 子集
      */
-    LinkedHashSet<SysMenuVO> children = new LinkedHashSet<>();
+    List<SysMenuVO> children = new ArrayList<>();
 
     @Override
-    public void setChildren(LinkedHashSet<SysMenuVO> children) {
+    public void setChildren(List<SysMenuVO> children) {
         this.children = children;
     }
 
