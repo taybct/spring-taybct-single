@@ -18,10 +18,7 @@ import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.Parameters;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 import java.util.Set;
@@ -43,6 +40,11 @@ public interface IScheduledTaskController extends BaseController<ScheduledTask, 
     default R<IPage<ScheduledTaskVO>> taskPage(@RequestParam(required = false) Map<String, Object> sqlQueryParams) {
         return R.data(getBaseService().taskPage(sqlQueryParams));
     }
+
+    @Operation(summary = "尝试执行一次")
+    @PostMapping("tryOnce/{key}")
+    @WebLog
+    R<?> tryOnce(@PathVariable String key, @RequestBody Map<String, Object> params);
 
     /**
      * 根据任务 key 启动任务

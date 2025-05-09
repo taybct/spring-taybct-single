@@ -45,6 +45,11 @@ public class ScheduledTaskControllerRegister implements IScheduledTaskController
     }
 
 
+    @Override
+    public R<?> tryOnce(String key, Map<String, Object> params) {
+        return R.data(schedulingService.tryOnce(key, params));
+    }
+
     /**
      * 根据任务 key 启动任务
      */
