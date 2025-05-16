@@ -291,7 +291,7 @@ onMounted(() => {
         <ElRow :gutter="20">
 <#list tableClass.pkFields as field>
         <ElCol :span="6">
-          <ElTooltip content="${field.remark!}">
+          <ElTooltip content="${field.remark!}" :trigger-keys="[]">
             <ElFormItem class="query-form-item" label="${field.remark!}">
               <ElInput v-model="form.${tableClass.shortClassName?uncap_first}QueryDTO.${field.fieldName}" clearable />
             </ElFormItem>
@@ -301,7 +301,7 @@ onMounted(() => {
 <#list tableClass.baseBlobFields as field>
 <#if field.jdbcType=="VARCHAR">
         <ElCol :span="6">
-          <ElTooltip content="${field.remark!}">
+          <ElTooltip content="${field.remark!}" :trigger-keys="[]">
             <ElFormItem class="query-form-item" label="${field.remark!}">
                 <ElInput v-model="form.${tableClass.shortClassName?uncap_first}QueryDTO.${field.fieldName}" placeholder="请输入" clearable />
             </ElFormItem>
@@ -309,14 +309,14 @@ onMounted(() => {
         </ElCol>
 <#elseif field.jdbcType=="DATE">
         <ElCol :span="6">
-          <ElTooltip content="${field.remark!}（日期范围开始）：查询比这个日期大的">
+          <ElTooltip content="${field.remark!}（日期范围开始）：查询比这个日期大的" :trigger-keys="[]">
             <ElFormItem class="query-form-item" label="${field.remark!}（日期范围开始）">
                 <el-date-picker v-model="form.${tableClass.shortClassName?uncap_first}QueryDTO.${field.fieldName}_ge" value-format="YYYY-MM-DD" type="date" placeholder="查询比这个日期大的" />
             </ElFormItem>
           </ElTooltip>
         </ElCol>
         <ElCol :span="6">
-          <ElTooltip content="${field.remark!}（日期范围结束）：查询比这个日期小的">
+          <ElTooltip content="${field.remark!}（日期范围结束）：查询比这个日期小的" :trigger-keys="[]">
             <ElFormItem class="query-form-item" label="${field.remark!}（日期范围结束）">
                 <el-date-picker v-model="form.${tableClass.shortClassName?uncap_first}QueryDTO.${field.fieldName}_le" value-format="YYYY-MM-DD" type="date" placeholder="查询比这个日期小的" />
             </ElFormItem>
@@ -324,14 +324,14 @@ onMounted(() => {
         </ElCol>
 <#elseif field.jdbcType=="TIMESTAMP">
         <ElCol :span="6">
-          <ElTooltip content="${field.remark!}（时间范围开始）：查询比这个时间大的">
+          <ElTooltip content="${field.remark!}（时间范围开始）：查询比这个时间大的" :trigger-keys="[]">
             <ElFormItem class="query-form-item" label="${field.remark!}（时间范围开始）">
                 <el-date-picker v-model="form.${tableClass.shortClassName?uncap_first}QueryDTO.${field.fieldName}_ge" value-format="YYYY-MM-DD HH:mm:ss" type="datetime" placeholder="查询比这个时间大的" />
             </ElFormItem>
           </ElTooltip>
         </ElCol>
         <ElCol :span="6">
-          <ElTooltip content="${field.remark!}（时间范围结束）：查询比这个时间小的">
+          <ElTooltip content="${field.remark!}（时间范围结束）：查询比这个时间小的" :trigger-keys="[]">
             <ElFormItem class="query-form-item" label="${field.remark!}（时间范围结束）">
                 <el-date-picker v-model="form.${tableClass.shortClassName?uncap_first}QueryDTO.${field.fieldName}_le" value-format="YYYY-MM-DD HH:mm:ss" type="datetime" placeholder="查询比这个时间小的" />
             </ElFormItem>
@@ -339,7 +339,7 @@ onMounted(() => {
         </ElCol>
 <#else>
         <ElCol :span="6">
-          <ElTooltip content="${field.remark!}">
+          <ElTooltip content="${field.remark!}" :trigger-keys="[]">
             <ElFormItem class="query-form-item" label="${field.remark!}">
                 <ElInput v-model="form.${tableClass.shortClassName?uncap_first}QueryDTO.${field.fieldName}" placeholder="请输入" clearable />
             </ElFormItem>
@@ -399,7 +399,7 @@ onMounted(() => {
 <#if field.jdbcType=="VARCHAR">
         <el-table-column prop="${field.fieldName}" label="${field.remark!}" width="150" >
           <template #default="{ row }">
-              <ElTooltip :content="row.${field.fieldName}" >
+              <ElTooltip :content="row.${field.fieldName}" :trigger-keys="[]">
                 <span class="list-table-column-value ellipsis">{{ row.${field.fieldName} }}</span>
               </ElTooltip>
           </template>
@@ -407,7 +407,7 @@ onMounted(() => {
 <#elseif field.jdbcType=="DATE">
         <el-table-column prop="${field.fieldName}" label="${field.remark!}" width="190" >
           <template #default="{ row }">
-              <ElTooltip :content="row.${field.fieldName}" >
+              <ElTooltip :content="row.${field.fieldName}" :trigger-keys="[]">
                 <span class="list-table-column-value ellipsis">{{ row.${field.fieldName} }}</span>
               </ElTooltip>
           </template>
@@ -415,7 +415,7 @@ onMounted(() => {
 <#elseif field.jdbcType=="TIMESTAMP">
         <el-table-column prop="${field.fieldName}" label="${field.remark!}" width="190" >
           <template #default="{ row }">
-              <ElTooltip :content="row.${field.fieldName}" >
+              <ElTooltip :content="row.${field.fieldName}" :trigger-keys="[]">
                 <span class="list-table-column-value ellipsis">{{ row.${field.fieldName} }}</span>
               </ElTooltip>
           </template>
@@ -423,7 +423,7 @@ onMounted(() => {
 <#else>
         <el-table-column prop="${field.fieldName}" label="${field.remark!}" width="150" >
           <template #default="{ row }">
-              <ElTooltip :content="row.${field.fieldName}" >
+              <ElTooltip :content="row.${field.fieldName}" :trigger-keys="[]">
                 <span class="list-table-column-value ellipsis">{{ row.${field.fieldName} }}</span>
               </ElTooltip>
           </template>

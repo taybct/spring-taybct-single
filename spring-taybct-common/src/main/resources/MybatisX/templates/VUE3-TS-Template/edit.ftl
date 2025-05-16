@@ -165,7 +165,7 @@ iniAddForm();
       <ElRow :gutter="20">
 <#list tableClass.pkFields as field>
         <ElCol v-if="form.${field.fieldName}" :span="12">
-          <ElTooltip content="${field.remark!}">
+          <ElTooltip content="${field.remark!}" :trigger-keys="[]">
             <ElFormItem v-if="form.${field.fieldName}" class="edit-form-item" label="${field.remark!}">
               <ElInput v-model="form.${field.fieldName}" readonly disabled />
             </ElFormItem>
@@ -174,7 +174,7 @@ iniAddForm();
 </#list>
 <#list tableClass.baseBlobFields as field>
         <ElCol :span="12">
-          <ElTooltip content="${field.remark!}">
+          <ElTooltip content="${field.remark!}" :trigger-keys="[]">
             <ElFormItem class="edit-form-item" label="${field.remark!}" prop="${field.fieldName}">
 <#if field.jdbcType=="VARCHAR">
             <ElInput v-model="form.${field.fieldName}" placeholder="请输入" clearable />
