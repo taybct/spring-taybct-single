@@ -35,9 +35,14 @@ public class AuthorizeRedirectUrlCreator implements IAuthorizeRedirectUrlCreator
             if (StringUtil.isBlank(loginPageConfig.getParamsRedirectApi())) {
                 throw new RuntimeException("请配置回调地址");
             }
-            fnMap.put(LoginPageConfig.EncodeType.base64, params -> String.format("redirect:%s?redirect=%s", loginPageConfig.getRedirectLoginPage(), encodeParamsBase64(params.getString("client_id"), params.getString("scope"), params.getString("redirect_uri"))));
-            fnMap.put(LoginPageConfig.EncodeType.uri_component, params -> String.format("redirect:%s?redirect=%s", loginPageConfig.getRedirectLoginPage(), encodeParamsURIComponent(params.getString("client_id"), params.getString("scope"), params.getString("redirect_uri"))));
+            fnMap.put("base64", params -> String.format("redirect:%s?redirect=%s", loginPageConfig.getRedirectLoginPage(), encodeParamsBase64(params.getString("client_id"), params.getString("scope"), params.getString("redirect_uri"))));
+            fnMap.put("uri_component", params -> String.format("redirect:%s?redirect=%s", loginPageConfig.getRedirectLoginPage(), encodeParamsURIComponent(params.getString("client_id"), params.getString("scope"), params.getString("redirect_uri"))));
         }
+    }
+
+    @Override
+    public String defaultRedirectUrl() {
+        return this.loginPageConfig.getLoginPage();
     }
 
     @Override

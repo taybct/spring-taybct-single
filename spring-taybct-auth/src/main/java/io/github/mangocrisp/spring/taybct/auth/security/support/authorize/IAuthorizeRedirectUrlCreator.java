@@ -1,6 +1,8 @@
 package io.github.mangocrisp.spring.taybct.auth.security.support.authorize;
 
 import com.alibaba.fastjson2.JSONObject;
+import io.github.mangocrisp.spring.taybct.tool.core.util.StringUtil;
+import jakarta.servlet.http.HttpServletRequest;
 
 /**
  * <pre>
@@ -11,6 +13,32 @@ import com.alibaba.fastjson2.JSONObject;
  * @since 2025/6/5 12:59
  */
 public interface IAuthorizeRedirectUrlCreator {
+
+    String defaultRedirectUrl();
+
+    /**
+     * 创建创建回调地址
+     *
+     * @param request 请求
+     * @return 回调地址
+     */
+    default String create(HttpServletRequest request){
+        String clientId = request.getParameter("client_id");
+        String redirectUri = request.getParameter("redirect_uri");
+        if (StringUtil.isNotBlank(clientId) && StringUtil.isNotBlank(redirectUri)) {
+            String scope = request.getParameter("scope");
+            if (StringUtil.isBlank(scope)) {
+                scope = "all";
+            }
+            JSONObject params = new JSONObject();
+            request.getParameterMap().forEach((key, value) -> params.put(key, value[0]));
+            params.put("client_id", clientId);
+            params.put("redirect_uri", redirectUri);
+            params.put("scope", scope);
+            return create(params);
+        }
+        return defaultRedirectUrl();
+    }
 
     /**
      * 创建创建回调地址

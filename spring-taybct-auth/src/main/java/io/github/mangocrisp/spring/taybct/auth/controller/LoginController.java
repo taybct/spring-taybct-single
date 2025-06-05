@@ -49,21 +49,7 @@ class LoginController {
         if (!loginPageConfig.getRedirect()) {
             return loginPageConfig.getLoginPage();
         }
-        String clientId = request.getParameter("client_id");
-        String redirectUri = request.getParameter("redirect_uri");
-        if (StringUtil.isNotBlank(clientId) && StringUtil.isNotBlank(redirectUri)) {
-            String scope = request.getParameter("scope");
-            if (StringUtil.isBlank(scope)) {
-                scope = "all";
-            }
-            JSONObject params = new JSONObject();
-            request.getParameterMap().forEach((key, value) -> params.put(key, value[0]));
-            params.put("client_id", clientId);
-            params.put("redirect_uri", redirectUri);
-            params.put("scope", scope);
-            return authorizeRedirectUrlCreator.create(params);
-        }
-        return loginPageConfig.getLoginPage();
+        return authorizeRedirectUrlCreator.create(request);
     }
 
     /**
