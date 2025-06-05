@@ -4,10 +4,13 @@ import cn.hutool.core.util.ArrayUtil;
 import io.github.mangocrisp.spring.taybct.auth.security.filter.AuthFilter;
 import io.github.mangocrisp.spring.taybct.auth.security.handle.IUserDetailsHandle;
 import io.github.mangocrisp.spring.taybct.auth.security.handle.deft.PropertiesUserDetailsHandle;
+import io.github.mangocrisp.spring.taybct.auth.security.prop.LoginPageConfig;
 import io.github.mangocrisp.spring.taybct.auth.security.prop.UserConfig;
 import io.github.mangocrisp.spring.taybct.auth.security.service.CustomizeUserDetailsServiceImpl;
 import io.github.mangocrisp.spring.taybct.auth.security.service.ICustomizeUserDetailsService;
 import io.github.mangocrisp.spring.taybct.auth.security.service.ThirdUserDetailsService;
+import io.github.mangocrisp.spring.taybct.auth.security.support.AuthorizeRedirectUrlCreator;
+import io.github.mangocrisp.spring.taybct.auth.security.support.IAuthorizeRedirectUrlCreator;
 import io.github.mangocrisp.spring.taybct.auth.security.util.ResponseHandler;
 import io.github.mangocrisp.spring.taybct.common.prop.SecureProp;
 import io.github.mangocrisp.spring.taybct.tool.core.constant.ISysParamsObtainService;
@@ -16,6 +19,7 @@ import io.github.mangocrisp.spring.taybct.tool.core.exception.handler.IGlobalPri
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.annotation.Order;
@@ -52,6 +56,7 @@ import java.util.stream.Collectors;
 @AutoConfiguration
 @EnableWebSecurity
 @Slf4j
+@EnableConfigurationProperties({LoginPageConfig.class})
 public class AuthSecurityConfig {
 
     /**
@@ -125,6 +130,11 @@ public class AuthSecurityConfig {
     public ResponseHandler responseHandler(IGlobalExceptionReporter globalExceptionReporter
             , IGlobalPrinter globalPrinter) {
         return new ResponseHandler(globalExceptionReporter, globalPrinter);
+    }
+
+    @Bean
+    public IAuthorizeRedirectUrlCreator authorizeRedirectUrlCreator(LoginPageConfig loginPageConfig){
+        return new AuthorizeRedirectUrlCreator(loginPageConfig);
     }
 
     /**

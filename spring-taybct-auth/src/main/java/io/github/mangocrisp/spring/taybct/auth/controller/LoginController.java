@@ -2,6 +2,9 @@ package io.github.mangocrisp.spring.taybct.auth.controller;
 
 import com.alibaba.fastjson2.JSONObject;
 import io.github.mangocrisp.spring.taybct.auth.security.handle.IUserDetailsHandle;
+import io.github.mangocrisp.spring.taybct.auth.security.prop.LoginPageConfig;
+import io.github.mangocrisp.spring.taybct.auth.security.support.IAuthorizeRedirectUrlCreator;
+import io.github.mangocrisp.spring.taybct.common.constants.CacheConstants;
 import io.github.mangocrisp.spring.taybct.common.constants.ServeConstants;
 import io.github.mangocrisp.spring.taybct.tool.core.bean.ISecurityUtil;
 import io.github.mangocrisp.spring.taybct.tool.core.result.R;
@@ -9,6 +12,10 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +24,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 
 /**
+ * <pre>
+ *     如果需要使用授权码模式，登录页面默认为 base-login，如果需要自定义登录页面，
+ *     浏览器访问：
+ *     {@code http://[ip]/api/auth/oauth/authorize?response_type=code&client_id=[client_id]&scope=[scope]&redirect_uri=[redirect_uri]}
+ *     鉴权服务器会跳转到登录页面，登录成功后，会返回一个授权码，然后跳转到 redirect_uri 中指定的页面，
+ * </pre>
+ *
  * @author xijieyin <br> 2022/12/30 1:18
  */
 @AutoConfiguration
@@ -29,9 +43,26 @@ class LoginController {
 
     final ISecurityUtil securityUtil;
 
+    final LoginPageConfig loginPageConfig;
+
+    final IAuthorizeRedirectUrlCreator authorizeRedirectUrlCreator;
+
+    final RedisTemplate<String, JSONObject> redisTemplate;
+
     @GetMapping("/login")
     String login() {
-        return "base-login";
+        if (!loginPageConfig.getRedirect()) {
+            return loginPageConfig.getLoginPage();
+        }
+        Authentication principal = SecurityContextHolder.getContext().getAuthentication();
+        if (principal != null && principal.getDetails() instanceof WebAuthenticationDetails webAuthenticationDetails) {
+            String sessionId = webAuthenticationDetails.getSessionId();
+            JSONObject params = redisTemplate.opsForValue().get(CacheConstants.OAuth.AUTHORIZE_CLIENT_CACHE + sessionId);
+            if (params != null) {
+                return authorizeRedirectUrlCreator.create(params);
+            }
+        }
+        return loginPageConfig.getLoginPage();
     }
 
     /**
