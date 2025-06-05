@@ -2,12 +2,10 @@ package io.github.mangocrisp.spring.taybct.auth.controller;
 
 import com.alibaba.fastjson2.JSONObject;
 import io.github.mangocrisp.spring.taybct.auth.security.handle.IUserDetailsHandle;
-import io.github.mangocrisp.spring.taybct.auth.security.prop.LoginPageConfig;
 import io.github.mangocrisp.spring.taybct.auth.security.support.authorize.IAuthorizeRedirectUrlCreator;
 import io.github.mangocrisp.spring.taybct.common.constants.ServeConstants;
 import io.github.mangocrisp.spring.taybct.tool.core.bean.ISecurityUtil;
 import io.github.mangocrisp.spring.taybct.tool.core.result.R;
-import io.github.mangocrisp.spring.taybct.tool.core.util.StringUtil;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
@@ -40,15 +38,10 @@ class LoginController {
 
     final ISecurityUtil securityUtil;
 
-    final LoginPageConfig loginPageConfig;
-
     final IAuthorizeRedirectUrlCreator authorizeRedirectUrlCreator;
 
     @GetMapping("/login")
     String login(HttpServletRequest request) {
-        if (!loginPageConfig.getRedirect()) {
-            return loginPageConfig.getLoginPage();
-        }
         return authorizeRedirectUrlCreator.create(request);
     }
 
