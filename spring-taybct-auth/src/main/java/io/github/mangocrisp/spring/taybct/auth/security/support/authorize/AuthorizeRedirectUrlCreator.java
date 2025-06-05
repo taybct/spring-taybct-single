@@ -1,4 +1,4 @@
-package io.github.mangocrisp.spring.taybct.auth.security.support;
+package io.github.mangocrisp.spring.taybct.auth.security.support.authorize;
 
 import cn.hutool.core.codec.Base64;
 import com.alibaba.fastjson2.JSONObject;

@@ -63,10 +63,6 @@ public class CacheConstants {
          * 计数缓存 key
          */
         String COUNT_CACHE_KEY = PREFIX + "pwd_ck_fail_c:";
-        /**
-         * 鉴权客户端 id 缓存键
-         */
-        String AUTHORIZE_CLIENT_CACHE = PREFIX + "authorize-client-cache:";
     }
 
     /**

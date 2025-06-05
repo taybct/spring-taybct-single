@@ -3,19 +3,16 @@ package io.github.mangocrisp.spring.taybct.auth.controller;
 import com.alibaba.fastjson2.JSONObject;
 import io.github.mangocrisp.spring.taybct.auth.security.handle.IUserDetailsHandle;
 import io.github.mangocrisp.spring.taybct.auth.security.prop.LoginPageConfig;
-import io.github.mangocrisp.spring.taybct.auth.security.support.IAuthorizeRedirectUrlCreator;
-import io.github.mangocrisp.spring.taybct.common.constants.CacheConstants;
+import io.github.mangocrisp.spring.taybct.auth.security.support.authorize.IAuthorizeRedirectUrlCreator;
 import io.github.mangocrisp.spring.taybct.common.constants.ServeConstants;
 import io.github.mangocrisp.spring.taybct.tool.core.bean.ISecurityUtil;
 import io.github.mangocrisp.spring.taybct.tool.core.result.R;
+import io.github.mangocrisp.spring.taybct.tool.core.util.StringUtil;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
-import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -47,20 +44,24 @@ class LoginController {
 
     final IAuthorizeRedirectUrlCreator authorizeRedirectUrlCreator;
 
-    final RedisTemplate<String, JSONObject> redisTemplate;
-
     @GetMapping("/login")
-    String login() {
+    String login(HttpServletRequest request) {
         if (!loginPageConfig.getRedirect()) {
             return loginPageConfig.getLoginPage();
         }
-        Authentication principal = SecurityContextHolder.getContext().getAuthentication();
-        if (principal != null && principal.getDetails() instanceof WebAuthenticationDetails webAuthenticationDetails) {
-            String sessionId = webAuthenticationDetails.getSessionId();
-            JSONObject params = redisTemplate.opsForValue().get(CacheConstants.OAuth.AUTHORIZE_CLIENT_CACHE + sessionId);
-            if (params != null) {
-                return authorizeRedirectUrlCreator.create(params);
+        String clientId = request.getParameter("client_id");
+        String redirectUri = request.getParameter("redirect_uri");
+        if (StringUtil.isNotBlank(clientId) && StringUtil.isNotBlank(redirectUri)) {
+            String scope = request.getParameter("scope");
+            if (StringUtil.isBlank(scope)) {
+                scope = "all";
             }
+            JSONObject params = new JSONObject();
+            request.getParameterMap().forEach((key, value) -> params.put(key, value[0]));
+            params.put("client_id", clientId);
+            params.put("redirect_uri", redirectUri);
+            params.put("scope", scope);
+            return authorizeRedirectUrlCreator.create(params);
         }
         return loginPageConfig.getLoginPage();
     }

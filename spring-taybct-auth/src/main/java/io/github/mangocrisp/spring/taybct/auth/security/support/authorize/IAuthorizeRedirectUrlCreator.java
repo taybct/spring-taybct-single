@@ -1,4 +1,4 @@
-package io.github.mangocrisp.spring.taybct.auth.security.support;
+package io.github.mangocrisp.spring.taybct.auth.security.support.authorize;
 
 import com.alibaba.fastjson2.JSONObject;
 
