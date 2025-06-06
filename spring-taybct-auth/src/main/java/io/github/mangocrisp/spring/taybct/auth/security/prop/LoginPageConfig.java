@@ -53,7 +53,7 @@ public class LoginPageConfig implements Serializable {
      */
     String paramsRedirectApi;
     /**
-     * url 加密类型
+     * 前端获取参数需要加密的 url 加密类型
      */
     String paramsRedirectApiEncodeType = EncodeType.uri_component;
 
