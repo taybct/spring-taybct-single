@@ -1,5 +1,6 @@
 package io.github.mangocrisp.spring.taybct.auth.security.support.authorize;
 
+import cn.hutool.core.util.ArrayUtil;
 import com.alibaba.fastjson2.JSONObject;
 import io.github.mangocrisp.spring.taybct.tool.core.util.StringUtil;
 import jakarta.servlet.http.HttpServletRequest;
@@ -31,7 +32,13 @@ public interface IAuthorizeRedirectUrlCreator {
                 scope = "all";
             }
             JSONObject params = new JSONObject();
-            request.getParameterMap().forEach((key, value) -> params.put(key, value[0]));
+            request.getParameterMap().forEach((key, value) -> {
+                if (ArrayUtil.length(value) == 1) {
+                    params.put(key, value[0]);
+                } else {
+                    params.put(key, value);
+                }
+            });
             params.put("client_id", clientId);
             params.put("redirect_uri", redirectUri);
             params.put("scope", scope);
