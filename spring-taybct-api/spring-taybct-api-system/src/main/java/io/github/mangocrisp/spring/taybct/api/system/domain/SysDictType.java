@@ -17,7 +17,7 @@ import java.io.Serial;
 import java.io.Serializable;
 
 /**
- * 字段类型<br>
+ * 字典类型<br>
  * sys_dict_type
  *
  * @author xijieyin <br> 2022/8/5 10:02

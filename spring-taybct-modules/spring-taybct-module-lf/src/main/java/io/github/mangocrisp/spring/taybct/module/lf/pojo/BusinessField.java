@@ -31,7 +31,7 @@ public class BusinessField implements Serializable {
      */
     private String title;
     /**
-     * 字段类型
+     * 字典类型
      * <br>
      * STRING: 字符串
      * NUMBER: 数字

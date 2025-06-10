@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
- * 针对表【sys_dict_type(字段类型)】的数据库操作Service实现
+ * 针对表【sys_dict_type(字典类型)】的数据库操作Service实现
  *
  * @author 24154
  */
