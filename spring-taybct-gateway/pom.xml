@@ -61,13 +61,6 @@
             <groupId>io.github.mangocrisp</groupId>
             <artifactId>spring-taybct-tool-core</artifactId>
             <version>${project.version}</version>
-            <exclusions>
-                <!--gateway 是基于 webflux 的，不需要用到 undertow-->
-                <exclusion>
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-starter-undertow</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
 
         <!--启动模块-->
