@@ -55,7 +55,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configurers.AuthorizeHttpRequestsConfigurer;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -86,6 +86,7 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.security.web.util.matcher.RequestMatcher;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.cors.CorsConfigurationSource;
 
 import java.security.KeyPair;
 import java.security.interfaces.RSAPrivateKey;
@@ -133,21 +134,28 @@ public class AuthorizationServerConfig {
             , IGlobalExceptionReporter globalExceptionReporter
             , IGlobalPrinter globalPrinter
             , IUserDetailsHandle userDetailsHandle
-            , IEncryptedPassable encryptedPassable)
+            , IEncryptedPassable encryptedPassable
+            , CorsConfigurationSource corsConfigurationSource)
             throws Exception {
+
+        // 应用默认授权服务器配置
+        OAuth2AuthorizationServerConfiguration.applyDefaultSecurity(http);
 
         AtomicReference<AuthenticationManager> authenticationManagerAtomicReference = new AtomicReference<>();
 
         OAuth2AuthorizationServerConfigurer authorizationServerConfigurer = new OAuth2AuthorizationServerConfigurer();
         RequestMatcher endpointsMatcher = authorizationServerConfigurer.getEndpointsMatcher();
-        // 禁用 csrf，跨域
-        http.csrf().disable().cors();
-        http.securityMatcher(endpointsMatcher).authorizeHttpRequests((authorize) -> ((AuthorizeHttpRequestsConfigurer.AuthorizedUrl) authorize.anyRequest()).authenticated())
+        // 禁用 csrf
+        http.csrf(AbstractHttpConfigurer::disable)
+                // 配置 CORS
+                .cors(cors -> cors.configurationSource(corsConfigurationSource));
 //                .csrf((csrf) -> {
 //                    csrf.ignoringRequestMatchers(new RequestMatcher[]{endpointsMatcher});
 //                })
-                .apply(authorizationServerConfigurer);
-
+//                .apply(authorizationServerConfigurer);
+        http.securityMatcher(endpointsMatcher);
+        // 授权服务器配置
+//        http.authorizeHttpRequests((authorize) -> (authorize.anyRequest()).authenticated());
         // Customizing the configuration
         /*
         OAuth2AuthorizationServerConfigurer provides the ability to fully customize the security configuration for an
@@ -158,81 +166,81 @@ public class AuthorizationServerConfig {
 
         机翻：OAuth2AuthorizationServerConfigurer提供了完全自定义OAuth2授权服务器的安全配置的能力。它允许您指定要使用的核心组件。。
          */
-        authorizationServerConfigurer
+        http.with(authorizationServerConfigurer, configurer -> configurer
 //                // 1 for managing new and existing clients. 用于管理新客户和现有客户。这个我这里默认的实现是只做查询客户端，客户端，我自己写或者我自己可以定义
-                // 其他的方式，这个，看是什么样的需求喽
+                        // 其他的方式，这个，看是什么样的需求喽
 //                .registeredClientRepository(registeredClientRepository)
 //                // 2 for managing new and existing authorizations. 用于管理新的和现有的授权。同上，同下，都是可以使用 JDBC 实现管理的 spring boot 提供了这
-                // 样的实现，但是我这里就只选择用默认的 InMemory 内存管理了
+                        // 样的实现，但是我这里就只选择用默认的 InMemory 内存管理了
 //                .authorizationService(authorizationService)
 //                // 3 for managing new and existing authorization consents. 用于管理新的和现有的授权同意。
-                /*
-                  上3个都可以使用 JDBC 来管理
-                  Spring Security 的建表语句在 org/springframework/security/core/userdetails/jdbc/users.ddl
-                  可以用 UserDetailsManager 添加用户信息
-                  Spring authorization Server 的建表文件在
-                  org/springframework/security/oauth2/server/authorization/oauth2-authorization-consent-schema.sql
-                  org/springframework/security/oauth2/server/authorization/oauth2-authorization-schema.sql
-                  org/springframework/security/oauth2/server/authorization/client/oauth2-registered-client-schema.sql
-                 */
+                        /*
+                          上3个都可以使用 JDBC 来管理
+                          Spring Security 的建表语句在 org/springframework/security/core/userdetails/jdbc/users.ddl
+                          可以用 UserDetailsManager 添加用户信息
+                          Spring authorization Server 的建表文件在
+                          org/springframework/security/oauth2/server/authorization/oauth2-authorization-consent-schema.sql
+                          org/springframework/security/oauth2/server/authorization/oauth2-authorization-schema.sql
+                          org/springframework/security/oauth2/server/authorization/client/oauth2-registered-client-schema.sql
+                         */
 //                .authorizationConsentService(authorizationConsentService)
 //                // 4 for customizing configuration settings for the OAuth2 authorization server. 用于自定义OAuth2授权服务器的配置设置。
-                // 也就是配置一些请求地址啊什么的，这里直接用默认的就好了，除非是有特别需求
+                        // 也就是配置一些请求地址啊什么的，这里直接用默认的就好了，除非是有特别需求
 //                .authorizationServerSettings(authorizationServerSettings)
 //                // 5 for generating tokens supported by the OAuth2 authorization server. 用于生成OAuth2授权服务器支持的令牌。
-                // 可以自定义 token 的一些信息
+                        // 可以自定义 token 的一些信息
 //                .tokenGenerator(tokenGenerator)
 //                // 6 提供了自定义OAuth2客户端身份验证的能力。它定义了扩展点，允许您自定义客户端身份验证请求的预处理、主处理和后处理逻辑。
-                .clientAuthentication(clientAuthentication -> {
-                    // 说白了就是比如前端请求传的放在请求头的客户端 id 和 密钥 怎么转换成 Authentication （身份验证，数据载体，叫什么都好，最后验证成功返回的结果也是这个）
-                    // 我默认只使用 ClientAuthenticationMethod.CLIENT_SECRET_BASIC，那这个设置不设置都无所谓啦
+                        .clientAuthentication(clientAuthentication -> {
+                            // 说白了就是比如前端请求传的放在请求头的客户端 id 和 密钥 怎么转换成 Authentication （身份验证，数据载体，叫什么都好，最后验证成功返回的结果也是这个）
+                            // 我默认只使用 ClientAuthenticationMethod.CLIENT_SECRET_BASIC，那这个设置不设置都无所谓啦
 //                    clientAuthentication.authenticationConverter()
-                    // 大概是用来做判断，哪些客户端能不能使用哪些方式，我都默认了，这个也可以不设置了
+                            // 大概是用来做判断，哪些客户端能不能使用哪些方式，我都默认了，这个也可以不设置了
 //                    clientAuthentication.authenticationConverters();
-                    // 这个就是主要鉴定客户端的方法啦，拿到了转换之后的 Authentication，然后去和对应的方式获取的 client 去做比对 ？然后返回正确的 client 或者报错
+                            // 这个就是主要鉴定客户端的方法啦，拿到了转换之后的 Authentication，然后去和对应的方式获取的 client 去做比对 ？然后返回正确的 client 或者报错
 //                    clientAuthentication.authenticationProvider();
-                    // 也是限制不同的客户端有不同的方法
+                            // 也是限制不同的客户端有不同的方法
 //                    clientAuthentication.authenticationProviders();
-                    // The AuthenticationSuccessHandler (post-processor) used for handling a successful client authentication and associating the
-                    // OAuth2ClientAuthenticationToken to the SecurityContext.
-                    // 用于处理成功用户身份验证的策略。 实现可以为所欲为，但典型的行为是控制到后续目的地的导航（使用重定向或转发）。
-                    // 例如，在用户通过提交登录表单登录后，应用程序需要决定之后应该将其重定向到何处
+                            // The AuthenticationSuccessHandler (post-processor) used for handling a successful client authentication and associating the
+                            // OAuth2ClientAuthenticationToken to the SecurityContext.
+                            // 用于处理成功用户身份验证的策略。 实现可以为所欲为，但典型的行为是控制到后续目的地的导航（使用重定向或转发）。
+                            // 例如，在用户通过提交登录表单登录后，应用程序需要决定之后应该将其重定向到何处
 //                    clientAuthentication.authenticationSuccessHandler();
-                    // 有成功就有失败啦
+                            // 有成功就有失败啦
 //                    clientAuthentication.errorResponseHandler();
-                })
+                        })
 //                // 7 提供了自定义OAuth2授权端点的功能。它定义了扩展点，允许您自定义OAuth2授权请求的预处理、主处理和后处理逻辑。
-                .authorizationEndpoint(authorizationEndpoint -> {
-                    // 将请求转换成身份证验证
-                    OAuth2AuthorizationCodeRequestJTIAuthenticationConverter authorizationRequestConverter = new OAuth2AuthorizationCodeRequestJTIAuthenticationConverter();
-                    authorizationRequestConverter.setUserDetailsHandle(userDetailsHandle);
-                    authorizationRequestConverter.setJtiCookieKeyFN(s -> applicationName.toUpperCase() + "-" + s);
-                    authorizationRequestConverter.setAuthenticationManagerAtomicReference(authenticationManagerAtomicReference);
-                    authorizationEndpoint.authorizationRequestConverter(authorizationRequestConverter);
-                    // 对身份进行验证
+                        .authorizationEndpoint(authorizationEndpoint -> {
+                            // 将请求转换成身份证验证
+                            OAuth2AuthorizationCodeRequestJTIAuthenticationConverter authorizationRequestConverter = new OAuth2AuthorizationCodeRequestJTIAuthenticationConverter();
+                            authorizationRequestConverter.setUserDetailsHandle(userDetailsHandle);
+                            authorizationRequestConverter.setJtiCookieKeyFN(s -> applicationName.toUpperCase() + "-" + s);
+                            authorizationRequestConverter.setAuthenticationManagerAtomicReference(authenticationManagerAtomicReference);
+                            authorizationEndpoint.authorizationRequestConverter(authorizationRequestConverter);
+                            // 对身份进行验证
 //                    authorizationEndpoint.authenticationProvider();
-                    // 验证身份转换方法访问限制
+                            // 验证身份转换方法访问限制
 //                    authorizationEndpoint.authorizationRequestConverters();
-                    // 是用于验证授权代码授予中使用的特定OAuth2授权请求参数的默认验证器 默认实现验证redirect_uri和scope参数
+                            // 是用于验证授权代码授予中使用的特定OAuth2授权请求参数的默认验证器 默认实现验证redirect_uri和scope参数
 //                    authorizationEndpoint.authenticationProviders();
-                    // 成功回调
+                            // 成功回调
 //                    authorizationEndpoint.authorizationResponseHandler();
-                    // 失败回调
+                            // 失败回调
 //                    authorizationEndpoint.errorResponseHandler();
-                })
+                        })
 //                // 8 提供了自定义OAuth2令牌端点的能力。它定义了扩展点，允许您自定义OAuth2访问令牌请求的预处理、主处理和后处理逻辑。
-                // TODO 这个会比较麻烦一点，但是，如果要做自定义的鉴权，主要就是通过这个来做
-                .tokenEndpoint(customizeTokenEndpointConfigurer)
+                        // TODO 这个会比较麻烦一点，但是，如果要做自定义的鉴权，主要就是通过这个来做
+                        .tokenEndpoint(customizeTokenEndpointConfigurer)
 //                // 9 提供了自定义OAuth2令牌自检端点的能力。它定义了扩展点，允许您自定义OAuth2内省请求的预处理、主处理和后处理逻辑。
-        // 自检的这个，我们就不需要做了，原来的框架里面有写黑名单这样的功能，和他这个应该也是差不太多的
+                // 自检的这个，我们就不需要做了，原来的框架里面有写黑名单这样的功能，和他这个应该也是差不太多的
 //                .tokenIntrospectionEndpoint(tokenIntrospectionEndpoint -> { })
 //                // 10 提供了自定义OAuth2令牌吊销端点的功能。它定义了扩展点，允许您自定义OAuth2内省请求的预处理、主处理和后处理逻辑。
 //                .tokenRevocationEndpoint(tokenRevocationEndpoint -> { })
 //                // 11 提供了自定义OAuth2授权服务器元数据终结点的功能。它定义了一个扩展点，允许您自定义OAuth2授权服务器元数据响应。
-        // 这个属于是对鉴权服务器里面的一些元数据修改，怎么处理一些逻辑什么的，他已经有默认的了，想自定义的话，就需要更高级的操作了
+                // 这个属于是对鉴权服务器里面的一些元数据修改，怎么处理一些逻辑什么的，他已经有默认的了，想自定义的话，就需要更高级的操作了
 //                .authorizationServerMetadataEndpoint(authorizationServerMetadataEndpoint -> { })
 
-        // 这个暂时不想搞 openid 的东西
+                // 这个暂时不想搞 openid 的东西
 //                .oidc(oidc -> oidc
 //                        // 12
 //                        .providerConfigurationEndpoint(providerConfigurationEndpoint -> { })
@@ -240,14 +248,13 @@ public class AuthorizationServerConfig {
 //                        .userInfoEndpoint(userInfoEndpoint -> { })
 //                        // 14
 //                        .clientRegistrationEndpoint(clientRegistrationEndpoint -> { })
-        ;
+        );
 
-        http
-                // Redirect to the login page when not authenticated from the authorization endpoint
-                .exceptionHandling((exceptions) -> exceptions.authenticationEntryPoint(
-                        new JsonExceptionAuthenticationEntryPoint("/login"
-                                , globalExceptionReporter, globalPrinter))
-                );
+        // 配置异常处理 // Redirect to the login page when not authenticated from the authorization endpoint
+        http.exceptionHandling((exceptions) -> exceptions.authenticationEntryPoint(
+                new JsonExceptionAuthenticationEntryPoint("/login"
+                        , globalExceptionReporter, globalPrinter))
+        );
 
 
         http.getConfigurer(OAuth2AuthorizationServerConfigurer.class)

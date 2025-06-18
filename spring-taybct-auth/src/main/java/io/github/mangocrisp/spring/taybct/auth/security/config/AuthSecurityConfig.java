@@ -26,8 +26,10 @@ import org.springframework.core.annotation.Order;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authorization.AuthorizationManager;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.annotation.web.configurers.SecurityContextConfigurer;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.context.SecurityContextHolderStrategy;
@@ -46,8 +48,13 @@ import org.springframework.security.web.context.HttpSessionSecurityContextReposi
 import org.springframework.security.web.context.RequestAttributeSecurityContextRepository;
 import org.springframework.security.web.context.SecurityContextRepository;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import java.security.KeyPair;
+import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Collectors;
 
 /**
@@ -78,31 +85,24 @@ public class AuthSecurityConfig {
             , ISysParamsObtainService sysParamsObtainService
             , KeyPair keyPair
             , ResponseHandler responseHandler
-            , IUserDetailsHandle userDetailsHandle)
+            , IUserDetailsHandle userDetailsHandle
+            , CorsConfigurationSource corsConfigurationSource)
             throws Exception {
         // 禁用 csrf，跨域
-        http.csrf().disable().cors();
+        http.csrf(AbstractHttpConfigurer::disable)
+                .cors(cors -> cors.configurationSource(corsConfigurationSource));
         // X-Frame-Options，这个是为了安全考虑，可以不让别人把我们的网页嵌入 IFrame，如果禁用就可以嵌入
         // http.headers().frameOptions().disable();
-        http.authorizeHttpRequests((authorize) -> {
-                            try {
-                                authorize
-                                        // 黑名单
-                                        .requestMatchers(ArrayUtil.toArray(secureProp.getBlackList().getUris(), String.class)).denyAll()
-                                        // 白名单
-                                        .requestMatchers(ArrayUtil.toArray(secureProp.getIgnore().getUris()
-                                                        .stream().map(AntPathRequestMatcher::new).collect(Collectors.toList())
-                                                , AntPathRequestMatcher.class)).permitAll()
-                                        .anyRequest()
-                                        //.authenticated()
-                                        .access(authorizationManager)
-                                        .and()
-                                        .exceptionHandling(handle -> handle.accessDeniedHandler(responseHandler)
-                                                .authenticationEntryPoint(responseHandler));
-                            } catch (Exception e) {
-                                throw new RuntimeException(e);
-                            }
-                        }
+        http.authorizeHttpRequests((authorize) -> authorize
+                        // 黑名单
+                        .requestMatchers(ArrayUtil.toArray(secureProp.getBlackList().getUris(), String.class)).denyAll()
+                        // 白名单
+                        .requestMatchers(ArrayUtil.toArray(secureProp.getIgnore().getUris()
+                                        .stream().map(AntPathRequestMatcher::new).collect(Collectors.toList())
+                                , AntPathRequestMatcher.class)).permitAll()
+                        .anyRequest()
+                        //.authenticated()
+                        .access(authorizationManager)
                 )
                 // Form login handles the redirect to the login page from the
                 // authorization server filter chain
@@ -114,7 +114,14 @@ public class AuthSecurityConfig {
 //                .oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt)
                 .oauth2ResourceServer(oauth2 -> oauth2.jwt(jwt -> jwt.decoder(jwtDecoder)
                         .jwtAuthenticationConverter(jwtAuthenticationConverter)))
-                .httpBasic();
+                .httpBasic(Customizer.withDefaults());
+
+        // 配置异常处理
+        http.exceptionHandling(handle -> handle
+                // 权限不足处理
+                .accessDeniedHandler(responseHandler)
+                // 未认证处理
+                .authenticationEntryPoint(responseHandler));
 
         // 过滤权限，解密 token 之后把 payload 放到 request 里面方便后面去获取用户
         http.addFilterAfter(new AuthFilter(redisTemplate, sysParamsObtainService, keyPair), AuthorizationFilter.class);
@@ -127,13 +134,32 @@ public class AuthSecurityConfig {
     }
 
     @Bean
+    @ConditionalOnMissingBean
+    public CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+        // 允许的源
+        configuration.setAllowedOrigins(List.of("*"));
+        // 允许的方法
+        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE"));
+        // 允许的请求头
+        configuration.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type"));
+        // 是否允许凭证
+        configuration.setAllowCredentials(true);
+
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        // 应用到所有路径
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
+    }
+
+    @Bean
     public ResponseHandler responseHandler(IGlobalExceptionReporter globalExceptionReporter
             , IGlobalPrinter globalPrinter) {
         return new ResponseHandler(globalExceptionReporter, globalPrinter);
     }
 
     @Bean
-    public IAuthorizeRedirectUrlCreator authorizeRedirectUrlCreator(LoginPageConfig loginPageConfig){
+    public IAuthorizeRedirectUrlCreator authorizeRedirectUrlCreator(LoginPageConfig loginPageConfig) {
         return new AuthorizeRedirectUrlCreator(loginPageConfig);
     }
 

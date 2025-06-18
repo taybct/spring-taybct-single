@@ -26,10 +26,15 @@ import org.springframework.security.oauth2.server.resource.authentication.Reacti
 import org.springframework.security.web.server.SecurityWebFilterChain;
 import org.springframework.security.web.server.ServerAuthenticationEntryPoint;
 import org.springframework.security.web.server.authorization.ServerAccessDeniedHandler;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.reactive.CorsConfigurationSource;
+import org.springframework.web.cors.reactive.UrlBasedCorsConfigurationSource;
 import reactor.core.publisher.Mono;
 
 import java.security.KeyPair;
 import java.security.interfaces.RSAPublicKey;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * 资源服务器配置
@@ -48,8 +53,13 @@ public class ResourceServerConfig {
     private SecureProp secureProp;
 
     @Bean
-    public SecurityWebFilterChain springSecurityFilterChain(ServerHttpSecurity http, KeyPair keyPair) {
-        http.csrf().disable().cors();
+    public SecurityWebFilterChain springSecurityFilterChain(ServerHttpSecurity http
+            , KeyPair keyPair
+            , CorsConfigurationSource corsConfigurationSource) {
+        // 禁用 CSRF
+        http.csrf(ServerHttpSecurity.CsrfSpec::disable)
+                // 配置 CORS
+                .cors(cors -> cors.configurationSource(corsConfigurationSource));
         http.authorizeExchange(exchanges -> {
                             if (CollectionUtil.isNotEmpty(secureProp.getBlackList().getUris())) {
                                 // 黑名单
@@ -60,19 +70,54 @@ public class ResourceServerConfig {
                                 exchanges.pathMatchers(ArrayUtil.toArray(secureProp.getIgnore().getUris(), String.class)).permitAll();
                             }
                             // 其他所有的都需要鉴权
-                            exchanges.anyExchange().access(authorizationManager)
-                                    .and().exceptionHandling().accessDeniedHandler(accessDeniedHandler())
-                                    .authenticationEntryPoint(authenticationEntryPoint());
+                            exchanges.anyExchange().access(authorizationManager);
                         }
                 )
                 .oauth2ResourceServer(oauth -> {
                     // 这里因为是自己的应用，直接就用本地 jks 好了，不用再网络请求
-                    oauth.jwt().publicKey((RSAPublicKey) keyPair.getPublic());
-                    oauth.jwt(jwtSpec -> jwtSpec.jwtAuthenticationConverter(jwtAuthenticationConverter()));
+                    oauth.jwt(jwtSpec -> jwtSpec.publicKey((RSAPublicKey) keyPair.getPublic())
+                            .jwtAuthenticationConverter(jwtAuthenticationConverter()));
                 });
+        // 配置异常处理
+        http.exceptionHandling(exceptionHandling -> exceptionHandling
+                        .authenticationEntryPoint(authenticationEntryPoint())
+                        .accessDeniedHandler(accessDeniedHandler()));
         return http.build();
     }
 
+    @Bean
+    @ConditionalOnMissingBean
+    public CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration config = new CorsConfiguration();
+
+        // 允许的源
+        config.setAllowedOrigins(List.of("*"));
+
+        // 允许的方法
+        config.setAllowedMethods(Arrays.asList(
+                "GET", "POST", "PUT", "DELETE", "OPTIONS"
+        ));
+
+        // 允许的请求头
+        config.setAllowedHeaders(Arrays.asList(
+                "Authorization", "Content-Type", "X-Requested-With"
+        ));
+
+        // 暴露的响应头
+        config.setExposedHeaders(Arrays.asList(
+                "Custom-Header", "Content-Disposition"
+        ));
+
+        // 是否允许凭证（cookies）
+        config.setAllowCredentials(true);
+
+        // 预检请求缓存时间（秒）
+        config.setMaxAge(3600L);
+
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", config);
+        return source;
+    }
 
     /**
      * An instance of java.security.KeyPair with keys generated on startup used to create the JWKSource above.<br>
