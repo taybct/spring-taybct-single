@@ -55,11 +55,13 @@ public class ResourceServerConfig {
     @Bean
     public SecurityWebFilterChain springSecurityFilterChain(ServerHttpSecurity http
             , KeyPair keyPair
-            , CorsConfigurationSource corsConfigurationSource) {
+//            , CorsConfigurationSource corsConfigurationSource
+    ) {
         // 禁用 CSRF
         http.csrf(ServerHttpSecurity.CsrfSpec::disable)
                 // 配置 CORS
-                .cors(cors -> cors.configurationSource(corsConfigurationSource));
+//                .cors(cors -> cors.configurationSource(corsConfigurationSource))
+        ;
         http.authorizeExchange(exchanges -> {
                             if (CollectionUtil.isNotEmpty(secureProp.getBlackList().getUris())) {
                                 // 黑名单
@@ -85,39 +87,39 @@ public class ResourceServerConfig {
         return http.build();
     }
 
-    @Bean
-    @ConditionalOnMissingBean
-    public CorsConfigurationSource corsConfigurationSource() {
-        CorsConfiguration config = new CorsConfiguration();
-
-        // 允许的源
-        config.setAllowedOrigins(List.of("*"));
-
-        // 允许的方法
-        config.setAllowedMethods(Arrays.asList(
-                "GET", "POST", "PUT", "DELETE", "OPTIONS"
-        ));
-
-        // 允许的请求头
-        config.setAllowedHeaders(Arrays.asList(
-                "Authorization", "Content-Type", "X-Requested-With"
-        ));
-
-        // 暴露的响应头
-        config.setExposedHeaders(Arrays.asList(
-                "Custom-Header", "Content-Disposition"
-        ));
-
-        // 是否允许凭证（cookies）
-        config.setAllowCredentials(true);
-
-        // 预检请求缓存时间（秒）
-        config.setMaxAge(3600L);
-
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", config);
-        return source;
-    }
+//    @Bean
+//    @ConditionalOnMissingBean
+//    public CorsConfigurationSource corsConfigurationSource() {
+//        CorsConfiguration config = new CorsConfiguration();
+//
+//        // 允许的源
+//        config.setAllowedOrigins(List.of("*"));
+//
+//        // 允许的方法
+//        config.setAllowedMethods(Arrays.asList(
+//                "GET", "POST", "PUT", "DELETE", "OPTIONS"
+//        ));
+//
+//        // 允许的请求头
+//        config.setAllowedHeaders(Arrays.asList(
+//                "Authorization", "Content-Type", "X-Requested-With"
+//        ));
+//
+//        // 暴露的响应头
+//        config.setExposedHeaders(Arrays.asList(
+//                "Custom-Header", "Content-Disposition"
+//        ));
+//
+//        // 是否允许凭证（cookies）
+//        config.setAllowCredentials(true);
+//
+//        // 预检请求缓存时间（秒）
+//        config.setMaxAge(3600L);
+//
+//        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+//        source.registerCorsConfiguration("/**", config);
+//        return source;
+//    }
 
     /**
      * An instance of java.security.KeyPair with keys generated on startup used to create the JWKSource above.<br>

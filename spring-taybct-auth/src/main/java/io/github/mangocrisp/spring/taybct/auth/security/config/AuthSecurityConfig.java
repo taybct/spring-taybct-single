@@ -86,11 +86,14 @@ public class AuthSecurityConfig {
             , KeyPair keyPair
             , ResponseHandler responseHandler
             , IUserDetailsHandle userDetailsHandle
-            , CorsConfigurationSource corsConfigurationSource)
+//            , CorsConfigurationSource corsConfigurationSource
+    )
             throws Exception {
-        // 禁用 csrf，跨域
+        // 禁用 csrf
         http.csrf(AbstractHttpConfigurer::disable)
-                .cors(cors -> cors.configurationSource(corsConfigurationSource));
+        // 配置 CORS跨域
+//                .cors(cors -> cors.configurationSource(corsConfigurationSource))
+        ;
         // X-Frame-Options，这个是为了安全考虑，可以不让别人把我们的网页嵌入 IFrame，如果禁用就可以嵌入
         // http.headers().frameOptions().disable();
         http.authorizeHttpRequests((authorize) -> authorize
@@ -133,24 +136,24 @@ public class AuthSecurityConfig {
         return build;
     }
 
-    @Bean
-    @ConditionalOnMissingBean
-    public CorsConfigurationSource corsConfigurationSource() {
-        CorsConfiguration configuration = new CorsConfiguration();
-        // 允许的源
-        configuration.setAllowedOrigins(List.of("*"));
-        // 允许的方法
-        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE"));
-        // 允许的请求头
-        configuration.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type"));
-        // 是否允许凭证
-        configuration.setAllowCredentials(true);
-
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        // 应用到所有路径
-        source.registerCorsConfiguration("/**", configuration);
-        return source;
-    }
+//    @Bean
+//    @ConditionalOnMissingBean
+//    public CorsConfigurationSource corsConfigurationSource() {
+//        CorsConfiguration configuration = new CorsConfiguration();
+//        // 允许的源
+//        configuration.setAllowedOrigins(List.of("*"));
+//        // 允许的方法
+//        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE"));
+//        // 允许的请求头
+//        configuration.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type"));
+//        // 是否允许凭证
+//        configuration.setAllowCredentials(true);
+//
+//        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+//        // 应用到所有路径
+//        source.registerCorsConfiguration("/**", configuration);
+//        return source;
+//    }
 
     @Bean
     public ResponseHandler responseHandler(IGlobalExceptionReporter globalExceptionReporter
