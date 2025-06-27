@@ -256,7 +256,7 @@ public class SysUserServiceImpl extends BaseServiceImpl<SysUserMapper, SysUser>
         Long userId = securityUtil.getLoginUser().getUserId();
         String avatar = entity.getAvatar();
         String existedAvatar = Optional.ofNullable(getOne(Wrappers.<SysUser>lambdaQuery()
-                        .select(SysUser::getAvatar)
+                        .select(SysUser::getId, SysUser::getAvatar)
                         .eq(SysUser::getId, userId)))
                 .map(SysUser::getAvatar)
                 .orElse(null);
