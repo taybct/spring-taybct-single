@@ -67,10 +67,6 @@ public class RouterVO implements Serializable, TreeUtil.Tree<RouterVO> {
      */
     private Byte hidden;
     /**
-     * 自定义的一些属性
-     */
-    private RouterMeta meta = new RouterMeta();
-    /**
      * 图标
      */
     private String icon;
@@ -87,6 +83,10 @@ public class RouterVO implements Serializable, TreeUtil.Tree<RouterVO> {
      * 菜单类型（M目录 C菜单 L外部连接）
      */
     private String menuType;
+    /**
+     * 自定义的一些属性
+     */
+    private RouterMeta meta = new RouterMeta();
     /**
      * 按钮权限列表
      */

@@ -73,17 +73,15 @@
         <result property="component" column="sm_component" jdbcType="VARCHAR"/>
         <result property="props" column="sm_props" jdbcType="VARCHAR"/>
         <result property="hidden" column="sm_hidden" jdbcType="TINYINT"/>
-        <!--<association property="meta" javaType="vo.io.github.mangocrisp.api.system.RouterMeta" column="sm_id" resultMap="RouterMetaResultMap"/>-->
         <result property="icon" column="sm_icon" jdbcType="VARCHAR"/>
         <result property="isBlank" column="sm_is_blank" jdbcType="TINYINT"/>
         <result property="isCache" column="sm_is_cache" jdbcType="TINYINT"/>
         <result property="menuType" column="sm_menu_type" jdbcType="VARCHAR"/>
+        <association property="meta" javaType="io.github.mangocrisp.spring.taybct.api.system.vo.RouterMeta" column="sm_id" resultMap="RouterMetaResultMap"/>
         <!--这个路由（菜单）需要限制的按钮权限-->
-        <!--<collection property="permissions" javaType="java.util.Set" resultMap="RouterPermResultMap" />-->
         <collection property="permissions" javaType="java.util.Set" resultMap="RouterPermResultMap"/>
         <!--用户拥有的角色关联的按钮权限-->
         <collection property="rolePermissions" javaType="java.util.Set" resultMap="RolePermResultMap"/>
-        <!--        <collection property="children" javaType="java.util.Set" resultMap="RouterResultMap" />-->
     </resultMap>
 
     <resultMap id="RouterMetaResultMap" type="io.github.mangocrisp.spring.taybct.api.system.vo.RouterMeta">
