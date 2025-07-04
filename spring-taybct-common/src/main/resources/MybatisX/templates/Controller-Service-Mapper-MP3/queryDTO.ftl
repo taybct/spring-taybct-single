@@ -53,7 +53,7 @@ public class ${tableClass.shortClassName}QueryDTO implements Serializable, Model
     /**
      * ${field.remark!}选择
      */
-    @Schema(description = "${field.remark!}")
+    @Schema(description = "${field.remark!}选择")
     private Collection<${field.shortTypeName}> ${field.fieldName}Selection;
 </#list>
 
