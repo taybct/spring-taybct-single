@@ -61,7 +61,6 @@ public class SysRole extends UniqueDeleteLogic<Long, Long> implements Serializab
     /**
      * 状态(1 有效 0 无效  2 冻结)
      */
-    @NotNull(message = "[状态(1 有效 0 无效  2 冻结)]不能为空")
     @Schema(description = "状态(1 有效 0 无效  2 冻结)")
     @TableFieldDefault("1")
     private Byte status;
