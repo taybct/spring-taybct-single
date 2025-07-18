@@ -98,7 +98,13 @@ public class SysPermissionServiceImpl extends BaseServiceImpl<SysPermissionMappe
         PermissionsValidityCheckTool.checkOperateOnlineRoot(() -> securityUtil);
         boolean result = false;
         try {
-            return (result = super.updateById(entity));
+            return (result = update(Wrappers.<SysPermission>lambdaUpdate()
+                    .set(SysPermission::getUrlPerm, entity.getUrlPerm())
+                    .set(SysPermission::getBtnPerm, entity.getBtnPerm())
+                    .set(SysPermission::getGroupId, entity.getGroupId())
+                    .set(SysPermission::getName, entity.getName())
+                    .set(SysPermission::getMenuId, entity.getMenuId())
+                    .eq(SysPermission::getId , entity.getId())));
         } finally {
             if (result) {
                 // 删除权限与角色的关联之后初始化权限角色配置

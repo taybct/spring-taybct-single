@@ -10,6 +10,7 @@ import io.github.mangocrisp.spring.taybct.tool.core.result.R;
 import io.github.mangocrisp.spring.taybct.tool.core.util.HttpClientUtil;
 import lombok.RequiredArgsConstructor;
 import org.apache.hc.core5.http.Header;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -31,9 +32,12 @@ public class AuthServeClientFeignHandle implements AuthServeClientHandle {
 
     final DiscoveryClient discoveryClient;
 
+    @Value("${" + ServeConstants.SERVE + "." + ServeConstants.AUTH + ".service-id: taybct-auth}")
+    private String authServiceId;
+
     @Override
     public boolean save(SysOauth2Client client) {
-        List<ServiceInstance> instances = discoveryClient.getInstances(ServeConstants.AUTH);
+        List<ServiceInstance> instances = discoveryClient.getInstances(authServiceId);
         for (ServiceInstance instance : instances) {
             String s = HttpClientUtil.doRequestJson("http://" + instance.getHost() + ":" + instance.getPort() + "/registeredClient"
                     , new Header[]{}
