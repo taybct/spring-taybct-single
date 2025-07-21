@@ -178,7 +178,7 @@ public class SysUserOnlineServiceImpl extends ServiceImpl<SysUserOnlineMapper, S
                         .findFirst()
                         .map(SysTenant::getTenantId).orElse(null);
                 if (tenantId == null) {
-                    if (unusual.size() > 0) {
+                    if (!unusual.isEmpty()) {
                         throw new BaseException(ResultCode.USER_LOGIN, "租户状态异常！登录失败！");
                     }
                     tenantId = defaultTenantId;
