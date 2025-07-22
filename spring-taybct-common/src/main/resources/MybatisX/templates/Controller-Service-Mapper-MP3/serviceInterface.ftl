@@ -51,9 +51,10 @@ public interface ${baseInfo.fileName} extends IService<${tableClass.shortClassNa
      * 查询总数
      *
      * @param params         查询条件
+     * @param <E>    结果类型
      * @return 分页结果
      */
-    long total(JSONObject params);
+    <E extends ${tableClass.shortClassName}> long total(JSONObject params);
 
     /**
      * 查询分页

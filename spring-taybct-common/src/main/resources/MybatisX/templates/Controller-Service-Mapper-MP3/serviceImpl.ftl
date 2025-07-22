@@ -59,7 +59,7 @@ public class ${baseInfo.fileName} extends ServiceImpl<${mapperInterface.fileName
     }
 
     @Override
-    public long total(JSONObject params) {
+    public <E extends ${tableClass.shortClassName}> long total(JSONObject params) {
         MybatisOptional<E> mybatisOptional = MyBatisUtil
                 .<E>mybatisOptional()
                 .params(params);
