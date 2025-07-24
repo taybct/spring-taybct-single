@@ -35,6 +35,7 @@
         ,su.username su_username
         ,su.nickname su_nickname
         ,su.avatar su_avatar
+        ,su.phone su_phone
         ,su.email su_email
         ,su.user_type su_user_type
         ,su.login_ip su_login_ip
