@@ -34,6 +34,7 @@
         su_id
         ,su.username su_username
         ,su.nickname su_nickname
+        ,su.gender su_gender
         ,su.avatar su_avatar
         ,su.phone su_phone
         ,su.email su_email
