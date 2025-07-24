@@ -155,7 +155,7 @@ public interface ISysUserController extends BaseController<SysUser, ISysUserServ
     @PatchMapping("myInfo")
     @WebLog
     @ApiLog(title = "根据 id 修改个人信息", description = "根据 id 修改个人信息", type = OperateType.UPDATE)
-    @SafeConvert(key = "domain", safeIn = SysUserSafeIn.class, ignoreIn = {"id", "username", "password", "openid", "phone"})
+    @SafeConvert(key = "domain", safeIn = SysUserSafeIn.class, ignoreIn = {"id", "username", "password", "openid", "phone", "email"})
     R<SysUser> updateMyInfo(@Valid @NotNull @RequestBody SysUser domain);
 
     @Operation(summary = "变更个人修改密码的时间")

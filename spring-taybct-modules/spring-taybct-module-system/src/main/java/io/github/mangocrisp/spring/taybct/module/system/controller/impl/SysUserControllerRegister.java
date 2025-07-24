@@ -80,7 +80,7 @@ public class SysUserControllerRegister implements ISysUserController {
      */
     @WebLog
     @ApiLog(title = "根据 id 修改个人信息", description = "根据 id 修改个人信息", type = OperateType.UPDATE)
-    @SafeConvert(key = "domain", safeIn = SysUserSafeIn.class, ignoreIn = {"id", "username", "password", "openid", "phone"})
+    @SafeConvert(key = "domain", safeIn = SysUserSafeIn.class, ignoreIn = {"id", "username", "password", "openid", "phone", "email"})
     @Override
     public R<SysUser> updateMyInfo(@Valid @NotNull @RequestBody SysUser domain) {
         domain.setId(getSecurityUtil().getLoginUser().getUserId());
