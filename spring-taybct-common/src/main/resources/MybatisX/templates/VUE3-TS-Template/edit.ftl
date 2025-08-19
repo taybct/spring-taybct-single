@@ -88,7 +88,7 @@ const rules = reactive<FormRules>({
 <#list tableClass.allFields as field>
 <#if !field.nullable || field.jdbcType=="VARCHAR">
 <#if !field.nullable>
-  ${field.fieldName}: [{ required: true, message: '请输入${field.remark!}', trigger: 'blur' }]<#sep>,
+  ${field.fieldName}: [{ required: true, message: '请输入${field.remark!}', trigger: 'blur' }]<#sep>,</#sep>
 </#if>
 </#if>
 </#list>
