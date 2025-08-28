@@ -12,9 +12,15 @@
         <result property="updateTime" column="sn_update_time" jdbcType="TIMESTAMP"/>
         <result property="isDeleted" column="sn_is_deleted" jdbcType="TINYINT"/>
         <result property="title" column="sn_title" jdbcType="VARCHAR"/>
-        <result property="content" column="sn_content" jdbcType="VARCHAR"/>
+        <result property="message" column="sn_message" jdbcType="VARCHAR"/>
         <result property="level" column="sn_level" jdbcType="VARCHAR"/>
         <result property="positive" column="sn_positive" jdbcType="TINYINT"/>
+        <result property="data" column="sn_data" jdbcType="OTHER"/>
+        <result property="topic" column="sn_topic" jdbcType="VARCHAR"/>
+        <result property="subType" column="sn_sub_type" jdbcType="VARCHAR"/>
+        <result property="fromUser" column="sn_from_user" jdbcType="BIGINT"/>
+        <result property="fromUserName" column="sn_from_user_name" jdbcType="VARCHAR"/>
+        <result property="fromUserAvatar" column="sn_from_user_avatar" jdbcType="VARCHAR"/>
     </resultMap>
 
     <resultMap id="VOResultMap" type="io.github.mangocrisp.spring.taybct.api.system.vo.SysNoticeVO"
@@ -26,8 +32,10 @@
         id
         ,create_user,create_time,
         update_user,update_time,is_deleted,
-        title,content,
-        level,positive
+        title,message,
+        level,positive,data,
+        topic,sub_type,from_user,from_user_name,
+        from_user_avatar
     </sql>
 
     <sql id="related_condition">
@@ -57,9 +65,15 @@
         ,sn.update_time sn_update_time
         ,sn.is_deleted sn_is_deleted
         ,sn.title sn_title
-        ,sn.content sn_content
+        ,sn.message sn_message
         ,sn.level sn_level
         ,sn.positive sn_positive
+        ,sn.data sn_data
+        ,sn.topic sn_topic
+        ,sn.sub_type sn_sub_type
+        ,sn.from_user sn_from_user
+        ,sn.from_user_name sn_from_user_name
+        ,sn.from_user_avatar sn_from_user_avatar
         from sys_notice sn
         <where>
             -- 禁止状态不能有

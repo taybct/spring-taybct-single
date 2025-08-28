@@ -166,6 +166,21 @@
             <scope>provided</scope>
         </dependency>
 
+        <!--mvc websocket-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-websocket</artifactId>
+            <optional>true</optional>
+            <scope>provided</scope>
+            <exclusions>
+                <!--使用 undertow 替代 tomcat-->
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-tomcat</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
     </dependencies>
 
 </project>

@@ -2,8 +2,11 @@ package io.github.mangocrisp.spring.taybct.api.system.domain;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.github.mangocrisp.spring.taybct.tool.core.annotation.TableFieldDefault;
+import io.github.mangocrisp.spring.taybct.tool.core.annotation.TableFieldJSON;
 import io.github.mangocrisp.spring.taybct.tool.core.bean.DeleteLogicEntity;
+import io.github.mangocrisp.spring.taybct.tool.core.support.ToJSONObjectSerializer;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -44,11 +47,11 @@ public class SysNotice extends DeleteLogicEntity<Long, Long> implements Serializ
     @Length(max = 100, message = "编码长度不能超过100")
     private String title;
     /**
-     * 通知内容
+     * 通知消息
      */
-    @NotBlank(message = "[通知内容]不能为空")
-    @Schema(description = "通知内容")
-    private String content;
+    @NotBlank(message = "[通知消息]不能为空")
+    @Schema(description = "通知消息")
+    private String message;
     /**
      * 级别(字典 notice_level)
      */
@@ -63,5 +66,40 @@ public class SysNotice extends DeleteLogicEntity<Long, Long> implements Serializ
     @Schema(description = "是否是确定指定的通知(1是 0 否)")
     @TableFieldDefault("0")
     private Integer positive;
+    /**
+     * 通知数据
+     */
+    @TableFieldJSON
+    @Schema(description = "通知数据")
+    @JsonSerialize(using = ToJSONObjectSerializer.class)
+    @TableFieldDefault("{}")
+    private Object data;
+    /**
+     * 主题
+     */
+    @Size(max = 100, message = "编码长度不能超过100")
+    @Schema(description = "主题")
+    private String topic;
+    /**
+     * 子类型
+     */
+    @Size(max = 100, message = "编码长度不能超过100")
+    @Schema(description = "子类型")
+    private String subType;
+    /**
+     * 发送人
+     */
+    @Schema(description = "发送人")
+    private Long fromUser;
+    /**
+     * 发送人名称
+     */
+    @Schema(description = "发送人名称")
+    private String fromUserName;
+    /**
+     * 发送人头像
+     */
+    @Schema(description = "发送人头像")
+    private String fromUserAvatar;
 
 }

@@ -13,6 +13,7 @@ import io.github.mangocrisp.spring.taybct.tool.core.annotation.WebLog;
 import io.github.mangocrisp.spring.taybct.tool.core.bean.controller.BaseController;
 import io.github.mangocrisp.spring.taybct.tool.core.constant.OperateType;
 import io.github.mangocrisp.spring.taybct.tool.core.result.R;
+import io.github.mangocrisp.spring.taybct.tool.core.websocket.support.WSR;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.Parameters;
@@ -100,6 +101,42 @@ public interface ISysNoticeController extends BaseController<SysNotice, ISysNoti
     @ApiLog(title = "消除消息（全部改为已读）", description = "消除消息（全部改为已读）", type = OperateType.DELETE, isSaveRequestData = false, isSaveResultData = false)
     default R<?> clean(){
         return getBaseService().clean() ? R.ok(String.format("操作%s成功！", getResource())) : R.fail(String.format("操作%s失败！", getResource()));
+    }
+
+    /**
+     * 发送当前用户消息
+     *
+     * @param message 消息内容
+     */
+    @Operation(summary = "发送当前用户消息")
+    @PostMapping("sendCurrentUserMessage")
+    @WebLog
+    default R<?> sendCurrentUserMessage(@RequestParam String message){
+        return getBaseService().sendCurrentUserMessage(message) ? R.ok(String.format("操作%s成功！", getResource())) : R.fail(String.format("操作%s失败！", getResource()));
+    }
+
+    /**
+     * 发送简单消息
+     *
+     * @param message 消息内容
+     */
+    @Operation(summary = "发送简单消息")
+    @PostMapping("sendMessage")
+    @WebLog
+    default R<?> sendMessage(@RequestBody WSR<?> message){
+        return getBaseService().sendMessage(message) ? R.ok(String.format("操作%s成功！", getResource())) : R.fail(String.format("操作%s失败！", getResource()));
+    }
+
+    /**
+     * 发送所有用户消息
+     *
+     * @param message 消息内容
+     */
+    @Operation(summary = "发送所有用户消息")
+    @PostMapping("sendAllMessage")
+    @WebLog
+    default R<?> sendAllMessage(@RequestBody WSR<?> message){
+        return getBaseService().sendAllMessage(message) ? R.ok(String.format("操作%s成功！", getResource())) : R.fail(String.format("操作%s失败！", getResource()));
     }
 
 }
