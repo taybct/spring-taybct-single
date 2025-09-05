@@ -3,7 +3,6 @@ import { ref } from "vue";
 import { formRules } from "./utils/rule";
 import type { EditFormDTO } from "./utils/types";
 import { cloneDeep } from "@pureadmin/utils";
-import { IconSelect } from "@/components/ReIcon";
 
 const props = withDefaults(defineProps<EditFormDTO>(), {
   isAddForm: true,

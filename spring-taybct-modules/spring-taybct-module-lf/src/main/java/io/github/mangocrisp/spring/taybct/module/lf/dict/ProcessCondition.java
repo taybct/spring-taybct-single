@@ -3,6 +3,8 @@ package io.github.mangocrisp.spring.taybct.module.lf.dict;
 import io.github.mangocrisp.spring.taybct.common.dict.AbstractSysDict;
 import lombok.Getter;
 
+import java.io.Serial;
+
 /**
  * 流程判断条件
  *
@@ -11,6 +13,7 @@ import lombok.Getter;
 @Getter
 public final class ProcessCondition extends AbstractSysDict {
 
+    @Serial
     private static final long serialVersionUID = 6994419157274562359L;
 
     public ProcessCondition(String key, String val) {

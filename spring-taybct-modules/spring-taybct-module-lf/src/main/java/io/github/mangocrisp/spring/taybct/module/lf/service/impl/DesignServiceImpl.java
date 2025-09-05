@@ -30,7 +30,7 @@ public class DesignServiceImpl extends BaseServiceImpl<DesignMapper, Design>
 
     @Setter
     @Getter
-    private String field = "id,create_user,create_time,update_user,update_time,is_deleted,name,status,description,type";
+    private String field = "id,create_user,create_time,update_user,update_time,is_deleted,name,status,description,type,icon,last_version";
 
     @Override
     public <E extends IPage<Design>> E page(E page, Wrapper<Design> queryWrapper) {

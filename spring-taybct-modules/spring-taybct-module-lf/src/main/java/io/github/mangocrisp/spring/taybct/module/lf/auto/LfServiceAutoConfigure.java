@@ -14,7 +14,7 @@ import org.springframework.context.annotation.Bean;
  */
 @AutoConfiguration
 @Slf4j
-public class ServiceAutoConfigure {
+public class LfServiceAutoConfigure {
 
     @Bean
     @ConditionalOnMissingBean
@@ -53,8 +53,8 @@ public class ServiceAutoConfigure {
 
     @Bean
     @ConditionalOnMissingBean
-    public IHistoryService historyService() {
-        return new HistoryServiceImpl() {
+    public ILfHistoryService lfHistoryService() {
+        return new LfHistoryServiceImpl() {
         };
     }
 

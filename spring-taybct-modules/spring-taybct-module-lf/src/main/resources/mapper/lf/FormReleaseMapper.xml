@@ -54,4 +54,54 @@
             from lf_form where id = #{release.formId}
         </foreach>
     </insert>
+    <select id="page" resultMap="BaseResultMap">
+        select lf_form_release.id
+        ,lf_form_release.create_user
+        ,lf_form_release.create_time
+        ,lf_form_release.update_user
+        ,lf_form_release.update_time
+        ,lf_form_release.is_deleted
+        ,lf_form_release.form_id
+        ,lf_form_release.name
+        ,lf_form.status as status
+        ,lf_form_release.description
+        <!--,lf_form_release.data 数据太多了列表查询的时候就不要查询了，应该是点查看详情的时候用 id 一个一个的去查询-->
+        ,lf_form_release.version
+        ,lf_form_release.type
+        ,lf_form_release.path
+        from lf_form_release left join lf_form on lf_form.id = lf_form_release.form_id
+        <where>
+            <if test="dto.id != null">
+                and lf_form_release.id = #{dto.id}
+            </if>
+            <!--创建时间-->
+            <if test="dto.createTimeBegin != null">
+                and lf_form_release.create_time &gt;= #{dto.createTimeBegin}
+            </if>
+            <if test="dto.createTimeEnd != null">
+                and lf_form_release.create_time &lt;= #{dto.createTimeEnd}
+            </if>
+            <if test="dto.formId != null">
+                and lf_form_release.form_id = #{dto.formId}
+            </if>
+            <if test="dto.name != null and dto.name != ''">
+                and lf_form_release.name like concat('%',#{dto.name},'%')
+            </if>
+            <if test="dto.description != null and dto.description != ''">
+                and lf_form_release.description like concat('%',#{dto.description},'%')
+            </if>
+            <if test="dto.status != null">
+                and lf_form.status = #{dto.status}
+            </if>
+            <if test="dto.version != null">
+                and lf_form_release.version = #{dto.version}
+            </if>
+            <if test="dto.type != null and dto.type != ''">
+                and lf_form_release.type = #{dto.type}
+            </if>
+            <if test="dto.showNewVersion">
+                and lf_form_release.version = lf_form.last_version
+            </if>
+        </where>
+    </select>
 </mapper>

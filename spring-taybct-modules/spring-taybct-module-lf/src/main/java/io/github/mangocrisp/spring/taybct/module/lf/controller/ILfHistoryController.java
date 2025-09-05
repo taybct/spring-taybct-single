@@ -20,7 +20,7 @@ import java.util.List;
 @Tag(name = "历史记录控制器")
 @RestControllerRegister("{version}/history")
 @ApiVersion
-public interface IHistoryController {
+public interface ILfHistoryController {
 
     @Operation(summary = "流程历史记录列表")
     @PostMapping("list")

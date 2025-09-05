@@ -15,6 +15,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.hibernate.validator.constraints.Length;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 /**
@@ -30,6 +31,7 @@ import java.io.Serializable;
 @Schema(description = "流程连线表")
 public class Edges implements Serializable {
 
+    @Serial
     @TableField(exist = false)
     private static final long serialVersionUID = -6031451599347610821L;
 

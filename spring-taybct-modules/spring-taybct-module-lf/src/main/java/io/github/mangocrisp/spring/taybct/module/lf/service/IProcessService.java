@@ -4,6 +4,7 @@ import com.alibaba.fastjson2.JSONObject;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import io.github.mangocrisp.spring.taybct.module.lf.dict.NodeType;
 import io.github.mangocrisp.spring.taybct.module.lf.domain.Edges;
+import io.github.mangocrisp.spring.taybct.module.lf.domain.History;
 import io.github.mangocrisp.spring.taybct.module.lf.domain.Nodes;
 import io.github.mangocrisp.spring.taybct.module.lf.domain.Process;
 import io.github.mangocrisp.spring.taybct.module.lf.dto.NodesSubmitDTO;
@@ -36,7 +37,7 @@ public interface IProcessService extends IBaseService<Process> {
     boolean newProcess(ProcessNewDTO process
             , Supplier<INodesService> nodesServiceSupplier
             , Supplier<IEdgesService> edgesServiceSupplier
-            , Supplier<IHistoryService> historyServiceSupplier
+            , Supplier<ILfHistoryService> historyServiceSupplier
             , Supplier<IPresentProcessService> presentProcessServiceSupplier
             , Supplier<ITodoService> todoServiceSupplier);
 
@@ -54,7 +55,7 @@ public interface IProcessService extends IBaseService<Process> {
     boolean userSubmit(NodesSubmitDTO nodes
             , Supplier<INodesService> nodesServiceSupplier
             , Supplier<IEdgesService> edgesServiceSupplier
-            , Supplier<IHistoryService> historyServiceSupplier
+            , Supplier<ILfHistoryService> historyServiceSupplier
             , Supplier<IPresentProcessService> presentProcessServiceSupplier
             , Supplier<ITodoService> todoServiceSupplier);
 
@@ -75,10 +76,11 @@ public interface IProcessService extends IBaseService<Process> {
             , Supplier<Nodes> nodesSupplier
             , Supplier<INodesService> nodesServiceSupplier
             , Supplier<IEdgesService> edgesServiceSupplier
-            , Supplier<IHistoryService> historyServiceSupplier
+            , Supplier<ILfHistoryService> historyServiceSupplier
             , Supplier<IPresentProcessService> presentProcessServiceSupplier
             , Supplier<ITodoService> todoServiceSupplier
-            , Supplier<Map<String, Object>> contextSupplier);
+            , Supplier<Map<String, Object>> contextSupplier
+            , History history);
 
     /**
      * 用户的任务列表查询
@@ -92,20 +94,22 @@ public interface IProcessService extends IBaseService<Process> {
     /**
      * 更新流程表单字段
      *
+     * @param historyId 历史记录 id（防止一个节点被重复处理 from 表单数据重复问题）
      * @param processId 流程 id
      * @param nodes     节点信息
      * @return boolean
      */
-    boolean updateFormData(Long processId, Nodes nodes);
+    boolean updateFormData(Long historyId, Long processId, Nodes nodes);
 
     /**
      * 更新流程表单字段
      *
-     * @param process 流程信息
-     * @param nodes   节点信息
+     * @param historyId 历史记录 id（防止一个节点被重复处理 from 表单数据重复问题）
+     * @param process   流程信息
+     * @param nodes     节点信息
      * @return boolean
      */
-    boolean updateFormData(Process process, Nodes nodes);
+    boolean updateFormData(Long historyId, Process process, Nodes nodes);
 
     /**
      * 更新流程表单字段

@@ -11,6 +11,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 /**
@@ -26,6 +27,7 @@ import java.io.Serializable;
 @Schema(description = "流程图设计")
 public class DesignPermissions implements Serializable {
 
+    @Serial
     @TableField(exist = false)
     private static final long serialVersionUID = -8363440381522514865L;
 

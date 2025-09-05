@@ -18,6 +18,7 @@
         <result property="data" column="data" jdbcType="OTHER"/>
         <result property="version" column="version" jdbcType="BIGINT"/>
         <result property="type" column="type" jdbcType="VARCHAR"/>
+        <result property="icon" column="icon" jdbcType="VARCHAR"/>
     </resultMap>
 
     <sql id="Base_Column_List">
@@ -26,7 +27,7 @@
         update_user,update_time,is_deleted,
         design_id,name,status,
         description,data,version,
-        type
+        type,icon
     </sql>
 
     <insert id="publish">
@@ -49,6 +50,7 @@
             , data
             , #{release.version}
             , type
+            , icon
             from lf_design where id = #{release.designId}
         </foreach>
     </insert>
@@ -71,6 +73,74 @@
             </choose>
             or user_id is null))
         </if>
+    </select>
+
+    <select id="page" resultMap="BaseResultMap">
+        select lf_release.id
+        ,lf_release.create_user
+        ,lf_release.create_time
+        ,lf_release.update_user
+        ,lf_release.update_time
+        ,lf_release.is_deleted
+        ,lf_release.design_id
+        ,lf_release.name
+        ,lf_design.status as status
+        ,lf_release.description
+        <!--,lf_release.data 数据太多了列表查询的时候就不要查询了，应该是点查看详情的时候用 id 一个一个的去查询-->
+        ,lf_release.version
+        ,lf_release.type
+        ,lf_release.icon
+        from lf_release
+        left join lf_design on lf_design.id = lf_release.design_id
+        <where>
+            <if test="_parameter.containsKey('_data_scope_') and _data_scope_ != null">
+                and exists(${_data_scope_})
+            </if>
+            <if test="_login_user_ != null">
+                and exists(select 1 from lf_release_permissions lrp where lrp.release_id = lf_release.id
+                and (
+                <choose>
+                    <when test="_databaseId == 'postgresql'">
+                        user_id = CAST(#{_login_user_.uid} AS BIGINT)
+                    </when>
+                    <otherwise>
+                        user_id = #{_login_user_.uid}
+                    </otherwise>
+                </choose>
+                or user_id is null))
+            </if>
+            <if test="dto.id != null">
+                and lf_release.id = #{dto.id}
+            </if>
+            <!--创建时间-->
+            <if test="dto.createTimeBegin != null">
+                and lf_release.create_time &gt;= #{dto.createTimeBegin}
+            </if>
+            <if test="dto.createTimeEnd != null">
+                and lf_release.create_time &lt;= #{dto.createTimeEnd}
+            </if>
+            <if test="dto.designId != null">
+                and lf_release.design_id = #{dto.designId}
+            </if>
+            <if test="dto.name != null and dto.name != ''">
+                and lf_release.name like concat('%',#{dto.name},'%')
+            </if>
+            <if test="dto.status != null">
+                and lf_design.status = #{dto.status}
+            </if>
+            <if test="dto.type != null and dto.type != ''">
+                and lf_release.type = #{dto.type}
+            </if>
+            <if test="dto.description != null and dto.description != ''">
+                and lf_release.description like concat('%',#{dto.description},'%')
+            </if>
+            <if test="dto.version != null">
+                and lf_release.version = #{dto.version}
+            </if>
+            <if test="dto.showNewVersion">
+                and lf_release.version = lf_design.last_version
+            </if>
+        </where>
     </select>
 
 </mapper>

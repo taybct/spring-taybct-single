@@ -45,6 +45,10 @@ public class BusinessProperties implements Serializable {
      */
     private Boolean isCountersign;
     /**
+     * 如果是用户节点是否抄送
+     */
+    private Boolean isCC;
+    /**
      * 角色列表,一般用于用户节点,用来分配当前节点的权限,有哪些角色可以处理
      */
     private Collection<String> roles;

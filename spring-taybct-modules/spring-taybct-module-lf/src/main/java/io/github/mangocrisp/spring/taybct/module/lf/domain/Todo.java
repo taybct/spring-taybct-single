@@ -3,6 +3,8 @@ package io.github.mangocrisp.spring.taybct.module.lf.domain;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import io.github.mangocrisp.spring.taybct.module.lf.dict.NodeType;
+import io.github.mangocrisp.spring.taybct.module.lf.enums.TodoType;
 import io.github.mangocrisp.spring.taybct.tool.core.annotation.TableFieldDefault;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
@@ -14,6 +16,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.hibernate.validator.constraints.Length;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
@@ -30,6 +33,7 @@ import java.time.LocalDateTime;
 @Schema(description = "待办、已办")
 public class Todo implements Serializable {
 
+    @Serial
     @TableField(exist = false)
     private static final long serialVersionUID = 4746489237670609235L;
 
@@ -105,4 +109,13 @@ public class Todo implements Serializable {
     @NotNull(message = "[流程图 id（这里主要是用来查询分类）]不能为空")
     @Schema(description = "流程图 id（这里主要是用来查询分类）")
     private Long designId;
+    /**
+     * 待办类型（1、任务待办 2、抄送待办 ...其他类型自定义）
+     */
+    @Size(max = 100, message = "编码长度不能超过100")
+    @Schema(description = "待办类型（1、任务待办 2、抄送待办 ...其他类型自定义）")
+    @Length(max = 100, message = "编码长度不能超过100")
+    @TableFieldDefault(TodoType.Code.TASK)
+    private String todoType;
+
 }

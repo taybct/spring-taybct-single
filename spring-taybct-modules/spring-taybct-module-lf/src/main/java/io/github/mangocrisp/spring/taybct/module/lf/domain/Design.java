@@ -1,5 +1,6 @@
 package io.github.mangocrisp.spring.taybct.module.lf.domain;
 
+import com.baomidou.mybatisplus.annotation.SqlCondition;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.github.mangocrisp.spring.taybct.module.lf.constants.ProcessType;
@@ -8,6 +9,8 @@ import io.github.mangocrisp.spring.taybct.tool.core.annotation.TableFieldJSON;
 import io.github.mangocrisp.spring.taybct.tool.core.bean.DeleteLogicEntity;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
+
+import java.io.Serial;
 
 /**
  * 流程图设计
@@ -22,6 +25,7 @@ import lombok.*;
 @Schema(description = "流程图设计")
 public class Design extends DeleteLogicEntity<Long, Long> {
 
+    @Serial
     @TableField(exist = false)
     private static final long serialVersionUID = 2340545827439654755L;
 
@@ -29,6 +33,7 @@ public class Design extends DeleteLogicEntity<Long, Long> {
      * 名称
      */
     @Schema(description = "名称")
+    @TableField(condition = SqlCondition.LIKE)
     private String name;
 
     /**
@@ -57,5 +62,16 @@ public class Design extends DeleteLogicEntity<Long, Long> {
     @Schema(description = "流程类型（字典项 lf_process_type）")
     @TableFieldDefault(ProcessType.NORMAL)
     private String type;
+
+    /**
+     * 图标
+     */
+    @Schema(description = "图标")
+    private String icon;
+    /**
+     * 最后版本号
+     */
+    @Schema(description = "最后版本号")
+    private Long lastVersion;
 
 }

@@ -11,6 +11,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 /**
@@ -26,6 +27,7 @@ import java.io.Serializable;
 @Schema(description = "流程发布权限表，用于关联指定流程，可以被哪些角色或者用户看到")
 public class ReleasePermissions implements Serializable {
 
+    @Serial
     @TableField(exist = false)
     private static final long serialVersionUID = 8908099351198345480L;
 

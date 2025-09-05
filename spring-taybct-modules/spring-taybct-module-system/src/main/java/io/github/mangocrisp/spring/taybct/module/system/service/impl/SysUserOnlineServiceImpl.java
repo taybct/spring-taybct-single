@@ -285,7 +285,7 @@ public class SysUserOnlineServiceImpl extends ServiceImpl<SysUserOnlineMapper, S
         // 业务类型
         apiLog.setType(OperateType.GRANT);
         // 登录成功状态码
-        apiLog.setCode(OperateStatus.SUCCESS.getCode());
+        apiLog.setCode(OperateStatus.SUCCESS.code());
         // 设置请求方式
         try {
             apiLog.setMethod(ServletUtil.getRequest().getMethod());

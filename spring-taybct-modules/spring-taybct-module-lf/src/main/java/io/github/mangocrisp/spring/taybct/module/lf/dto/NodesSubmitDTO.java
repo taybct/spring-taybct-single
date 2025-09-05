@@ -7,6 +7,8 @@ import io.github.mangocrisp.spring.taybct.module.lf.domain.Nodes;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 
+import java.io.Serial;
+
 /**
  * 流程节点提交 DTO
  */
@@ -20,6 +22,7 @@ import lombok.*;
 public class NodesSubmitDTO extends Nodes {
 
     @TableField(exist = false)
+    @Serial
     private static final long serialVersionUID = -7736973053195778901L;
 
     /**

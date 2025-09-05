@@ -12,6 +12,8 @@ import jakarta.validation.constraints.Size;
 import lombok.*;
 import org.hibernate.validator.constraints.Length;
 
+import java.io.Serial;
+
 /**
  * 流程管理
  * <p>
@@ -26,6 +28,7 @@ import org.hibernate.validator.constraints.Length;
 @Schema(description = "流程管理")
 public class Process extends DeleteLogicEntity<Long, Long> {
 
+    @Serial
     @TableField(exist = false)
     private static final long serialVersionUID = -6040784392969489687L;
 
@@ -106,5 +109,10 @@ public class Process extends DeleteLogicEntity<Long, Long> {
     @Schema(description = "流程类型（字典项 lf_process_type）")
     @Length(max = 100, message = "编码长度不能超过100")
     private String type;
+    /**
+     * 图标
+     */
+    @Schema(description = "图标")
+    private String icon;
 
 }

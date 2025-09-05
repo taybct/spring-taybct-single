@@ -13,6 +13,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.hibernate.validator.constraints.Length;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
@@ -29,6 +30,7 @@ import java.time.LocalDateTime;
 @Schema(description = "当前正在进行的流程")
 public class PresentProcess implements Serializable {
 
+    @Serial
     @TableField(exist = false)
     private static final long serialVersionUID = -5312365081033507567L;
 

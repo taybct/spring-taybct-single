@@ -1,8 +1,11 @@
 package io.github.mangocrisp.spring.taybct.module.lf.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import io.github.mangocrisp.spring.taybct.module.lf.domain.FormRelease;
 import io.github.mangocrisp.spring.taybct.module.lf.dto.FormReleasePublishDTO;
+import io.github.mangocrisp.spring.taybct.module.lf.dto.FormReleaseQueryDTO;
+import io.github.mangocrisp.spring.taybct.module.lf.dto.ReleaseQueryDTO;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.Collection;
@@ -22,6 +25,16 @@ public interface FormReleaseMapper extends BaseMapper<FormRelease> {
      * @return 影响行数
      */
     int publish(@Param("dto") Collection<FormReleasePublishDTO> dto);
+
+    /**
+     * 分页查询
+     *
+     * @param page  分页参数
+     * @param dto   查询参数
+     * @param <P>   分页参数
+     * @return 分页数据
+     */
+    <P extends IPage<FormRelease>> P page(P page, @Param("dto") FormReleaseQueryDTO dto);
 
 }
 

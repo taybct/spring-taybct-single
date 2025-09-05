@@ -7,6 +7,8 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
+import java.io.Serial;
+
 /**
  * 新建流程 DTO
  */
@@ -19,6 +21,7 @@ import lombok.*;
 public class ProcessNewDTO extends Process {
 
     @TableField(exist = false)
+    @Serial
     private static final long serialVersionUID = -6839720519371984133L;
 
     /**

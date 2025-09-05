@@ -63,6 +63,10 @@ public class BusinessField implements Serializable {
      */
     private Boolean disabled;
     /**
+     * 是否必填
+     */
+    private Boolean required;
+    /**
      * 如果类型是 FILE，这个需要指定需要上传哪些类型的文件
      */
     private String accept;

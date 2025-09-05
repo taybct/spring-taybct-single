@@ -50,7 +50,7 @@ public class CustomizeUserDetailsServiceImpl implements ICustomizeUserDetailsSer
                     setPassword(user);
                     OAuth2UserDetails userDetails = new OAuth2UserDetails(user);
                     // 当前使用的认证方式是用户名+密码
-                    userDetails.setAuthenticationMethod(OAuthenticationMethodType.USERNAME.getValue());
+                    userDetails.setAuthenticationMethod(OAuthenticationMethodType.USERNAME.value());
                     return userDetails;
                 }).orElseThrow(() -> new UsernameNotFoundException(ResultCode.USER_NOT_EXIST.getMessage()));
     }
@@ -64,7 +64,7 @@ public class CustomizeUserDetailsServiceImpl implements ICustomizeUserDetailsSer
                     OAuth2UserDetails userDetails = new OAuth2UserDetails(user);
                     userDetails.setPrincipal(openId);
                     // 当前获取认证的方式是使用 open id
-                    userDetails.setAuthenticationMethod(OAuthenticationMethodType.OPENID.getValue());
+                    userDetails.setAuthenticationMethod(OAuthenticationMethodType.OPENID.value());
                     return userDetails;
                 })
                 // 如果是用微信 openid 去查询的用户，他就有可能是 null 的，这里就需要直接返回 null
@@ -78,7 +78,7 @@ public class CustomizeUserDetailsServiceImpl implements ICustomizeUserDetailsSer
                     setPassword(user);
                     OAuth2UserDetails userDetails = new OAuth2UserDetails(user);
                     // 当前获取认证的方式是使用 手机号
-                    userDetails.setAuthenticationMethod(OAuthenticationMethodType.PHONE.getValue());
+                    userDetails.setAuthenticationMethod(OAuthenticationMethodType.PHONE.value());
                     return userDetails;
                 }).orElseThrow(() -> new UsernameNotFoundException(ResultCode.USER_NOT_EXIST.getMessage()));
     }

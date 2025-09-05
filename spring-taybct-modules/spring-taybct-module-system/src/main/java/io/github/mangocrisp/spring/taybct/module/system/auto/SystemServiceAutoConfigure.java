@@ -16,7 +16,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @Slf4j
 @AutoConfiguration
-public class ServiceAutoConfigure {
+public class SystemServiceAutoConfigure {
 
     @Bean
     @ConditionalOnMissingBean

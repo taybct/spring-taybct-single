@@ -6,7 +6,7 @@ import io.github.mangocrisp.spring.taybct.module.lf.domain.Nodes;
 import io.github.mangocrisp.spring.taybct.module.lf.dto.HistoryListQueryDTO;
 import io.github.mangocrisp.spring.taybct.module.lf.dto.HistoryOperator;
 import io.github.mangocrisp.spring.taybct.module.lf.mapper.HistoryMapper;
-import io.github.mangocrisp.spring.taybct.module.lf.service.IHistoryService;
+import io.github.mangocrisp.spring.taybct.module.lf.service.ILfHistoryService;
 import io.github.mangocrisp.spring.taybct.module.lf.vo.HistoryListVO;
 
 import java.util.List;
@@ -16,11 +16,11 @@ import java.util.List;
  * <br>description 针对表【lf_history(流程历史)】的数据库操作Service实现
  * @since 2023-07-03 11:32:23
  */
-public class HistoryServiceImpl extends ServiceImpl<HistoryMapper, History>
-        implements IHistoryService {
+public class LfHistoryServiceImpl extends ServiceImpl<HistoryMapper, History>
+        implements ILfHistoryService {
 
     @Override
-    public boolean save(HistoryOperator operator
+    public History save(HistoryOperator operator
             , Nodes nodes
             , String action) {
         History h = new History();
@@ -34,7 +34,8 @@ public class HistoryServiceImpl extends ServiceImpl<HistoryMapper, History>
         }
         h.setProcessId(nodes.getProcessId());
         h.setNodeType(nodes.getType());
-        return super.save(h);
+        super.save(h);
+        return h;
     }
 
     @Override

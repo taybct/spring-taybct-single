@@ -1,23 +1,20 @@
 package io.github.mangocrisp.spring.taybct.module.lf.service.impl;
 
+import cn.hutool.core.collection.CollectionUtil;
 import com.alibaba.fastjson2.JSONArray;
 import com.alibaba.fastjson2.JSONObject;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import io.github.mangocrisp.spring.taybct.module.lf.constants.DoneStatus;
-import io.github.mangocrisp.spring.taybct.module.lf.constants.ProcessStatus;
-import io.github.mangocrisp.spring.taybct.module.lf.constants.TodoListStatus;
-import io.github.mangocrisp.spring.taybct.module.lf.constants.TodoStatus;
-import io.github.mangocrisp.spring.taybct.module.lf.domain.Edges;
-import io.github.mangocrisp.spring.taybct.module.lf.domain.Nodes;
+import io.github.mangocrisp.spring.taybct.module.lf.constants.*;
+import io.github.mangocrisp.spring.taybct.module.lf.domain.*;
 import io.github.mangocrisp.spring.taybct.module.lf.domain.Process;
-import io.github.mangocrisp.spring.taybct.module.lf.domain.Todo;
 import io.github.mangocrisp.spring.taybct.module.lf.dto.HistoryOperator;
 import io.github.mangocrisp.spring.taybct.module.lf.dto.NodesSubmitDTO;
 import io.github.mangocrisp.spring.taybct.module.lf.dto.ProcessNewDTO;
 import io.github.mangocrisp.spring.taybct.module.lf.dto.UserRequestListQueryDTO;
 import io.github.mangocrisp.spring.taybct.module.lf.enums.ProcessItemType;
+import io.github.mangocrisp.spring.taybct.module.lf.enums.TodoType;
 import io.github.mangocrisp.spring.taybct.module.lf.mapper.ProcessMapper;
 import io.github.mangocrisp.spring.taybct.module.lf.pojo.BusinessField;
 import io.github.mangocrisp.spring.taybct.module.lf.service.*;
@@ -28,11 +25,13 @@ import io.github.mangocrisp.spring.taybct.tool.core.bean.service.BaseServiceImpl
 import io.github.mangocrisp.spring.taybct.tool.core.exception.def.BaseException;
 import io.github.mangocrisp.spring.taybct.tool.core.request.SqlQueryParams;
 import io.github.mangocrisp.spring.taybct.tool.core.util.MyBatisUtil;
+import org.springframework.http.HttpStatus;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
@@ -44,14 +43,14 @@ import java.util.stream.Collectors;
 public class ProcessServiceImpl extends BaseServiceImpl<ProcessMapper, Process>
         implements IProcessService {
 
-    private final ExecutorService cachedThreadPool = Executors.newCachedThreadPool();
+//    private final ExecutorService cachedThreadPool = Executors.newCachedThreadPool();
 
     @Override
     @Transactional(rollbackFor = Exception.class)
     public boolean newProcess(ProcessNewDTO dto
             , Supplier<INodesService> nodesServiceSupplier
             , Supplier<IEdgesService> edgesServiceSupplier
-            , Supplier<IHistoryService> historyServiceSupplier
+            , Supplier<ILfHistoryService> historyServiceSupplier
             , Supplier<IPresentProcessService> presentProcessServiceSupplier
             , Supplier<ITodoService> todoServiceSupplier) {
 
@@ -64,54 +63,56 @@ public class ProcessServiceImpl extends BaseServiceImpl<ProcessMapper, Process>
         // 获取节点集合
         if (jsonData != null) {
             // 获取到并且转换所有的节点集合
-            List<Nodes> nodes = jsonData.getJSONArray("nodes").toJavaList(JSONObject.class)
+            List<Nodes> nodes = jsonData.getJSONArray(ProcessConstant.NODES).toJavaList(JSONObject.class)
                     .stream().map(node -> {
                         Nodes n = new Nodes();
                         // 节点 id
-                        n.setId(node.getString("id"));
+                        n.setId(node.getString(ProcessConstant.Nodes.ID));
                         // 流程 id
                         n.setProcessId(process.getId());
                         // 获取节点上的属性
-                        n.setProperties(node.getJSONObject("properties").toJSONString());
+                        n.setProperties(node.getJSONObject(ProcessConstant.Nodes.PROPERTIES).toJSONString());
                         // 节点类型
-                        n.setType(node.getString("type"));
+                        n.setType(node.getString(ProcessConstant.Nodes.TYPE));
                         // 节点上的文字
-                        n.setText(Optional.ofNullable(node.getJSONObject("text")).map(jsonObject -> jsonObject.getString("value")).orElse(null));
+                        n.setText(Optional.ofNullable(node.getJSONObject(ProcessConstant.Nodes.TEXT))
+                                .map(jsonObject -> jsonObject.getString(ProcessConstant.Nodes.VALUE)).orElse(null));
                         return n;
                     })
                     .collect(Collectors.toList());
             nodesServiceSupplier.get().saveOrUpdateBatch(nodes);
             // 获取连线集合
-            List<Edges> edges = jsonData.getJSONArray("edges").toJavaList(JSONObject.class)
+            List<Edges> edges = jsonData.getJSONArray(ProcessConstant.EDGES).toJavaList(JSONObject.class)
                     .stream().map(edge -> {
                         Edges e = new Edges();
-                        e.setId(edge.getString("id"));
-                        e.setType(edge.getString("type"));
-                        e.setTargetNodeId(edge.getString("targetNodeId"));
-                        e.setSourceNodeId(edge.getString("sourceNodeId"));
-                        e.setProperties(edge.getJSONObject("properties").toJSONString());
-                        e.setText(Optional.ofNullable(edge.getJSONObject("text")).map(jsonObject -> jsonObject.getString("value")).orElse(null));
+                        e.setId(edge.getString(ProcessConstant.Edges.ID));
+                        e.setType(edge.getString(ProcessConstant.Edges.TYPE));
+                        e.setTargetNodeId(edge.getString(ProcessConstant.Edges.TARGET_NODE_ID));
+                        e.setSourceNodeId(edge.getString(ProcessConstant.Edges.SOURCE_NODE_ID));
+                        e.setProperties(edge.getJSONObject(ProcessConstant.Edges.PROPERTIES).toJSONString());
+                        e.setText(Optional.ofNullable(edge.getJSONObject(ProcessConstant.Edges.TEXT))
+                                .map(jsonObject -> jsonObject.getString(ProcessConstant.Edges.VALUE)).orElse(null));
                         e.setProcessId(process.getId());
                         return e;
                     })
                     .collect(Collectors.toList());
             edgesServiceSupplier.get().saveOrUpdateBatch(edges);
 
-            IHistoryService historyService = historyServiceSupplier.get();
+            ILfHistoryService historyService = historyServiceSupplier.get();
             IPresentProcessService presentProcessService = presentProcessServiceSupplier.get();
             // 更新开始节点的属性数据
             Nodes startNodes = dto.getStartNodes();
             // 设置流程 id
             startNodes.setProcessId(process.getId());
             // 如果是开始节点，这里要添加第一个历史 和 当前节点
-            historyService.save(HistoryOperator.builder()
+            History history = historyService.save(HistoryOperator.builder()
                     .userId(process.getUserId())
                     .deptId(process.getDeptId())
                     .postId(process.getPostId())
                     .build(), startNodes, "开始");
             // 保存当前节点
             presentProcessService.save(startNodes);
-            updateFormData(process, startNodes);
+            updateFormData(history.getId(), process, startNodes);
             nextStep(() -> process
                     , () -> startNodes
                     , nodesServiceSupplier
@@ -119,7 +120,8 @@ public class ProcessServiceImpl extends BaseServiceImpl<ProcessMapper, Process>
                     , historyServiceSupplier
                     , presentProcessServiceSupplier
                     , todoServiceSupplier
-                    , () -> ProcessUtil.getProcessFormData(process));
+                    , () -> ProcessUtil.getProcessFormData(process)
+                    , history);
             // 直接异步处理下一步
 //            cachedThreadPool.execute(() -> nextStep(() -> process
 //                    , () -> startNodes
@@ -138,17 +140,15 @@ public class ProcessServiceImpl extends BaseServiceImpl<ProcessMapper, Process>
     public boolean userSubmit(NodesSubmitDTO nodes
             , Supplier<INodesService> nodesServiceSupplier
             , Supplier<IEdgesService> edgesServiceSupplier
-            , Supplier<IHistoryService> historyServiceSupplier
+            , Supplier<ILfHistoryService> historyServiceSupplier
             , Supplier<IPresentProcessService> presentProcessServiceSupplier
             , Supplier<ITodoService> todoServiceSupplier) {
         IEdgesService edgesService = edgesServiceSupplier.get();
-        IHistoryService historyService = historyServiceSupplier.get();
+        ILfHistoryService historyService = historyServiceSupplier.get();
         ITodoService todoService = todoServiceSupplier.get();
         ILoginUser loginUser = securityUtil.getLoginUser();
         // 根据节点里的 process id 获取
         Process process = getById(nodes.getProcessId());
-        // 更新表单信息
-        updateFormData(process, nodes);
 
         JSONObject nodesProperties = ProcessUtil.getJSONObject(nodes.getProperties());
         // 如果提交的时候会一起把连线的线也传过来，就直接使用
@@ -160,21 +160,10 @@ public class ProcessServiceImpl extends BaseServiceImpl<ProcessMapper, Process>
         if (nodesProperties == null) {
             throw new BaseException("获取用户节点 properties 为空，流程无法正常进行！");
         }
-        // 是否自动处理
-        boolean autoExecute = nodesProperties.getBooleanValue("autoExecute");
-        // 是否会签
-        boolean isCountersign = nodesProperties.getBooleanValue("isCountersign");
 
-        if (autoExecute) {
-            // 自动处理用户任务
-            boolean nodeAutoResult = ProcessUtil.autoDeal(process
-                    , edges
-                    , nodes
-                    , nodesProperties
-                    , () -> ProcessUtil.getProcessFormData(process));
-            // 添加用户节点自动处理结果
-            updateFormData(process, ProcessUtil.generatorFormData(ProcessItemType.NODE, nodes.getId(), "auto_result", nodeAutoResult));
-        }
+        // 是否会签
+        boolean isCountersign = nodesProperties.getBooleanValue(ProcessConstant.NodeProperties.IS_COUNTERSIGN);
+
         // 可以进行下一步
         boolean canNextStep;
         if (isCountersign) {
@@ -206,11 +195,28 @@ public class ProcessServiceImpl extends BaseServiceImpl<ProcessMapper, Process>
         }
 
         // 添加一个历史记录
-        historyService.save(HistoryOperator.builder()
+        History history = historyService.save(HistoryOperator.builder()
                 .userId(loginUser.getUserId())
                 .deptId(nodes.getDeptId())
                 .postId(nodes.getPostId())
                 .build(), nodes, nodes.getText());
+
+        // 更新表单信息
+        updateFormData(history.getId(), process, nodes);
+
+        // 是否自动处理
+        boolean autoExecute = nodesProperties.getBooleanValue(ProcessConstant.NodeProperties.AUTO_EXECUTE);
+        if (autoExecute) {
+            // 自动处理用户任务
+            boolean nodeAutoResult = ProcessUtil.autoDeal(history
+                    , process
+                    , edges
+                    , nodes
+                    , nodesProperties
+                    , () -> ProcessUtil.getProcessFormData(process));
+            // 添加用户节点自动处理结果
+            updateFormData(process, ProcessUtil.generatorFormData(history.getId(), ProcessItemType.NODE, nodes.getId(), ProcessConstant.AUTO_RESULT, nodeAutoResult));
+        }
 
         if (canNextStep) {
             nextStep(() -> process
@@ -220,7 +226,8 @@ public class ProcessServiceImpl extends BaseServiceImpl<ProcessMapper, Process>
                     , historyServiceSupplier
                     , presentProcessServiceSupplier
                     , todoServiceSupplier
-                    , () -> ProcessUtil.getProcessFormData(process));
+                    , () -> ProcessUtil.getProcessFormData(process)
+                    , history);
             // 直接异步处理下一步
 //            cachedThreadPool.execute(() -> nextStep(() -> process
 //                    , () -> nodes
@@ -261,13 +268,14 @@ public class ProcessServiceImpl extends BaseServiceImpl<ProcessMapper, Process>
             , Supplier<Nodes> nodesSupplier
             , Supplier<INodesService> nodesServiceSupplier
             , Supplier<IEdgesService> edgesServiceSupplier
-            , Supplier<IHistoryService> historyServiceSupplier
+            , Supplier<ILfHistoryService> historyServiceSupplier
             , Supplier<IPresentProcessService> presentProcessServiceSupplier
             , Supplier<ITodoService> todoServiceSupplier
-            , Supplier<Map<String, Object>> contextSupplier) {
+            , Supplier<Map<String, Object>> contextSupplier
+            , History history) {
         INodesService nodesService = nodesServiceSupplier.get();
         IEdgesService edgesService = edgesServiceSupplier.get();
-        IHistoryService historyService = historyServiceSupplier.get();
+        ILfHistoryService historyService = historyServiceSupplier.get();
         IPresentProcessService presentProcessService = presentProcessServiceSupplier.get();
         ITodoService todoService = todoServiceSupplier.get();
         Process process = processSupplier.get();
@@ -283,9 +291,9 @@ public class ProcessServiceImpl extends BaseServiceImpl<ProcessMapper, Process>
             JSONObject edgeProperties;
             edgeProperties = ProcessUtil.getJSONObject(edges.getProperties());
             // 自动处理，用于判断连线是否可以进行
-            Boolean edgesAutoResult = ProcessUtil.autoDeal(process, edges, nextNodes, edgeProperties, contextSupplier);
+            Boolean edgesAutoResult = ProcessUtil.autoDeal(history, process, edges, nextNodes, edgeProperties, contextSupplier);
             // 添加连线处理结果
-            updateFormData(process, ProcessUtil.generatorFormData(ProcessItemType.EDGE, edges.getId(), "auto_result", edgesAutoResult));
+            updateFormData(process, ProcessUtil.generatorFormData(history.getId(), ProcessItemType.EDGE, edges.getId(), ProcessConstant.AUTO_RESULT, edgesAutoResult));
             if (!edgesAutoResult) {
                 return;
             }
@@ -303,104 +311,134 @@ public class ProcessServiceImpl extends BaseServiceImpl<ProcessMapper, Process>
                 JSONObject nextNodesProperties = ProcessUtil.getJSONObject(nextNodes.getProperties());
                 // 属性
                 String nodesType = nextNodes.getType();
-                if (nodesType.equals("custom-node-user")) {// 用户任务
-                    // 如果是用户任务就直接添加一个历史节点 和 添加当前节点，因为这里需要用户去处理
-                    // 这里保存用户节点的权限配置
-                    ArrayList<Todo> todoList = new ArrayList<>();
-                    if (nextNodesProperties != null) {
-                        Optional.ofNullable(nextNodesProperties.getJSONArray("roles"))
-                                .map(r -> r.toJavaList(String.class))
-                                .ifPresent(list -> list.forEach(r -> {
-                                    Todo e = new Todo();
-                                    e.setNodeId(nextNodes.getId());
-                                    e.setRoleId(Long.parseLong(r));
-                                    e.setStatus(TodoListStatus.TODO);
-                                    e.setTodoStatus(TodoStatus.TODO);
-                                    e.setProcessId(process.getId());
-                                    e.setType(process.getType());
-                                    e.setDesignId(process.getDesignId());
-                                    todoList.add(e);
-                                }));
-                        Optional.ofNullable(nextNodesProperties.getJSONArray("userIdList"))
-                                .map(u -> u.toJavaList(String.class))
-                                .ifPresent(list -> list.forEach(u -> {
-                                    Todo e = new Todo();
-                                    e.setNodeId(nextNodes.getId());
-                                    e.setUserId(Long.parseLong(u));
-                                    e.setStatus(TodoListStatus.TODO);
-                                    e.setTodoStatus(TodoStatus.TODO);
-                                    e.setProcessId(process.getId());
-                                    e.setType(process.getType());
-                                    e.setDesignId(process.getDesignId());
-                                    todoList.add(e);
-                                }));
-                        Optional.ofNullable(nextNodesProperties.getJSONArray("deptIdList"))
-                                .map(d -> d.toJavaList(String.class))
-                                .ifPresent(list -> list.forEach(d -> {
-                                    Todo e = new Todo();
-                                    e.setNodeId(nextNodes.getId());
-                                    e.setDeptId(Long.parseLong(d));
-                                    e.setStatus(TodoListStatus.TODO);
-                                    e.setTodoStatus(TodoStatus.TODO);
-                                    e.setProcessId(process.getId());
-                                    e.setType(process.getType());
-                                    e.setDesignId(process.getDesignId());
-                                    todoList.add(e);
-                                }));
+                switch (nodesType) {
+                    case ProcessConstant.NodesType.USER -> {
+                        // 如果是用户任务就直接添加一个历史节点 和 添加当前节点，因为这里需要用户去处理
+                        // 这里保存用户节点的权限配置
+                        ArrayList<Todo> todoList = new ArrayList<>();
+                        // 是否抄送
+                        AtomicBoolean isCC = new AtomicBoolean(false);
+                        if (nextNodesProperties != null) {
+                            isCC.set(nextNodesProperties.getBooleanValue(ProcessConstant.NodeProperties.IS_CC, false));
+                            Optional.ofNullable(nextNodesProperties.getJSONArray(ProcessConstant.NodeProperties.USER_ID_LIST))
+                                    .map(u -> u.toJavaList(String.class))
+                                    .ifPresent(list -> list.forEach(u -> {
+                                        Todo e = new Todo();
+                                        e.setNodeId(nextNodes.getId());
+                                        e.setUserId(Long.parseLong(u));
+                                        e.setStatus(TodoListStatus.TODO);
+                                        e.setTodoStatus(TodoStatus.TODO);
+                                        e.setProcessId(process.getId());
+                                        e.setType(process.getType());
+                                        e.setDesignId(process.getDesignId());
+                                        if (isCC.get()){
+                                            e.setType(TodoType.Code.CC);
+                                        }
+                                        todoList.add(e);
+                                    }));
+                            if(!isCC.get()){
+                                // 如果不是抄送节点才能指定部门和角色待办
+                                Optional.ofNullable(nextNodesProperties.getJSONArray(ProcessConstant.NodeProperties.ROLES))
+                                        .map(r -> r.toJavaList(String.class))
+                                        .ifPresent(list -> list.forEach(r -> {
+                                            Todo e = new Todo();
+                                            e.setNodeId(nextNodes.getId());
+                                            e.setRoleId(Long.parseLong(r));
+                                            e.setStatus(TodoListStatus.TODO);
+                                            e.setTodoStatus(TodoStatus.TODO);
+                                            e.setProcessId(process.getId());
+                                            e.setType(process.getType());
+                                            e.setDesignId(process.getDesignId());
+                                            todoList.add(e);
+                                        }));
+                                Optional.ofNullable(nextNodesProperties.getJSONArray(ProcessConstant.NodeProperties.DEPT_ID_LIST))
+                                        .map(d -> d.toJavaList(String.class))
+                                        .ifPresent(list -> list.forEach(d -> {
+                                            Todo e = new Todo();
+                                            e.setNodeId(nextNodes.getId());
+                                            e.setDeptId(Long.parseLong(d));
+                                            e.setStatus(TodoListStatus.TODO);
+                                            e.setTodoStatus(TodoStatus.TODO);
+                                            e.setProcessId(process.getId());
+                                            e.setType(process.getType());
+                                            e.setDesignId(process.getDesignId());
+                                            todoList.add(e);
+                                        }));
+                            }
+                        }
+                        if (CollectionUtil.isEmpty(todoList)) {
+                            throw new BaseException("流程配置有误，未以任何形式配置用户节点指定用户/部门/角色待办").setHttpStatus(HttpStatus.BAD_REQUEST);
+                        }
+
+                        // 添加权限配置，绑定，用户/角色/部门，只有会签才是只有所有用户都处理完才到下一个节点，但是如果不是会签，就不管是谁，只要处理了就进入下一个节点了
+                        todoService.saveOrUpdateBatch(todoList);
+                        // 添加下一个节点为当前节点
+                        presentProcessService.save(nextNodes);
+                        if(isCC.get()) {
+                            // 如果用户节点是抄送节点，就直接下一步
+                            nextStep(() -> process
+                                    , () -> nextNodes
+                                    , nodesServiceSupplier
+                                    , edgesServiceSupplier
+                                    , historyServiceSupplier
+                                    , presentProcessServiceSupplier
+                                    , todoServiceSupplier
+                                    , () -> ProcessUtil.getProcessFormData(process)
+                                    , history);
+                        }
+                        // TODO 用户节点的自动处理，需要放在用户提交的方法里面处理，提交完再自动处理，再有就是历史记录需要在提交的时候记录
                     }
-                    // 添加权限配置，绑定，用户/角色/部门，只有会签才是只有所有用户都处理完才到下一个节点，但是如果不是会签，就不管是谁，只要处理了就进入下一个节点了
-                    todoService.saveOrUpdateBatch(todoList);
-                    // 添加下一个节点为当前节点
-                    presentProcessService.save(nextNodes);
-
-                    // TODO 用户节点的自动处理，需要放在用户提交的方法里面处理，提交完再自动处理，再有就是历史记录需要在提交的时候记录
-
-                } else if (nodesType.equals("custom-node-service")) {// 系统任务
-                    // 自动处理系统任务
-                    boolean nodeAutoResult = ProcessUtil.autoDeal(process, edges, nextNodes, nextNodesProperties, contextSupplier);
-                    // 这里更新一下流程的表单属性，把系统自动处理的结果添加进表单里面
-                    updateFormData(process, ProcessUtil.generatorFormData(ProcessItemType.NODE, nextNodes.getId(), "auto_result", nodeAutoResult));
-                    // 添加一个历史记录
-                    historyService.save(null, nextNodes, nextNodes.getText());
-                    nextStep(() -> process
-                            , () -> nextNodes
-                            , nodesServiceSupplier
-                            , edgesServiceSupplier
-                            , historyServiceSupplier
-                            , presentProcessServiceSupplier
-                            , todoServiceSupplier
-                            , () -> ProcessUtil.getProcessFormData(process));
-                } else if (nodesType.equals("custom-node-judgment")) {// 条件判断
-                    // 添加一个历史记录
-                    historyService.save(null, nextNodes, nextNodes.getText());
-                    // 如果是条件判断节点，就直接下一步
-                    nextStep(() -> process
-                            , () -> nextNodes
-                            , nodesServiceSupplier
-                            , edgesServiceSupplier
-                            , historyServiceSupplier
-                            , presentProcessServiceSupplier
-                            , todoServiceSupplier
-                            , () -> ProcessUtil.getProcessFormData(process));
-                } else if (nodesType.equals("custom-node-end")) {// 结束节点
-                    // 添加下一个节点为当前节点
-                    presentProcessService.save(nextNodes);
-                    // 更新流程状态为结束状态
-                    super.update(new Process()
-                            , Wrappers.<Process>lambdaUpdate().set(Process::getStatus, ProcessStatus.END)
-                                    .eq(Process::getId, process.getId()));
-                    // 添加一个历史记录
-                    historyService.save(null, nextNodes, nextNodes.getText());
-                    // 完成之后，把所有的待办都变成已办，且归档
-                    todoService.update(new Todo(), Wrappers.<Todo>lambdaUpdate()
-                            .set(Todo::getStatus, TodoListStatus.DONE)
-                            .set(Todo::getTodoStatus, null)
-                            .set(Todo::getDoneStatus, DoneStatus.ARCHIVED)
-                            .eq(Todo::getProcessId, process.getId()));
-                    // 结束之后也可以进行自动处理
-                    boolean nodeAutoResult = ProcessUtil.autoDeal(process, edges, nextNodes, nextNodesProperties, contextSupplier);
-                    // 这里更新一下流程的表单属性，把系统自动处理的结果添加进表单里面
-                    updateFormData(process, ProcessUtil.generatorFormData(ProcessItemType.NODE, nextNodes.getId(), "auto_result", nodeAutoResult));
+                    case ProcessConstant.NodesType.SERVICE -> {// 系统任务
+                        // 添加一个历史记录
+                        History h = historyService.save(null, nextNodes, nextNodes.getText());
+                        // 自动处理系统任务
+                        boolean nodeAutoResult = ProcessUtil.autoDeal(history, process, edges, nextNodes, nextNodesProperties, contextSupplier);
+                        // 这里更新一下流程的表单属性，把系统自动处理的结果添加进表单里面
+                        updateFormData(process, ProcessUtil.generatorFormData(h.getId(), ProcessItemType.NODE, nextNodes.getId(), ProcessConstant.AUTO_RESULT, nodeAutoResult));
+                        nextStep(() -> process
+                                , () -> nextNodes
+                                , nodesServiceSupplier
+                                , edgesServiceSupplier
+                                , historyServiceSupplier
+                                , presentProcessServiceSupplier
+                                , todoServiceSupplier
+                                , () -> ProcessUtil.getProcessFormData(process)
+                                , h);
+                    }
+                    case ProcessConstant.NodesType.JUDGMENT -> {
+                        // 添加一个历史记录
+                        historyService.save(null, nextNodes, nextNodes.getText());
+                        // 如果是条件判断节点，就直接下一步
+                        nextStep(() -> process
+                                , () -> nextNodes
+                                , nodesServiceSupplier
+                                , edgesServiceSupplier
+                                , historyServiceSupplier
+                                , presentProcessServiceSupplier
+                                , todoServiceSupplier
+                                , () -> ProcessUtil.getProcessFormData(process)
+                                , history);
+                    }
+                    case ProcessConstant.NodesType.END -> {// 结束节点
+                        // 添加下一个节点为当前节点
+                        presentProcessService.save(nextNodes);
+                        // 更新流程状态为结束状态
+                        super.update(new Process()
+                                , Wrappers.<Process>lambdaUpdate().set(Process::getStatus, ProcessStatus.END)
+                                        .eq(Process::getId, process.getId()));
+                        // 完成之后，把所有的待办都变成已办，且归档
+                        todoService.update(new Todo(), Wrappers.<Todo>lambdaUpdate()
+                                .set(Todo::getStatus, TodoListStatus.DONE)
+                                .set(Todo::getTodoStatus, null)
+                                .set(Todo::getDoneStatus, DoneStatus.ARCHIVED)
+                                .eq(Todo::getProcessId, process.getId()));
+                        // 添加一个历史记录
+                        History h = historyService.save(null, nextNodes, nextNodes.getText());
+                        // 结束之后也可以进行自动处理
+                        boolean nodeAutoResult = ProcessUtil.autoDeal(history, process, edges, nextNodes, nextNodesProperties, contextSupplier);
+                        // 这里更新一下流程的表单属性，把系统自动处理的结果添加进表单里面
+                        updateFormData(process, ProcessUtil.generatorFormData(h.getId(), ProcessItemType.NODE, nextNodes.getId(), ProcessConstant.AUTO_RESULT, nodeAutoResult));
+                    }
                 }
             }
         });
@@ -423,16 +461,16 @@ public class ProcessServiceImpl extends BaseServiceImpl<ProcessMapper, Process>
     }
 
     @Override
-    public boolean updateFormData(Long processId, Nodes nodes) {
+    public boolean updateFormData(Long historyId, Long processId, Nodes nodes) {
         // 获取流程中的表单
-        return updateFormData(super.getById(processId), nodes);
+        return updateFormData(historyId, super.getById(processId), nodes);
     }
 
     @Override
-    public boolean updateFormData(Process process, Nodes nodes) {
+    public boolean updateFormData(Long historyId, Process process, Nodes nodes) {
         JSONObject properties = ProcessUtil.getJSONObject(nodes.getProperties());
         if (properties != null) {
-            JSONArray jsonArray = properties.getJSONArray("fields");
+            JSONArray jsonArray = properties.getJSONArray(ProcessConstant.NodeProperties.FIELDS);
             if (jsonArray != null) {
                 JSONObject formData = ProcessUtil.getJSONObject(process.getFormData());
                 if (formData == null) {
@@ -441,9 +479,10 @@ public class ProcessServiceImpl extends BaseServiceImpl<ProcessMapper, Process>
                 JSONObject finalFormData = formData;
                 jsonArray.toJavaList(BusinessField.class).forEach(field -> {
                     // 按照 {node/edge}__{节点id}_{字段名} : 字段值 的方式存入到表单里面
-                    finalFormData.put(String.format("node_%s_%s"
-                            , nodes.getId()
-                            , field.getName()), field.getValue());
+//                    finalFormData.put(String.format("node_%s_%s"
+//                            , nodes.getId()
+//                            , field.getName()), field.getValue());
+                    ProcessUtil.generatorFormData(finalFormData, historyId, ProcessItemType.NODE, nodes.getId(), field.getName(), field.getValue());
                 });
                 Process entity = new Process();
                 entity.setId(process.getId());
@@ -490,45 +529,47 @@ public class ProcessServiceImpl extends BaseServiceImpl<ProcessMapper, Process>
         Nodes nodes = nodesSupplier.get();
         Edges edges = edgesSupplier.get();
         // 获取到并且转换所有的节点集合
-        List<Nodes> saveNodes = processData.getJSONArray("nodes").toJavaList(JSONObject.class)
+        List<Nodes> saveNodes = processData.getJSONArray(ProcessConstant.NODES).toJavaList(JSONObject.class)
                 .stream()
-                .filter(node -> node.getString("id").equals(nodes.getId()))
+                .filter(node -> node.getString(ProcessConstant.Nodes.ID).equals(nodes.getId()))
                 .peek(node -> {
-                    JSONObject properties = node.getJSONObject("properties");
-                    properties.put("isActivated", true);
+                    JSONObject properties = node.getJSONObject(ProcessConstant.Nodes.PROPERTIES);
+                    properties.put(ProcessConstant.Nodes.IS_ACTIVATED, true);
                 })
                 .map(node -> {
                     Nodes n = new Nodes();
                     // 节点 id
-                    n.setId(node.getString("id"));
+                    n.setId(node.getString(ProcessConstant.Nodes.ID));
                     // 流程 id
                     n.setProcessId(process.getId());
                     // 获取节点上的属性
                     n.setProperties(nodes.getProperties());
                     // 节点类型
-                    n.setType(node.getString("type"));
+                    n.setType(node.getString(ProcessConstant.Nodes.TYPE));
                     // 节点上的文字
-                    n.setText(Optional.ofNullable(node.getJSONObject("text")).map(jsonObject -> jsonObject.getString("value")).orElse(null));
+                    n.setText(Optional.ofNullable(node.getJSONObject(ProcessConstant.Nodes.TEXT))
+                            .map(jsonObject -> jsonObject.getString(ProcessConstant.Nodes.VALUE)).orElse(null));
                     return n;
                 })
                 .collect(Collectors.toList());
         nodesServiceSupplier.get().saveOrUpdateBatch(saveNodes);
         // 获取连线集合
-        List<Edges> saveEdges = processData.getJSONArray("edges").toJavaList(JSONObject.class)
+        List<Edges> saveEdges = processData.getJSONArray(ProcessConstant.EDGES).toJavaList(JSONObject.class)
                 .stream()
-                .filter(edge -> edge.getString("id").equals(edges.getId()))
+                .filter(edge -> edge.getString(ProcessConstant.Edges.ID).equals(edges.getId()))
                 .peek(edge -> {
-                    JSONObject properties = edge.getJSONObject("properties");
-                    properties.put("isActivated", true);
+                    JSONObject properties = edge.getJSONObject(ProcessConstant.Edges.PROPERTIES);
+                    properties.put(ProcessConstant.Edges.IS_ACTIVATED, true);
                 })
                 .map(edge -> {
                     Edges e = new Edges();
-                    e.setId(edge.getString("id"));
-                    e.setType(edge.getString("type"));
-                    e.setTargetNodeId(edge.getString("targetNodeId"));
-                    e.setSourceNodeId(edge.getString("sourceNodeId"));
+                    e.setId(edge.getString(ProcessConstant.Edges.ID));
+                    e.setType(edge.getString(ProcessConstant.Edges.TYPE));
+                    e.setTargetNodeId(edge.getString(ProcessConstant.Edges.TARGET_NODE_ID));
+                    e.setSourceNodeId(edge.getString(ProcessConstant.Edges.SOURCE_NODE_ID));
                     e.setProperties(edges.getProperties());
-                    e.setText(Optional.ofNullable(edge.getJSONObject("text")).map(jsonObject -> jsonObject.getString("value")).orElse(null));
+                    e.setText(Optional.ofNullable(edge.getJSONObject(ProcessConstant.Edges.TEXT))
+                            .map(jsonObject -> jsonObject.getString(ProcessConstant.Edges.VALUE)).orElse(null));
                     e.setProcessId(process.getId());
                     return e;
                 })

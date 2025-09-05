@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.hibernate.validator.constraints.Length;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.Set;
 
@@ -23,6 +24,7 @@ import java.util.Set;
 @Schema(description = "流程历史记录查询 DTO")
 public class HistoryListQueryDTO implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = -3821998231054391209L;
     /**
      * 运行流程 id

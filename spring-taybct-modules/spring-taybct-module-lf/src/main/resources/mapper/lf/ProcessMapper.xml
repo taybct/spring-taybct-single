@@ -23,6 +23,7 @@
         <result property="remark" column="remark" jdbcType="VARCHAR"/>
         <result property="cause" column="cause" jdbcType="VARCHAR"/>
         <result property="type" column="type" jdbcType="VARCHAR"/>
+        <result property="icon" column="type" jdbcType="VARCHAR"/>
     </resultMap>
 
     <sql id="Base_Column_List">
@@ -32,7 +33,7 @@
         design_id,title,user_id,
         dept_id,post_id,data,
         release_id,form_data,status,
-        remark,cause,type
+        remark,cause,type,icon
     </sql>
 
     <resultMap id="ProcessListVOMap" type="io.github.mangocrisp.spring.taybct.module.lf.vo.ProcessListVO">
@@ -46,6 +47,8 @@
         <result property="designName" column="design_name" jdbcType="VARCHAR"/>
         <result property="nodeId" column="node_id" jdbcType="VARCHAR"/>
         <result property="nodeText" column="node_text" jdbcType="VARCHAR"/>
+        <result property="icon" column="process_icon" jdbcType="VARCHAR"/>
+        <result property="lastVersion" column="design_last_version" jdbcType="BIGINT"/>
     </resultMap>
 
     <insert id="newProcess">
@@ -72,6 +75,7 @@
         , #{process.remark}
         , #{process.cause}
         , type
+        , icon
         from lf_release where id = #{process.releaseId}
     </insert>
 
@@ -87,7 +91,9 @@
         lp.design_id design_id,
         ld.name design_name,
         lpp.node_id node_id,
-        ln.text node_text
+        ln.text node_text,
+        lp.icon process_icon,
+        ld.last_version design_last_version
         from lf_process lp
         left join sys_user su on lp.create_user = su.id
         left join lf_design ld on lp.design_id = ld.id

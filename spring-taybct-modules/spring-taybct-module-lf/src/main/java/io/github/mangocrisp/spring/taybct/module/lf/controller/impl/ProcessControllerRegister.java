@@ -35,7 +35,7 @@ public class ProcessControllerRegister implements IProcessController {
     @Autowired(required = false)
     protected IPresentProcessService presentProcessService;
     @Autowired(required = false)
-    protected IHistoryService historyService;
+    protected ILfHistoryService lfHistoryService;
     @Autowired(required = false)
     protected ITodoService todoService;
 
@@ -55,8 +55,8 @@ public class ProcessControllerRegister implements IProcessController {
         return presentProcessService;
     }
 
-    public IHistoryService getHistoryService() {
-        return historyService;
+    public ILfHistoryService getLfHistoryService() {
+        return lfHistoryService;
     }
 
     public ITodoService getTodoService() {
@@ -68,7 +68,7 @@ public class ProcessControllerRegister implements IProcessController {
         return getProcessService().newProcess(process
                 , this::getNodesService
                 , this::getEdgesService
-                , this::getHistoryService
+                , this::getLfHistoryService
                 , this::getPresentProcessService
                 , this::getTodoService) ? R.ok() : R.fail("创建申请失败！");
     }
@@ -98,7 +98,7 @@ public class ProcessControllerRegister implements IProcessController {
         return getProcessService().userSubmit(nodes
                 , this::getNodesService
                 , this::getEdgesService
-                , this::getHistoryService
+                , this::getLfHistoryService
                 , this::getPresentProcessService
                 , this::getTodoService) ? R.ok() : R.fail("提交失败！");
     }

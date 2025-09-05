@@ -15,6 +15,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.hibernate.validator.constraints.Length;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
@@ -31,6 +32,7 @@ import java.time.LocalDateTime;
 @Schema(description = "流程历史")
 public class History implements Serializable {
 
+    @Serial
     @TableField(exist = false)
     private static final long serialVersionUID = -3280703527723124564L;
 

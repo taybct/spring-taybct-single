@@ -17,6 +17,7 @@
         <result property="todoStatus" column="todo_status" jdbcType="SMALLINT"/>
         <result property="doneStatus" column="done_status" jdbcType="SMALLINT"/>
         <result property="designId" column="design_id" jdbcType="BIGINT"/>
+        <result property="todoType" column="todo_type" jdbcType="VARCHAR"/>
     </resultMap>
 
     <sql id="Base_Column_List">
@@ -24,7 +25,8 @@
         ,node_id,role_id,
         user_id,dept_id,create_time,
         process_id,status,type,
-        todo_status,done_status,design_id
+        todo_status,done_status,design_id,
+        todo_type
     </sql>
 
     <resultMap id="TodoPageResultMap" type="io.github.mangocrisp.spring.taybct.module.lf.vo.ProcessListVO">
@@ -39,21 +41,26 @@
         <result property="designName" column="design_name" jdbcType="VARCHAR"/>
         <result property="nodeId" column="node_id" jdbcType="VARCHAR"/>
         <result property="nodeText" column="node_text" jdbcType="VARCHAR"/>
+        <result property="icon" column="process_icon" jdbcType="VARCHAR"/>
+        <result property="lastVersion" column="design_last_version" jdbcType="BIGINT"/>
     </resultMap>
 
     <sql id="todoListQuery">
         select
         lt.id todo_id,
-        lp.release_id release_id,
         lt.process_id process_id,
+        lt.design_id design_id,
+        lt.node_id node_id,
+        lt.todo_type todo_type,
         lp.title title,
         lp.create_user create_user,
-        su.nickname create_user_name,
+        lp.release_id release_id,
         lp.create_time create_time,
-        lt.design_id design_id,
         ld.name design_name,
-        lt.node_id node_id,
-        ln.text node_text
+        su.nickname create_user_name,
+        ln.text node_text,
+        lp.icon process_icon,
+        ld.last_version design_last_version
         from lf_todo lt
         left join lf_nodes ln on lt.node_id = ln.id
         left join lf_process lp on lt.process_id = lp.id
@@ -80,6 +87,9 @@
             </if>
             <if test="params.releaseId != null">
                 and lp.release_id = #{params.releaseId}
+            </if>
+            <if test="params.todoType != null">
+                and lp.todo_type = #{params.todoType}
             </if>
             <if test="params.title != null">
                 and lp.title like concat(concat('%',#{params.title}),'%')

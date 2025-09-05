@@ -22,7 +22,7 @@ public class FormServiceImpl extends BaseServiceImpl<FormMapper, Form>
 
     @Setter
     @Getter
-    protected String field = "id,create_user,create_time,update_user,update_time,is_deleted,name,status,description,type,path";
+    protected String field = "id,create_user,create_time,update_user,update_time,is_deleted,name,status,description,type,path,last_version";
 
     @Override
     public <E extends IPage<Form>> E page(E page, Wrapper<Form> queryWrapper) {

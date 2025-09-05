@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
 import io.github.mangocrisp.spring.taybct.module.lf.domain.Release;
 import io.github.mangocrisp.spring.taybct.module.lf.dto.ReleasePublishDTO;
+import io.github.mangocrisp.spring.taybct.module.lf.dto.ReleaseQueryDTO;
 import io.github.mangocrisp.spring.taybct.tool.core.annotation.DataScope;
 import io.github.mangocrisp.spring.taybct.tool.core.enums.DataScopeGetNotDealType;
 import io.github.mangocrisp.spring.taybct.tool.core.enums.DataScopeType;
@@ -37,8 +38,7 @@ public interface ReleaseMapper extends BaseMapper<Release> {
             , multiDeptId = "dept_id"
             , notExistDealType = DataScopeGetNotDealType.ALLOW
     )
-    @Override
-    <P extends IPage<Release>> P selectPage(P page, @Param(Constants.WRAPPER) Wrapper<Release> queryWrapper);
+    <P extends IPage<Release>> P page(P page, @Param("dto") ReleaseQueryDTO dto);
 
     @DataScope(alias = "lf_release"
             , field = "id"

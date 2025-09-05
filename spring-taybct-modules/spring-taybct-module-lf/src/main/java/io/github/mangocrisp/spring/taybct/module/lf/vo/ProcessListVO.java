@@ -78,5 +78,15 @@ public class ProcessListVO implements Serializable {
      */
     @Schema(description = "当前节点标题")
     private String nodeText;
+    /**
+     * 图标
+     */
+    @Schema(description = "图标")
+    private String icon;
+    /**
+     * 最后版本号
+     */
+    @Schema(description = "最后版本号")
+    private Long lastVersion;
 
 }

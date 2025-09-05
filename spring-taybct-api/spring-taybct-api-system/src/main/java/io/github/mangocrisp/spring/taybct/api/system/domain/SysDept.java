@@ -1,5 +1,6 @@
 package io.github.mangocrisp.spring.taybct.api.system.domain;
 
+import com.baomidou.mybatisplus.annotation.SqlCondition;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -39,6 +40,7 @@ public class SysDept extends UniqueDeleteLogic<Long, Long> implements Serializab
     @Size(max = 64, message = "编码长度不能超过64")
     @Schema(description = "部门名")
     @Length(max = 64, message = "编码长度不能超过64")
+    @TableField(condition = SqlCondition.LIKE)
     private String name;
     /**
      * 排序
@@ -58,6 +60,7 @@ public class SysDept extends UniqueDeleteLogic<Long, Long> implements Serializab
     @Size(max = 100, message = "编码长度不能超过100")
     @Schema(description = "全称")
     @Length(max = 100, message = "编码长度不能超过100")
+    @TableField(condition = SqlCondition.LIKE_LEFT)
     private String fullName;
     /**
      * 部门，组织机构代码
@@ -66,6 +69,7 @@ public class SysDept extends UniqueDeleteLogic<Long, Long> implements Serializab
     @Size(max = 100, message = "编码长度不能超过100")
     @Schema(description = "部门，组织机构代码")
     @Length(max = 100, message = "编码长度不能超过100")
+    @TableField(condition = SqlCondition.LIKE_LEFT)
     private String code;
     /**
      * 父 id

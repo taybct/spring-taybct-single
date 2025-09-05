@@ -13,6 +13,8 @@ import jakarta.validation.constraints.Size;
 import lombok.*;
 import org.hibernate.validator.constraints.Length;
 
+import java.io.Serial;
+
 /**
  * 流程发布表
  * <p>
@@ -27,6 +29,7 @@ import org.hibernate.validator.constraints.Length;
 @Schema(description = "流程发布表")
 public class Release extends DeleteLogicEntity<Long, Long> {
 
+    @Serial
     @TableField(exist = false)
     private static final long serialVersionUID = -9220849992133901103L;
 
@@ -57,6 +60,7 @@ public class Release extends DeleteLogicEntity<Long, Long> {
     @Size(max = 255, message = "编码长度不能超过255")
     @Schema(description = "备注说明")
     @Length(max = 255, message = "编码长度不能超过255")
+    @TableField(condition = SqlCondition.LIKE)
     private String description;
     /**
      * 数据（每个版本的数据）
@@ -78,5 +82,10 @@ public class Release extends DeleteLogicEntity<Long, Long> {
     @Schema(description = "流程类型（字典项 lf_process_type）")
     @Length(max = 100, message = "编码长度不能超过100")
     private String type;
+    /**
+     * 图标
+     */
+    @Schema(description = "图标")
+    private String icon;
 
 }

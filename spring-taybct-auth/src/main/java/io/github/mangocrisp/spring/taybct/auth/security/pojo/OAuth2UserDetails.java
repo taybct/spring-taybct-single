@@ -83,9 +83,9 @@ public class OAuth2UserDetails implements UserDetails {
         this.userId = dto.getUserId();
         this.username = dto.getUsername();
         this.password = dto.getPassword();
-        this.locked = dto.getStatus().equals(OAuthUserStatus.FREEZE.getStatus());
+        this.locked = dto.getStatus().equals(OAuthUserStatus.FREEZE.status());
         if (!locked) {
-            this.enabled = dto.getStatus().equals(OAuthUserStatus.ENABLE.getStatus());
+            this.enabled = dto.getStatus().equals(OAuthUserStatus.ENABLE.status());
         }
         if (CollectionUtil.isNotEmpty(dto.getRoles())) {
             authorities = new ArrayList<>();

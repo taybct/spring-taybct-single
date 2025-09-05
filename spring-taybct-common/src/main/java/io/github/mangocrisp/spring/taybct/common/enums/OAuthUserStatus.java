@@ -10,13 +10,7 @@ import lombok.Getter;
  * @author xijieyin <br> 2022/8/5 18:30
  * @since 1.0.0
  */
-@Getter
-@AllArgsConstructor
-public final class OAuthUserStatus {
-
-    private final Byte status;
-
-    private final String description;
+public record OAuthUserStatus(Byte status, String description) {
 
     /**
      * 可用
@@ -40,12 +34,12 @@ public final class OAuthUserStatus {
             return false;
         }
         OAuthUserStatus that = (OAuthUserStatus) obj;
-        return this.getStatus().equals(that.getStatus());
+        return this.status().equals(that.status());
     }
 
     @Override
     public int hashCode() {
-        return this.getStatus().hashCode();
+        return this.status().hashCode();
     }
 
 }

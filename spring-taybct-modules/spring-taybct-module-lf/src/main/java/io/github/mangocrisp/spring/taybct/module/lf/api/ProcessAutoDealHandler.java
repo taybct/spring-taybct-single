@@ -1,6 +1,7 @@
 package io.github.mangocrisp.spring.taybct.module.lf.api;
 
 import io.github.mangocrisp.spring.taybct.module.lf.domain.Edges;
+import io.github.mangocrisp.spring.taybct.module.lf.domain.History;
 import io.github.mangocrisp.spring.taybct.module.lf.domain.Nodes;
 import io.github.mangocrisp.spring.taybct.module.lf.domain.Process;
 
@@ -14,10 +15,11 @@ public interface ProcessAutoDealHandler {
     /**
      * 处理业务
      *
+     * @param history 用于区分是第几次处理当前的节点
      * @param process 流程信息
      * @param edges   连线信息
      * @param nodes   连线连到的节点信息
      * @return boolean
      */
-    boolean apply(Process process, Edges edges, Nodes nodes);
+    boolean apply(History history, Process process, Edges edges, Nodes nodes);
 }

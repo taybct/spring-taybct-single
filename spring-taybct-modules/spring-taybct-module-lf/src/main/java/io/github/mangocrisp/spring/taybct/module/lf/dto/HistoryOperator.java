@@ -3,6 +3,7 @@ package io.github.mangocrisp.spring.taybct.module.lf.dto;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 /**
@@ -17,7 +18,9 @@ import java.io.Serializable;
 @Schema(description = "历史记录操作者")
 @Builder
 public class HistoryOperator implements Serializable {
+    @Serial
     private static final long serialVersionUID = -647879019573889339L;
+
     /**
      * 流程发起人 id
      */

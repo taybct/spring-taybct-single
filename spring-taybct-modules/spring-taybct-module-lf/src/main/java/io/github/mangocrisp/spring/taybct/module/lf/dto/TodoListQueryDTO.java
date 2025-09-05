@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.hibernate.validator.constraints.Length;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 /**
@@ -22,6 +23,7 @@ import java.io.Serializable;
 @Schema(description = "流程查询 DTO")
 public class TodoListQueryDTO implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = 6231624597804786448L;
 
     /**

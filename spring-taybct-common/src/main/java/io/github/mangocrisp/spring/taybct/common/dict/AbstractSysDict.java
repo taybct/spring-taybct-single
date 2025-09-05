@@ -31,10 +31,9 @@ public abstract class AbstractSysDict implements ISysDict {
         if (this == obj) {
             return true;
         }
-        if (!(obj instanceof ISysDict)) {
+        if (!(obj instanceof ISysDict that)) {
             return false;
         }
-        ISysDict that = (ISysDict) obj;
         return getKey().equals(that.getKey());
     }
 

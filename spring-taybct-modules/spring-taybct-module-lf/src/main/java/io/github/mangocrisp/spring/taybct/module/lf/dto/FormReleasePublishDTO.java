@@ -19,6 +19,7 @@ import org.apache.ibatis.mapping.SqlCommandType;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
@@ -32,6 +33,7 @@ import java.time.LocalDateTime;
 @Schema(description = "表单发布 DTO")
 public class FormReleasePublishDTO implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = -1964234480998796297L;
 
     /**

@@ -46,7 +46,7 @@ public class ThirdUserDetailsService implements UserDetailsService {
                     setPassword(user);
                     OAuth2UserDetails userDetails = new OAuth2UserDetails(user);
                     // 当前使用的认证方式是用户名+密码
-                    userDetails.setAuthenticationMethod(OAuthenticationMethodType.USERNAME.getValue());
+                    userDetails.setAuthenticationMethod(OAuthenticationMethodType.USERNAME.value());
                     return userDetails;
                 }).orElseThrow(() -> new UsernameNotFoundException(ResultCode.USER_NOT_EXIST.getMessage()));
     }

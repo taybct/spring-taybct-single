@@ -171,10 +171,10 @@
                 <include refid="Auth_Condition"/>
             </if>
             <if test="dto.name != null">
-                and sd.name = #{dto.name}
+                and sd.name like concat('%',#{dto.name},'%')
             </if>
             <if test="dto.code != null">
-                and sd.code = #{dto.code}
+                and sd.code like concat('%',#{dto.code})
             </if>
             <if test="dto.type != null">
                 and sd.type = #{dto.type}

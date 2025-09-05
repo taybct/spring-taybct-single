@@ -14,7 +14,7 @@ import java.util.List;
  * <br>description 针对表【lf_history(流程历史)】的数据库操作Service
  * @since 2023-07-03 11:32:23
  */
-public interface IHistoryService extends IService<History> {
+public interface ILfHistoryService extends IService<History> {
 
     /**
      * 保存历史记录
@@ -23,7 +23,7 @@ public interface IHistoryService extends IService<History> {
      * @param nodes    需要记录的历史节点信息
      * @param action   动作，做了什么操作
      */
-    boolean save(HistoryOperator operator, Nodes nodes, String action);
+    History save(HistoryOperator operator, Nodes nodes, String action);
 
     /**
      * 查询历史记录列表

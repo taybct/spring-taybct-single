@@ -16,6 +16,8 @@
         <result property="description" column="description" jdbcType="VARCHAR"/>
         <result property="data" column="data" jdbcType="OTHER"/>
         <result property="type" column="type" jdbcType="VARCHAR"/>
+        <result property="icon" column="icon" jdbcType="VARCHAR"/>
+        <result property="lastVersion" column="last_version" jdbcType="BIGINT"/>
     </resultMap>
 
     <sql id="Base_Column_List">
@@ -23,6 +25,6 @@
         ,create_user,create_time,
         update_user,update_time,is_deleted,
         name,status,description,
-        data,type
+        data,type,icon,last_version
     </sql>
 </mapper>

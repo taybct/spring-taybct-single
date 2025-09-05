@@ -1,5 +1,6 @@
 package io.github.mangocrisp.spring.taybct.module.lf.domain;
 
+import com.baomidou.mybatisplus.annotation.SqlCondition;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.github.mangocrisp.spring.taybct.tool.core.annotation.TableFieldDefault;
@@ -42,6 +43,7 @@ public class FormRelease extends DeleteLogicEntity<Long, Long> {
     @Size(max = 64, message = "编码长度不能超过64")
     @Schema(description = "发布名称")
     @Length(max = 64, message = "编码长度不能超过64")
+    @TableField(condition = SqlCondition.LIKE)
     private String name;
     /**
      * 状态(0 关闭 1 打开)
@@ -55,6 +57,7 @@ public class FormRelease extends DeleteLogicEntity<Long, Long> {
     @Size(max = 255, message = "编码长度不能超过255")
     @Schema(description = "备注说明")
     @Length(max = 255, message = "编码长度不能超过255")
+    @TableField(condition = SqlCondition.LIKE)
     private String description;
     /**
      * 数据（每个版本的数据）

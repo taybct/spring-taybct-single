@@ -1,5 +1,7 @@
 package io.github.mangocrisp.spring.taybct.module.lf.dto;
 
+import com.baomidou.mybatisplus.annotation.SqlCondition;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
@@ -13,6 +15,7 @@ import lombok.ToString;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
@@ -28,6 +31,7 @@ import java.time.LocalDateTime;
 @Schema(description = "表单发布查询 DTO")
 public class FormReleaseQueryDTO implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = -7610420451077111257L;
 
     /**
@@ -67,6 +71,14 @@ public class FormReleaseQueryDTO implements Serializable {
     @Schema(description = "发布名称")
     @Length(max = 64, message = "编码长度不能超过64")
     private String name;
+    /**
+     * 备注说明
+     */
+    @Size(max = 255, message = "编码长度不能超过255")
+    @Schema(description = "备注说明")
+    @Length(max = 255, message = "编码长度不能超过255")
+    @TableField(condition = SqlCondition.LIKE)
+    private String description;
     /**
      * 状态(0 关闭 1 打开)
      */

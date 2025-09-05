@@ -3,6 +3,8 @@ package io.github.mangocrisp.spring.taybct.module.lf.dict;
 import io.github.mangocrisp.spring.taybct.common.dict.AbstractSysDict;
 import lombok.Getter;
 
+import java.io.Serial;
+
 /**
  * 节点类型
  *
@@ -11,6 +13,7 @@ import lombok.Getter;
 @Getter
 public final class NodeType extends AbstractSysDict {
 
+    @Serial
     private static final long serialVersionUID = -6446684472971026548L;
 
     /**
