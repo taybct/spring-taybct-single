@@ -55,11 +55,15 @@ public class BusinessProperties implements Serializable {
     /**
      * 用户 id 列表,一般用于用户节点,用来分配当前节点被哪些用户可以处理
      */
-    private Collection<String> userIdList;
+    private Collection<?> userIdList;
     /**
      * 部门 id 列表,一般用于用户节点,用来分配当前节点被哪些部门可以处理
      */
-    private Collection<String> deptIdList;
+    private Collection<?> deptIdList;
+    /**
+     * 绑定表单
+     */
+    private Object formBind;
     /**
      * 是否自动处理,当节点是系统节点时,默认为 true,如果节点是用户节点,还希望自动处理逻辑,可以开启
      */

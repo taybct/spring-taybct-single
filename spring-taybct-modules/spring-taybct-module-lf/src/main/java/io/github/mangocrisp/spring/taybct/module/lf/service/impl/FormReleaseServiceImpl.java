@@ -4,6 +4,7 @@ import cn.hutool.core.bean.BeanUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import io.github.mangocrisp.spring.taybct.module.lf.domain.Design;
 import io.github.mangocrisp.spring.taybct.module.lf.domain.Form;
 import io.github.mangocrisp.spring.taybct.module.lf.domain.FormRelease;
 import io.github.mangocrisp.spring.taybct.module.lf.dto.FormReleasePublishDTO;
@@ -12,8 +13,10 @@ import io.github.mangocrisp.spring.taybct.module.lf.mapper.FormMapper;
 import io.github.mangocrisp.spring.taybct.module.lf.mapper.FormReleaseMapper;
 import io.github.mangocrisp.spring.taybct.module.lf.service.IFormReleaseService;
 import io.github.mangocrisp.spring.taybct.tool.core.bean.service.BaseServiceImpl;
+import io.github.mangocrisp.spring.taybct.tool.core.exception.def.BaseException;
 import io.github.mangocrisp.spring.taybct.tool.core.request.SqlQueryParams;
 import io.github.mangocrisp.spring.taybct.tool.core.util.MyBatisUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collections;
@@ -26,11 +29,17 @@ import java.util.Collections;
 public class FormReleaseServiceImpl extends BaseServiceImpl<FormReleaseMapper, FormRelease>
         implements IFormReleaseService {
 
+    @Autowired(required = false)
     protected FormMapper formMapper;
 
     @Override
     @Transactional(rollbackFor = Throwable.class)
     public boolean publish(FormReleasePublishDTO dto) {
+        if (formMapper.exists(Wrappers.<Form>lambdaQuery()
+                .isNull(Form::getData)
+                .eq(Form::getId, dto.getFormId()))) {
+            throw new BaseException("表单设计数据为空！无法发布！");
+        }
         boolean b = getBaseMapper().publish(Collections.singleton(dto)) > 0;
         if (b) {
             formMapper.update(Wrappers.<Form>lambdaUpdate()

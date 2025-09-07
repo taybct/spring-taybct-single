@@ -46,6 +46,11 @@ public class ReleaseServiceImpl extends BaseServiceImpl<ReleaseMapper, Release>
     @Override
     @Transactional(rollbackFor = Throwable.class)
     public boolean publish(ReleasePublishDTO dto) {
+        if (designMapper.exists(Wrappers.<Design>lambdaQuery()
+                .isNull(Design::getData)
+                .eq(Design::getId, dto.getDesignId()))) {
+            throw new BaseException("流程设计数据为空！无法发布！");
+        }
         if (!designPermissionsService.checkPermission(Collections.singleton(dto.getDesignId()), new DesignPermissionsType[]{
                 DesignPermissionsType.PUBLISH
         })) {

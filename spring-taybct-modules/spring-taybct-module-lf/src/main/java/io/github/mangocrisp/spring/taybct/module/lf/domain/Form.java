@@ -8,7 +8,6 @@ import io.github.mangocrisp.spring.taybct.tool.core.annotation.TableFieldJSON;
 import io.github.mangocrisp.spring.taybct.tool.core.bean.DeleteLogicEntity;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 import org.hibernate.validator.constraints.Length;
@@ -36,7 +35,6 @@ public class Form extends DeleteLogicEntity<Long, Long> {
     /**
      * 名称
      */
-    @NotBlank(message = "[名称]不能为空")
     @Size(max = 64, message = "编码长度不能超过64")
     @Schema(description = "名称")
     @Length(max = 64, message = "编码长度不能超过64")
@@ -59,14 +57,12 @@ public class Form extends DeleteLogicEntity<Long, Long> {
     /**
      * 数据（实时设计最新的表单数据）
      */
-    @NotNull(message = "[数据（实时设计最新的表单数据）]不能为空")
     @Schema(description = "数据（实时设计最新的表单数据）")
     @TableFieldJSON
     private Object data;
     /**
      * 表单类型，是表单还是单组件（字典项 lf_form_type）
      */
-    @NotBlank(message = "[表单类型，是表单还是单组件（字典项 lf_form_type）]不能为空")
     @Size(max = 100, message = "编码长度不能超过100")
     @Schema(description = "表单类型，是表单还是单组件（字典项 lf_form_type）")
     @Length(max = 100, message = "编码长度不能超过100")
