@@ -185,4 +185,49 @@
         </if>
     </select>
 
+    <select id="deptUserTree" resultType="io.github.mangocrisp.spring.taybct.api.system.vo.DeptUserTreeVO">
+        select d.* from (
+        select
+        'd_' || sys_dept.id as id,
+        sys_dept.name as name,
+        'dept' as type,
+        sys_dept.id as dept_id,
+        null::int8 as user_id,
+        'd_' || sys_dept.pid as parent_id from sys_dept
+        where sys_dept.is_deleted = 0 and (sys_dept.id in
+        <foreach collection="deptIdSet" open="(" separator="," close=")" item="deptId">
+            #{deptId}
+        </foreach>
+        or sys_dept.pid in
+        <foreach collection="deptIdSet" open="(" separator="," close=")" item="deptId">
+            #{deptId}
+        </foreach>)
+        order by sys_dept.id,sys_dept.sort
+        ) d
+        <if test="includeUser">
+            union all
+            select u.* from (
+            select
+            'u_' || sys_user.id as id,
+            sys_user.nickname as name,
+            'user' as type,
+            sys_user_dept.dept_id,
+            sys_user.id as user_id,
+            'd_' || sys_user_dept.dept_id as parent_id from sys_user join sys_user_dept on sys_user.id = sys_user_dept.user_id
+            where sys_user.status = 1 and sys_user.is_deleted = 0 and sys_user_dept.dept_id in
+            <foreach collection="deptIdSet" open="(" separator="," close=")" item="deptId">
+                #{deptId}
+            </foreach>
+            and sys_user.id <![CDATA[<>]]> 1
+            <if test="_login_user_ != null">
+                and sys_user.id <![CDATA[<>]]> #{_login_user_.uid}::int8
+            </if>
+            order by sys_user.nickname
+            ) u
+        </if>
+    </select>
+    <select id="getDeptIdsByUserNickname" resultType="java.lang.Long">
+        select sys_user_dept.dept_id from sys_user join sys_user_dept on sys_user_dept.user_id = sys_user.id where sys_user.nickname like concat(concat('%', #{nickname}), '%')
+    </select>
+
 </mapper>
