@@ -56,6 +56,7 @@ public class Release extends DeleteLogicEntity<Long, Long> {
      */
     @Schema(description = "状态(0 关闭 1 打开)")
     @TableFieldDefault("1")
+    @JsonSerialize(using = ToStringSerializer.class)
     private Byte status;
     /**
      * 备注说明

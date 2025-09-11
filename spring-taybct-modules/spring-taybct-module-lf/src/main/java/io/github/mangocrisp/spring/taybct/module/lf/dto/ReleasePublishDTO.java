@@ -79,6 +79,7 @@ public class ReleasePublishDTO implements Serializable {
      */
     @TableLogic
     @TableFieldDefault("0")
+    @JsonSerialize(using = ToStringSerializer.class)
     private Byte isDeleted;
 
     /**
@@ -101,6 +102,7 @@ public class ReleasePublishDTO implements Serializable {
      */
     @Schema(description = "状态(0 关闭 1 打开)")
     @TableFieldDefault("1")
+    @JsonSerialize(using = ToStringSerializer.class)
     private Byte status;
     /**
      * 备注说明

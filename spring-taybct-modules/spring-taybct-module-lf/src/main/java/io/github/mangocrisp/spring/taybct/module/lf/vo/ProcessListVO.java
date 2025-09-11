@@ -43,6 +43,17 @@ public class ProcessListVO implements Serializable {
     @JsonSerialize(using = ToStringSerializer.class)
     private Long releaseId;
     /**
+     * 所属流程图 id
+     */
+    @Schema(description = "流程图 id（可以知道当前流程是基于什么原始设计运行的）")
+    @JsonSerialize(using = ToStringSerializer.class)
+    private Long designId;
+    /**
+     * 所属流程名称
+     */
+    @Schema(description = "所属流程名称")
+    private String designName;
+    /**
      * 运行流程 id
      */
     @Schema(description = "运行流程 id")
@@ -71,17 +82,6 @@ public class ProcessListVO implements Serializable {
     @JsonFormat(pattern = DateConstants.format.YYYY_MM_DD_HH_mm_ss)
     private LocalDateTime createTime;
     /**
-     * 所属流程图 id
-     */
-    @Schema(description = "流程图 id（可以知道当前流程是基于什么原始设计运行的）")
-    @JsonSerialize(using = ToStringSerializer.class)
-    private Long designId;
-    /**
-     * 所属流程名称
-     */
-    @Schema(description = "所属流程名称")
-    private String designName;
-    /**
      * 当前节点 id
      */
     @Schema(description = "当前节点 id")
@@ -102,5 +102,37 @@ public class ProcessListVO implements Serializable {
     @Schema(description = "最后版本号")
     @JsonSerialize(using = ToStringSerializer.class)
     private Long lastVersion;
+
+    /**
+     * 状态（1、待办、0、已办）
+     */
+    @Schema(description = "状态（1、待办、0、已办）")
+    @JsonSerialize(using = ToStringSerializer.class)
+    private Byte status;
+    /**
+     * 流程类型（字典项 lf_process_type）
+     */
+    @Schema(description = "流程类型（字典项 lf_process_type）")
+    private String type;
+
+    /**
+     * 待办状态（1、待处理 2、待阅 3、被退回  4、未读 5、反馈）
+     */
+    @Schema(description = "待办状态（1、待处理 2、待阅 3、被退回 4、未读 5、反馈）")
+    @JsonSerialize(using = ToStringSerializer.class)
+    private Byte todoStatus;
+
+    /**
+     * 已办状态（1、未归档 2、已归档 3、待回复 4、未读 5、反馈）
+     */
+    @Schema(description = "已办状态（1、未归档 2、已归档 3、待回复 4、未读 5、反馈）")
+    @JsonSerialize(using = ToStringSerializer.class)
+    private Byte doneStatus;
+
+    /**
+     * 待办类型（1、任务待办 2、抄送待办 ...其他类型自定义）
+     */
+    @Schema(description = "待办类型（1、任务待办 2、抄送待办 ...其他类型自定义）")
+    private String todoType;
 
 }

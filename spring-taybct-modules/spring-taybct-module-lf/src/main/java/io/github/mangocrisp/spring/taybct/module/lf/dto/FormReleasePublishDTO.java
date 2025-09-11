@@ -78,6 +78,7 @@ public class FormReleasePublishDTO implements Serializable {
      */
     @TableLogic
     @TableFieldDefault("0")
+    @JsonSerialize(using = ToStringSerializer.class)
     private Byte isDeleted;
 
     /**

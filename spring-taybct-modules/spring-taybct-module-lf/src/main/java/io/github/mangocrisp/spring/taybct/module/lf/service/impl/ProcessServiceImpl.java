@@ -337,7 +337,7 @@ public class ProcessServiceImpl extends BaseServiceImpl<ProcessMapper, Process>
                                         e.setType(process.getType());
                                         e.setDesignId(process.getDesignId());
                                         if (isCC.get()){
-                                            e.setType(TodoType.Code.CC);
+                                            e.setTodoType(TodoType.Code.CC);
                                         }
                                         todoList.add(e);
                                     }));

@@ -94,6 +94,7 @@ public class Process extends DeleteLogicEntity<Long, Long> {
      */
     @Schema(description = "状态（1、流程进行中 0、流程已经完成 -1、流程中止）")
     @TableFieldDefault("1")
+    @JsonSerialize(using = ToStringSerializer.class)
     private Byte status;
     /**
      * 备注

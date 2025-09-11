@@ -2,6 +2,8 @@ package io.github.mangocrisp.spring.taybct.module.lf.dto;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
+import io.github.mangocrisp.spring.taybct.module.lf.enums.TodoType;
+import io.github.mangocrisp.spring.taybct.tool.core.annotation.TableFieldDefault;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -73,16 +75,19 @@ public class TodoListQueryDTO implements Serializable {
      * 状态（1、待办、0、已办）
      */
     @Schema(description = "状态（1、待办、0、已办）")
+    @JsonSerialize(using = ToStringSerializer.class)
     private Byte status;
     /**
      * 待办状态（1、待处理 2、待阅 3、被退回  4、未读 5、反馈）
      */
     @Schema(description = "待办状态（1、待处理 2、待阅 3、被退回 4、未读 5、反馈）")
+    @JsonSerialize(using = ToStringSerializer.class)
     private Byte todoStatus;
     /**
      * 已办状态（1、未归档 2、已归档 3、待回复 4、未读 5、反馈）
      */
     @Schema(description = "已办状态（1、未归档 2、已归档 3、待回复 4、未读 5、反馈）")
+    @JsonSerialize(using = ToStringSerializer.class)
     private Byte doneStatus;
     /**
      * 流程类型（字典项 lf_process_type）
@@ -91,4 +96,11 @@ public class TodoListQueryDTO implements Serializable {
     @Schema(description = "流程类型（字典项 lf_process_type）")
     @Length(max = 100, message = "编码长度不能超过100")
     private String type;
+    /**
+     * 待办类型（1、任务待办 2、抄送待办 ...其他类型自定义）
+     */
+    @Size(max = 100, message = "编码长度不能超过100")
+    @Schema(description = "待办类型（1、任务待办 2、抄送待办 ...其他类型自定义）")
+    @Length(max = 100, message = "编码长度不能超过100")
+    private String todoType;
 }

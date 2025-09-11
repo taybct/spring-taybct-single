@@ -86,6 +86,7 @@ public class ReleaseQueryDTO implements Serializable {
      * 状态(0 关闭 1 打开)
      */
     @Schema(description = "状态(0 关闭 1 打开)")
+    @JsonSerialize(using = ToStringSerializer.class)
     private Byte status;
     /**
      * 版本号

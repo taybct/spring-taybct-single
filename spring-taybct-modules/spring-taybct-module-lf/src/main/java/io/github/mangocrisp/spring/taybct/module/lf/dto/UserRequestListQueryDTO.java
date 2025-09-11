@@ -57,6 +57,7 @@ public class UserRequestListQueryDTO implements Serializable {
      * 已办状态（1、未归档 2、已归档 3、待回复 4、未读 5、反馈）
      */
     @Schema(description = "已办状态（1、未归档 2、已归档 3、待回复 4、未读 5、反馈）")
+    @JsonSerialize(using = ToStringSerializer.class)
     private Byte doneStatus;
     /**
      * 流程类型（字典项 lf_process_type）
