@@ -1,5 +1,7 @@
 package io.github.mangocrisp.spring.taybct.module.lf.dto;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -30,6 +32,7 @@ public class TodoListQueryDTO implements Serializable {
      * 流程图 id（可以知道当前流程是基于什么原始设计运行的）
      */
     @Schema(description = "流程图 id（可以知道当前流程是基于什么原始设计运行的）")
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long designId;
     /**
      * 流程标题
@@ -58,11 +61,13 @@ public class TodoListQueryDTO implements Serializable {
      * 流程发布 id（可以知道当前流程是基于什么版本的设计在运行的）
      */
     @Schema(description = "流程发布 id（可以知道当前流程是基于什么版本的设计在运行的）")
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long releaseId;
     /**
      * 运行流程 id
      */
     @Schema(description = "运行流程 id")
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long processId;
     /**
      * 状态（1、待办、0、已办）

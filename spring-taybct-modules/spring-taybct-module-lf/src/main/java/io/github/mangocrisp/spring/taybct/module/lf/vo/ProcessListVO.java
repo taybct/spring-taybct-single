@@ -1,11 +1,17 @@
 package io.github.mangocrisp.spring.taybct.module.lf.vo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
+import io.github.mangocrisp.spring.taybct.tool.core.constant.DateConstants;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.springframework.format.annotation.DateTimeFormat;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
@@ -21,22 +27,26 @@ import java.time.LocalDateTime;
 @Schema(description = "流程列表查询 VO 对象")
 public class ProcessListVO implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = -2494815245297446809L;
 
     /**
      * 待办 id
      */
     @Schema(description = "待办 id")
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long todoId;
     /**
      * 流程发布 id（可以知道当前流程是基于什么版本的设计在运行的）
      */
     @Schema(description = "流程发布 id（可以知道当前流程是基于什么版本的设计在运行的）")
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long releaseId;
     /**
      * 运行流程 id
      */
     @Schema(description = "运行流程 id")
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long processId;
     /**
      * 流程标题
@@ -57,11 +67,14 @@ public class ProcessListVO implements Serializable {
      * 创建时间
      */
     @Schema(description = "创建时间")
+    @DateTimeFormat(pattern = DateConstants.format.YYYY_MM_DD_HH_mm_ss)
+    @JsonFormat(pattern = DateConstants.format.YYYY_MM_DD_HH_mm_ss)
     private LocalDateTime createTime;
     /**
      * 所属流程图 id
      */
     @Schema(description = "流程图 id（可以知道当前流程是基于什么原始设计运行的）")
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long designId;
     /**
      * 所属流程名称
@@ -87,6 +100,7 @@ public class ProcessListVO implements Serializable {
      * 最后版本号
      */
     @Schema(description = "最后版本号")
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long lastVersion;
 
 }

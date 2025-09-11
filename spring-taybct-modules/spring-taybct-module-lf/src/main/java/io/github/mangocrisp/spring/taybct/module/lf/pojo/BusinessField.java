@@ -2,6 +2,7 @@ package io.github.mangocrisp.spring.taybct.module.lf.pojo;
 
 import lombok.*;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 /**
@@ -16,6 +17,7 @@ import java.io.Serializable;
 @ToString
 public class BusinessField implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = 4312742936001877397L;
 
     /**

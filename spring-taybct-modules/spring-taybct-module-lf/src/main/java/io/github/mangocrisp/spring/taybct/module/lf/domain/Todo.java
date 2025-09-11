@@ -3,9 +3,13 @@ package io.github.mangocrisp.spring.taybct.module.lf.domain;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import io.github.mangocrisp.spring.taybct.module.lf.dict.NodeType;
 import io.github.mangocrisp.spring.taybct.module.lf.enums.TodoType;
 import io.github.mangocrisp.spring.taybct.tool.core.annotation.TableFieldDefault;
+import io.github.mangocrisp.spring.taybct.tool.core.constant.DateConstants;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -15,6 +19,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.hibernate.validator.constraints.Length;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -40,6 +45,7 @@ public class Todo implements Serializable {
     /**
      * 主键
      */
+    @JsonSerialize(using = ToStringSerializer.class)
     @NotNull(message = "[主键]不能为空")
     @Schema(description = "主键")
     @TableId
@@ -56,16 +62,19 @@ public class Todo implements Serializable {
     /**
      * 角色 id
      */
+    @JsonSerialize(using = ToStringSerializer.class)
     @Schema(description = "角色 id")
     private Long roleId;
     /**
      * 用户id
      */
+    @JsonSerialize(using = ToStringSerializer.class)
     @Schema(description = "用户id")
     private Long userId;
     /**
      * 部门id
      */
+    @JsonSerialize(using = ToStringSerializer.class)
     @Schema(description = "部门id")
     private Long deptId;
     /**
@@ -73,10 +82,13 @@ public class Todo implements Serializable {
      */
     @Schema(description = "创建时间")
     @TableFieldDefault(isTimeNow = true)
+    @DateTimeFormat(pattern = DateConstants.format.YYYY_MM_DD_HH_mm_ss)
+    @JsonFormat(pattern = DateConstants.format.YYYY_MM_DD_HH_mm_ss)
     private LocalDateTime createTime;
     /**
      * 流程 id
      */
+    @JsonSerialize(using = ToStringSerializer.class)
     @NotNull(message = "[流程 id]不能为空")
     @Schema(description = "流程 id")
     private Long processId;
@@ -106,6 +118,7 @@ public class Todo implements Serializable {
     /**
      * 流程图 id（这里主要是用来查询分类）
      */
+    @JsonSerialize(using = ToStringSerializer.class)
     @NotNull(message = "[流程图 id（这里主要是用来查询分类）]不能为空")
     @Schema(description = "流程图 id（这里主要是用来查询分类）")
     private Long designId;

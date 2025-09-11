@@ -1,5 +1,7 @@
 package io.github.mangocrisp.spring.taybct.module.lf.dto;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -30,6 +32,7 @@ public class HistoryListQueryDTO implements Serializable {
      * 运行流程 id
      */
     @Schema(description = "运行流程 id")
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long processId;
     /**
      * 当前节点类型（字典项 lf_node_type）

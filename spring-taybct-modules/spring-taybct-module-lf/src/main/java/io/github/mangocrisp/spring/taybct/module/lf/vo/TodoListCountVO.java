@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.List;
 
@@ -21,6 +22,7 @@ import java.util.List;
 @Schema(description = "待办数量查询 VO")
 public class TodoListCountVO implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = 8559793940385106870L;
 
     /**

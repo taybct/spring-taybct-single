@@ -1,5 +1,7 @@
 package io.github.mangocrisp.spring.taybct.module.lf.dto;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 
@@ -25,11 +27,13 @@ public class HistoryOperator implements Serializable {
      * 流程发起人 id
      */
     @Schema(description = "流程发起人 id")
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long userId;
     /**
      * 发起部门
      */
     @Schema(description = "发起部门")
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long deptId;
     /**
      * 岗位

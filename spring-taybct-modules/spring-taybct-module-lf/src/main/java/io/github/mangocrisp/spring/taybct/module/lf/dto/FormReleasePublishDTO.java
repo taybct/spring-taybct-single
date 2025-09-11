@@ -39,6 +39,7 @@ public class FormReleasePublishDTO implements Serializable {
     /**
      * 主键
      */
+    @JsonSerialize(using = ToStringSerializer.class)
     @TableFieldDefault(expression = "T(com.baomidou.mybatisplus.core.toolkit.IdWorker).getId()")
     private Long id;
 
@@ -84,6 +85,7 @@ public class FormReleasePublishDTO implements Serializable {
      */
     @NotNull(message = "[表单 id]不能为空")
     @Schema(description = "表单 id")
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long formId;
     /**
      * 发布名称
@@ -111,6 +113,7 @@ public class FormReleasePublishDTO implements Serializable {
      */
     @Schema(description = "版本号（yyyyMMddHHmmss）")
     @TableFieldDefault(expression = "T(java.lang.Long).valueOf(T(java.time.LocalDateTime).now().format(T(java.time.format.DateTimeFormatter).ofPattern(\"yyyyMMddHHmmss\", T(java.util.Locale).CHINA)))")
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long version;
     /**
      * 表单类型，是表单还是单组件（字典项 lf_form_type）

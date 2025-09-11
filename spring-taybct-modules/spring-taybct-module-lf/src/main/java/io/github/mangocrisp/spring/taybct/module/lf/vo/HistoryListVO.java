@@ -4,6 +4,8 @@ import io.github.mangocrisp.spring.taybct.module.lf.domain.History;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 
+import java.io.Serial;
+
 /**
  * 流程历史 VO 类
  */
@@ -15,6 +17,7 @@ import lombok.*;
 @Schema(description = "流程历史 VO 类")
 public class HistoryListVO extends History {
 
+    @Serial
     private static final long serialVersionUID = 8200129443366216365L;
 
     /**

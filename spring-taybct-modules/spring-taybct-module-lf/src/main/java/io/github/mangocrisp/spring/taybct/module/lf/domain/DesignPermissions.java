@@ -3,6 +3,8 @@ package io.github.mangocrisp.spring.taybct.module.lf.domain;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import io.github.mangocrisp.spring.taybct.tool.core.annotation.TableFieldDefault;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotNull;
@@ -38,22 +40,26 @@ public class DesignPermissions implements Serializable {
     @Schema(description = "主键")
     @TableId
     @TableFieldDefault(expression = "T(com.baomidou.mybatisplus.core.toolkit.IdWorker).getId()")
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long id;
     /**
      * 设计图 id
      */
     @NotNull(message = "[设计图 id]不能为空")
     @Schema(description = "设计图 id")
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long designId;
     /**
      * 用户id
      */
     @Schema(description = "用户id")
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long userId;
     /**
      * 部门id
      */
     @Schema(description = "部门id")
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long deptId;
     /**
      * 编辑权限

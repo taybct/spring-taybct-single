@@ -41,6 +41,7 @@ public class ReleasePublishDTO implements Serializable {
      * 主键
      */
     @TableFieldDefault(expression = "T(com.baomidou.mybatisplus.core.toolkit.IdWorker).getId()")
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long id;
 
     /**
@@ -85,6 +86,7 @@ public class ReleasePublishDTO implements Serializable {
      */
     @NotNull(message = "[流程图 id]不能为空")
     @Schema(description = "流程图 id")
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long designId;
     /**
      * 发布名称
@@ -112,6 +114,7 @@ public class ReleasePublishDTO implements Serializable {
      */
     @Schema(description = "版本号")
     @TableFieldDefault(expression = "T(java.lang.Long).valueOf(T(java.time.LocalDateTime).now().format(T(java.time.format.DateTimeFormatter).ofPattern(\"yyyyMMddHHmmss\", T(java.util.Locale).CHINA)))")
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long version;
     /**
      * 流程类型（字典项 lf_process_type）

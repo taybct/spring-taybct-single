@@ -2,9 +2,12 @@ package io.github.mangocrisp.spring.taybct.module.lf.domain;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import io.github.mangocrisp.spring.taybct.tool.core.annotation.TableFieldDefault;
 import io.github.mangocrisp.spring.taybct.tool.core.annotation.TableFieldJSON;
 import io.github.mangocrisp.spring.taybct.tool.core.bean.DeleteLogicEntity;
+import io.github.mangocrisp.spring.taybct.tool.core.handle.TableFieldDefaultLoginUserIdHandler;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -35,6 +38,7 @@ public class Process extends DeleteLogicEntity<Long, Long> {
     /**
      * 流程图 id（可以知道当前流程是基于什么原始设计运行的）
      */
+    @JsonSerialize(using = ToStringSerializer.class)
     @NotNull(message = "[流程图 id（可以知道当前流程是基于什么原始设计运行的）]不能为空")
     @Schema(description = "流程图 id（可以知道当前流程是基于什么原始设计运行的）")
     private Long designId;
@@ -49,17 +53,20 @@ public class Process extends DeleteLogicEntity<Long, Long> {
     /**
      * 流程发起人 id
      */
-    @NotNull(message = "[流程发起人 id]不能为空")
+    @JsonSerialize(using = ToStringSerializer.class)
     @Schema(description = "流程发起人 id")
+    @TableFieldDefault(handler = TableFieldDefaultLoginUserIdHandler.class)
     private Long userId;
     /**
      * 发起部门
      */
+    @JsonSerialize(using = ToStringSerializer.class)
     @Schema(description = "发起部门")
     private Long deptId;
     /**
      * 岗位
      */
+    @JsonSerialize(using = ToStringSerializer.class)
     @Schema(description = "岗位")
     private Long postId;
     /**
@@ -71,6 +78,7 @@ public class Process extends DeleteLogicEntity<Long, Long> {
     /**
      * 流程发布 id（可以知道当前流程是基于什么版本的设计在运行的）
      */
+    @JsonSerialize(using = ToStringSerializer.class)
     @NotNull(message = "[流程发布 id（可以知道当前流程是基于什么版本的设计在运行的）]不能为空")
     @Schema(description = "流程发布 id（可以知道当前流程是基于什么版本的设计在运行的）")
     private Long releaseId;

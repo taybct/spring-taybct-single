@@ -1,11 +1,14 @@
 package io.github.mangocrisp.spring.taybct.module.lf.vo;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 /**
@@ -20,17 +23,20 @@ import java.io.Serializable;
 @Schema(description = "未操作者")
 public class UnOperator implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = -2418630399996497780L;
 
     /**
      * 运行流程 id
      */
     @Schema(description = "运行流程 id")
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long processId;
     /**
      * 操作者 id
      */
     @Schema(description = "操作者 id")
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long id;
     /**
      * 操作者名

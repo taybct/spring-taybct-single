@@ -37,6 +37,7 @@ public class FormReleaseQueryDTO implements Serializable {
     /**
      * 主键
      */
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long id;
 
     /**
@@ -63,6 +64,7 @@ public class FormReleaseQueryDTO implements Serializable {
      * 表单 id
      */
     @Schema(description = "表单 id")
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long formId;
     /**
      * 发布名称
@@ -88,6 +90,7 @@ public class FormReleaseQueryDTO implements Serializable {
      * 版本号
      */
     @Schema(description = "版本号")
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long version;
     /**
      * 流程类型（字典项 lf_process_type）

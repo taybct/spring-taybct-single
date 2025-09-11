@@ -1,11 +1,14 @@
 package io.github.mangocrisp.spring.taybct.module.lf.vo;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 /**
@@ -20,6 +23,7 @@ import java.io.Serializable;
 @Schema(description = "待办统计")
 public class TodoCount implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = -2243285972051108221L;
 
     /**
@@ -31,6 +35,7 @@ public class TodoCount implements Serializable {
      * 数量
      */
     @Schema(description = "数量")
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long count;
 
 }

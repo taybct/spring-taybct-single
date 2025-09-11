@@ -3,6 +3,7 @@ package io.github.mangocrisp.spring.taybct.module.lf.pojo;
 import com.alibaba.fastjson2.JSONObject;
 import lombok.*;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.Collection;
 
@@ -18,6 +19,7 @@ import java.util.Collection;
 @ToString
 public class BusinessProperties implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = 3282580153238788918L;
 
     /**

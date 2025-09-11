@@ -3,8 +3,12 @@ package io.github.mangocrisp.spring.taybct.module.lf.domain;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import io.github.mangocrisp.spring.taybct.tool.core.annotation.TableFieldDefault;
 import io.github.mangocrisp.spring.taybct.tool.core.annotation.TableFieldJSON;
+import io.github.mangocrisp.spring.taybct.tool.core.constant.DateConstants;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -14,6 +18,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.hibernate.validator.constraints.Length;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -43,6 +48,7 @@ public class History implements Serializable {
     @Schema(description = "主键")
     @TableFieldDefault(expression = "T(com.baomidou.mybatisplus.core.toolkit.IdWorker).getId()")
     @TableId
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long id;
     /**
      * 操作时间
@@ -50,22 +56,27 @@ public class History implements Serializable {
     @NotNull(message = "[操作时间]不能为空")
     @Schema(description = "操作时间")
     @TableFieldDefault(isTimeNow = true)
+    @DateTimeFormat(pattern = DateConstants.format.YYYY_MM_DD_HH_mm_ss)
+    @JsonFormat(pattern = DateConstants.format.YYYY_MM_DD_HH_mm_ss)
     private LocalDateTime time;
     /**
      * 操作人 id
      */
     @Schema(description = "操作人 id")
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long userId;
     /**
      * 操作人的部门
      */
     @Schema(description = "操作人的部门")
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long deptId;
     /**
      * 流程 id
      */
     @NotNull(message = "[流程 id]不能为空")
     @Schema(description = "流程 id")
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long processId;
     /**
      * 动作（节点的 text 或者单独有个 action 的属性）
@@ -78,6 +89,7 @@ public class History implements Serializable {
     /**
      * 操作顺序
      */
+    @JsonSerialize(using = ToStringSerializer.class)
     @NotNull(message = "[操作顺序]不能为空")
     @Schema(description = "操作顺序")
     @TableFieldDefault(expression = "T(java.lang.System).currentTimeMillis()")
@@ -99,6 +111,7 @@ public class History implements Serializable {
     /**
      * 操作人的岗位
      */
+    @JsonSerialize(using = ToStringSerializer.class)
     @Schema(description = "操作人的岗位")
     private Long postId;
     /**

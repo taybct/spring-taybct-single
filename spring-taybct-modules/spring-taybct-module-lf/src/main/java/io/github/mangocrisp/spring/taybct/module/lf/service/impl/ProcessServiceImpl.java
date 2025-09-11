@@ -17,6 +17,7 @@ import io.github.mangocrisp.spring.taybct.module.lf.enums.ProcessItemType;
 import io.github.mangocrisp.spring.taybct.module.lf.enums.TodoType;
 import io.github.mangocrisp.spring.taybct.module.lf.mapper.ProcessMapper;
 import io.github.mangocrisp.spring.taybct.module.lf.pojo.BusinessField;
+import io.github.mangocrisp.spring.taybct.module.lf.pojo.PermissionsDTO;
 import io.github.mangocrisp.spring.taybct.module.lf.service.*;
 import io.github.mangocrisp.spring.taybct.module.lf.util.ProcessUtil;
 import io.github.mangocrisp.spring.taybct.module.lf.vo.ProcessListVO;
@@ -81,6 +82,10 @@ public class ProcessServiceImpl extends BaseServiceImpl<ProcessMapper, Process>
                     })
                     .collect(Collectors.toList());
             nodesServiceSupplier.get().saveOrUpdateBatch(nodes);
+            // 设置一下开始节点的 id
+            nodes.stream().filter(n->n.getType().equalsIgnoreCase(ProcessConstant.NodesType.START))
+                    .forEach(n-> dto.getStartNodes().setId(n.getId()));
+
             // 获取连线集合
             List<Edges> edges = jsonData.getJSONArray(ProcessConstant.EDGES).toJavaList(JSONObject.class)
                     .stream().map(edge -> {
@@ -104,14 +109,14 @@ public class ProcessServiceImpl extends BaseServiceImpl<ProcessMapper, Process>
             Nodes startNodes = dto.getStartNodes();
             // 设置流程 id
             startNodes.setProcessId(process.getId());
+            // 保存当前节点
+            presentProcessService.save(startNodes);
             // 如果是开始节点，这里要添加第一个历史 和 当前节点
             History history = historyService.save(HistoryOperator.builder()
                     .userId(process.getUserId())
                     .deptId(process.getDeptId())
                     .postId(process.getPostId())
                     .build(), startNodes, "开始");
-            // 保存当前节点
-            presentProcessService.save(startNodes);
             updateFormData(history.getId(), process, startNodes);
             nextStep(() -> process
                     , () -> startNodes
@@ -321,11 +326,11 @@ public class ProcessServiceImpl extends BaseServiceImpl<ProcessMapper, Process>
                         if (nextNodesProperties != null) {
                             isCC.set(nextNodesProperties.getBooleanValue(ProcessConstant.NodeProperties.IS_CC, false));
                             Optional.ofNullable(nextNodesProperties.getJSONArray(ProcessConstant.NodeProperties.USER_ID_LIST))
-                                    .map(u -> u.toJavaList(String.class))
+                                    .map(u -> u.toJavaList(PermissionsDTO.class))
                                     .ifPresent(list -> list.forEach(u -> {
                                         Todo e = new Todo();
                                         e.setNodeId(nextNodes.getId());
-                                        e.setUserId(Long.parseLong(u));
+                                        e.setUserId(u.getId());
                                         e.setStatus(TodoListStatus.TODO);
                                         e.setTodoStatus(TodoStatus.TODO);
                                         e.setProcessId(process.getId());
@@ -339,11 +344,11 @@ public class ProcessServiceImpl extends BaseServiceImpl<ProcessMapper, Process>
                             if(!isCC.get()){
                                 // 如果不是抄送节点才能指定部门和角色待办
                                 Optional.ofNullable(nextNodesProperties.getJSONArray(ProcessConstant.NodeProperties.ROLES))
-                                        .map(r -> r.toJavaList(String.class))
+                                        .map(r -> r.toJavaList(PermissionsDTO.class))
                                         .ifPresent(list -> list.forEach(r -> {
                                             Todo e = new Todo();
                                             e.setNodeId(nextNodes.getId());
-                                            e.setRoleId(Long.parseLong(r));
+                                            e.setRoleId(r.getId());
                                             e.setStatus(TodoListStatus.TODO);
                                             e.setTodoStatus(TodoStatus.TODO);
                                             e.setProcessId(process.getId());
@@ -352,11 +357,11 @@ public class ProcessServiceImpl extends BaseServiceImpl<ProcessMapper, Process>
                                             todoList.add(e);
                                         }));
                                 Optional.ofNullable(nextNodesProperties.getJSONArray(ProcessConstant.NodeProperties.DEPT_ID_LIST))
-                                        .map(d -> d.toJavaList(String.class))
+                                        .map(d -> d.toJavaList(PermissionsDTO.class))
                                         .ifPresent(list -> list.forEach(d -> {
                                             Todo e = new Todo();
                                             e.setNodeId(nextNodes.getId());
-                                            e.setDeptId(Long.parseLong(d));
+                                            e.setDeptId(d.getId());
                                             e.setStatus(TodoListStatus.TODO);
                                             e.setTodoStatus(TodoStatus.TODO);
                                             e.setProcessId(process.getId());

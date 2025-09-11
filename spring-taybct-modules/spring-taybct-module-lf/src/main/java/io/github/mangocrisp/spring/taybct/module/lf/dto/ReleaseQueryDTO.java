@@ -37,6 +37,7 @@ public class ReleaseQueryDTO implements Serializable {
     /**
      * 主键
      */
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long id;
 
     /**
@@ -63,6 +64,7 @@ public class ReleaseQueryDTO implements Serializable {
      * 流程图 id
      */
     @Schema(description = "流程图 id")
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long designId;
     /**
      * 发布名称
@@ -89,6 +91,7 @@ public class ReleaseQueryDTO implements Serializable {
      * 版本号
      */
     @Schema(description = "版本号")
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long version;
     /**
      * 流程类型（字典项 lf_process_type）

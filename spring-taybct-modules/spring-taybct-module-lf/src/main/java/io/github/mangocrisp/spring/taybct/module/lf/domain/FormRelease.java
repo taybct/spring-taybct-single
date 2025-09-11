@@ -3,6 +3,8 @@ package io.github.mangocrisp.spring.taybct.module.lf.domain;
 import com.baomidou.mybatisplus.annotation.SqlCondition;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import io.github.mangocrisp.spring.taybct.tool.core.annotation.TableFieldDefault;
 import io.github.mangocrisp.spring.taybct.tool.core.annotation.TableFieldJSON;
 import io.github.mangocrisp.spring.taybct.tool.core.bean.DeleteLogicEntity;
@@ -35,6 +37,7 @@ public class FormRelease extends DeleteLogicEntity<Long, Long> {
      */
     @NotNull(message = "[表单 id]不能为空")
     @Schema(description = "表单 id")
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long formId;
     /**
      * 发布名称
@@ -72,6 +75,7 @@ public class FormRelease extends DeleteLogicEntity<Long, Long> {
     @NotNull(message = "[版本号（yyyyMMddHHmmss）]不能为空")
     @Schema(description = "版本号（yyyyMMddHHmmss）")
     @TableFieldDefault(expression = "T(java.lang.Long).valueOf(T(java.time.LocalDateTime).now().format(T(java.time.format.DateTimeFormatter).ofPattern(\"yyyyMMddHHmmss\", T(java.util.Locale).CHINA)))")
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long version;
     /**
      * 表单类型，是表单还是单组件（字典项 lf_form_type）

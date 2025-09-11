@@ -3,6 +3,8 @@ package io.github.mangocrisp.spring.taybct.module.lf.domain;
 import com.baomidou.mybatisplus.annotation.SqlCondition;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import io.github.mangocrisp.spring.taybct.module.lf.constants.ProcessType;
 import io.github.mangocrisp.spring.taybct.tool.core.annotation.TableFieldDefault;
 import io.github.mangocrisp.spring.taybct.tool.core.annotation.TableFieldJSON;
@@ -72,6 +74,7 @@ public class Design extends DeleteLogicEntity<Long, Long> {
      * 最后版本号
      */
     @Schema(description = "最后版本号")
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long lastVersion;
 
 }
