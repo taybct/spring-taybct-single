@@ -19,13 +19,5 @@ public interface TodoStatus {
      * 被退回
      */
     byte BOUNCED = 3;
-    /**
-     * 未读
-     */
-    byte UNREAD = 4;
-    /**
-     * 反馈
-     */
-    byte FEEDBACK = 5;
 
 }

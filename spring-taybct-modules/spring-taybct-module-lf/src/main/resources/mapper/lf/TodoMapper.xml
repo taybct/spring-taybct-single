@@ -43,6 +43,7 @@
         <result property="nodeText" column="node_text" jdbcType="VARCHAR"/>
         <result property="icon" column="process_icon" jdbcType="VARCHAR"/>
         <result property="lastVersion" column="design_last_version" jdbcType="BIGINT"/>
+        <result property="processStatus" column="process_status" jdbcType="SMALLINT"/>
         <result property="status" column="lt_status" jdbcType="SMALLINT"/>
         <result property="type" column="lt_type" jdbcType="VARCHAR"/>
         <result property="todoStatus" column="lt_todo_status" jdbcType="SMALLINT"/>
@@ -65,6 +66,7 @@
         ln.text node_text,
         lp.icon process_icon,
         ld.last_version design_last_version,
+        lp.status process_status,
         lt.status lt_status,
         lt.type lt_type,
         lt.todo_status lt_todo_status,
@@ -93,6 +95,9 @@
             </if>
             <if test="params.processId != null">
                 and lt.process_id = #{params.processId}
+            </if>
+            <if test="params.processStatus != null">
+                and lp.status = #{params.processStatus}
             </if>
             <if test="params.releaseId != null">
                 and lp.release_id = #{params.releaseId}

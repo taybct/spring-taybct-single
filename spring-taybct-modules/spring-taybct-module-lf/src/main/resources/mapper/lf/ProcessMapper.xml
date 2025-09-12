@@ -49,6 +49,7 @@
         <result property="nodeText" column="node_text" jdbcType="VARCHAR"/>
         <result property="icon" column="process_icon" jdbcType="VARCHAR"/>
         <result property="lastVersion" column="design_last_version" jdbcType="BIGINT"/>
+        <result property="processStatus" column="process_status" jdbcType="BIGINT"/>
     </resultMap>
 
     <insert id="newProcess">
@@ -93,7 +94,8 @@
         lpp.node_id node_id,
         ln.text node_text,
         lp.icon process_icon,
-        ld.last_version design_last_version
+        ld.last_version design_last_version,
+        lp.status process_status
         from lf_process lp
         left join sys_user su on lp.create_user = su.id
         left join lf_design ld on lp.design_id = ld.id
@@ -119,9 +121,12 @@
             <if test="params.type != null">
                 and lp.type = #{params.type}
             </if>
-            <if test="params.doneStatus != null">
-                and exists (select 1 from lf_todo where process_id = lp.id and (done_status is null or done_status =
-                #{params.doneStatus}))
+            <if test="params.processStatus != null">
+                and lp.status = #{params.processStatus}
+            </if>
+            <if test="params.todoStatus != null">
+                and exists (select 1 from lf_todo where process_id = lp.id and (status is null or status =
+                #{params.todoStatus}))
             </if>
         </where>
     </sql>

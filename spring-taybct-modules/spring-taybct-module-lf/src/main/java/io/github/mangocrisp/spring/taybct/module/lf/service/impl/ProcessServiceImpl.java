@@ -179,14 +179,12 @@ public class ProcessServiceImpl extends BaseServiceImpl<ProcessMapper, Process>
             todoService.remove(Wrappers.<Todo>lambdaQuery()
                     .eq(Todo::getNodeId, nodes.getId())
                     .eq(Todo::getStatus, TodoListStatus.TODO)
-                    .eq(Todo::getTodoStatus, TodoStatus.TODO)
                     .eq(Todo::getUserId, loginUser.getUserId()));
 
             // 查询还有多少个待办，如果还有待办，说明还有其他用户没有处理完
             canNextStep = todoService.count(Wrappers.<Todo>lambdaQuery()
                     .eq(Todo::getNodeId, nodes.getId())
-                    .eq(Todo::getStatus, TodoListStatus.TODO)
-                    .eq(Todo::getTodoStatus, TodoStatus.TODO)) == 0;
+                    .eq(Todo::getStatus, TodoListStatus.TODO)) == 0;
 
         } else {
             // 如果不是会签节点，只要有一个人处理了就可以直接下一步了
@@ -194,8 +192,7 @@ public class ProcessServiceImpl extends BaseServiceImpl<ProcessMapper, Process>
             // 然后删除其他人对于这个节点的待办（因为当前用户已经处理完了）
             todoService.remove(Wrappers.<Todo>lambdaQuery()
                     .eq(Todo::getNodeId, nodes.getId())
-                    .eq(Todo::getStatus, TodoListStatus.TODO)
-                    .eq(Todo::getTodoStatus, TodoStatus.TODO));
+                    .eq(Todo::getStatus, TodoListStatus.TODO));
             canNextStep = true;
         }
 
@@ -259,8 +256,6 @@ public class ProcessServiceImpl extends BaseServiceImpl<ProcessMapper, Process>
         e.setUserId(loginUser.getUserId());
         // 设置当前用户处理已办
         e.setStatus(TodoListStatus.DONE);
-        // TODO 但是是未归档，归档状态需要在结束节点去做
-        e.setDoneStatus(DoneStatus.NOT_ARCHIVED);
         e.setProcessId(process.getId());
         e.setType(process.getType());
         e.setDesignId(process.getDesignId());
@@ -332,7 +327,7 @@ public class ProcessServiceImpl extends BaseServiceImpl<ProcessMapper, Process>
                                         e.setNodeId(nextNodes.getId());
                                         e.setUserId(u.getId());
                                         e.setStatus(TodoListStatus.TODO);
-                                        e.setTodoStatus(TodoStatus.TODO);
+                                        e.setTodoStatus(TodoStatus.TO_BE_READ);
                                         e.setProcessId(process.getId());
                                         e.setType(process.getType());
                                         e.setDesignId(process.getDesignId());
@@ -350,7 +345,7 @@ public class ProcessServiceImpl extends BaseServiceImpl<ProcessMapper, Process>
                                             e.setNodeId(nextNodes.getId());
                                             e.setRoleId(r.getId());
                                             e.setStatus(TodoListStatus.TODO);
-                                            e.setTodoStatus(TodoStatus.TODO);
+                                            e.setTodoStatus(TodoStatus.TO_BE_READ);
                                             e.setProcessId(process.getId());
                                             e.setType(process.getType());
                                             e.setDesignId(process.getDesignId());
@@ -363,7 +358,7 @@ public class ProcessServiceImpl extends BaseServiceImpl<ProcessMapper, Process>
                                             e.setNodeId(nextNodes.getId());
                                             e.setDeptId(d.getId());
                                             e.setStatus(TodoListStatus.TODO);
-                                            e.setTodoStatus(TodoStatus.TODO);
+                                            e.setTodoStatus(TodoStatus.TO_BE_READ);
                                             e.setProcessId(process.getId());
                                             e.setType(process.getType());
                                             e.setDesignId(process.getDesignId());
@@ -431,11 +426,10 @@ public class ProcessServiceImpl extends BaseServiceImpl<ProcessMapper, Process>
                         super.update(new Process()
                                 , Wrappers.<Process>lambdaUpdate().set(Process::getStatus, ProcessStatus.END)
                                         .eq(Process::getId, process.getId()));
-                        // 完成之后，把所有的待办都变成已办，且归档
+                        // 完成之后，把所有的待办都变成已办
                         todoService.update(new Todo(), Wrappers.<Todo>lambdaUpdate()
                                 .set(Todo::getStatus, TodoListStatus.DONE)
                                 .set(Todo::getTodoStatus, null)
-                                .set(Todo::getDoneStatus, DoneStatus.ARCHIVED)
                                 .eq(Todo::getProcessId, process.getId()));
                         // 添加一个历史记录
                         History h = historyService.save(null, nextNodes, nextNodes.getText());

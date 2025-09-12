@@ -90,9 +90,9 @@ public class Process extends DeleteLogicEntity<Long, Long> {
     private Object formData;
 
     /**
-     * 状态（1、流程进行中 0、流程已经完成 -1、流程中止）
+     * 状态（1、流程进行中 0、流程已经完成 2、流程已归档 -1、流程中止）
      */
-    @Schema(description = "状态（1、流程进行中 0、流程已经完成 -1、流程中止）")
+    @Schema(description = "状态（1、流程进行中 0、流程已经完成 2、流程已归档 -1、流程中止）")
     @TableFieldDefault("1")
     private Byte status;
     /**

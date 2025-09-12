@@ -3,6 +3,7 @@ package io.github.mangocrisp.spring.taybct.module.lf.vo;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
+import io.github.mangocrisp.spring.taybct.tool.core.annotation.TableFieldDefault;
 import io.github.mangocrisp.spring.taybct.tool.core.constant.DateConstants;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
@@ -102,6 +103,11 @@ public class ProcessListVO implements Serializable {
     @Schema(description = "最后版本号")
     @JsonSerialize(using = ToStringSerializer.class)
     private Long lastVersion;
+    /**
+     * 流程状态（1、流程进行中 0、流程已经完成 2、流程已归档 -1、流程中止）
+     */
+    @Schema(description = "流程状态（1、流程进行中 0、流程已经完成 2、流程已归档 -1、流程中止）")
+    private Byte processStatus;
 
     /**
      * 状态（1、待办、0、已办）
@@ -115,15 +121,15 @@ public class ProcessListVO implements Serializable {
     private String type;
 
     /**
-     * 待办状态（1、待处理 2、待阅 3、被退回  4、未读 5、反馈）
+     * 待办状态（1、待处理 2、待阅 3、驳回）
      */
-    @Schema(description = "待办状态（1、待处理 2、待阅 3、被退回 4、未读 5、反馈）")
+    @Schema(description = "待办状态（1、待处理 2、待阅 3、驳回）")
     private Byte todoStatus;
 
     /**
-     * 已办状态（1、未归档 2、已归档 3、待回复 4、未读 5、反馈）
+     * 已办状态（这个可以行写自动处理 bean 去自定义状态）
      */
-    @Schema(description = "已办状态（1、未归档 2、已归档 3、待回复 4、未读 5、反馈）")
+    @Schema(description = "已办状态（这个可以行写自动处理 bean 去自定义状态）")
     private Byte doneStatus;
 
     /**
