@@ -1,5 +1,7 @@
 package io.github.mangocrisp.spring.taybct.module.lf.pojo;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -27,6 +29,7 @@ public class PermissionsDTO implements Serializable {
     /**
      * 用户/部门/角色 id
      */
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long id;
 
     /**

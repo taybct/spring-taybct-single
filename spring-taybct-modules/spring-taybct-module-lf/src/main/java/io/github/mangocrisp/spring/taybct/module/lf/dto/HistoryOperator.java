@@ -39,5 +39,6 @@ public class HistoryOperator implements Serializable {
      * 岗位
      */
     @Schema(description = "岗位")
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long postId;
 }

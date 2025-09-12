@@ -42,9 +42,9 @@ public class PresentProcess implements Serializable {
     /**
      * 流程 id
      */
-    @JsonSerialize(using = ToStringSerializer.class)
     @NotNull(message = "[流程 id]不能为空")
     @Schema(description = "流程 id")
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long processId;
     /**
      * 当前节点 id

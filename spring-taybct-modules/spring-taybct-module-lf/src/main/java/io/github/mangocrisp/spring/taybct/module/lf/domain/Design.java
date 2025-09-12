@@ -43,7 +43,6 @@ public class Design extends DeleteLogicEntity<Long, Long> {
      */
     @Schema(description = "状态(0未发布，1已经发布)")
     @TableFieldDefault("0")
-    @JsonSerialize(using = ToStringSerializer.class)
     private Byte status;
 
     /**

@@ -38,9 +38,9 @@ public class Process extends DeleteLogicEntity<Long, Long> {
     /**
      * 流程图 id（可以知道当前流程是基于什么原始设计运行的）
      */
-    @JsonSerialize(using = ToStringSerializer.class)
     @NotNull(message = "[流程图 id（可以知道当前流程是基于什么原始设计运行的）]不能为空")
     @Schema(description = "流程图 id（可以知道当前流程是基于什么原始设计运行的）")
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long designId;
     /**
      * 流程标题
@@ -53,21 +53,21 @@ public class Process extends DeleteLogicEntity<Long, Long> {
     /**
      * 流程发起人 id
      */
-    @JsonSerialize(using = ToStringSerializer.class)
     @Schema(description = "流程发起人 id")
     @TableFieldDefault(handler = TableFieldDefaultLoginUserIdHandler.class)
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long userId;
     /**
      * 发起部门
      */
-    @JsonSerialize(using = ToStringSerializer.class)
     @Schema(description = "发起部门")
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long deptId;
     /**
      * 岗位
      */
-    @JsonSerialize(using = ToStringSerializer.class)
     @Schema(description = "岗位")
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long postId;
     /**
      * 流程实时数据(方便实时查看流程走向)
@@ -94,7 +94,6 @@ public class Process extends DeleteLogicEntity<Long, Long> {
      */
     @Schema(description = "状态（1、流程进行中 0、流程已经完成 -1、流程中止）")
     @TableFieldDefault("1")
-    @JsonSerialize(using = ToStringSerializer.class)
     private Byte status;
     /**
      * 备注

@@ -97,7 +97,6 @@ public class Todo implements Serializable {
      */
     @NotNull(message = "[状态（1、待办、0、已办）]不能为空")
     @Schema(description = "状态（1、待办、0、已办）")
-    @JsonSerialize(using = ToStringSerializer.class)
     private Byte status;
     /**
      * 流程类型（字典项 lf_process_type）
@@ -110,13 +109,11 @@ public class Todo implements Serializable {
      * 待办状态（1、待处理 2、待阅 3、被退回  4、未读 5、反馈）
      */
     @Schema(description = "待办状态（1、待处理 2、待阅 3、被退回 4、未读 5、反馈）")
-    @JsonSerialize(using = ToStringSerializer.class)
     private Byte todoStatus;
     /**
      * 已办状态（1、未归档 2、已归档 3、待回复 4、未读 5、反馈）
      */
     @Schema(description = "已办状态（1、未归档 2、已归档 3、待回复 4、未读 5、反馈）")
-    @JsonSerialize(using = ToStringSerializer.class)
     private Byte doneStatus;
     /**
      * 流程图 id（这里主要是用来查询分类）

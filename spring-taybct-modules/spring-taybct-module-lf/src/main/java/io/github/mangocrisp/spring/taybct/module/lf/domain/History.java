@@ -89,10 +89,10 @@ public class History implements Serializable {
     /**
      * 操作顺序
      */
-    @JsonSerialize(using = ToStringSerializer.class)
     @NotNull(message = "[操作顺序]不能为空")
     @Schema(description = "操作顺序")
     @TableFieldDefault(expression = "T(java.lang.System).currentTimeMillis()")
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long sort;
     /**
      * 当前节点操作的数据
@@ -111,8 +111,8 @@ public class History implements Serializable {
     /**
      * 操作人的岗位
      */
-    @JsonSerialize(using = ToStringSerializer.class)
     @Schema(description = "操作人的岗位")
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long postId;
     /**
      * 当前节点类型（字典项 lf_node_type）

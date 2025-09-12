@@ -50,8 +50,8 @@ public class Nodes implements Serializable {
     /**
      * 流程 id
      */
-    @JsonSerialize(using = ToStringSerializer.class)
     @Schema(description = "流程 id")
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long processId;
     /**
      * 节点的属性数据
