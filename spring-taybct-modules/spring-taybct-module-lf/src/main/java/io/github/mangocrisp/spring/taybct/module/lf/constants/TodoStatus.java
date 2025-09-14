@@ -16,8 +16,8 @@ public interface TodoStatus {
      */
     byte TO_BE_READ = 2;
     /**
-     * 被退回
+     * 驳回
      */
-    byte BOUNCED = 3;
+    byte REJECT = 3;
 
 }

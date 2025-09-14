@@ -62,39 +62,37 @@ public class ProcessUtil {
         try {
             if (properties != null) {
                 // 是否自动处理
-                boolean autoExecute = properties.getBooleanValue(ProcessConstant.AUTO_EXECUTE);
-                if (autoExecute) {
-                    // 连线如果有判断条件是否经过这条线
-                    String condition = properties.getString(ProcessConstant.CONDITION);
-                    if (condition != null) {
-                        if (condition.equals(ProcessCondition.topic.getKey())) {
-                            // 如果是根据 spring bean 来判断
-                            String topic = properties.getString(ProcessConstant.TOPIC);
-                            if (StringUtil.isBlank(topic)) {
-                                return false;
-                            }
-                            String[] topicList = topic.split(",");
-                            for (String t : topicList) {
-                                ProcessAutoDealHandler processAutoDealHandler = SpringUtil.getBean(t, ProcessAutoDealHandler.class);
-                                if (!processAutoDealHandler.apply(history, process, edges, nodes)) {
-                                    return false;
-                                }
-                            }
-                            return true;
-                        } else if (condition.equals(ProcessCondition.SpEL.getKey())) {
-                            // 如果是根据 SpEL 表达式来判断
-                            String expressionTemplate = properties.getString(ProcessConstant.EXPRESSION);
-                            String expression = StringUtils.replaceAll(expressionTemplate, ProcessConstant.HISTORY_ID_PLACEHOLDER, Convert.toStr(history.getId()));
-                            if (StringUtil.isBlank(expression)) {
-                                return false;
-                            }
-                            Map<String, Object> stringObjectMap = contextSupplier.get();
-                            if (CollectionUtil.isEmpty(stringObjectMap)) {
-                                return false;
-                            }
-                            Object eval = new SpELEngine().eval(expression, stringObjectMap, new LinkedHashSet<>());
-                            return (eval instanceof Boolean) && (Boolean) eval;
+                Boolean autoExecute = properties.getBooleanValue(ProcessConstant.AUTO_EXECUTE);
+                // 连线如果有判断条件是否经过这条线
+                String condition = properties.getString(ProcessConstant.CONDITION);
+                if (condition != null) {
+                    if (condition.equals(ProcessCondition.topic.getKey())) {
+                        // 如果是根据 spring bean 来判断
+                        String topic = properties.getString(ProcessConstant.TOPIC);
+                        if (StringUtil.isBlank(topic)) {
+                            return false;
                         }
+                        String[] topicList = topic.split(",");
+                        for (String t : topicList) {
+                            ProcessAutoDealHandler processAutoDealHandler = SpringUtil.getBean(t, ProcessAutoDealHandler.class);
+                            if (!processAutoDealHandler.apply(history, process, edges, nodes)) {
+                                return false;
+                            }
+                        }
+                        return true;
+                    } else if (condition.equals(ProcessCondition.SpEL.getKey())) {
+                        // 如果是根据 SpEL 表达式来判断
+                        String expressionTemplate = properties.getString(ProcessConstant.EXPRESSION);
+                        String expression = StringUtils.replaceAll(expressionTemplate, ProcessConstant.HISTORY_ID_PLACEHOLDER, Convert.toStr(history.getId()));
+                        if (StringUtil.isBlank(expression)) {
+                            return false;
+                        }
+                        Map<String, Object> stringObjectMap = contextSupplier.get();
+                        if (CollectionUtil.isEmpty(stringObjectMap)) {
+                            return false;
+                        }
+                        Object eval = new SpELEngine().eval(expression, stringObjectMap, new LinkedHashSet<>());
+                        return (eval instanceof Boolean) && (Boolean) eval;
                     }
                 }
             }

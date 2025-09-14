@@ -179,6 +179,7 @@ public class ProcessServiceImpl extends BaseServiceImpl<ProcessMapper, Process>
             todoService.remove(Wrappers.<Todo>lambdaQuery()
                     .eq(Todo::getNodeId, nodes.getId())
                     .eq(Todo::getStatus, TodoListStatus.TODO)
+                    .eq(Todo::getProcessId, nodes.getProcessId())
                     .eq(Todo::getUserId, loginUser.getUserId()));
 
             // 查询还有多少个待办，如果还有待办，说明还有其他用户没有处理完
@@ -192,7 +193,8 @@ public class ProcessServiceImpl extends BaseServiceImpl<ProcessMapper, Process>
             // 然后删除其他人对于这个节点的待办（因为当前用户已经处理完了）
             todoService.remove(Wrappers.<Todo>lambdaQuery()
                     .eq(Todo::getNodeId, nodes.getId())
-                    .eq(Todo::getStatus, TodoListStatus.TODO));
+                    .eq(Todo::getStatus, TodoListStatus.TODO)
+                    .eq(Todo::getProcessId, nodes.getProcessId()));
             canNextStep = true;
         }
 
@@ -429,7 +431,6 @@ public class ProcessServiceImpl extends BaseServiceImpl<ProcessMapper, Process>
                         // 完成之后，把所有的待办都变成已办
                         todoService.update(new Todo(), Wrappers.<Todo>lambdaUpdate()
                                 .set(Todo::getStatus, TodoListStatus.DONE)
-                                .set(Todo::getTodoStatus, null)
                                 .eq(Todo::getProcessId, process.getId()));
                         // 添加一个历史记录
                         History h = historyService.save(null, nextNodes, nextNodes.getText());

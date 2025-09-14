@@ -142,9 +142,10 @@
 
                 <if test="_databaseId == 'mysql' or _databaseId == 'postgresql'">
                     <include refid="userRequestListQuery"/>
-                    <if test="pageOrder != null">
+                    <!--<if test="pageOrder != null">
                         order by lp.update_time desc
-                    </if>
+                    </if>-->
+                    order by lp.update_time desc
                     limit #{size} offset #{offset}
                 </if>
 
@@ -153,18 +154,20 @@
                     SELECT rownum rn,offset_end.* FROM (
 
                     <include refid="userRequestListQuery"/>
-                    <if test="pageOrder != null">
+                    <!--<if test="pageOrder != null">
                         order by lp.update_time desc
-                    </if>
+                    </if>-->
+                    order by lp.update_time desc
                     ) offset_end WHERE rownum <![CDATA[<=]]> (#{offset}+#{size})
                     ) offset_start WHERE offset_start.rn <![CDATA[>]]> #{offset}
                 </if>
             </when>
             <otherwise>
                 <include refid="userRequestListQuery"/>
-                <if test="pageOrder != null">
+                <!--<if test="pageOrder != null">
                     order by lp.update_time desc
-                </if>
+                </if>-->
+                order by lp.update_time desc
             </otherwise>
         </choose>
     </select>

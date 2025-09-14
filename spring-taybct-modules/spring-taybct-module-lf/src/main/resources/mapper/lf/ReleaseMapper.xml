@@ -60,7 +60,7 @@
         <include refid="Base_Column_List"/>
         from lf_release
         where id = #{id,jdbcType=BIGINT}
-        <if test="_login_user_ != null">
+        <!--<if test="_login_user_ != null">
             and exists(select 1 from lf_release_permissions lrp where lrp.release_id = lf_release.id
             and (
             <choose>
@@ -72,7 +72,7 @@
                 </otherwise>
             </choose>
             or user_id is null))
-        </if>
+        </if>-->
     </select>
 
     <select id="page" resultMap="BaseResultMap">
@@ -93,10 +93,10 @@
         from lf_release
         left join lf_design on lf_design.id = lf_release.design_id
         <where>
-            <if test="_parameter.containsKey('_data_scope_') and _data_scope_ != null">
+            <!--<if test="_parameter.containsKey('_data_scope_') and _data_scope_ != null">
                 and exists(${_data_scope_})
-            </if>
-            <if test="_login_user_ != null">
+            </if>-->
+            <!--<if test="_login_user_ != null">
                 and exists(select 1 from lf_release_permissions lrp where lrp.release_id = lf_release.id
                 and (
                 <choose>
@@ -108,7 +108,7 @@
                     </otherwise>
                 </choose>
                 or user_id is null))
-            </if>
+            </if>-->
             <if test="dto.id != null">
                 and lf_release.id = #{dto.id}
             </if>
