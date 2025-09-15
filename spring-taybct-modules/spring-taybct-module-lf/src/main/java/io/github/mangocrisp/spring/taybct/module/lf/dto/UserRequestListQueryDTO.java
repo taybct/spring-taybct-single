@@ -60,15 +60,15 @@ public class UserRequestListQueryDTO implements Serializable {
     @Schema(description = "流程状态（1、流程进行中 0、流程已经完成 2、流程已归档 -1、流程中止）")
     private Byte processStatus;
     /**
-     * 已办状态（这个可以行写自动处理 bean 去自定义状态）
-     */
-    @Schema(description = "已办状态（这个可以行写自动处理 bean 去自定义状态）")
-    private Byte doneStatus;
-    /**
      * 流程类型（字典项 lf_process_type）
      */
     @Size(max = 100, message = "编码长度不能超过100")
     @Schema(description = "流程类型（字典项 lf_process_type）")
     @Length(max = 100, message = "编码长度不能超过100")
     private String type;
+    /**
+     * 是否是我提交的申请
+     */
+    @Schema(description = "是否是我提交的申请")
+    private boolean isMe = false;
 }
