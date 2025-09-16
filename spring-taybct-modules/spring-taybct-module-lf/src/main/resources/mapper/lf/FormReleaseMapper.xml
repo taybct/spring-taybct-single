@@ -85,10 +85,24 @@
                 and lf_form_release.form_id = #{dto.formId}
             </if>
             <if test="dto.name != null and dto.name != ''">
-                and lf_form_release.name like concat('%',#{dto.name},'%')
+                <choose>
+                    <when test="_db_type_db_ == 'sqlite'">
+                        and lf_form_release.name like '%' || #{dto.name} || '%'
+                    </when>
+                    <otherwise>
+                        and lf_form_release.name like concat(concat('%',#{dto.name}),'%')
+                    </otherwise>
+                </choose>
             </if>
             <if test="dto.description != null and dto.description != ''">
-                and lf_form_release.description like concat('%',#{dto.description},'%')
+                <choose>
+                    <when test="_db_type_db_ == 'sqlite'">
+                        and lf_form_release.description like '%' || #{dto.description} || '%'
+                    </when>
+                    <otherwise>
+                        and lf_form_release.description like concat(concat('%',#{dto.description}),'%')
+                    </otherwise>
+                </choose>
             </if>
             <if test="dto.status != null">
                 and lf_form.status = #{dto.status}

@@ -106,24 +106,31 @@
                 and lt.todo_type = #{params.todoType}
             </if>
             <if test="params.title != null">
-                and ld.name like concat(concat('%',#{params.title}),'%')
+                <choose>
+                    <when test="_db_type_db_ == 'sqlite'">
+                        and ld.name like '%' || #{params.title} || '%'
+                    </when>
+                    <otherwise>
+                        and ld.name like concat(concat('%',#{params.title}),'%')
+                    </otherwise>
+                </choose>
             </if>
             <if test="_login_user_ != null">
                 and (
                 lt.user_id =
                 <choose>
-                    <when test="_databaseId == 'postgresql'">CAST(#{_login_user_.uid} AS BIGINT)</when>
+                    <when test="_db_type_db_ == 'postgresql'">CAST(#{_login_user_.uid} AS BIGINT)</when>
                     <otherwise>#{_login_user_.uid}</otherwise>
                 </choose>
                 or exists(select 1 from sys_user_role where role_id = lt.role_id and user_id =
                 <choose>
-                    <when test="_databaseId == 'postgresql'">CAST(#{_login_user_.uid} AS BIGINT)</when>
+                    <when test="_db_type_db_ == 'postgresql'">CAST(#{_login_user_.uid} AS BIGINT)</when>
                     <otherwise>#{_login_user_.uid}</otherwise>
                 </choose>
                 )
                 or exists(select 1 from sys_user_dept where dept_id = lt.dept_id and user_id =
                 <choose>
-                    <when test="_databaseId == 'postgresql'">CAST(#{_login_user_.uid} AS BIGINT)</when>
+                    <when test="_db_type_db_ == 'postgresql'">CAST(#{_login_user_.uid} AS BIGINT)</when>
                     <otherwise>#{_login_user_.uid}</otherwise>
                 </choose>
                 )
@@ -142,7 +149,7 @@
         <choose>
             <when test="offset != null and size != null">
 
-                <if test="_databaseId == 'mysql' or _databaseId == 'postgresql'">
+                <if test="_db_type_db_ == 'mysql' or _db_type_db_ == 'sqlite' or _db_type_db_ == 'postgresql'">
                     <include refid="todoListQuery"/>
                     <!--<if test="pageOrder != null">
                         order by lt.create_time desc
@@ -151,7 +158,7 @@
                     limit #{size} offset #{offset}
                 </if>
 
-                <if test="_databaseId == 'oracle'">
+                <if test="_db_type_db_ == 'oracle'">
                     SELECT offset_start.* FROM (
                     SELECT rownum rn,offset_end.* FROM (
 
@@ -238,18 +245,18 @@
                 and (
                 lt.user_id =
                 <choose>
-                    <when test="_databaseId == 'postgresql'">CAST(#{_login_user_.uid} AS BIGINT)</when>
+                    <when test="_db_type_db_ == 'postgresql'">CAST(#{_login_user_.uid} AS BIGINT)</when>
                     <otherwise>#{_login_user_.uid}</otherwise>
                 </choose>
                 or exists(select 1 from sys_user_role where role_id = lt.role_id and user_id =
                 <choose>
-                    <when test="_databaseId == 'postgresql'">CAST(#{_login_user_.uid} AS BIGINT)</when>
+                    <when test="_db_type_db_ == 'postgresql'">CAST(#{_login_user_.uid} AS BIGINT)</when>
                     <otherwise>#{_login_user_.uid}</otherwise>
                 </choose>
                 )
                 or exists(select 1 from sys_user_dept where dept_id = lt.dept_id and user_id =
                 <choose>
-                    <when test="_databaseId == 'postgresql'">CAST(#{_login_user_.uid} AS BIGINT)</when>
+                    <when test="_db_type_db_ == 'postgresql'">CAST(#{_login_user_.uid} AS BIGINT)</when>
                     <otherwise>#{_login_user_.uid}</otherwise>
                 </choose>
                 )

@@ -107,7 +107,7 @@
             <if test="params.isMe and _login_user_ != null">
                 and lp.user_id =
                 <choose>
-                    <when test="_databaseId == 'postgresql'">CAST(#{_login_user_.uid} AS BIGINT)</when>
+                    <when test="_db_type_db_ == 'postgresql'">CAST(#{_login_user_.uid} AS BIGINT)</when>
                     <otherwise>#{_login_user_.uid}</otherwise>
                 </choose>
             </if>
@@ -115,7 +115,14 @@
                 and lp.design_id = #{params.designId}
             </if>
             <if test="params.title != null">
-                and ld.name like concat(concat('%',#{params.title}),'%')
+                <choose>
+                    <when test="_db_type_db_ == 'sqlite'">
+                        and ld.name like '%' || #{params.title} || '%'
+                    </when>
+                    <otherwise>
+                        and ld.name like concat(concat('%',#{params.title}),'%')
+                    </otherwise>
+                </choose>
             </if>
             <if test="params.releaseId != null">
                 and lp.release_id = #{params.releaseId}
@@ -138,7 +145,7 @@
         <choose>
             <when test="offset != null and size != null">
 
-                <if test="_databaseId == 'mysql' or _databaseId == 'postgresql'">
+                <if test="_db_type_db_ == 'mysql' or _db_type_db_ == 'sqlite' or _db_type_db_ == 'postgresql'">
                     <include refid="userRequestListQuery"/>
                     <!--<if test="pageOrder != null">
                         order by lp.update_time desc
@@ -147,7 +154,7 @@
                     limit #{size} offset #{offset}
                 </if>
 
-                <if test="_databaseId == 'oracle'">
+                <if test="_db_type_db_ == 'oracle'">
                     SELECT offset_start.* FROM (
                     SELECT rownum rn,offset_end.* FROM (
 

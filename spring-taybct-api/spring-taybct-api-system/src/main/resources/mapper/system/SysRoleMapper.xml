@@ -100,13 +100,13 @@
                     and (
                     sd.id = #{dto.deptId}
                     <if test="dto.includeChildren != null and dto.includeChildren == 1">
-                        <if test="_databaseId == 'postgresql'">
+                        <if test="_db_type_db_ == 'postgresql'">
                             or CAST(#{dto.deptId} as VARCHAR) = ANY(STRING_TO_ARRAY(sd.pid_all, ','))
                         </if>
-                        <if test="_databaseId == 'mysql'">
+                        <if test="_db_type_db_ == 'mysql'">
                             or FIND_IN_SET(#{dto.deptId},sd.pid_all)
                         </if>
-                        <if test="_databaseId == 'oracle'">
+                        <if test="_db_type_db_ == 'oracle'">
                             or INSTR(sd.pid_all, TO_CHAR(#{dto.deptId}))>0
                         </if>
                     </if>
@@ -125,7 +125,14 @@
             <if test="null != params[k]">
                 <choose>
                     <when test="k=='name' or k=='name'">
-                        sr.${k} like concat(concat('%',#{params.${k}}),'%')
+                        <choose>
+                            <when test="_db_type_db_ == 'sqlite'">
+                                sr.${k} like '%' || #{params.${k}} || '%'
+                            </when>
+                            <otherwise>
+                                sr.${k} like concat(concat('%',#{params.${k}}),'%')
+                            </otherwise>
+                        </choose>
                     </when>
                     <otherwise>
                         sr.${k} = #{params.${k}}
@@ -145,7 +152,7 @@
         <choose>
             <when test="offset != null and size != null">
 
-                <if test="_databaseId == 'mysql' or _databaseId == 'postgresql'">
+                <if test="_db_type_db_ == 'mysql' or _db_type_db_ == 'sqlite' or _db_type_db_ == 'postgresql'">
                     <include refid="base_query"/>
                     <if test="pageOrder != null">
                         order by ${pageOrder}
@@ -153,7 +160,7 @@
                     limit #{size} offset #{offset}
                 </if>
 
-                <if test="_databaseId == 'oracle'">
+                <if test="_db_type_db_ == 'oracle'">
                     SELECT offset_start.* FROM (
                     SELECT rownum rn,offset_end.* FROM (
 

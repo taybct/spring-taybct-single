@@ -40,7 +40,7 @@
             </if>-->
             <if test="userId != null">
                 <choose>
-                    <when test="_databaseId == 'postgresql'">
+                    <when test="_db_type_db_ == 'postgresql'">
                         and u.user_id = CAST(#{userId} AS BIGINT)
                     </when>
                     <otherwise>

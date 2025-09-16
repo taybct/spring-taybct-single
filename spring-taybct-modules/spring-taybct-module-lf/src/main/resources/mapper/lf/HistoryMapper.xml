@@ -53,23 +53,23 @@
         left join sys_dept sd on lh.dept_id = sd.id
         <where>
             <if test="params.processId != null">
-                and process_id = #{params.processId}
+                and lh.process_id = #{params.processId}
             </if>
             <if test="params.nodeType != null">
-                and node_type in
+                and lh.node_type in
                 <foreach collection="params.nodeType" item="type" open="(" separator="," close=")" index="index">
                     #{type}
                 </foreach>
             </if>
             <if test="params.relatedToMe != null and params.relatedToMe == 1 and _login_user_ != null">
-                and user_id =
+                and lh.user_id =
                 <choose>
-                    <when test="_databaseId == 'postgresql'">CAST(#{_login_user_.uid} AS BIGINT)</when>
+                    <when test="_db_type_db_ == 'postgresql'">CAST(#{_login_user_.uid} AS BIGINT)</when>
                     <otherwise>#{_login_user_.uid}</otherwise>
                 </choose>
             </if>
         </where>
-        order by sort
+        order by lh.sort
     </select>
 
 </mapper>

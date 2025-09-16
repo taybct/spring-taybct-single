@@ -117,10 +117,10 @@
         CASE
         WHEN
         ( SELECT id FROM sys_menu WHERE is_deleted = 0 and parent_id = sm.id
-        <if test="_databaseId == 'mysql' or _databaseId == 'postgresql'">
+        <if test="_db_type_db_ == 'mysql' or _db_type_db_ == 'sqlite' or _db_type_db_ == 'postgresql'">
             limit 1
         </if>
-        <if test="_databaseId == 'oracle'">
+        <if test="_db_type_db_ == 'oracle'">
             and ROWNUM <![CDATA[<]]> 2
         </if>
         ) IS NULL THEN
@@ -145,9 +145,16 @@
                 <if test="null != params[k]">
                     <choose>
                         <when test="k=='name'">
-                            sm.${k} like concat(concat('%',#{params.${k}}),'%')
+                            <choose>
+                                <when test="_db_type_db_ == 'sqlite'">
+                                    sm.${k} like '%' || #{params.${k}} || '%'
+                                </when>
+                                <otherwise>
+                                    sm.${k} like concat(concat('%',#{params.${k}}),'%')
+                                </otherwise>
+                            </choose>
                         </when>
-                        <when test="k=='parent_id' and _databaseId == 'postgresql'">
+                        <when test="k=='parent_id' and _db_type_db_ == 'postgresql'">
                             sm.${k} = CAST(#{params.${k}} AS BIGINT)
                         </when>
                         <otherwise>
@@ -206,13 +213,13 @@
         sm.sort sm_sort,
         sm.always_show sm_always_show,
         sm.route_path sm_route_path,
-        <if test="_databaseId == 'mysql'">
+        <if test="_db_type_db_ == 'mysql' or _db_type_db_ == 'sqlite'">
             IFNULL(sm.route_name,'') sm_name,
         </if>
-        <if test="_databaseId == 'postgresql'">
+        <if test="_db_type_db_ == 'postgresql'">
             coalesce(sm.route_name,'') sm_name,
         </if>
-        <if test="_databaseId == 'oracle'">
+        <if test="_db_type_db_ == 'oracle'">
             NVL(sm.route_name,'') sm_name,
         </if>
         sm.redirect sm_redirect,

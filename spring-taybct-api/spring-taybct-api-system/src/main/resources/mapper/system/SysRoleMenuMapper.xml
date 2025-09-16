@@ -106,7 +106,7 @@
             role_id = sr.id
             <if test="params.menuId != null">
                 <choose>
-                    <when test="_databaseId == 'postgresql'">
+                    <when test="_db_type_db_ == 'postgresql'">
                         and menu_id = CAST(#{params.menuId} AS BIGINT)
                     </when>
                     <otherwise>
@@ -118,7 +118,7 @@
         )
         <if test="params.roleId != null">
             <choose>
-                <when test="_databaseId == 'postgresql'">
+                <when test="_db_type_db_ == 'postgresql'">
                     and sr.id = CAST(#{params.roleId} AS BIGINT)
                 </when>
                 <otherwise>
@@ -128,7 +128,7 @@
         </if>
         <if test="params.checked != null">
             <choose>
-                <when test="_databaseId == 'postgresql'">
+                <when test="_db_type_db_ == 'postgresql'">
                     and srm.checked = CAST(#{params.checked} AS SMALLINT)
                 </when>
                 <otherwise>

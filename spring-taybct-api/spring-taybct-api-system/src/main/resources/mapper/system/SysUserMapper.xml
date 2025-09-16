@@ -106,7 +106,14 @@
                su.username                                su_username,
                su.password                                su_password,
                su.status                                  su_status,
-               concat(sr.tenant_id, concat(':', sr.code)) sr_code
+               <choose>
+                   <when test="_db_type_db_ == 'sqlite'">
+                       sr.tenant_id || ':' || sr.code  sr_code
+                   </when>
+                   <otherwise>
+                       concat(sr.tenant_id, concat(':', sr.code)) sr_code
+                   </otherwise>
+               </choose>
         from sys_user su
                  left join sys_user_role sur on su.id = sur.user_id
                  left join sys_role sr on sur.role_id = sr.id and sr.status = 1
@@ -131,7 +138,7 @@
         <where>
             su.is_deleted = 0
             <choose>
-                <when test="_databaseId == 'postgresql'">
+                <when test="_db_type_db_ == 'postgresql'">
                     and su.id = CAST(#{userId} AS BIGINT)
                 </when>
                 <otherwise>
@@ -176,13 +183,16 @@
                     and (
                     sd.id = #{dto.deptId}
                     <if test="dto.includeChildren != null and dto.includeChildren == 1">
-                        <if test="_databaseId == 'postgresql'">
+                        <if test="_db_type_db_ == 'postgresql'">
                             or CAST(#{dto.deptId} as VARCHAR) = ANY(STRING_TO_ARRAY(sd.pid_all, ','))
                         </if>
-                        <if test="_databaseId == 'mysql'">
+                        <if test="_db_type_db_ == 'mysql'">
                             or FIND_IN_SET(#{dto.deptId},sd.pid_all)
                         </if>
-                        <if test="_databaseId == 'oracle'">
+                        <if test="_db_type_db_ == 'sqlite'">
+                            or  ',' || sd.pid_all || ',' like '%,' || dto.deptId || ',%'
+                        </if>
+                        <if test="_db_type_db_ == 'oracle'">
                             or INSTR(sd.pid_all, TO_CHAR(#{dto.deptId}))>0
                         </if>
                     </if>
@@ -201,7 +211,14 @@
             <if test="null != params[k]">
                 <choose>
                     <when test="k=='username' or k=='real_name' or k=='nickname'">
-                        su.${k} like concat(concat('%',#{params.${k}}),'%')
+                        <choose>
+                            <when test="_db_type_db_ == 'sqlite'">
+                                su.${k} like '%' || #{params.${k}} || '%'
+                            </when>
+                            <otherwise>
+                                su.${k} like concat(concat('%',#{params.${k}}),'%')
+                            </otherwise>
+                        </choose>
                     </when>
                     <otherwise>
                         su.${k} = #{params.${k}}
@@ -221,7 +238,7 @@
         <choose>
             <when test="offset != null and size != null">
 
-                <if test="_databaseId == 'mysql' or _databaseId == 'postgresql'">
+                <if test="_db_type_db_ == 'mysql' or _db_type_db_ == 'sqlite' or _db_type_db_ == 'postgresql'">
                     <include refid="base_query"/>
                     <if test="pageOrder != null">
                         order by ${pageOrder}
@@ -229,7 +246,7 @@
                     limit #{size} offset #{offset}
                 </if>
 
-                <if test="_databaseId == 'oracle'">
+                <if test="_db_type_db_ == 'oracle'">
                     SELECT offset_start.* FROM (
                     SELECT rownum rn,offset_end.* FROM (
 

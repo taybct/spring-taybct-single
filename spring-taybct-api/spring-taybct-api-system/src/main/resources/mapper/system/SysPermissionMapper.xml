@@ -63,7 +63,14 @@
         id
         role_id,
         role.name role_name,
-        concat(role.tenant_id,concat(':',role.code)) role_code,
+        <choose>
+            <when test="_db_type_db_ == 'sqlite'">
+                role.tenant_id || ':' || role.code role_code,
+            </when>
+            <otherwise>
+                concat(role.tenant_id,concat(':',role.code)) role_code,
+            </otherwise>
+        </choose>
         role.sort role_sort,
         role.status role_status,
         role.create_user role_create_user,
@@ -109,7 +116,7 @@
         <where>
             <if test="params.menuId != null">
                 <choose>
-                    <when test="_databaseId == 'postgresql'">
+                    <when test="_db_type_db_ == 'postgresql'">
                         and sp.menu_id = CAST(#{params.menuId} AS BIGINT)
                     </when>
                     <otherwise>
@@ -119,7 +126,7 @@
             </if>
             <if test="params.groupId != null">
                 <choose>
-                    <when test="_databaseId == 'postgresql'">
+                    <when test="_db_type_db_ == 'postgresql'">
                         and sp.group_id = CAST(#{params.groupId} AS BIGINT)
                     </when>
                     <otherwise>
@@ -159,21 +166,21 @@
         role_id,
         permission_id
         FROM
-        sys_role_permission temp
+        sys_role_permission as temp
         WHERE
         EXISTS ( SELECT 1 FROM sys_permission WHERE id = temp.permission_id
-        <if test="_databaseId == 'mysql' or _databaseId == 'postgresql'">
+        <if test="_db_type_db_ == 'mysql' or _db_type_db_ == 'sqlite' or _db_type_db_ == 'postgresql'">
             limit 1
         </if>
-        <if test="_databaseId == 'oracle'">
+        <if test="_db_type_db_ == 'oracle'">
             and ROWNUM <![CDATA[<]]> 2
         </if>
         )
         and EXISTS (select 1 from sys_role where id = temp.role_id and is_deleted = 0 and status = 1
-        <if test="_databaseId == 'mysql' or _databaseId == 'postgresql'">
+        <if test="_db_type_db_ == 'mysql' or _db_type_db_ == 'sqlite' or _db_type_db_ == 'postgresql'">
             limit 1
         </if>
-        <if test="_databaseId == 'oracle'">
+        <if test="_db_type_db_ == 'oracle'">
             and ROWNUM <![CDATA[<]]> 2
         </if>
         )

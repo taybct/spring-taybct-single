@@ -17,21 +17,21 @@
     <delete id="clearDirtyData">
         delete
         FROM
-        sys_role_permission temp
+        sys_role_permission as temp
         WHERE
         not EXISTS ( SELECT 1 FROM sys_permission WHERE id = temp.permission_id
-        <if test="_databaseId == 'mysql' or _databaseId == 'postgresql'">
+        <if test="_db_type_db_ == 'mysql' or _db_type_db_ == 'sqlite' or _db_type_db_ == 'postgresql'">
             limit 1
         </if>
-        <if test="_databaseId == 'oracle'">
+        <if test="_db_type_db_ == 'oracle'">
             and ROWNUM <![CDATA[<]]> 2
         </if>
         )
         or not EXISTS (select 1 from sys_role where id = temp.role_id
-        <if test="_databaseId == 'mysql' or _databaseId == 'postgresql'">
+        <if test="_db_type_db_ == 'mysql' or _db_type_db_ == 'sqlite' or _db_type_db_ == 'postgresql'">
             limit 1
         </if>
-        <if test="_databaseId == 'oracle'">
+        <if test="_db_type_db_ == 'oracle'">
             and ROWNUM <![CDATA[<]]> 2
         </if>
         )
