@@ -49,10 +49,4 @@ public class UserPassCheckDTO implements Serializable {
     @Schema(description = "邮箱")
     private String email;
 
-    /**
-     * 警号
-     */
-    @Schema(description = "警号")
-    private String policeNum;
-
 }
