@@ -225,7 +225,14 @@
         sys_dept.name as name,
         'dept' as type,
         sys_dept.id as dept_id,
-        null::int8 as user_id,
+        <choose>
+            <when test="_db_type_db_ == 'postgresql'">
+                null::int8 as user_id,
+            </when>
+            <otherwise>
+                null as user_id,
+            </otherwise>
+        </choose>
         'd_' || sys_dept.pid as parent_id from sys_dept
         where sys_dept.is_deleted = 0 and (sys_dept.id in
         <foreach collection="deptIdSet" open="(" separator="," close=")" item="deptId">
@@ -253,7 +260,14 @@
             </foreach>
             and sys_user.id <![CDATA[<>]]> 1
             <if test="_login_user_ != null">
-                and sys_user.id <![CDATA[<>]]> #{_login_user_.uid}::int8
+                <choose>
+                    <when test="_db_type_db_ == 'postgresql'">
+                        and sys_user.id <![CDATA[<>]]> #{_login_user_.uid}::int8
+                    </when>
+                    <otherwise>
+                        and sys_user.id <![CDATA[<>]]> #{_login_user_.uid}
+                    </otherwise>
+                </choose>
             </if>
             order by sys_user.nickname
             ) u
