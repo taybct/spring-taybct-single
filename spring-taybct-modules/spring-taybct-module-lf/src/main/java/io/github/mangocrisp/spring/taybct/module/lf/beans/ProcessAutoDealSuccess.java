@@ -7,7 +7,6 @@ import io.github.mangocrisp.spring.taybct.module.lf.domain.*;
 import io.github.mangocrisp.spring.taybct.module.lf.domain.Process;
 import io.github.mangocrisp.spring.taybct.module.lf.enums.TodoType;
 import io.github.mangocrisp.spring.taybct.module.lf.service.ITodoService;
-import io.github.mangocrisp.spring.taybct.tool.core.bean.ISecurityUtil;
 import jakarta.annotation.Resource;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -15,16 +14,16 @@ import org.springframework.boot.autoconfigure.AutoConfiguration;
 
 /**
  * <pre>
- * 驳回 beans
+ * 成功后的 beans
  * </pre>
  *
  * @author XiJieYin
  * @since 2025/9/12 17:56
  */
-@AutoConfiguration("flowProcessAutoDealReject")
+@AutoConfiguration("flowProcessAutoDealSuccess")
 @Slf4j
 @RequiredArgsConstructor
-public class ProcessAutoDealReject implements ProcessAutoDealHandler {
+public class ProcessAutoDealSuccess implements ProcessAutoDealHandler {
 
     @Resource
     private ITodoService todoService;
@@ -40,7 +39,7 @@ public class ProcessAutoDealReject implements ProcessAutoDealHandler {
             // 设置当前用户处理已办
             e.setStatus(TodoListStatus.TODO);
             e.setType(process.getType());
-            e.setTodoStatus(TodoStatus.REJECT);
+            e.setTodoStatus(TodoStatus.TO_BE_READ);
             e.setTodoType(TodoType.Code.CC);
             e.setDesignId(process.getDesignId());
             todoService.save(e);

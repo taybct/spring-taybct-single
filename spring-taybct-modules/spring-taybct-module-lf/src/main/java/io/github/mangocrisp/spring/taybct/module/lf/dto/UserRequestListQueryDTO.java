@@ -70,5 +70,5 @@ public class UserRequestListQueryDTO implements Serializable {
      * 是否是我提交的申请
      */
     @Schema(description = "是否是我提交的申请")
-    private boolean isMe = false;
+    private Boolean isMe;
 }

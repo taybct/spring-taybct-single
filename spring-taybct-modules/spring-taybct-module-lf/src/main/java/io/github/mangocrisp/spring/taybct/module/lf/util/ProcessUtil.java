@@ -59,6 +59,9 @@ public class ProcessUtil {
             , Nodes nodes
             , JSONObject properties
             , Supplier<Map<String, Object>> contextSupplier) {
+        String beanName = null;
+        String SpELExpression = null;
+        Map<String, Object> stringObjectMap = null;
         try {
             if (properties != null) {
                 // 是否自动处理
@@ -74,6 +77,7 @@ public class ProcessUtil {
                         }
                         String[] topicList = topic.split(",");
                         for (String t : topicList) {
+                            beanName = t;
                             ProcessAutoDealHandler processAutoDealHandler = SpringUtil.getBean(t, ProcessAutoDealHandler.class);
                             if (!processAutoDealHandler.apply(history, process, edges, nodes)) {
                                 return false;
@@ -83,21 +87,26 @@ public class ProcessUtil {
                     } else if (condition.equals(ProcessCondition.SpEL.getKey())) {
                         // 如果是根据 SpEL 表达式来判断
                         String expressionTemplate = properties.getString(ProcessConstant.EXPRESSION);
-                        String expression = StringUtils.replaceAll(expressionTemplate, ProcessConstant.HISTORY_ID_PLACEHOLDER, Convert.toStr(history.getId()));
-                        if (StringUtil.isBlank(expression)) {
+                        SpELExpression = StringUtils.replaceAll(expressionTemplate, ProcessConstant.HISTORY_ID_PLACEHOLDER, Convert.toStr(history.getId()));
+                        if (StringUtil.isBlank(SpELExpression)) {
                             return false;
                         }
-                        Map<String, Object> stringObjectMap = contextSupplier.get();
+                        stringObjectMap = contextSupplier.get();
                         if (CollectionUtil.isEmpty(stringObjectMap)) {
                             return false;
                         }
-                        Object eval = new SpELEngine().eval(expression, stringObjectMap, new LinkedHashSet<>());
+                        Object eval = new SpELEngine().eval(SpELExpression, stringObjectMap, new LinkedHashSet<>());
                         return (eval instanceof Boolean) && (Boolean) eval;
                     }
                 }
             }
             return true;
         } catch (Exception e) {
+            log.error("beanName: {}", beanName);
+            log.error("SpELExpression: {}", SpELExpression);
+            if (stringObjectMap != null) {
+                log.error("stringObjectMap: \r\n {}", stringObjectMap);
+            }
             log.error("自动处理失败", e);
             return false;
         }
