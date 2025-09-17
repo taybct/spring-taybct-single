@@ -39,12 +39,14 @@ public class WhiteListGlobalFilter implements GlobalFilter, Ordered {
         ServerHttpResponse response = exchange.getResponse();
         PathMatcher pathMatcher = new AntPathMatcher();
         String requestUri = request.getURI().getPath();
+        String method = request.getMethod().name();
+        String restfulPath = method + ":" + requestUri;
         InetSocketAddress remoteAddress = request.getRemoteAddress();
         if (remoteAddress != null) {
             String hostAddress = remoteAddress.getAddress().getHostAddress();
             for (SecureProp.UriIP uriIP : secureProp.getWhiteList().getUriIpSet()) {
                 String path = uriIP.getUri().getPath();
-                if (pathMatcher.match(path, requestUri)){
+                if (pathMatcher.match(path, restfulPath)){
                     // 如果配置上的 url 包含的 ip 是需要被限制的 ip 如果和请求的 ip 匹配上了就要限制访问
                     if (uriIP.getIpSet().stream().noneMatch(ip -> isIpMatch(ip, hostAddress))){
                         // 地址不在白名单里面，就直接拦截掉
