@@ -53,6 +53,7 @@
         <module>spring-taybct-module-system</module>
         <module>spring-taybct-module-scheduling</module>
         <module>spring-taybct-module-lf</module>
+        <module>spring-taybct-module-online-doc</module>
     </modules>
 
     <properties>

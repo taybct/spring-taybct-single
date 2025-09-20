@@ -1,5 +1,8 @@
 package io.github.mangocrisp.spring.taybct.api.system.vo;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.impl.StringCollectionSerializer;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import io.github.mangocrisp.spring.taybct.api.system.domain.SysUser;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
@@ -28,6 +31,12 @@ public class UserInfoVO extends SysUser {
      */
     @Schema(description = "拥有的角色列表")
     private List<String> roles;
+    /**
+     * 部门id集合
+     */
+    @Schema(description = "部门id集合")
+    @JsonSerialize(using = StringCollectionSerializer.class)
+    private List<Long> deptIds;
 
     /**
      * 要求修改密码的时间间隔(单位：月)

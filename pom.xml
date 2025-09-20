@@ -100,6 +100,8 @@
         <jdk18on.version>1.77</jdk18on.version>
         <!--junit 测试-->
         <junit.version>4.13.2</junit.version>
+        <!--poi 导出依赖-->
+        <jxls-core.version>1.0.3</jxls-core.version>
         <!--httpclient5-->
         <httpclient5.version>5.2.3</httpclient5.version>
         <!--java 工具类库-->

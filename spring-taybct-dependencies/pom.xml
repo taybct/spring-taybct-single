@@ -105,6 +105,12 @@
                 <artifactId>spring-taybct-module-scheduling</artifactId>
                 <version>${project.version}</version>
             </dependency>
+            <!--任务调度模块-->
+            <dependency>
+                <groupId>io.github.mangocrisp</groupId>
+                <artifactId>spring-taybct-module-online-doc</artifactId>
+                <version>${project.version}</version>
+            </dependency>
             <!--流程引擎-->
             <dependency>
                 <groupId>io.github.mangocrisp</groupId>

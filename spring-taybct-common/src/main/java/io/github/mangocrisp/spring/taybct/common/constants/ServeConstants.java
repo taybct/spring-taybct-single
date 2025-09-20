@@ -27,6 +27,10 @@ public interface ServeConstants {
      */
     String SYSTEM = BASE_PREFIX + "system";
     /**
+     * 在线文档模块
+     */
+    String ONLINE_DOC = BASE_PREFIX + "online-doc";
+    /**
      * 任务调度模块
      */
     String SCHEDULING = BASE_PREFIX + "scheduling";
@@ -81,6 +85,10 @@ public interface ServeConstants {
      */
     String CONTEXT_PATH_SYSTEM = "${" + SERVE + "." + ServeConstants.SYSTEM + ".context-path}";
     /**
+     * —— 在线文档
+     */
+    String CONTEXT_PATH_ONLINE_DOC = "${" + SERVE + "." + ServeConstants.ONLINE_DOC + ".context-path}";
+    /**
      * —— 任务调度
      */
     String CONTEXT_PATH_SCHEDULING = "${" + SERVE + "." + ServeConstants.SCHEDULING + ".context-path}";
@@ -105,6 +113,10 @@ public interface ServeConstants {
      * 系统管理
      */
     String SERVE_ID_SYSTEM = "${" + SERVE + "." + ServeConstants.SYSTEM + ".service-id}";
+    /**
+     * 在线文档
+     */
+    String SERVE_ID_ONLINE_DOC = "${" + SERVE + "." + ServeConstants.ONLINE_DOC + ".service-id}";
     /**
      * 鉴权
      */

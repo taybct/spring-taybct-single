@@ -101,6 +101,10 @@
         <result column="sr_code" jdbcType="VARCHAR"/>
     </resultMap>
 
+    <resultMap id="Oauth2UserDeptIdsResultMap" type="java.lang.String">
+        <result column="sud_dept_id" jdbcType="VARCHAR"/>
+    </resultMap>
+
     <select id="getUserByFiled" resultMap="Oauth2UserResultMap">
         select su.id                                      su_id,
                su.username                                su_username,
@@ -126,15 +130,18 @@
     <resultMap id="UserInfoVOResult" type="io.github.mangocrisp.spring.taybct.api.system.vo.UserInfoVO"
                extends="BaseResultMap">
         <collection property="roles" javaType="java.util.List" resultMap="Oauth2UserRolesResultMap"/>
+        <collection property="deptIds" javaType="java.util.List" resultMap="Oauth2UserDeptIdsResultMap"/>
     </resultMap>
 
     <select id="getUserInfoByUserId" resultMap="UserInfoVOResult">
         select
         <include refid="user_info_column_list"/>
         , sr.code sr_code
+        , sud.dept_id sud_dept_id
         from sys_user su
-        left join sys_user_role sur on su.id = sur.user_id
-        left join sys_role sr on sur.role_id = sr.id
+        left join sys_user_role sur on sur.user_id = su.id
+        left join sys_role sr on sr.id = sur.role_id
+        left join sys_user_dept sud on sud.user_id = su.id
         <where>
             su.is_deleted = 0
             <choose>
