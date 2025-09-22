@@ -88,7 +88,14 @@ public class OnlineDocControllerRegister implements LongKeyConvertibleController
             , @RequestParam(required = false, defaultValue = "false") Boolean d
             , @RequestParam(required = false) String dName) {
         InputStream inputStream = null;
-        fileName = ObjectUtil.getValue(fileName, path.substring(path.lastIndexOf("/")));
+        if (fileName == null){
+            int i = path.lastIndexOf("/");
+            if (i != -1){
+                fileName = path.substring(i + 1);
+            } else {
+                fileName = path;
+            }
+        }
         try {
             if (d) {
                 // 是否需要下载，下载是会返回一个流文件，会直接下载文件
