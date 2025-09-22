@@ -331,6 +331,16 @@
             <if test="_login_user_dept_ != null || _login_user_ != null">
                 and (
                     (t_online_doc.share = 0
+                    <if test="_login_user_ != null">
+                        <choose>
+                            <when test="_db_type_db_ == 'postgresql'">
+                                AND t_online_doc.create_user = #{_login_user_.uid}::int8
+                            </when>
+                            <otherwise>
+                                AND t_online_doc.create_user = #{_login_user_.uid}
+                            </otherwise>
+                        </choose>
+                    </if>
                     <if test="_login_user_dept_ != null">
                         and (exists(
                         select 1 from sys_dept where sys_dept.id = t_online_doc.dept_id
@@ -366,6 +376,16 @@
                         )
                         or t_online_doc.dept_id = #{_login_user_dept_.id}
                     </if>
+                    <if test="_login_user_ != null">
+                        <choose>
+                            <when test="_db_type_db_ == 'postgresql'">
+                                or t_online_doc.create_user = #{_login_user_.uid}::int8
+                            </when>
+                            <otherwise>
+                                or t_online_doc.create_user = #{_login_user_.uid}
+                            </otherwise>
+                        </choose>
+                    </if>
                     )
                 )
             </if>
@@ -389,13 +409,13 @@
             <choose>
                 <when test="mo.page.offset != null and mo.page.pageSize != null">
 
-                    <if test="_databaseId == 'mysql' or _databaseId == 'postgresql'">
+                    <if test="_db_type_db_ == 'mysql' or _db_type_db_ == 'sqlite' or _db_type_db_ == 'postgresql'">
                         <include refid="Base_Query"/>
                         <include refid="Base_Page_Order_By"/>
                         limit #{mo.page.pageSize} offset #{mo.page.offset}
                     </if>
 
-                    <if test="_databaseId == 'oracle'">
+                    <if test="_db_type_db_ == 'oracle'">
                         SELECT offset_start.* FROM (
                         SELECT rownum rn,offset_end.* FROM (
 
