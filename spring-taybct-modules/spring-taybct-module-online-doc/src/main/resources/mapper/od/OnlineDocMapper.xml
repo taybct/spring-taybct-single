@@ -197,8 +197,16 @@
         <include refid="JSON_Column"/>
         <if test="_login_user_ != null">
             ,(select t_online_doc_permit.is_admin from t_online_doc_permit where
-            t_online_doc_permit.doc_id = t_online_doc.id and t_online_doc_permit.user_id =
-            #{_login_user_.uid}::int8 limit 1) as t_online_doc_vo_is_admin
+            t_online_doc_permit.doc_id = t_online_doc.id
+            <choose>
+                <when test="_db_type_db_ == 'postgresql'">
+                    and t_online_doc_permit.user_id = #{_login_user_.uid}::int8 limit 1
+                </when>
+                <otherwise>
+                    and t_online_doc_permit.user_id = #{_login_user_.uid} limit 1
+                </otherwise>
+            </choose>
+            ) as t_online_doc_vo_is_admin
         </if>
         from
         <include refid="Base_Table_Name"/>
@@ -230,8 +238,16 @@
         <include refid="Base_Column_List"/>
         <if test="_login_user_ != null">
             ,(select t_online_doc_permit.is_admin from t_online_doc_permit where
-            t_online_doc_permit.doc_id = t_online_doc.id and t_online_doc_permit.user_id =
-            #{_login_user_.uid}::int8 limit 1) as t_online_doc_vo_is_admin
+            t_online_doc_permit.doc_id = t_online_doc.id
+            <choose>
+                <when test="_db_type_db_ == 'postgresql'">
+                    and t_online_doc_permit.user_id = #{_login_user_.uid}::int8 limit 1
+                </when>
+                <otherwise>
+                    and t_online_doc_permit.user_id = #{_login_user_.uid} limit 1
+                </otherwise>
+            </choose>
+            ) as t_online_doc_vo_is_admin
         </if>
         from
         <include refid="Base_Table_Name"/>
@@ -345,7 +361,14 @@
                 <if test="_login_user_dept_ != null">
                     and (exists(
                     select 1 from sys_dept where sys_dept.id = t_online_doc.dept_id
-                    and position(#{_login_user_dept_.id}::varchar in sys_dept.pid_all) &gt; 0
+                    <choose>
+                        <when test="_db_type_db_ == 'postgresql'">
+                            and position(#{_login_user_dept_.id}::varchar in sys_dept.pid_all) &gt; 0
+                        </when>
+                        <otherwise>
+                            and position(#{_login_user_dept_.id} in sys_dept.pid_all) &gt; 0
+                        </otherwise>
+                    </choose>
                     ) or t_online_doc.dept_id = #{_login_user_dept_.id})
                 </if>
                 )
@@ -359,21 +382,42 @@
                     or
                     exists(
                     select 1 from sys_dept where sys_dept.id = t_online_doc_permit.dept_id
-                    and position(#{_login_user_dept_.id}::varchar in sys_dept.pid_all) &gt; 0
+                    <choose>
+                        <when test="_db_type_db_ == 'postgresql'">
+                            and position(#{_login_user_dept_.id}::varchar in sys_dept.pid_all) &gt; 0
+                        </when>
+                        <otherwise>
+                            and position(#{_login_user_dept_.id} in sys_dept.pid_all) &gt; 0
+                        </otherwise>
+                    </choose>
                     )
                 </if>
                 <if test="_login_user_dept_ != null and _login_user_dept_ != null">
                     OR
                 </if>
                 <if test="_login_user_ != null">
-                    t_online_doc_permit.user_id = #{_login_user_.uid}::int8
+                    <choose>
+                        <when test="_db_type_db_ == 'postgresql'">
+                            t_online_doc_permit.user_id = #{_login_user_.uid}::int8
+                        </when>
+                        <otherwise>
+                            t_online_doc_permit.user_id = #{_login_user_.uid}
+                        </otherwise>
+                    </choose>
                 </if>
                 )
                 )
                 <if test="_login_user_dept_ != null">
                     or exists(
                     select 1 from sys_dept where sys_dept.id = t_online_doc.dept_id
-                    and position(#{_login_user_dept_.id}::varchar in sys_dept.pid_all) &gt; 0
+                    <choose>
+                        <when test="_db_type_db_ == 'postgresql'">
+                            and position(#{_login_user_dept_.id}::varchar in sys_dept.pid_all) &gt; 0
+                        </when>
+                        <otherwise>
+                            and position(#{_login_user_dept_.id} in sys_dept.pid_all) &gt; 0
+                        </otherwise>
+                    </choose>
                     )
                     or t_online_doc.dept_id = #{_login_user_dept_.id}
                 </if>
