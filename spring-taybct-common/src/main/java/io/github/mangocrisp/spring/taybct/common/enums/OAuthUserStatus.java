@@ -1,9 +1,5 @@
 package io.github.mangocrisp.spring.taybct.common.enums;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-
-
 /**
  * 用户状态
  *

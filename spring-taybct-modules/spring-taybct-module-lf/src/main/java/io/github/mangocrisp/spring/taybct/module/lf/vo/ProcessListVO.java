@@ -3,7 +3,6 @@ package io.github.mangocrisp.spring.taybct.module.lf.vo;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
-import io.github.mangocrisp.spring.taybct.tool.core.annotation.TableFieldDefault;
 import io.github.mangocrisp.spring.taybct.tool.core.constant.DateConstants;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;

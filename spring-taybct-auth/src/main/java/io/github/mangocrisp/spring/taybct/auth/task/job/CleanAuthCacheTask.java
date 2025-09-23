@@ -2,8 +2,8 @@ package io.github.mangocrisp.spring.taybct.auth.task.job;
 
 import com.alibaba.fastjson2.JSONObject;
 import io.github.mangocrisp.spring.taybct.common.message.cheduledlog.ScheduledLogDTO;
-import io.github.mangocrisp.spring.taybct.tool.core.message.IMessageSendService;
 import io.github.mangocrisp.spring.taybct.tool.core.annotation.Scheduler;
+import io.github.mangocrisp.spring.taybct.tool.core.message.IMessageSendService;
 import io.github.mangocrisp.spring.taybct.tool.scheduling.job.RedisScheduledTaskJob;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;

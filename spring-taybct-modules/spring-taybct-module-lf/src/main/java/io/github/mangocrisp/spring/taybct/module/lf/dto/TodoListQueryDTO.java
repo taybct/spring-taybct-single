@@ -2,8 +2,6 @@ package io.github.mangocrisp.spring.taybct.module.lf.dto;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
-import io.github.mangocrisp.spring.taybct.module.lf.enums.TodoType;
-import io.github.mangocrisp.spring.taybct.tool.core.annotation.TableFieldDefault;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;

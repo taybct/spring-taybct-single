@@ -11,9 +11,7 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
 import java.net.URI;
 import java.util.Arrays;
 import java.util.LinkedHashSet;
-import java.util.Map;
 import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * 安全参数配置

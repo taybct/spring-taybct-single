@@ -1,10 +1,9 @@
 <script setup lang="ts">
-import { ref } from "vue";
-import { formRules } from "./utils/rule";
-import type { EditFormDTO } from "./utils/types";
-import { cloneDeep } from "@pureadmin/utils";
+    import {ref} from "vue";
+    import {cloneDeep} from "@pureadmin/utils";
+    import type { EditFormDTO } from "./utils/types";
 
-const props = withDefaults(defineProps<EditFormDTO>(), {
+    const props = withDefaults(defineProps<EditFormDTO>(), {
   isAddForm: true,
   formInline: () => ({
 <#list tableClass.baseBlobFields as field>

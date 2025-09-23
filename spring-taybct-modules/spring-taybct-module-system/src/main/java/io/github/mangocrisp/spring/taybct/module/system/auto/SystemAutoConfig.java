@@ -1,7 +1,6 @@
 package io.github.mangocrisp.spring.taybct.module.system.auto;
 
 import cn.hutool.core.util.ObjectUtil;
-import io.github.mangocrisp.spring.taybct.api.system.mapper.SysUserMapper;
 import io.github.mangocrisp.spring.taybct.common.constants.CacheConstants;
 import io.github.mangocrisp.spring.taybct.module.system.config.IForceAllClientUserByRole;
 import io.github.mangocrisp.spring.taybct.module.system.config.ILoginCacheClear;

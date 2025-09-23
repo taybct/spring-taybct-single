@@ -9,7 +9,6 @@ import io.github.mangocrisp.spring.taybct.api.system.vo.SysDeptTreeVO;
 import io.github.mangocrisp.spring.taybct.tool.core.bean.service.IBaseService;
 import io.github.mangocrisp.spring.taybct.tool.core.request.SqlQueryParams;
 
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 

@@ -13,7 +13,6 @@ import io.github.mangocrisp.spring.taybct.tool.core.bean.UniqueDeleteLogic;
 import io.github.mangocrisp.spring.taybct.tool.core.bean.validated.InsertGroup;
 import io.github.mangocrisp.spring.taybct.tool.core.bean.validated.UpdateGroup;
 import io.github.mangocrisp.spring.taybct.tool.core.constant.DateConstants;
-import io.github.mangocrisp.spring.taybct.tool.core.util.sm.SM4Coder;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;

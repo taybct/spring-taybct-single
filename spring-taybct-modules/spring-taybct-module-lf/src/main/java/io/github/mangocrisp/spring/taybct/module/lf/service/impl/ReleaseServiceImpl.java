@@ -1,8 +1,5 @@
 package io.github.mangocrisp.spring.taybct.module.lf.service.impl;
 
-import cn.hutool.core.bean.BeanUtil;
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.IdWorker;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
@@ -15,7 +12,6 @@ import io.github.mangocrisp.spring.taybct.module.lf.mapper.DesignMapper;
 import io.github.mangocrisp.spring.taybct.module.lf.mapper.ReleaseMapper;
 import io.github.mangocrisp.spring.taybct.module.lf.mapper.ReleasePermissionsMapper;
 import io.github.mangocrisp.spring.taybct.module.lf.service.IDesignPermissionsService;
-import io.github.mangocrisp.spring.taybct.module.lf.service.IDesignService;
 import io.github.mangocrisp.spring.taybct.module.lf.service.IReleaseService;
 import io.github.mangocrisp.spring.taybct.tool.core.bean.service.BaseServiceImpl;
 import io.github.mangocrisp.spring.taybct.tool.core.exception.def.BaseException;

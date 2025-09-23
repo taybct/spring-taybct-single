@@ -2,11 +2,11 @@ package io.github.mangocrisp.spring.taybct.module.od.dto.update;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
+import io.github.mangocrisp.spring.taybct.module.od.domain.OnlineDoc;
+import io.github.mangocrisp.spring.taybct.module.od.domain.OnlineDocPermit;
 import io.github.mangocrisp.spring.taybct.tool.core.bean.ModelConvertible;
 import io.github.mangocrisp.spring.taybct.tool.core.exception.def.BaseException;
 import io.github.mangocrisp.spring.taybct.tool.core.util.BeanUtil;
-import io.github.mangocrisp.spring.taybct.module.od.domain.OnlineDoc;
-import io.github.mangocrisp.spring.taybct.module.od.domain.OnlineDocPermit;
 import io.swagger.v3.oas.annotations.Hidden;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotNull;

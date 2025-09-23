@@ -1,15 +1,14 @@
 <script lang="tsx" setup>
-import { onMounted, reactive, ref, unref } from 'vue'
-import { ElCheckbox } from 'element-plus'
-import { useState, useToggle } from '@gx-web/tool'
+    import {onMounted, reactive, ref, unref} from 'vue'
+    import {ElCheckbox} from 'element-plus'
+    import {useState, useToggle} from '@gx-web/tool'
 
-import type { FunctionalComponent } from 'vue'
+    import {required} from '@base-lib/utils/formRules'
+    import {SelectionExportExcelType} from '@/types/global'
+    import type { FunctionalComponent } from 'vue'
 import type { CheckboxValueType, Column, FormInstance, FormRules } from 'element-plus'
 
-import { required } from '@base-lib/utils/formRules'
-import { SelectionExportExcelType } from '@/types/global'
-
-defineOptions({
+    defineOptions({
   name: 'SelectionExport'
 })
 

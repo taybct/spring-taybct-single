@@ -1,10 +1,10 @@
 package io.github.mangocrisp.spring.taybct.module.od.dto.query.body;
 
+import io.github.mangocrisp.spring.taybct.module.od.domain.OnlineDoc;
+import io.github.mangocrisp.spring.taybct.module.od.dto.query.dto.OnlineDocQueryDTO;
 import io.github.mangocrisp.spring.taybct.tool.core.bean.ModelConvertible;
 import io.github.mangocrisp.spring.taybct.tool.core.exception.def.BaseException;
 import io.github.mangocrisp.spring.taybct.tool.core.util.BeanUtil;
-import io.github.mangocrisp.spring.taybct.module.od.domain.OnlineDoc;
-import io.github.mangocrisp.spring.taybct.module.od.dto.query.dto.OnlineDocQueryDTO;
 import io.swagger.v3.oas.annotations.Hidden;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;

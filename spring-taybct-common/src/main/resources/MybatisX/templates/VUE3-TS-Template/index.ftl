@@ -1,14 +1,19 @@
 <script setup lang="ts">
-import { defineAsyncComponent, onMounted, ref, watch } from 'vue'
-import usePageTable from '@base-lib/hooks/web/usePageTable'
-import { useCompRef, useToggle } from '@gx-web/tool'
-import useForm from '@base-lib/hooks/web/useForm'
-import useTableSelection from '@base-lib/hooks/web/useTableSelection'
-import { Select, Tag } from '@base-lib/components/Status'
-import { downloadByData } from '@/utils/download'
-import ${tableClass.shortClassName}Api from '@/api/${domain.fileName?uncap_first}/${domain.fileName?uncap_first}'
+    import {defineAsyncComponent, ref, watch} from 'vue'
+    import usePageTable from '@base-lib/hooks/web/usePageTable'
+    import useForm from '@base-lib/hooks/web/useForm'
+    import useTableSelection from '@base-lib/hooks/web/useTableSelection'
+    import {downloadByData} from '@/utils/download'
+    import ${tableClass
 
-defineOptions({
+    .shortClassName
+    }
+
+    Api
+    from
+    '@/api/'
+
+    defineOptions({
   name: '${tableClass.shortClassName}List'
 })
 

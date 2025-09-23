@@ -9,7 +9,6 @@ import io.github.mangocrisp.spring.taybct.common.constants.CacheConstants;
 import io.github.mangocrisp.spring.taybct.module.system.service.ISysParamsService;
 import io.github.mangocrisp.spring.taybct.tool.core.annotation.CacheTimeOut;
 import io.github.mangocrisp.spring.taybct.tool.core.bean.service.BaseServiceImpl;
-import io.github.mangocrisp.spring.taybct.tool.core.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.util.Assert;

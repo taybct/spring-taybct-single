@@ -9,7 +9,6 @@ import io.github.mangocrisp.spring.taybct.tool.core.annotation.TableFieldDefault
 import io.github.mangocrisp.spring.taybct.tool.core.annotation.TableFieldJSON;
 import io.github.mangocrisp.spring.taybct.tool.core.bean.DeleteLogicEntity;
 import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 import org.hibernate.validator.constraints.Length;

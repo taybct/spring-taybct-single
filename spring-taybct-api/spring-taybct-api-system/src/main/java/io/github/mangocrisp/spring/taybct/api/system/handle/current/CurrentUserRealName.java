@@ -7,7 +7,6 @@ import io.github.mangocrisp.spring.taybct.tool.core.bean.ILoginUser;
 import io.github.mangocrisp.spring.taybct.tool.core.bean.ISecurityUtil;
 import io.github.mangocrisp.spring.taybct.tool.core.config.TableFieldDefaultHandler;
 import lombok.RequiredArgsConstructor;
-import org.springframework.lang.Nullable;
 
 import java.util.Optional;
 

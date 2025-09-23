@@ -2,7 +2,6 @@ package io.github.mangocrisp.spring.taybct.api.system.vo;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.impl.StringCollectionSerializer;
-import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import io.github.mangocrisp.spring.taybct.api.system.domain.SysUser;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;

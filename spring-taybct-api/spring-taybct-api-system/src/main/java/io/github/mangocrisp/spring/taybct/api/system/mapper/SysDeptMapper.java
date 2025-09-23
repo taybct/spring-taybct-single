@@ -7,10 +7,8 @@ import io.github.mangocrisp.spring.taybct.api.system.dto.SysDeptQueryDTO;
 import io.github.mangocrisp.spring.taybct.api.system.vo.DeptUserTreeVO;
 import io.github.mangocrisp.spring.taybct.api.system.vo.SysDeptTreeVO;
 import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
 
 import java.io.Serializable;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 

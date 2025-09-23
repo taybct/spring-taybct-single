@@ -7,7 +7,6 @@ import io.github.mangocrisp.spring.taybct.admin.file.domain.SysFile;
 import io.github.mangocrisp.spring.taybct.tool.core.bean.ModelConvertible;
 import io.github.mangocrisp.spring.taybct.tool.core.bean.UpdateModel;
 import io.github.mangocrisp.spring.taybct.tool.core.mybatis.support.SqlPageParams;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Map;

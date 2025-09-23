@@ -1,8 +1,6 @@
 package io.github.mangocrisp.spring.taybct.api.system.handle.current;
 
 import io.github.mangocrisp.spring.taybct.api.system.domain.SysDept;
-import io.github.mangocrisp.spring.taybct.tool.core.bean.ILoginUser;
-import io.github.mangocrisp.spring.taybct.tool.core.bean.ISecurityUtil;
 import io.github.mangocrisp.spring.taybct.tool.core.mybatis.handle.MyBatisExtraParamsHandle;
 import io.github.mangocrisp.spring.taybct.tool.core.util.ObjectUtil;
 import lombok.RequiredArgsConstructor;
@@ -11,8 +9,6 @@ import org.apache.ibatis.mapping.MappedStatement;
 
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicBoolean;
-import java.util.concurrent.locks.ReentrantLock;
-import java.util.function.Function;
 import java.util.function.Supplier;
 
 /**

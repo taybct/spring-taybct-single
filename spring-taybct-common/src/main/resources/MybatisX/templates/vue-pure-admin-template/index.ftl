@@ -1,20 +1,15 @@
 <script setup lang="ts">
-import { use${tableClass.shortClassName} } from "./utils/hook";
-import { defineAsyncComponent, ref } from "vue";
-import { PureTableBar } from "@/components/RePureTableBar";
-import { useRenderIcon } from "@/components/ReIcon/src/hooks";
-import { deviceDetection } from "@pureadmin/utils";
+    import {use$
 
-import Delete from "~icons/ep/delete";
-import EditPen from "~icons/ep/edit-pen";
-import Refresh from "~icons/ep/refresh";
-import AddFill from "~icons/ri/add-circle-line";
-import FileIconsMicrosoftExcel from "~icons/file-icons/microsoft-excel";
-import LucideBookTemplate from "~icons/lucide/book-template";
-import EpUploadFilled from "~icons/ep/upload-filled";
-import MaterialSymbolsCloudDownload from "~icons/material-symbols/cloud-download";
+    {
+        tableClass.shortClassName
+    }
+    }
+    from
+    "./utils/hook";
+    import {ref} from "vue";
 
-defineOptions({
+    defineOptions({
   name: "permission"
 });
 

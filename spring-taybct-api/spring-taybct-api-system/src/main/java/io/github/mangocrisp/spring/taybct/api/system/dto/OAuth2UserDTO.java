@@ -3,7 +3,6 @@ package io.github.mangocrisp.spring.taybct.api.system.dto;
 import io.github.mangocrisp.spring.taybct.api.system.handle.PasswordHandler;
 import io.github.mangocrisp.spring.taybct.tool.core.annotation.EnhanceElement;
 import io.github.mangocrisp.spring.taybct.tool.core.annotation.EnhanceElements;
-import io.github.mangocrisp.spring.taybct.tool.core.util.sm.SM4Coder;
 import lombok.Data;
 
 import java.io.Serial;
