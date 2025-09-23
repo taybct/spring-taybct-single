@@ -52,9 +52,9 @@ public class BlackListGlobalFilter implements GlobalFilter, Ordered {
             String hostAddress = remoteAddress.getAddress().getHostAddress();
             for (SecureProp.UriIP uriIP : secureProp.getBlackList().getUriIpSet()) {
                 String path = uriIP.getUri().getPath();
-                if (pathMatcher.match(path, restfulPath)){
+                if (pathMatcher.match(path, restfulPath)) {
                     // 如果配置上的 url 包含的 ip 是需要被限制的 ip 如果和请求的 ip 匹配上了就要限制访问
-                    if (uriIP.getIpSet().stream().anyMatch(ip -> isIpMatch(ip, hostAddress))){
+                    if (uriIP.getIpSet().stream().anyMatch(ip -> isIpMatch(ip, hostAddress))) {
                         // 地址在黑名单里面，就直接拦截掉
                         response.setStatusCode(HttpStatus.NOT_FOUND);
                         return response.setComplete();
@@ -66,7 +66,7 @@ public class BlackListGlobalFilter implements GlobalFilter, Ordered {
     }
 
     private static boolean isIpMatch(String cidr, String hostAddress) {
-        if (!cidr.contains("/")){
+        if (!cidr.contains("/")) {
             return cidr.equals(hostAddress);
         }
         return NetUtil.isInRange(hostAddress, cidr);

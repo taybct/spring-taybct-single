@@ -19,7 +19,6 @@ import org.hibernate.validator.constraints.Length;
 import java.io.Serial;
 
 /**
- *
  * <pre>
  * 在线文档[t_online_doc]
  * </pre>

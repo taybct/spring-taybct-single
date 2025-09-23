@@ -22,7 +22,6 @@ import java.time.LocalDateTime;
 import java.util.Collection;
 
 /**
- *
  * <pre>
  * 在线文档 列表查询对象
  * </pre>

@@ -24,6 +24,7 @@ public interface ISysDictService extends IBaseService<SysDict> {
 
     /**
      * 清除缓存
+     *
      * @param dictCodes 需要清除缓存的字典 code
      */
     boolean cleanCache(Set<String> dictCodes);

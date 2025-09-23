@@ -12,7 +12,6 @@ import java.util.Objects;
 
 
 /**
- *
  * <pre>
  * 当前登录用户的部门 id
  * </pre>

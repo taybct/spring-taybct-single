@@ -29,7 +29,7 @@ public interface DesignMapper extends BaseMapper<Design> {
             , multiDeptId = "dept_id"
             , notExistDealType = DataScopeGetNotDealType.ALLOW
     )
-    default <P extends IPage<Design>> P selectPage(P page, @Param(Constants.WRAPPER) Wrapper<Design> queryWrapper){
+    default <P extends IPage<Design>> P selectPage(P page, @Param(Constants.WRAPPER) Wrapper<Design> queryWrapper) {
         page.setRecords(selectList(page, queryWrapper));
         return page;
     }

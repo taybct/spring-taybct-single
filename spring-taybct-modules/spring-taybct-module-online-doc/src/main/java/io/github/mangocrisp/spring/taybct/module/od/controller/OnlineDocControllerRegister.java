@@ -87,9 +87,9 @@ public class OnlineDocControllerRegister implements LongKeyConvertibleController
             , @RequestParam(required = false, defaultValue = "false") Boolean d
             , @RequestParam(required = false) String dName) {
         InputStream inputStream = null;
-        if (fileName == null){
+        if (fileName == null) {
             int i = path.lastIndexOf("/");
-            if (i != -1){
+            if (i != -1) {
                 fileName = path.substring(i + 1);
             } else {
                 fileName = path;

@@ -25,15 +25,16 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 /**
- * <pre>
+*
+<pre>
  * ${tableClass.remark!} 列表多条件查询对象
  * TableName: ${tableClass.tableName} 列表多条件查询对象
  * </pre>
- *
- * @author ${author!}
- * @since ${.now?string('yyyy-MM-dd HH:mm:ss')}
- * @see ${tableClass.fullClassName}
- */
+*
+* @author ${author!}
+* @since ${.now?string('yyyy-MM-dd HH:mm:ss')}
+* @see ${tableClass.fullClassName}
+*/
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -41,35 +42,35 @@ import java.time.LocalDateTime;
 @Schema(description = "【${tableClass.remark!}】列表多条件查询对象")
 public class ${tableClass.shortClassName}QueryBody implements Serializable, ModelConvertible<${tableClass.shortClassName}> {
 
-    @Serial
-    private static final long serialVersionUID = 1L;
+@Serial
+private static final long serialVersionUID = 1L;
 
 
-    /**
-     * 【${tableClass.remark!}】查询 dto
-     */
-    @Schema(description = "【${tableClass.remark!}】查询 dto")
-    private ${tableClass.shortClassName}QueryDTO ${tableClass.shortClassName?uncap_first}QueryDTO = new ${tableClass.shortClassName}QueryDTO();
+/**
+* 【${tableClass.remark!}】查询 dto
+*/
+@Schema(description = "【${tableClass.remark!}】查询 dto")
+private ${tableClass.shortClassName}QueryDTO ${tableClass.shortClassName?uncap_first}QueryDTO = new ${tableClass.shortClassName}QueryDTO();
 
-    // TODO 还可以继续添加 dto 进来
+// TODO 还可以继续添加 dto 进来
 
-    @Hidden
-    ${tableClass.shortClassName} convertedBean;
+@Hidden
+${tableClass.shortClassName} convertedBean;
 
-    @Override
-    @Hidden
-    public void setConvertedBean(${tableClass.shortClassName} convertedBean) {
-        throw new BaseException("not support!");
-    }
+@Override
+@Hidden
+public void setConvertedBean(${tableClass.shortClassName} convertedBean) {
+throw new BaseException("not support!");
+}
 
-    @Override
-    public ${tableClass.shortClassName} bean(String... ignoreProperties) {
-        ${tableClass.shortClassName} bean;
-        if ((bean = getConvertedBean()) != null) {
-            return bean;
-        }
-        this.convertedBean = (bean = BeanUtil.copyProperties(${tableClass.shortClassName?uncap_first}QueryDTO, beanClass(), ignoreProperties));
-        return bean;
-    }
+@Override
+public ${tableClass.shortClassName} bean(String... ignoreProperties) {
+${tableClass.shortClassName} bean;
+if ((bean = getConvertedBean()) != null) {
+return bean;
+}
+this.convertedBean = (bean = BeanUtil.copyProperties(${tableClass.shortClassName?uncap_first}QueryDTO, beanClass(), ignoreProperties));
+return bean;
+}
 
 }

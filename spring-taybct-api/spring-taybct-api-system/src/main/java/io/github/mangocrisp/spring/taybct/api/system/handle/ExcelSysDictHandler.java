@@ -13,7 +13,6 @@ import java.util.Map;
 import java.util.function.Function;
 
 /**
- *
  * <pre>
  * EasyPOI 字典翻译
  * 你可以在 Spring 容器中注册这个 bean，然后就可以在 EasyPOI 中使用

@@ -11,13 +11,12 @@ import java.util.List;
 import java.util.Map;
 
 /**
- *
  * <pre>
  * 针对表【t_online_doc(在线文档)】的数据库操作Mapper
  * </pre>
  *
- * @see OnlineDoc
  * @author xijieyin
+ * @see OnlineDoc
  * @since 2025/9/20 03:06
  */
 public interface OnlineDocMapper extends BaseMapper<OnlineDoc> {

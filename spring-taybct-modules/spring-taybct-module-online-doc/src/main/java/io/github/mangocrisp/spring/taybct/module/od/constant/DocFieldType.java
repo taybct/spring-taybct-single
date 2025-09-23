@@ -2,7 +2,6 @@ package io.github.mangocrisp.spring.taybct.module.od.constant;
 
 
 /**
- *
  * <pre>
  * 文档字段类型
  * </pre>

@@ -6,10 +6,12 @@
 
     <resultMap id="BaseResultMap" type="${tableClass.fullClassName}">
         <#list tableClass.pkFields as field>
-            <id property="${field.fieldName}" column="${tableClass.tableName}_${field.columnName}" jdbcType="${field.jdbcType}"/>
+            <id property="${field.fieldName}" column="${tableClass.tableName}_${field.columnName}"
+                jdbcType="${field.jdbcType}"/>
         </#list>
         <#list tableClass.baseFields as field>
-            <result property="${field.fieldName}" column="${tableClass.tableName}_${field.columnName}" jdbcType="${field.jdbcType}"/>
+            <result property="${field.fieldName}" column="${tableClass.tableName}_${field.columnName}"
+                    jdbcType="${field.jdbcType}"/>
         </#list>
     </resultMap>
 
@@ -41,32 +43,33 @@
             </otherwise>
         </choose>
         from (
-            select s.*
-            from (
-            <include refid="page_sql"/>
-            ) s
+        select s.*
+        from (
+        <include refid="page_sql"/>
+        ) s
         ) temp
     </select>
 
     <update id="updateBatchByCondition">
-        update <include refid="Base_Table_Name"/>
+        update
+        <include refid="Base_Table_Name"/>
         <set>
-        <#list tableClass.baseBlobFields as field>
-            <if test="mo.bean.${field.fieldName} != null">
-                ,${field.columnName} = ${'#'}{mo.bean.${field.fieldName},jdbcType=${field.jdbcType}}
-            </if>
-        </#list>
+            <#list tableClass.baseBlobFields as field>
+                <if test="mo.bean.${field.fieldName} != null">
+                    ,${field.columnName} = ${'#'}{mo.bean.${field.fieldName},jdbcType=${field.jdbcType}}
+                </if>
+            </#list>
         </set>
         <where>
             <#list tableClass.pkFields as field>
-            <!--${field.remark!}-->
-            <if test="mo.params.${field.fieldName} != null<#if field.jdbcType=="VARCHAR"> and mo.params.${field.fieldName} != ''</#if>">
-                and ${tableClass.tableName}.${field.columnName} = ${r'#'}{mo.params.${field.fieldName}}
-            </if>
+                <!--${field.remark!}-->
+                <if test="mo.params.${field.fieldName} != null<#if field.jdbcType=="VARCHAR"> and mo.params.${field.fieldName} != ''</#if>">
+                    and ${tableClass.tableName}.${field.columnName} = ${r'#'}{mo.params.${field.fieldName}}
+                </if>
             </#list>
             <!--当前表的查询条件-->
             <if test="mo.params.${tableClass.shortClassName?uncap_first}QueryDTO != null">
-            <include refid="DTO_Condition"/>
+                <include refid="DTO_Condition"/>
             </if>
             <!--TODO 继续添加查询条件-->
         </where>
@@ -75,7 +78,7 @@
     <!--查询总数-->
     <select id="total" resultType="java.lang.Long">
         select count(1) from (
-            <include refid="Base_Query"/>
+        <include refid="Base_Query"/>
         ) temp
     </select>
 
@@ -83,10 +86,12 @@
     <sql id="page_sql">
         select t.*
         from (
-            <include refid="Base_Page_Query"/>
+        <include refid="Base_Page_Query"/>
         ) t
         <if test="mo.page != null and mo.page.sort != null">
-        order by <foreach collection="mo.page.sort" item="item" separator=","> t.${tableClass.tableName}_${r'$'}{item}</foreach>
+            order by
+            <foreach collection="mo.page.sort" item="item" separator=","> t.${tableClass.tableName}_${r'$'}{item}
+            </foreach>
         </if>
     </sql>
     <!--查询分页-->
@@ -111,7 +116,7 @@
     <sql id="detail_sql">
         select t.*
         from (
-            <include refid="Base_Query"/>
+        <include refid="Base_Query"/>
         ) t
     </sql>
     <!--查询详情-->
@@ -134,40 +139,48 @@
 
     <!--基础查询-->
     <sql id="Base_Query">
-        select <include refid="Base_Column_List"/>
-        from <include refid="Base_Table_Name"/>
+        select
+        <include refid="Base_Column_List"/>
+        from
+        <include refid="Base_Table_Name"/>
         <include refid="Base_Condition"/>
     </sql>
 
     <!--对象参数查询条件-->
     <sql id="DTO_Condition">
         <#list tableClass.pkFields as field>
-        <!--${field.remark!}-->
-        <if test="mo.params.${tableClass.shortClassName?uncap_first}QueryDTO.${field.fieldName} != null<#if field.jdbcType=="VARCHAR"> and mo.params.${tableClass.shortClassName?uncap_first}QueryDTO.${field.fieldName} != ''</#if>">
-            and ${tableClass.tableName}.${field.columnName} = ${r'#'}{mo.params.${tableClass.shortClassName?uncap_first}QueryDTO.${field.fieldName}}
-        </if>
-        <!--${field.remark!}选择-->
-        <if test="mo.params.${tableClass.shortClassName?uncap_first}QueryDTO.${field.fieldName}Selection != null and mo.params.${tableClass.shortClassName?uncap_first}QueryDTO.${field.fieldName}Selection.size() > 0">
-            and ${tableClass.tableName}.${field.columnName} in
-            <foreach collection="mo.params.${tableClass.shortClassName?uncap_first}QueryDTO.${field.fieldName}Selection" open="(" separator="," close=")" item="id">
-                ${r'#'}{id}
-            </foreach>
-        </if>
+            <!--${field.remark!}-->
+            <if test="mo.params.${tableClass.shortClassName?uncap_first}QueryDTO.${field.fieldName} != null<#if field.jdbcType=="VARCHAR"> and mo.params.${tableClass.shortClassName?uncap_first}QueryDTO.${field.fieldName} != ''</#if>">
+                and ${tableClass.tableName}.${field.columnName} = ${r'#'}
+                {mo.params.${tableClass.shortClassName?uncap_first}QueryDTO.${field.fieldName}}
+            </if>
+            <!--${field.remark!}选择-->
+            <if test="mo.params.${tableClass.shortClassName?uncap_first}QueryDTO.${field.fieldName}Selection != null and mo.params.${tableClass.shortClassName?uncap_first}QueryDTO.${field.fieldName}Selection.size() > 0">
+                and ${tableClass.tableName}.${field.columnName} in
+                <foreach
+                        collection="mo.params.${tableClass.shortClassName?uncap_first}QueryDTO.${field.fieldName}Selection"
+                        open="(" separator="," close=")" item="id">
+                    ${r'#'}{id}
+                </foreach>
+            </if>
         </#list>
         <#list tableClass.baseBlobFields as field>
-        <!--${field.remark!}-->
-        <#if field.jdbcType=="TIMESTAMP" || field.jdbcType=="DATE" >
-        <if test="mo.params.${tableClass.shortClassName?uncap_first}QueryDTO.${field.fieldName}_ge != null">
-            and ${tableClass.tableName}.${field.columnName} ${r'&gt;'}= ${r'#'}{mo.params.${tableClass.shortClassName?uncap_first}QueryDTO.${field.fieldName}_ge}
-        </if>
-        <if test="mo.params.${tableClass.shortClassName?uncap_first}QueryDTO.${field.fieldName}_le != null">
-            and ${tableClass.tableName}.${field.columnName} ${r'&lt;'}= ${r'#'}{mo.params.${tableClass.shortClassName?uncap_first}QueryDTO.${field.fieldName}_le}
-        </if>
-        <#else>
-        <if test="mo.params.${tableClass.shortClassName?uncap_first}QueryDTO.${field.fieldName} != null<#if field.jdbcType=="VARCHAR"> and mo.params.${tableClass.shortClassName?uncap_first}QueryDTO.${field.fieldName} != ''</#if>">
-            and ${tableClass.tableName}.${field.columnName} = ${r'#'}{mo.params.${tableClass.shortClassName?uncap_first}QueryDTO.${field.fieldName}}
-        </if>
-        </#if>
+            <!--${field.remark!}-->
+            <#if field.jdbcType=="TIMESTAMP" || field.jdbcType=="DATE" >
+                <if test="mo.params.${tableClass.shortClassName?uncap_first}QueryDTO.${field.fieldName}_ge != null">
+                    and ${tableClass.tableName}.${field.columnName} ${r'&gt;'}= ${r'#'}
+                    {mo.params.${tableClass.shortClassName?uncap_first}QueryDTO.${field.fieldName}_ge}
+                </if>
+                <if test="mo.params.${tableClass.shortClassName?uncap_first}QueryDTO.${field.fieldName}_le != null">
+                    and ${tableClass.tableName}.${field.columnName} ${r'&lt;'}= ${r'#'}
+                    {mo.params.${tableClass.shortClassName?uncap_first}QueryDTO.${field.fieldName}_le}
+                </if>
+            <#else>
+                <if test="mo.params.${tableClass.shortClassName?uncap_first}QueryDTO.${field.fieldName} != null<#if field.jdbcType=="VARCHAR"> and mo.params.${tableClass.shortClassName?uncap_first}QueryDTO.${field.fieldName} != ''</#if>">
+                    and ${tableClass.tableName}.${field.columnName} = ${r'#'}
+                    {mo.params.${tableClass.shortClassName?uncap_first}QueryDTO.${field.fieldName}}
+                </if>
+            </#if>
         </#list>
     </sql>
 
@@ -176,18 +189,18 @@
         <where>
             <if test="mo.conditions != null and mo.conditions.basic != null">
                 and (
-                    ${r'$'}{mo.conditions.basic}
+                ${r'$'}{mo.conditions.basic}
                 )
             </if>
             <#list tableClass.pkFields as field>
-            <!--${field.remark!}-->
-            <if test="mo.params.${field.fieldName} != null<#if field.jdbcType=="VARCHAR"> and mo.params.${field.fieldName} != ''</#if>">
-                and ${tableClass.tableName}.${field.columnName} = ${r'#'}{mo.params.${field.fieldName}}
-            </if>
+                <!--${field.remark!}-->
+                <if test="mo.params.${field.fieldName} != null<#if field.jdbcType=="VARCHAR"> and mo.params.${field.fieldName} != ''</#if>">
+                    and ${tableClass.tableName}.${field.columnName} = ${r'#'}{mo.params.${field.fieldName}}
+                </if>
             </#list>
             <!--当前表的查询条件-->
             <if test="mo.params.${tableClass.shortClassName?uncap_first}QueryDTO != null">
-            <include refid="DTO_Condition"/>
+                <include refid="DTO_Condition"/>
             </if>
             <!--TODO 继续添加查询条件-->
         </where>
@@ -195,7 +208,9 @@
 
     <sql id="Base_Page_Order_By">
         <if test="mo.page != null and mo.page.sort != null">
-        order by <foreach collection="mo.page.sort" item="item" separator=","> ${tableClass.tableName}.${r'$'}{item}</foreach>
+            order by
+            <foreach collection="mo.page.sort" item="item" separator=","> ${tableClass.tableName}.${r'$'}{item}
+            </foreach>
         </if>
     </sql>
 

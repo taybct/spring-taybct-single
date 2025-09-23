@@ -54,7 +54,7 @@ public class ResourceServerConfig {
     ) {
         // 禁用 CSRF
         http.csrf(ServerHttpSecurity.CsrfSpec::disable)
-                // 配置 CORS
+        // 配置 CORS
 //                .cors(cors -> cors.configurationSource(corsConfigurationSource))
         ;
         http.authorizeExchange(exchanges -> {
@@ -77,8 +77,8 @@ public class ResourceServerConfig {
                 });
         // 配置异常处理
         http.exceptionHandling(exceptionHandling -> exceptionHandling
-                        .authenticationEntryPoint(authenticationEntryPoint())
-                        .accessDeniedHandler(accessDeniedHandler()));
+                .authenticationEntryPoint(authenticationEntryPoint())
+                .accessDeniedHandler(accessDeniedHandler()));
         return http.build();
     }
 

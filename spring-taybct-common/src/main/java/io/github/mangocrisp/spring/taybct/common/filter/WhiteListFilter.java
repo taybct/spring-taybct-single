@@ -37,9 +37,9 @@ public class WhiteListFilter implements Filter {
             String requestURI = request.getRequestURI();
             for (SecureProp.UriIP uriIP : secureProp.getWhiteList().getUriIpSet()) {
                 String path = uriIP.getUri().getPath();
-                if (new AntPathMatcher().match(path, requestURI)){
+                if (new AntPathMatcher().match(path, requestURI)) {
                     // 如果配置上的 url 包含的 ip 是需要被允许的 ip 如果和请求的 ip 匹配上了才能访问
-                    if (uriIP.getIpSet().stream().noneMatch(ip->isIpMatch(ip, remoteHost))){
+                    if (uriIP.getIpSet().stream().noneMatch(ip -> isIpMatch(ip, remoteHost))) {
                         // 地址不在白名单里面，就直接拦截掉
                         response.setStatus(HttpStatus.NOT_FOUND.value());
                         return;
@@ -51,7 +51,7 @@ public class WhiteListFilter implements Filter {
     }
 
     private static boolean isIpMatch(String cidr, String hostAddress) {
-        if (!cidr.contains("/")){
+        if (!cidr.contains("/")) {
             return cidr.equals(hostAddress);
         }
         return NetUtil.isInRange(hostAddress, cidr);

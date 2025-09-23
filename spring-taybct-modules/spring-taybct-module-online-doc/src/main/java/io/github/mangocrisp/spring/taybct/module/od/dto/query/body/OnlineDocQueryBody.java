@@ -16,7 +16,6 @@ import java.io.Serial;
 import java.io.Serializable;
 
 /**
- *
  * <pre>
  * 在线文档 列表多条件查询对象
  * </pre>

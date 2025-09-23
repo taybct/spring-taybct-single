@@ -28,9 +28,9 @@ public interface FormReleaseMapper extends BaseMapper<FormRelease> {
     /**
      * 分页查询
      *
-     * @param page  分页参数
-     * @param dto   查询参数
-     * @param <P>   分页参数
+     * @param page 分页参数
+     * @param dto  查询参数
+     * @param <P>  分页参数
      * @return 分页数据
      */
     <P extends IPage<FormRelease>> P page(P page, @Param("dto") FormReleaseQueryDTO dto);

@@ -37,14 +37,14 @@ import java.io.Serial;
 @ExcelTarget(value = "${tableClass.remark!}")
 public class ${tableClass.shortClassName} implements Serializable {
 
-    @TableField(exist = false)
-    @Serial
-    private static final long serialVersionUID = 1L;
+@TableField(exist = false)
+@Serial
+private static final long serialVersionUID = 1L;
 
-    @Excel(name = "序号", width = 10, needMerge = true, mergeVertical = true, format = PoiBaseConstants.IS_ADD_INDEX)
-    @TableField(exist = false)
-    @Schema(hidden = true)
-    private Integer easy_poi_excel_index = 1;
+@Excel(name = "序号", width = 10, needMerge = true, mergeVertical = true, format = PoiBaseConstants.IS_ADD_INDEX)
+@TableField(exist = false)
+@Schema(hidden = true)
+private Integer easy_poi_excel_index = 1;
 
 <#list tableClass.pkFields as field>
     /**

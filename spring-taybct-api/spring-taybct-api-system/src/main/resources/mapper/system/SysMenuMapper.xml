@@ -77,7 +77,8 @@
         <result property="isBlank" column="sm_is_blank" jdbcType="TINYINT"/>
         <result property="isCache" column="sm_is_cache" jdbcType="TINYINT"/>
         <result property="menuType" column="sm_menu_type" jdbcType="VARCHAR"/>
-        <association property="meta" javaType="io.github.mangocrisp.spring.taybct.api.system.vo.RouterMeta" column="sm_id" resultMap="RouterMetaResultMap"/>
+        <association property="meta" javaType="io.github.mangocrisp.spring.taybct.api.system.vo.RouterMeta"
+                     column="sm_id" resultMap="RouterMetaResultMap"/>
         <!--这个路由（菜单）需要限制的按钮权限-->
         <collection property="permissions" javaType="java.util.Set" resultMap="RouterPermResultMap"/>
         <!--用户拥有的角色关联的按钮权限-->

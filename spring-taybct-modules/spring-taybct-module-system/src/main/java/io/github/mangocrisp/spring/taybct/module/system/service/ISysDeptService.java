@@ -23,8 +23,8 @@ public interface ISysDeptService extends IBaseService<SysDept> {
     /**
      * 条件查询条件来获取树结构
      *
-     * @param dto 查询条件
-     * @param makeTree  是否要生成树结构
+     * @param dto         查询条件
+     * @param makeTree    是否要生成树结构
      * @param includeUser 是否包含搜索用户
      * @return 结果列表
      */
@@ -33,7 +33,7 @@ public interface ISysDeptService extends IBaseService<SysDept> {
     /**
      * 部门和用户一起的树
      *
-     * @param deptIdSet 部门 id 集合
+     * @param deptIdSet   部门 id 集合
      * @param includeUser 是否包含搜索用户
      * @return 结果列表
      */
@@ -43,8 +43,8 @@ public interface ISysDeptService extends IBaseService<SysDept> {
     /**
      * 获取到所有的部门和部门下的人
      *
-     * @param deptIdSet 按部门查询
-     * @param makeTree  是否要生成树结构
+     * @param deptIdSet   按部门查询
+     * @param makeTree    是否要生成树结构
      * @param includeUser 是否包含搜索用户
      * @return 部门和部门下的人
      */

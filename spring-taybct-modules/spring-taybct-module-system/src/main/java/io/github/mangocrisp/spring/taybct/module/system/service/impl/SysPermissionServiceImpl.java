@@ -104,7 +104,7 @@ public class SysPermissionServiceImpl extends BaseServiceImpl<SysPermissionMappe
                     .set(SysPermission::getGroupId, entity.getGroupId())
                     .set(SysPermission::getName, entity.getName())
                     .set(SysPermission::getMenuId, entity.getMenuId())
-                    .eq(SysPermission::getId , entity.getId())));
+                    .eq(SysPermission::getId, entity.getId())));
         } finally {
             if (result) {
                 // 删除权限与角色的关联之后初始化权限角色配置

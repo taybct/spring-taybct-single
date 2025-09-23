@@ -84,8 +84,8 @@ public class ProcessServiceImpl extends BaseServiceImpl<ProcessMapper, Process>
                     .collect(Collectors.toList());
             nodesServiceSupplier.get().saveOrUpdateBatch(nodes);
             // 设置一下开始节点的 id
-            nodes.stream().filter(n->n.getType().equalsIgnoreCase(ProcessConstant.NodesType.START))
-                    .forEach(n-> dto.getStartNodes().setId(n.getId()));
+            nodes.stream().filter(n -> n.getType().equalsIgnoreCase(ProcessConstant.NodesType.START))
+                    .forEach(n -> dto.getStartNodes().setId(n.getId()));
 
             // 获取连线集合
             List<Edges> edges = jsonData.getJSONArray(ProcessConstant.EDGES).toJavaList(JSONObject.class)
@@ -334,12 +334,12 @@ public class ProcessServiceImpl extends BaseServiceImpl<ProcessMapper, Process>
                                         e.setProcessId(process.getId());
                                         e.setType(process.getType());
                                         e.setDesignId(process.getDesignId());
-                                        if (isCC.get()){
+                                        if (isCC.get()) {
                                             e.setTodoType(TodoType.Code.CC);
                                         }
                                         todoList.add(e);
                                     }));
-                            if(!isCC.get()){
+                            if (!isCC.get()) {
                                 // 如果不是抄送节点才能指定部门和角色待办
                                 Optional.ofNullable(nextNodesProperties.getJSONArray(ProcessConstant.NodeProperties.ROLES))
                                         .map(r -> r.toJavaList(PermissionsDTO.class))
@@ -377,7 +377,7 @@ public class ProcessServiceImpl extends BaseServiceImpl<ProcessMapper, Process>
                         todoService.saveOrUpdateBatch(todoList);
                         // 添加下一个节点为当前节点
                         presentProcessService.save(nextNodes);
-                        if(isCC.get()) {
+                        if (isCC.get()) {
                             // 如果用户节点是抄送节点，就直接下一步
                             nextStep(() -> process
                                     , () -> nextNodes

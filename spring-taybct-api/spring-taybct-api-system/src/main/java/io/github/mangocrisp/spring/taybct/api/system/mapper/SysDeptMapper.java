@@ -33,7 +33,7 @@ public interface SysDeptMapper extends BaseMapper<SysDept> {
     /**
      * 用户部门树
      *
-     * @param deptIdSet 需要查询的部门id集合
+     * @param deptIdSet   需要查询的部门id集合
      * @param includeUser 是否包含搜索用户
      * @return 部门树
      */

@@ -100,7 +100,7 @@ public class SysParamsServiceImpl extends BaseServiceImpl<SysParamsMapper, SysPa
 
     @Override
     public boolean cleanCache(Set<String> paramsKeySet) {
-        if (CollectionUtil.isNotEmpty(paramsKeySet)){
+        if (CollectionUtil.isNotEmpty(paramsKeySet)) {
             redisTemplate.delete(paramsKeySet.stream()
                     .map(paramsKey -> String.format("%s::%s", CacheConstants.System.PARAMS, paramsKey))
                     .collect(Collectors.toSet()));

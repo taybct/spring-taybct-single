@@ -106,24 +106,24 @@
     </resultMap>
 
     <select id="getUserByFiled" resultMap="Oauth2UserResultMap">
-        select su.id                                      su_id,
-               su.username                                su_username,
-               su.password                                su_password,
-               su.status                                  su_status,
-               <choose>
-                   <when test="_db_type_db_ == 'sqlite'">
-                       sr.tenant_id || ':' || sr.code  sr_code
-                   </when>
-                   <otherwise>
-                       concat(sr.tenant_id, concat(':', sr.code)) sr_code
-                   </otherwise>
-               </choose>
+        select su.id su_id,
+        su.username su_username,
+        su.password su_password,
+        su.status su_status,
+        <choose>
+            <when test="_db_type_db_ == 'sqlite'">
+                sr.tenant_id || ':' || sr.code sr_code
+            </when>
+            <otherwise>
+                concat(sr.tenant_id, concat(':', sr.code)) sr_code
+            </otherwise>
+        </choose>
         from sys_user su
-                 left join sys_user_role sur on su.id = sur.user_id
-                 left join sys_role sr on sur.role_id = sr.id and sr.status = 1
+        left join sys_user_role sur on su.id = sur.user_id
+        left join sys_role sr on sur.role_id = sr.id and sr.status = 1
         where su.is_deleted = 0
-          and sr.is_deleted = 0
-          and su.${field} = #{value}
+        and sr.is_deleted = 0
+        and su.${field} = #{value}
     </select>
 
 
@@ -197,7 +197,7 @@
                             or FIND_IN_SET(#{dto.deptId},sd.pid_all)
                         </if>
                         <if test="_db_type_db_ == 'sqlite'">
-                            or  ',' || sd.pid_all || ',' like '%,' || dto.deptId || ',%'
+                            or ',' || sd.pid_all || ',' like '%,' || dto.deptId || ',%'
                         </if>
                         <if test="_db_type_db_ == 'oracle'">
                             or INSTR(sd.pid_all, TO_CHAR(#{dto.deptId}))>0

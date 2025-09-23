@@ -25,7 +25,7 @@ public interface ReleaseMapper extends BaseMapper<Release> {
      */
     int publish(@Param("dto") Collection<ReleasePublishDTO> dto);
 
-//    @DataScope(alias = "lf_release"
+    //    @DataScope(alias = "lf_release"
 //            , field = "id"
 //            , type = DataScopeType.MULTI
 //            , multiTable = "lf_release_permissions"
@@ -35,7 +35,7 @@ public interface ReleaseMapper extends BaseMapper<Release> {
 //    )
     <P extends IPage<Release>> P page(P page, @Param("dto") ReleaseQueryDTO dto);
 
-//    @DataScope(alias = "lf_release"
+    //    @DataScope(alias = "lf_release"
 //            , field = "id"
 //            , type = DataScopeType.MULTI
 //            , multiTable = "lf_release_permissions"

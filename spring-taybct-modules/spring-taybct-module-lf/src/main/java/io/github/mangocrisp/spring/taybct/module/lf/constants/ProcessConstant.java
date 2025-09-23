@@ -42,7 +42,7 @@ public class ProcessConstant {
         /**
          * 是否激活
          */
-        String IS_ACTIVATED= "isActivated";
+        String IS_ACTIVATED = "isActivated";
     }
 
     /**
@@ -52,11 +52,11 @@ public class ProcessConstant {
         /**
          * 是否会签
          */
-        String IS_COUNTERSIGN= "isCountersign";
+        String IS_COUNTERSIGN = "isCountersign";
         /**
          * 是否抄送
          */
-        String IS_CC= "isCC";
+        String IS_CC = "isCC";
         /**
          * 是否自动处理
          */
@@ -122,7 +122,7 @@ public class ProcessConstant {
         /**
          * 目标节点id
          */
-        String TARGET_NODE_ID ="targetNodeId";
+        String TARGET_NODE_ID = "targetNodeId";
         /**
          * 源节点id
          */
@@ -142,7 +142,7 @@ public class ProcessConstant {
         /**
          * 是否激活
          */
-        String IS_ACTIVATED= "isActivated";
+        String IS_ACTIVATED = "isActivated";
     }
 
     /**

@@ -23,7 +23,7 @@ public interface IAuthorizeRedirectUrlCreator {
      * @param request 请求
      * @return 回调地址
      */
-    default String create(HttpServletRequest request){
+    default String create(HttpServletRequest request) {
         String clientId = request.getParameter("client_id");
         String redirectUri = request.getParameter("redirect_uri");
         if (StringUtil.isNotBlank(clientId) && StringUtil.isNotBlank(redirectUri)) {

@@ -74,10 +74,10 @@
                 </if>
                 <if test="_db_type_db_ == 'sqlite'">
                     <if test="dto.includeChildren != null and dto.includeChildren == 1">
-                        or  ',' || sd.pid_all || ',' like '%,' || sud.dept_id || ',%'
+                        or ',' || sd.pid_all || ',' like '%,' || sud.dept_id || ',%'
                     </if>
                     <if test="dto.includeParents != null and dto.includeParents == 1">
-                        or  ',' || sd.pid_all || ',' like '%,' || sd.id || ',%'
+                        or ',' || sd.pid_all || ',' like '%,' || sd.id || ',%'
                     </if>
                 </if>
                 <if test="_db_type_db_ == 'oracle'">
@@ -121,10 +121,10 @@
                 </if>
                 <if test="_db_type_db_ == 'sqlite'">
                     <if test="dto.includeChildren != null and dto.includeChildren == 1">
-                        or  ',' || sd.pid_all || ',' like '%,' || srd.dept_id || ',%'
+                        or ',' || sd.pid_all || ',' like '%,' || srd.dept_id || ',%'
                     </if>
                     <if test="dto.includeParents != null and dto.includeParents == 1">
-                        or  ',' || sd.pid_all || ',' like '%,' || sd.id || ',%'
+                        or ',' || sd.pid_all || ',' like '%,' || sd.id || ',%'
                     </if>
                 </if>
                 <if test="_db_type_db_ == 'oracle'">
@@ -178,7 +178,7 @@
                         or FIND_IN_SET(#{dto.pid},sd.pid_all)
                     </if>
                     <if test="_db_type_db_ == 'sqlite'">
-                        or  ',' || sd.pid_all || ',' like '%,' || dto.pid || ',%'
+                        or ',' || sd.pid_all || ',' like '%,' || dto.pid || ',%'
                     </if>
                     <if test="_db_type_db_ == 'oracle'">
                         or INSTR(sd.pid_all, TO_CHAR(#{dto.pid}))>0
@@ -253,7 +253,8 @@
             'user' as type,
             sys_user_dept.dept_id,
             sys_user.id as user_id,
-            'd_' || sys_user_dept.dept_id as parent_id from sys_user join sys_user_dept on sys_user.id = sys_user_dept.user_id
+            'd_' || sys_user_dept.dept_id as parent_id from sys_user join sys_user_dept on sys_user.id =
+            sys_user_dept.user_id
             where sys_user.status = 1 and sys_user.is_deleted = 0 and sys_user_dept.dept_id in
             <foreach collection="deptIdSet" open="(" separator="," close=")" item="deptId">
                 #{deptId}

@@ -99,7 +99,7 @@ public interface ISysNoticeController extends BaseController<SysNotice, ISysNoti
     @DeleteMapping("clean")
     @WebLog
     @ApiLog(title = "消除消息（全部改为已读）", description = "消除消息（全部改为已读）", type = OperateType.DELETE, isSaveRequestData = false, isSaveResultData = false)
-    default R<?> clean(){
+    default R<?> clean() {
         return getBaseService().clean() ? R.ok(String.format("操作%s成功！", getResource())) : R.fail(String.format("操作%s失败！", getResource()));
     }
 
@@ -111,7 +111,7 @@ public interface ISysNoticeController extends BaseController<SysNotice, ISysNoti
     @Operation(summary = "发送当前用户消息")
     @PostMapping("sendCurrentUserMessage")
     @WebLog
-    default R<?> sendCurrentUserMessage(@RequestParam String message){
+    default R<?> sendCurrentUserMessage(@RequestParam String message) {
         return getBaseService().sendCurrentUserMessage(message) ? R.ok(String.format("操作%s成功！", getResource())) : R.fail(String.format("操作%s失败！", getResource()));
     }
 
@@ -123,7 +123,7 @@ public interface ISysNoticeController extends BaseController<SysNotice, ISysNoti
     @Operation(summary = "发送简单消息")
     @PostMapping("sendMessage")
     @WebLog
-    default R<?> sendMessage(@RequestBody WSR<?> message){
+    default R<?> sendMessage(@RequestBody WSR<?> message) {
         return getBaseService().sendMessage(message) ? R.ok(String.format("操作%s成功！", getResource())) : R.fail(String.format("操作%s失败！", getResource()));
     }
 
@@ -135,7 +135,7 @@ public interface ISysNoticeController extends BaseController<SysNotice, ISysNoti
     @Operation(summary = "发送所有用户消息")
     @PostMapping("sendAllMessage")
     @WebLog
-    default R<?> sendAllMessage(@RequestBody WSR<?> message){
+    default R<?> sendAllMessage(@RequestBody WSR<?> message) {
         return getBaseService().sendAllMessage(message) ? R.ok(String.format("操作%s成功！", getResource())) : R.fail(String.format("操作%s失败！", getResource()));
     }
 

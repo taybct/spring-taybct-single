@@ -148,7 +148,8 @@ public class OAuth2SqliteAuthorizationRowMapper implements RowMapper<OAuth2Autho
         String refreshTokenValue = getLobValue(rs, "refresh_token_value");
         if (StringUtils.hasText(refreshTokenValue)) {
             tokenIssuedAt = getTimestampValue(rs, "refresh_token_issued_at");
-            tokenExpiresAt = getTimestampValue(rs, "refresh_token_expires_at");;
+            tokenExpiresAt = getTimestampValue(rs, "refresh_token_expires_at");
+            ;
 //            Timestamp refreshTokenExpiresAt = rs.getTimestamp("refresh_token_expires_at");
 //            if (refreshTokenExpiresAt != null) {
 //                tokenExpiresAt = refreshTokenExpiresAt.toInstant();

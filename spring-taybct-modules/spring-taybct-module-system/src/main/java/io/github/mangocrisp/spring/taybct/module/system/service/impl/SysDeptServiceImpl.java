@@ -39,7 +39,7 @@ public class SysDeptServiceImpl extends BaseServiceImpl<SysDeptMapper, SysDept>
                         .select(SysDept::getId)
                         .like(SysDept::getName, keyWord))
                 .stream().map(SysDept::getId).toList();
-        List<Long> userDeptId = includeUser? getBaseMapper().getDeptIdsByUserNickname(keyWord) : new ArrayList<>();
+        List<Long> userDeptId = includeUser ? getBaseMapper().getDeptIdsByUserNickname(keyWord) : new ArrayList<>();
         return deptUserTree(new HashSet<>(CollectionUtil.union(deptId, userDeptId)), makeTree, includeUser);
     }
 

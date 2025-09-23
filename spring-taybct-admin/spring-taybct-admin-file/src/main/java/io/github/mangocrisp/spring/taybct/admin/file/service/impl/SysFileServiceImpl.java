@@ -65,7 +65,7 @@ public class SysFileServiceImpl extends ServiceImpl<SysFileMapper, SysFile>
         Long limit = Convert.convert(Long.class, params.get("limit"), 999L);
         Page<SysFile> page = new Page<>();
         page.setSize(limit);
-        for (long i = 1L; ; i ++) {
+        for (long i = 1L; ; i++) {
             page.setCurrent(i);
             List<SysFile> list = page(page, Wrappers.<SysFile>lambdaQuery()
                     .select(SysFile::getId, SysFile::getPath, SysFile::getManageType)

@@ -23,7 +23,6 @@ import java.io.Serializable;
 import java.util.Set;
 
 /**
- *
  * <pre>
  * 在线文档 新增对象
  * </pre>

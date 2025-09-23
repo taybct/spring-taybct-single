@@ -19,7 +19,6 @@ import java.security.Permissions;
 
 
 /**
- *
  * <pre>
  * 在线文档操作权限[t_online_doc_permit]
  * </pre>
