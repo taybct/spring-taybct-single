@@ -333,6 +333,23 @@
         </if>
     </sql>
 
+    <sql id="Dept_Filter">
+        <choose>
+            <when test="_db_type_db_ == 'postgresql'">
+                and CAST(#{_login_user_dept_.id} as VARCHAR) = ANY(STRING_TO_ARRAY(sys_dept.pid_all, ','))
+            </when>
+            <when test="_db_type_db_ == 'mysql'">
+                and FIND_IN_SET(#{_login_user_dept_.id},sys_dept.pid_all)
+            </when>
+            <when test="_db_type_db_ == 'sqlite'">
+                and ',' || sys_dept.pid_all || ',' like '%,' || #{_login_user_dept_.id} || ',%'
+            </when>
+            <when test="_db_type_db_ == 'oracle'">
+                and INSTR(sys_dept.pid_all, TO_CHAR(#{_login_user_dept_.id}))>0
+            </when>
+        </choose>
+    </sql>
+
     <!--基础条件-->
     <sql id="Base_Condition">
         <where>
@@ -361,14 +378,7 @@
                 <if test="_login_user_dept_ != null">
                     and (exists(
                     select 1 from sys_dept where sys_dept.id = t_online_doc.dept_id
-                    <choose>
-                        <when test="_db_type_db_ == 'postgresql'">
-                            and position(#{_login_user_dept_.id}::varchar in sys_dept.pid_all) &gt; 0
-                        </when>
-                        <otherwise>
-                            and position(#{_login_user_dept_.id} in sys_dept.pid_all) &gt; 0
-                        </otherwise>
-                    </choose>
+                    <include refid="Dept_Filter"/>
                     ) or t_online_doc.dept_id = #{_login_user_dept_.id})
                 </if>
                 )
@@ -382,14 +392,7 @@
                     or
                     exists(
                     select 1 from sys_dept where sys_dept.id = t_online_doc_permit.dept_id
-                    <choose>
-                        <when test="_db_type_db_ == 'postgresql'">
-                            and position(#{_login_user_dept_.id}::varchar in sys_dept.pid_all) &gt; 0
-                        </when>
-                        <otherwise>
-                            and position(#{_login_user_dept_.id} in sys_dept.pid_all) &gt; 0
-                        </otherwise>
-                    </choose>
+                    <include refid="Dept_Filter"/>
                     )
                 </if>
                 <if test="_login_user_dept_ != null and _login_user_dept_ != null">
@@ -410,14 +413,7 @@
                 <if test="_login_user_dept_ != null">
                     or exists(
                     select 1 from sys_dept where sys_dept.id = t_online_doc.dept_id
-                    <choose>
-                        <when test="_db_type_db_ == 'postgresql'">
-                            and position(#{_login_user_dept_.id}::varchar in sys_dept.pid_all) &gt; 0
-                        </when>
-                        <otherwise>
-                            and position(#{_login_user_dept_.id} in sys_dept.pid_all) &gt; 0
-                        </otherwise>
-                    </choose>
+                    <include refid="Dept_Filter"/>
                     )
                     or t_online_doc.dept_id = #{_login_user_dept_.id}
                 </if>
