@@ -106,6 +106,7 @@ public class ScheduledLog implements Serializable {
      * 租户 id
      */
     @Schema(description = "租户 id 区分不同租户的日志")
+    @TableFieldDefault("000000")
     private String tenantId;
 
 }

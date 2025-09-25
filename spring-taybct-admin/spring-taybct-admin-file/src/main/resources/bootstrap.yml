@@ -67,5 +67,6 @@ taybct:
         auto-start: 1
         sort: 1
         params:
+          "tenantId": "000000"
           # 每次查询清理的条数，分页大小
           "limit": 999

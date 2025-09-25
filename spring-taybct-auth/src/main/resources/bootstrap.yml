@@ -144,3 +144,5 @@ taybct:
         description: "清理登录超时用户"
         auto-start: 1
         sort: 1
+        params:
+          "tenantId": "000000"
