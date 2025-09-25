@@ -173,9 +173,12 @@ public class OnlineDocServiceImpl extends ServiceImpl<OnlineDocMapper, OnlineDoc
                             .eq(SysUserDept::getUserId, onlineDoc.getUpdateUser())
                             .orderByAsc(SysUserDept::getId)
                             .last("limit 1"));
-                    SysDept sysDept = sysDeptMapper.selectOne(Wrappers.<SysDept>lambdaQuery()
-                            .select(SysDept::getId, SysDept::getName, SysDept::getFullName)
-                            .eq(SysDept::getId, sysUserDept.getDeptId()));
+                    SysDept sysDept = null;
+                    if (sysUserDept != null){
+                        sysDept = sysDeptMapper.selectOne(Wrappers.<SysDept>lambdaQuery()
+                                .select(SysDept::getId, SysDept::getName, SysDept::getFullName)
+                                .eq(SysDept::getId, sysUserDept.getDeptId()));
+                    }
                     String realName = Optional.ofNullable(sysUser.getRealName()).orElse(sysUser.getNickname());
                     if (ObjectUtil.isNotEmpty(sysDept)) {
                         String deptName = Optional.ofNullable(sysDept.getName()).orElse(sysDept.getFullName());
