@@ -41,68 +41,70 @@
 </script>
 
 <template>
-    <el-form
-            ref="formRef"
-            :model="formData"
-            :rules="formRules"
-            label-width="auto"
-    >
-        <el-row :gutter="20">
-            <#list tableClass.baseBlobFields as field>
-                <el-col :span="12" :xs="24" :sm="12">
-                    <el-tooltip content="${field.remark!}" :trigger-keys="[]">
-                        <el-form-item label="${field.remark!}" prop="${field.fieldName}">
-                            <#if field.jdbcType=="VARCHAR">
-                                <el-input
-                                        v-model="formData.${field.fieldName}"
-                                        clearable
-                                        placeholder="请输入${field.remark!}"
-                                />
-                            <#elseif field.jdbcType=="DATE">
-                                <el-date-picker
-                                        v-model="formData.${field.fieldName}"
-                                        clearable
-                                        value-format="YYYY-MM-DD"
-                                        type="date"
-                                        placeholder="请输入${field.remark!}"
-                                />
-                            <#elseif field.jdbcType=="TIMESTAMP">
-                                <el-date-picker
-                                        v-model="formData.${field.fieldName}"
-                                        clearable
-                                        value-format="YYYY-MM-DD HH:mm:ss"
-                                        type="datetime"
-                                        placeholder="请输入${field.remark!}"
-                                />
-                            <#elseif field.jdbcType=="BIGINT" || field.jdbcType=="NUMERIC" || field.jdbcType=="INTEGER" || field.jdbcType=="SMALLINT" || field.jdbcType=="TINYINT">
-                                <el-input
-                                        v-model="formData.${field.fieldName}"
-                                        clearable
-                                        type="number"
-                                        placeholder="请输入${field.remark!}"
-                                />
-                            <#elseif field.jdbcType=="BOOLEAN">
-                                <el-switch
-                                        v-model="formData.${field.fieldName}"
-                                        inline-prompt
-                                        :active-value="true"
-                                        :inactive-value="false"
-                                        active-text="启用"
-                                        inactive-text="停用"
-                                />
-                            <#else>
-                                <el-input
-                                        v-model="formData.${field.fieldName}"
-                                        clearable
-                                        placeholder="请输入${field.remark!}"
-                                />
-                            </#if>
-                        </el-form-item>
-                    </el-tooltip>
-                </el-col>
-            </#list>
-        </el-row>
-    </el-form>
+    <div class="w-[100%]">
+        <el-form
+                ref="formRef"
+                :model="formData"
+                :rules="formRules"
+                label-width="auto"
+        >
+            <el-row :gutter="20">
+                <#list tableClass.baseBlobFields as field>
+                    <el-col :span="12" :xs="24" :sm="12">
+                        <el-tooltip content="${field.remark!}" :trigger-keys="[]">
+                            <el-form-item label="${field.remark!}" prop="${field.fieldName}">
+                                <#if field.jdbcType=="VARCHAR">
+                                    <el-input
+                                            v-model="formData.${field.fieldName}"
+                                            clearable
+                                            placeholder="请输入${field.remark!}"
+                                    />
+                                <#elseif field.jdbcType=="DATE">
+                                    <el-date-picker
+                                            v-model="formData.${field.fieldName}"
+                                            clearable
+                                            value-format="YYYY-MM-DD"
+                                            type="date"
+                                            placeholder="请输入${field.remark!}"
+                                    />
+                                <#elseif field.jdbcType=="TIMESTAMP">
+                                    <el-date-picker
+                                            v-model="formData.${field.fieldName}"
+                                            clearable
+                                            value-format="YYYY-MM-DD HH:mm:ss"
+                                            type="datetime"
+                                            placeholder="请输入${field.remark!}"
+                                    />
+                                <#elseif field.jdbcType=="BIGINT" || field.jdbcType=="NUMERIC" || field.jdbcType=="INTEGER" || field.jdbcType=="SMALLINT" || field.jdbcType=="TINYINT">
+                                    <el-input
+                                            v-model="formData.${field.fieldName}"
+                                            clearable
+                                            type="number"
+                                            placeholder="请输入${field.remark!}"
+                                    />
+                                <#elseif field.jdbcType=="BOOLEAN">
+                                    <el-switch
+                                            v-model="formData.${field.fieldName}"
+                                            inline-prompt
+                                            :active-value="true"
+                                            :inactive-value="false"
+                                            active-text="启用"
+                                            inactive-text="停用"
+                                    />
+                                <#else>
+                                    <el-input
+                                            v-model="formData.${field.fieldName}"
+                                            clearable
+                                            placeholder="请输入${field.remark!}"
+                                    />
+                                </#if>
+                            </el-form-item>
+                        </el-tooltip>
+                    </el-col>
+                </#list>
+            </el-row>
+        </el-form>
+    </div>
 </template>
 
 <style lang="scss" scoped>
