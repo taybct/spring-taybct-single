@@ -1,1 +1,1 @@
-mvn deploy -DskipTests=true
+mvn deploy -e -DskipTests=true
