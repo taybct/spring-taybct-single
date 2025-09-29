@@ -75,6 +75,12 @@
             <groupId>io.github.mangocrisp</groupId>
             <artifactId>spring-taybct-tool-file</artifactId>
             <version>${project.version}</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>bcprov-jdk15on</artifactId>
+                    <groupId>org.bouncycastle</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <!-- mybatis-plus 依赖配置-->
