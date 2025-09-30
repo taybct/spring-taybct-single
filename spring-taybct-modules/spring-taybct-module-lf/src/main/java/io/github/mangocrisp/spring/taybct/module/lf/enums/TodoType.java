@@ -1,5 +1,7 @@
 package io.github.mangocrisp.spring.taybct.module.lf.enums;
 
+import java.io.Serializable;
+
 /**
  * <pre>
  * 任务待办
@@ -11,7 +13,7 @@ package io.github.mangocrisp.spring.taybct.module.lf.enums;
  * @author XiJieYin
  * @since 2025/9/4 14:47
  */
-public record TodoType(String code, int codeInt, String description) {
+public record TodoType(String code, int codeInt, String description) implements Serializable {
 
     /**
      * 编码
