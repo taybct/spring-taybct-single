@@ -1,12 +1,14 @@
 package io.github.mangocrisp.spring.taybct.common.enums;
 
+import java.io.Serializable;
+
 /**
  * 用户状态
  *
  * @author xijieyin <br> 2022/8/5 18:30
  * @since 1.0.0
  */
-public record OAuthUserStatus(Byte status, String description) {
+public record OAuthUserStatus(Byte status, String description) implements Serializable {
 
     /**
      * 可用
