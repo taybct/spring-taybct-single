@@ -5,13 +5,13 @@
     <parent>
         <groupId>io.github.mangocrisp</groupId>
         <artifactId>spring-taybct-modules</artifactId>
-        <version>3.2.4</version>
+        <version>3.5.0-beta.1</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>io.github.mangocrisp</groupId>
     <artifactId>spring-taybct-module-lf</artifactId>
-    <version>3.2.4</version>
+    <version>3.5.0-beta.1</version>
     <name>${project.artifactId}</name>
     <packaging>jar</packaging>
     <description>logic-flow 流程引擎</description>
@@ -107,8 +107,8 @@
         <!--oracle驱动-->
         <dependency>
             <groupId>com.oracle.database.jdbc</groupId>
-            <artifactId>ojdbc8</artifactId>
-            <version>${ojdbc8.version}</version>
+            <artifactId>ojdbc11</artifactId>
+            <version>${ojdbc.version}</version>
             <optional>true</optional>
             <scope>provided</scope>
         </dependency>

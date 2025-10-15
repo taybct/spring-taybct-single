@@ -5,13 +5,13 @@
     <parent>
         <groupId>org.springframework.cloud</groupId>
         <artifactId>spring-cloud-dependencies-parent</artifactId>
-        <version>3.0.1</version>
+        <version>4.3.1</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>io.github.mangocrisp</groupId>
     <artifactId>spring-taybct-dependencies</artifactId>
-    <version>3.2.4</version>
+    <version>3.5.0-beta.1</version>
     <name>Spring TayBct</name>
     <description>Spring TayBct</description>
     <url>https://github.com/mangocrisp/spring-taybct</url>
@@ -55,9 +55,9 @@
         <!--central 发布插件-->
         <central-publishing-maven-plugin.version>0.5.0</central-publishing-maven-plugin.version>
         <!--Gpg Signature 插件-->
-        <maven-gpg-plugin.version>3.2.5</maven-gpg-plugin.version>
+        <maven-gpg-plugin.version>3.2.8</maven-gpg-plugin.version>
         <!--平台版本-->
-        <project.version>3.2.4</project.version>
+        <project.version>3.5.0-beta.1</project.version>
     </properties>
 
     <dependencyManagement>

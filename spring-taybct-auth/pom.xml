@@ -5,13 +5,13 @@
     <parent>
         <groupId>io.github.mangocrisp</groupId>
         <artifactId>spring-taybct</artifactId>
-        <version>3.2.4</version>
+        <version>3.5.0-beta.1</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>io.github.mangocrisp</groupId>
     <artifactId>spring-taybct-auth</artifactId>
-    <version>3.2.4</version>
+    <version>3.5.0-beta.1</version>
     <name>${project.artifactId}</name>
     <packaging>jar</packaging>
     <description>认证，授权服务</description>
@@ -104,17 +104,17 @@
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-oauth2-resource-server</artifactId>
-            <version>${spring-security-oauth2-resource-server.version}</version>
+            <version>${spring-security-core.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-oauth2-client</artifactId>
-            <version>${spring-security-oauth2-client.version}</version>
+            <version>${spring-security-core.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-oauth2-jose</artifactId>
-            <version>${spring-security-oauth2-jose.version}</version>
+            <version>${spring-security-core.version}</version>
         </dependency>
 
         <!--安全工具-->
@@ -161,8 +161,8 @@
         <!--oracle驱动-->
         <dependency>
             <groupId>com.oracle.database.jdbc</groupId>
-            <artifactId>ojdbc8</artifactId>
-            <version>${ojdbc8.version}</version>
+            <artifactId>ojdbc11</artifactId>
+            <version>${ojdbc.version}</version>
             <optional>true</optional>
             <scope>provided</scope>
         </dependency>
