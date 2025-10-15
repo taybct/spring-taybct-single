@@ -184,6 +184,37 @@
             </exclusions>
         </dependency>
 
+        <!--easyexcel poi 操作导入导出 excel-->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>easyexcel</artifactId>
+            <version>${easyexcel.version}</version>
+            <optional>true</optional>
+            <scope>provided</scope>
+        </dependency>
+        <!-- easypoi的支持 -->
+        <dependency>
+            <groupId>cn.afterturn</groupId>
+            <artifactId>easypoi-base</artifactId>
+            <version>${easypoi.version}</version>
+            <optional>true</optional>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>cn.afterturn</groupId>
+            <artifactId>easypoi-web</artifactId>
+            <version>${easypoi.version}</version>
+            <optional>true</optional>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>cn.afterturn</groupId>
+            <artifactId>easypoi-annotation</artifactId>
+            <version>${easypoi.version}</version>
+            <optional>true</optional>
+            <scope>provided</scope>
+        </dependency>
+
     </dependencies>
 
 </project>
