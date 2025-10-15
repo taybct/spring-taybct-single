@@ -7,8 +7,8 @@
     <groupId>io.github.mangocrisp</groupId>
     <artifactId>spring-taybct</artifactId>
     <version>3.5.0-beta.1</version>
-    <name>Spring TayBct</name>
-    <description>Spring TayBct</description>
+    <name>Spring TayBct Single</name>
+    <description>Spring TayBct Single</description>
     <url>https://github.com/mangocrisp/spring-taybct</url>
     <packaging>pom</packaging>
 
@@ -47,8 +47,9 @@
     </scm>
 
     <properties>
-        <!--central 发布插件-->
-        <central-publishing-maven-plugin.version>0.5.0</central-publishing-maven-plugin.version>
+
+        <!--框架依赖-->
+
         <!-- Collection 增强Java集合框架 -->
         <commons-collections4.version>4.4</commons-collections4.version>
         <!--commons-dbutils jdbc 工具类-->
@@ -113,8 +114,6 @@
         <maven.compiler.release>21</maven.compiler.release>
         <!--maven 插件-->
         <maven-compiler-plugin.version>3.14.1</maven-compiler-plugin.version>
-        <!--Gpg Signature 插件-->
-        <maven-gpg-plugin.version>3.2.8</maven-gpg-plugin.version>
         <!-- javadoc插件 -->
         <maven-javadoc-plugin.version>3.12.0</maven-javadoc-plugin.version>
         <!--maven 源码插件-->
@@ -171,6 +170,23 @@
         <spring-security-oauth2-authorization-server.version>1.5.2</spring-security-oauth2-authorization-server.version>
         <!--spring-security-rsa-->
         <spring-security-rsa.version>1.1.5</spring-security-rsa.version>
+
+        <!--项目需要-->
+
+        <dockerfile-maven-plugin.version>1.4.13</dockerfile-maven-plugin.version>
+        <!--Registry2仓库的地址，ip:port-->
+        <docker.repository.url>127.0.0.1:5000</docker.repository.url>
+        <!--<docker.repository.url>registry.cn-beijing.aliyuncs.com</docker.repository.url>-->
+        <!--项目名-->
+        <docker.registry.name>spring-taybct-single</docker.registry.name>
+        <docker.registry.username>taybct</docker.registry.username>
+        <docker.registry.password>taybct</docker.registry.password>
+        <!--maven 打包工具，可以把各个模块打的包移动到同一个 target 文件夹下面方便部署-->
+        <maven-antrun-plugin.version>3.1.0</maven-antrun-plugin.version>
+        <!--生成 archetype 模板插件-->
+        <maven-archetype-plugin.version>3.4.1</maven-archetype-plugin.version>
+        <!--工具版本-->
+        <spring-taybct-tools.version>3.5.0-beta.1</spring-taybct-tools.version>
     </properties>
 
     <!-- 依赖声明 -->
@@ -185,13 +201,65 @@
                 <scope>import</scope>
             </dependency>
 
-            <!--依赖版本管理-->
+            <!--运行模块-鉴权模块-->
             <dependency>
                 <groupId>io.github.mangocrisp</groupId>
-                <artifactId>spring-taybct-dependencies</artifactId>
+                <artifactId>spring-taybct-auth</artifactId>
                 <version>${project.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
+            </dependency>
+            <!--运行模块-基础网关-->
+            <dependency>
+                <groupId>io.github.mangocrisp</groupId>
+                <artifactId>spring-taybct-gateway</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <!--运行模块-文件管理-->
+            <dependency>
+                <groupId>io.github.mangocrisp</groupId>
+                <artifactId>spring-taybct-admin-file</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <!--运行模块-日志管理-->
+            <dependency>
+                <groupId>io.github.mangocrisp</groupId>
+                <artifactId>spring-taybct-admin-log</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <!--运行模块-系统模块-->
+            <dependency>
+                <groupId>io.github.mangocrisp</groupId>
+                <artifactId>spring-taybct-module-system</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <!--任务调度模块-->
+            <dependency>
+                <groupId>io.github.mangocrisp</groupId>
+                <artifactId>spring-taybct-module-scheduling</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <!--任务调度模块-->
+            <dependency>
+                <groupId>io.github.mangocrisp</groupId>
+                <artifactId>spring-taybct-module-online-doc</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <!--流程引擎-->
+            <dependency>
+                <groupId>io.github.mangocrisp</groupId>
+                <artifactId>spring-taybct-module-lf</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <!--api 接口-系统-->
+            <dependency>
+                <groupId>io.github.mangocrisp</groupId>
+                <artifactId>spring-taybct-api-system</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <!--公共模块（偏业务）-->
+            <dependency>
+                <groupId>io.github.mangocrisp</groupId>
+                <artifactId>spring-taybct-common</artifactId>
+                <version>${project.version}</version>
             </dependency>
 
         </dependencies>
@@ -236,27 +304,14 @@
         <module>spring-taybct-auth</module>
         <module>spring-taybct-gateway</module>
         <module>spring-taybct-common</module>
+        <module>run</module>
     </modules>
 
     <build>
-        <finalName>${project.artifactId}</finalName>
+        <finalName>${project.artifactId}-${project.version}</finalName>
         <resources>
             <resource>
                 <directory>src/main/resources</directory>
-                <excludes>
-                    <!--这里把框架默认的 jks 排除-->
-                    <exclude>
-                        *.jks
-                    </exclude>
-                    <!--这里把框架默认的 cer 公钥排除-->
-                    <exclude>
-                        *.cer
-                    </exclude>
-                    <!--这里把框架默认的 key 密钥排除-->
-                    <exclude>
-                        *.key
-                    </exclude>
-                </excludes>
             </resource>
             <resource>
                 <directory>src/main/java</directory>
@@ -291,17 +346,23 @@
                     <artifactId>maven-javadoc-plugin</artifactId>
                     <version>${maven-javadoc-plugin.version}</version>
                 </plugin>
-                <!--central 发布插件-->
-                <plugin>
-                    <groupId>org.sonatype.central</groupId>
-                    <artifactId>central-publishing-maven-plugin</artifactId>
-                    <version>${central-publishing-maven-plugin.version}</version>
-                </plugin>
-                <!-- Gpg Signature -->
+                <!--maven 打包工具-->
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-gpg-plugin</artifactId>
-                    <version>${maven-gpg-plugin.version}</version>
+                    <artifactId>maven-antrun-plugin</artifactId>
+                    <version>${maven-antrun-plugin.version}</version>
+                </plugin>
+                <!--生成 maven 模板-->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-archetype-plugin</artifactId>
+                    <version>${maven-archetype-plugin.version}</version>
+                </plugin>
+                <!--docker 打包-->
+                <plugin>
+                    <groupId>com.spotify</groupId>
+                    <artifactId>dockerfile-maven-plugin</artifactId>
+                    <version>${dockerfile-maven-plugin.version}</version>
                 </plugin>
             </plugins>
         </pluginManagement>
@@ -315,7 +376,7 @@
                     <finalName>${project.build.finalName}</finalName>
                     <!-- spring-boot:run 中文乱码解决 -->
                     <jvmArguments>-Dfile.encoding=UTF-8</jvmArguments>
-                    <skip>true</skip>
+                    <!--<skip>true</skip>-->
                     <!--打包本地 jar 包到-->
                     <includeSystemScope>true</includeSystemScope>
                 </configuration>
@@ -375,34 +436,33 @@
                     </execution>
                 </executions>
             </plugin>
-            <!--central 发布插件-->
-            <plugin>
-                <groupId>org.sonatype.central</groupId>
-                <artifactId>central-publishing-maven-plugin</artifactId>
-                <version>${central-publishing-maven-plugin.version}</version>
-                <extensions>true</extensions>
-                <configuration>
-                    <publishingServerId>taybct</publishingServerId>
-                </configuration>
-            </plugin>
-            <!-- Gpg Signature -->
+            <!--生成 maven 模板-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-gpg-plugin</artifactId>
-                <version>${maven-gpg-plugin.version}</version>
-                <executions>
-                    <execution>
-                        <id>sign-artifacts</id>
-                        <phase>verify</phase>
-                        <goals>
-                            <goal>sign</goal>
-                        </goals>
-                        <configuration>
-                            <useAgent>true</useAgent>
-                            <!--<passphraseServerId>${gpg.keyname}</passphraseServerId>-->
-                        </configuration>
-                    </execution>
-                </executions>
+                <artifactId>maven-archetype-plugin</artifactId>
+                <version>${maven-archetype-plugin.version}</version>
+            </plugin>
+            <!-- 构建和推动Docker镜像 -->
+            <plugin>
+                <groupId>com.spotify</groupId>
+                <artifactId>dockerfile-maven-plugin</artifactId>
+                <version>${dockerfile-maven-plugin.version}</version>
+                <configuration>
+                    <!--如果需要自动打包 docker 镜像，就注释这个标签 skip-->
+                    <skip>true</skip>
+                    <contextDirectory>${maven.multiModuleProjectDirectory}</contextDirectory>
+                    <useMavenSettingsForAuth>true</useMavenSettingsForAuth>
+                    <!--仓库地址/项目名/模块名-->
+                    <repository>${docker.repository.url}/${docker.registry.name}/${project.build.finalName}</repository>
+                    <!--用户名-->
+                    <username>${docker.registry.username}</username>
+                    <!--用户密码-->
+                    <password>${docker.registry.password}</password>
+                    <tag>${project.version}</tag>
+                    <buildArgs>
+                        <JAR_FILE>target/${project.build.finalName}.jar</JAR_FILE>
+                    </buildArgs>
+                </configuration>
             </plugin>
         </plugins>
     </build>
