@@ -185,13 +185,18 @@
                 <scope>import</scope>
             </dependency>
 
-            <!--依赖版本管理-->
+            <!--api 接口-系统-->
             <dependency>
                 <groupId>io.github.mangocrisp</groupId>
-                <artifactId>spring-taybct-dependencies</artifactId>
+                <artifactId>spring-taybct-api-system</artifactId>
                 <version>${project.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
+            </dependency>
+
+            <!--公共模块（偏业务）-->
+            <dependency>
+                <groupId>io.github.mangocrisp</groupId>
+                <artifactId>spring-taybct-common</artifactId>
+                <version>${project.version}</version>
             </dependency>
 
         </dependencies>
