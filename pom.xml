@@ -302,7 +302,6 @@
         <module>spring-taybct-modules</module>
         <module>spring-taybct-admin</module>
         <module>spring-taybct-auth</module>
-        <module>spring-taybct-gateway</module>
         <module>spring-taybct-common</module>
         <module>run</module>
     </modules>

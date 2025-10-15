@@ -96,7 +96,7 @@ spring:
       # 用来检测连接是否有效的sql
       # mysql中为 select 'x'
       # oracle中为 select 1 from dual
-      validation-query: SELECT 'x'
+      validation-query: SELECT 1
       # 检测连接是否有效的超时时间
       validation-query-timeout: 1
       # 申请连接时会执行 validationQuery 检测连接是否有效,开启会降低性能,默认为true
