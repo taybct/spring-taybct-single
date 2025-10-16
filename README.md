@@ -6,7 +6,7 @@ Spring TayBct 是一个 Spring 业务组件基础集成的基础业务库，对�
 
 #### 软件架构
 
-- 基于 spring boot 开发，版本和 spring boot 大版本基本同步，例如 spring-taybct 3.2.x -> spring-boot 3.2.x.
+- 基于 spring boot 开发，版本和 spring boot 大版本基本同步，例如 spring-taybct 3.5.x -> spring-boot 3.5.x.
 - 适配一些 spring 相关的基础组件的简单基础集成
 - 系统管理等一些基础通用业务模块的基础简易集成
 
