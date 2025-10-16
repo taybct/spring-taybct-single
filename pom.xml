@@ -173,6 +173,7 @@
 
         <!--项目需要-->
 
+        <!--Docker maven 插件-->
         <dockerfile-maven-plugin.version>1.4.13</dockerfile-maven-plugin.version>
         <!--Registry2仓库的地址，ip:port-->
         <docker.repository.url>127.0.0.1:5000</docker.repository.url>
