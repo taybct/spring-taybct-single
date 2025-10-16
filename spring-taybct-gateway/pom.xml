@@ -73,10 +73,10 @@
             <version>${project.version}</version>
         </dependency>
 
-        <!-- SpringCloud Gateway -->
+        <!-- SpringCloud Gateway WebFlux -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-gateway</artifactId>
+            <artifactId>spring-cloud-gateway-server-webflux</artifactId>
             <version>${spring-cloud-build.version}</version>
         </dependency>
 
