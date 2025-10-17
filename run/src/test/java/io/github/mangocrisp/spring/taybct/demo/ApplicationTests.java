@@ -1,10 +1,7 @@
 package io.github.mangocrisp.spring.taybct.demo;
 
-import cn.hutool.crypto.digest.MD5;
 import io.github.mangocrisp.spring.taybct.api.system.domain.SysOauth2Client;
-import io.github.mangocrisp.spring.taybct.common.constants.HeaderConstants;
 import io.github.mangocrisp.spring.taybct.single.RunApplication;
-import io.github.mangocrisp.spring.taybct.tool.core.constant.AuthHeaderConstants;
 import jakarta.annotation.Resource;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,10 +13,8 @@ import org.springframework.security.oauth2.server.authorization.client.Registere
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClientRepository;
 import org.springframework.security.oauth2.server.authorization.settings.ClientSettings;
 import org.springframework.security.oauth2.server.authorization.settings.TokenSettings;
-import org.springframework.security.rsa.crypto.RsaSecretEncryptor;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.security.KeyPair;
 import java.time.Duration;
 import java.util.Arrays;
 import java.util.Optional;
@@ -148,44 +143,4 @@ public class ApplicationTests {
         return builder.build();
     }
 
-    @Resource
-    private KeyPair keyPair;
-
-    /**
-     * 如果想让客户端 id 和密钥在请求的时候不明文传输可以使用这样的请求头:
-     */
-    @Test
-    public void test1() {
-        RsaSecretEncryptor rsaSecretEncryptor = new RsaSecretEncryptor(keyPair.getPublic());
-        // 你的客户端 id
-        String clientId = "taybct_demo";
-        // 客户端密钥明文
-        String secret = "123456";
-        // 客户端密钥密文,一般是在数据库存密文,不会存明文,当然
-        String md5Str = MD5.create().digestHex(secret);
-        String encrypt = rsaSecretEncryptor.encrypt(String.format("%s:%s", clientId, md5Str));
-        System.out.println(encrypt);
-        String decrypt = new RsaSecretEncryptor(keyPair).decrypt(encrypt);
-        System.out.println(decrypt);
-
-        System.out.printf("请求头: %s:%s%s", AuthHeaderConstants.AUTHORIZATION_KEY, HeaderConstants.CUSTOMIZE_PREFIX, encrypt);
-
-        //  AQA74/76zyBNvZPa7VFaAKADl0OxT3mH+1aIPKinFfEK4yB9hqUNLyB1MhsQ6E1E8+NxzlyZSRzJJ6Z/qmBzp0RyjjNsgaN5klfWoh+7oJroEmul3jTtjuk4fCoiSIK3pBW9UHY5GIL/gBE+xtB+AwVCWW58c+zmCyehykbeFVHFK5yf6QNdXzbl7fDerQgUdydWEX3CwBt7O3wrQ2p849wkeZfCCP3lduPB748sCNcsX5+U89ppS09zXgTikQhD/quWmzzA+pvUs/YQEZ2qNxkHVSoP+bDzMKCfDNkzhohCfdXSmPYWeQ3dT4m4YpJXXnz+JmmJ2OCBwZZlja+wZNhxbgDpIu4TXMJb8JLGj2b/lg5U53OnM5TddPDQkB9u2Tr+6EZvL9AXjiKm5Vo+ub7EAHEXMMweRFg4mj7DjKAOKQ==
-        //  taybct_demo:e10adc3949ba59abbe56e057f20f883e
-        //  请求头: Authorization:taybct AQA74/76zyBNvZPa7VFaAKADl0OxT3mH+1aIPKinFfEK4yB9hqUNLyB1MhsQ6E1E8+NxzlyZSRzJJ6Z/qmBzp0RyjjNsgaN5klfWoh+7oJroEmul3jTtjuk4fCoiSIK3pBW9UHY5GIL/gBE+xtB+AwVCWW58c+zmCyehykbeFVHFK5yf6QNdXzbl7fDerQgUdydWEX3CwBt7O3wrQ2p849wkeZfCCP3lduPB748sCNcsX5+U89ppS09zXgTikQhD/quWmzzA+pvUs/YQEZ2qNxkHVSoP+bDzMKCfDNkzhohCfdXSmPYWeQ3dT4m4YpJXXnz+JmmJ2OCBwZZlja+wZNhxbgDpIu4TXMJb8JLGj2b/lg5U53OnM5TddPDQkB9u2Tr+6EZvL9AXjiKm5Vo+ub7EAHEXMMweRFg4mj7DjKAOKQ==
-
-        /*
-            为此测试,你需要创建以下数据:
-
-            INSERT INTO sys_role
-(id, "name", code, sort, status, create_user, create_time, update_user, update_time, is_deleted, tenant_id, unique_key)
-VALUES(5, '游客', 'TOURIST', 5, 1, 1, NULL, 1, '2022-10-19 15:37:36.000', 0, '000000', 0);
-
-INSERT INTO sys_oauth2_client
-(id, create_user, create_time, update_user, update_time, is_deleted, client_id, client_secret, resource_ids, "scope", authorized_grant_types, web_server_redirect_uri, authorities, access_token_validity, refresh_token_validity, additional_information, auto_approve, unique_key, client_name)
-VALUES(1640605022936346625, 1, '2023-03-28 14:41:33.068', 1, '2023-03-28 14:42:44.130', 0, 'taybct_demo', 'e10adc3949ba59abbe56e057f20f883e', NULL, 'all', 'demo', 'https://www.baidu.com', NULL, 3600, 3600, NULL, 'true', 0, 'taybct_demo');
-
-
-         */
-    }
 }
