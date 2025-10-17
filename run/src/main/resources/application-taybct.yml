@@ -52,7 +52,7 @@ taybct:
     # 黑名单
     black-list:
       uris:
-        - "actuator/**"
+        - "/actuator/**"
     # 不校验白名单
     ignore:
       uris:
