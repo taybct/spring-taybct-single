@@ -1,6 +1,5 @@
-# 服务器配置
-server:
-  port: 9102
+swagger:
+  title: "网关模块"
 # Spring
 spring:
   main:
@@ -12,6 +11,16 @@ spring:
     name: gateway
   profiles:
     active: dev
+  config:
+    # 导入配置
+    # optional: 可选，如果不设置这个在拉取nacos配置异常时会快速失败，会导致 spring 容器启动失败
+    # group: 指定 group 覆盖默认 group
+    # refreshEnabled: 是否开启动态刷新
+    import:
+      - optional:nacos:${spring.application.name}.yml?group=${spring.cloud.nacos.config.group}&refreshEnabled=true # 同应用名配置
+      - optional:nacos:taybct.yml?group=${spring.cloud.nacos.config.group}&refreshEnabled=true # 基本配置
+      - optional:nacos:taybct-global-exception.yml?group=${spring.cloud.nacos.config.group}&refreshEnabled=true # 全局异常配置
+      - optional:nacos:taybct-redis.yml?group=${spring.cloud.nacos.config.group}&refreshEnabled=true # redis 缓存
   cloud:
     # 使用 nacos 注册发现和配置
     nacos:
@@ -21,29 +30,18 @@ spring:
         # 服务注册地址
         server-addr: 127.0.0.1:8848
         # 命名空间
-        namespace: taybct-3-2-x
+        namespace: taybct-3-5-x
         # 配置分组
         group: ${spring.profiles.active}
       config:
         # 服务注册地址
         server-addr: 127.0.0.1:8848
         # 命名空间
-        namespace: taybct-3-2-x
+        namespace: taybct-3-5-x
         # 配置分组
         group: ${spring.profiles.active}
         # 配置文件格式
         file-extension: yml
-        # 共享配置
-        shared-configs:
-          - data-id: ${taybct.config-prefix}.${spring.cloud.nacos.config.file-extension}      # 基本配置
-            group: ${spring.cloud.nacos.config.group}
-            refresh: true
-          - data-id: ${taybct.config-prefix}-global-exception.${spring.cloud.nacos.config.file-extension}     # 全局异常配置
-            group: ${spring.cloud.nacos.config.group}
-            refresh: true
-          - data-id: ${taybct.config-prefix}-redis.${spring.cloud.nacos.config.file-extension}      # redis 缓存
-            group: ${spring.cloud.nacos.config.group}
-            refresh: true
     sentinel:
       # 取消控制台懒加载
       eager: true
@@ -81,83 +79,96 @@ spring:
         # 日志存放路径
         dir: ./logs/sentinel/${spring.application.name}/
     gateway:
-      # 网关跨域配置
-      globalcors:
-        cors-configurations:
-          '[/**]':
-            #是否允许cookie跨域  true允许
-            allowCredentials: true
-            #允许跨域的url * 则允许全部
-            allowedOriginPatterns: '*'
-            # 允许跨域的方法 * 则全部
-            allowedMethods: '*'
-            # 跨域预检时间
-            maxAge: 3600
-      discovery:
-        locator:
-          # 开启从注册中心动态创建路由的功能
-          enabled: true
-          # 使用小写服务名，默认是大写
-          lowerCaseServiceId: true
-      routes:
-        # 鉴权模块
-        - id: auth
-          uri: lb://auth
-          predicates:
-            - Path=/auth/**
-          filters:
-            - StripPrefix=1
-        # 系统模块
-        - id: module-system
-          uri: lb://module-system
-          predicates:
-            - Path=/system/**
-          filters:
-            - StripPrefix=1
-        # 文件服务
-        - id: admin-file
-          uri: lb://admin-file
-          predicates:
-            - Path=/admin-file/**
-          filters:
-            - StripPrefix=1
-        # 日志管理
-        - id: admin-log
-          uri: lb://admin-log
-          predicates:
-            - Path=/admin-log/**
-          filters:
-            - StripPrefix=1
-        # 代理
-        - id: taybct-admin-proxy
-          uri: lb://taybct-admin-proxy
-          predicates:
-            - Path=/admin-proxy/**
-          filters:
-            - StripPrefix=1
-        # 测试模块2
-        - id: module2
-          uri: lb://module2
-          predicates:
-            - Path=/module2/**
-          filters:
-            - StripPrefix=1
-        # 任务调度模块
-        - id: module-scheduling
-          uri: lb://module-scheduling
-          predicates:
-            - Path=/scheduling/**
-          filters:
-            - StripPrefix=1
-        # 流程中心
-        - id: module-logic-flow
-          uri: lb://module-logic-flow
-          predicates:
-            - Path=/lf/**
-          filters:
-            - StripPrefix=1
+      server:
+        webflux:
+          # 网关跨域配置
+          globalcors:
+            cors-configurations:
+              '[/**]':
+                #是否允许cookie跨域  true允许
+                allowCredentials: true
+                #允许跨域的url * 则允许全部
+                allowedOriginPatterns: '*'
+                # 允许跨域的方法 * 则全部
+                allowedMethods: '*'
+                # 跨域预检时间
+                maxAge: 3600
+          discovery:
+            locator:
+              # 开启从注册中心动态创建路由的功能
+              enabled: true
+              # 使用小写服务名，默认是大写
+              lowerCaseServiceId: true
+          routes:
+            # 鉴权模块
+            - id: auth
+              uri: lb://auth
+              predicates:
+                - Path=/auth/**
+              filters:
+                - StripPrefix=1
+            # 系统模块
+            - id: module-system
+              uri: lb://module-system
+              predicates:
+                - Path=/system/**
+              filters:
+                - StripPrefix=1
+            # 系统模块
+            - id: module-system-websocket
+              uri: lb://module-system
+              predicates:
+                - Path=/websocket/**
+            # 文件服务
+            - id: admin-file
+              uri: lb://admin-file
+              predicates:
+                - Path=/admin-file/**
+              filters:
+                - StripPrefix=1
+            # 日志管理
+            - id: admin-log
+              uri: lb://admin-log
+              predicates:
+                - Path=/admin-log/**
+              filters:
+                - StripPrefix=1
+            # 代理
+            - id: taybct-admin-proxy
+              uri: lb://taybct-admin-proxy
+              predicates:
+                - Path=/admin-proxy/**
+              filters:
+                - StripPrefix=1
+            # 测试模块2
+            - id: module2
+              uri: lb://module2
+              predicates:
+                - Path=/module2/**
+              filters:
+                - StripPrefix=1
+            # 任务调度模块
+            - id: module-scheduling
+              uri: lb://module-scheduling
+              predicates:
+                - Path=/scheduling/**
+              filters:
+                - StripPrefix=1
+            # 流程中心
+            - id: module-lf
+              uri: lb://module-lf
+              predicates:
+                - Path=/lf/**
+              filters:
+                - StripPrefix=1
+            # 在线文档
+            - id: module-online-doc
+              uri: lb://module-online-doc
+              predicates:
+                - Path=/online-doc/**
+              filters:
+                - StripPrefix=1
 taybct:
-  config-prefix: taybct
   rsa:
     # resources 目录下的证书
     resource: rsa.jks
@@ -171,60 +182,6 @@ taybct:
         alias: limited
         password: taybct
         expire-check: true
-  # 安全配置
-  secure:
-    # 不校验白名单
-    ignore:
-      uris:
-        - "/auth/oauth/**"
-        - "/oauth/logout"
-        - "/data/**"
-        - "/login/**"
-        - "/logout/**"
-        - "/admin-file/statics/**"
-        - "/system/v1/params/cache/sys_title"
-        - "/error"
-        # 静态资源
-        - "/csrf"
-        - "/error"
-        - "/static/**"
-        - "/locate/**"
-        - "/favicon.ico"
-        # 文件
-        - "/admin-file/statics/**"
-        # Monitor
-        - "/assets/**"
-        - "/variables.css"
-        - "/login"
-        - "/actuator/**"
-        - "/instances/**"
-        # 验证码
-        - "/captcha"
-        - "/enableCaptcha"
-        # 允许获取公钥接口的访问
-        - "/rsa/publicKey"
-        - "/sm2/publicKey"
-        # swagger
-        - "/*/v3/api-docs"
-        - "/*/v3/api-docs/default"
-        - "/v3/**"
-        - "/doc.html"
-        - "/swagger-ui/**"
-        - "/swagger-resources"
-        - "/swagger-resources/**"
-        - "/webjars/**"
-        - "/swagger-ui.html"
-        # 注册客户端
-        - "/registeredClient"
-        - "/es/**"
-      captcha-grant-type:
-        - "refresh_token" # 刷新令牌不需要验证码
-    captcha-urls: # 需要验证码的请求
-      - "/auth/oauth/token"
-      - "/auth/oauth/login"
-    captcha-authorizations:
-      - "Basic dGF5YmN0X3BjOmUxMGFkYzM5NDliYTU5YWJiZTU2ZTA1N2YyMGY4ODNl"
-    allow-when-no-match: true
 knife4j:
   gateway:
     # 是否开启
@@ -242,6 +199,7 @@ knife4j:
       # 需要排除的微服务(eg:网关服务)
       excluded-services:
         - taybct-gateway
+        - admin-monitor
       # 各个聚合服务的个性化配置，key:注册中心中的服务名称，value：个性化配置
       service-config:
         auth:
@@ -291,5 +249,12 @@ knife4j:
           order: 7
           # 前端显示名称
           group-name: 搜索引擎
+          # 重新指定basePath，一般在OpenAPI3规范中需要
+          context-path: /
+        module-online-doc:
+          # 排序
+          order: 8
+          # 前端显示名称
+          group-name: 在线文档
           # 重新指定basePath，一般在OpenAPI3规范中需要
           context-path: /

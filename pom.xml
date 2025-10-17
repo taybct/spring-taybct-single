@@ -263,6 +263,13 @@
                     <exclude>
                         *.key
                     </exclude>
+                    <exclude>
+                        *.pem
+                    </exclude>
+                    <!--默认配置文件-->
+                    <exclude>
+                        bootstrap.yml
+                    </exclude>
                 </excludes>
             </resource>
             <resource>
