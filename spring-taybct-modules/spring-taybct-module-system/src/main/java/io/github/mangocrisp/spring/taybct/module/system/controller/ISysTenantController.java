@@ -25,7 +25,7 @@ import java.util.List;
  *
  * @author xijieyin <br> 2022/8/17 10:29
  * @see SysTenant
- * @see io.github.mangocrisp.spring.taybct.tool.core.bean.controller.BaseController
+ * @see BaseController
  * @see ISysTenantService
  * @since 1.0.1
  */

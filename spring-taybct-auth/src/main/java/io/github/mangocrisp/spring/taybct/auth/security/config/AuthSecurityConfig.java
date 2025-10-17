@@ -47,7 +47,7 @@ import org.springframework.security.web.context.DelegatingSecurityContextReposit
 import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
 import org.springframework.security.web.context.RequestAttributeSecurityContextRepository;
 import org.springframework.security.web.context.SecurityContextRepository;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.security.web.servlet.util.matcher.PathPatternRequestMatcher;
 
 import java.security.KeyPair;
 import java.util.stream.Collectors;
@@ -96,8 +96,8 @@ public class AuthSecurityConfig {
                         .requestMatchers(ArrayUtil.toArray(secureProp.getBlackList().getUris(), String.class)).denyAll()
                         // 白名单
                         .requestMatchers(ArrayUtil.toArray(secureProp.getIgnore().getUris()
-                                        .stream().map(AntPathRequestMatcher::new).collect(Collectors.toList())
-                                , AntPathRequestMatcher.class)).permitAll()
+                                        .stream().map(uri -> PathPatternRequestMatcher.withDefaults().matcher(uri)).collect(Collectors.toList())
+                                , PathPatternRequestMatcher.class)).permitAll()
                         .anyRequest()
                         //.authenticated()
                         .access(authorizationManager)

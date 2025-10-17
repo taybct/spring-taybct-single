@@ -138,8 +138,12 @@ public class AuthorizationServerConfig {
             , CorsConfigurationSource corsConfigurationSource)
             throws Exception {
 
+//        OAuth2AuthorizationServerConfigurer authorizationServerConfigurer = OAuth2AuthorizationServerConfigurer.authorizationServer();
+//        (http.securityMatcher(authorizationServerConfigurer.getEndpointsMatcher()).with(authorizationServerConfigurer, Customizer.withDefaults()))
+//                .authorizeHttpRequests((authorize) -> ((AuthorizeHttpRequestsConfigurer.AuthorizedUrl)authorize.anyRequest()).authenticated());
+
         // 应用默认授权服务器配置
-        OAuth2AuthorizationServerConfiguration.applyDefaultSecurity(http);
+        //OAuth2AuthorizationServerConfiguration.applyDefaultSecurity(http);
 
         AtomicReference<AuthenticationManager> authenticationManagerAtomicReference = new AtomicReference<>();
 

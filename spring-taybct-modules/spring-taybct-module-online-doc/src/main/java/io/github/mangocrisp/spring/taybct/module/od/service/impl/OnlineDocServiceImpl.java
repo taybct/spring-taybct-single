@@ -174,7 +174,7 @@ public class OnlineDocServiceImpl extends ServiceImpl<OnlineDocMapper, OnlineDoc
                             .orderByAsc(SysUserDept::getId)
                             .last("limit 1"));
                     SysDept sysDept = null;
-                    if (sysUserDept != null){
+                    if (sysUserDept != null) {
                         sysDept = sysDeptMapper.selectOne(Wrappers.<SysDept>lambdaQuery()
                                 .select(SysDept::getId, SysDept::getName, SysDept::getFullName)
                                 .eq(SysDept::getId, sysUserDept.getDeptId()));
