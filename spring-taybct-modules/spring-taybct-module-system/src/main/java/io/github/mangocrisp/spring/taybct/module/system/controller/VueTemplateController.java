@@ -36,7 +36,6 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
-import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -55,7 +54,6 @@ import java.util.concurrent.atomic.AtomicReference;
  * @author SuMuYue
  * @since 2025-08-15 11:12:11
  */
-@AutoConfiguration
 @Tag(name = "前端通用模板控制器")
 @RestController
 @RequestMapping(ServeConstants.CONTEXT_PATH_SYSTEM + "v1/vueTemplate")

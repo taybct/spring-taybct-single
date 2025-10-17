@@ -63,14 +63,6 @@ public class SecureProp {
     public static class Ignore {
 
         /**
-         * 鉴权忽略的 url 地址（已经弃用）
-         */
-        @Deprecated(
-                since = "3.2.1",
-                forRemoval = true
-        )
-        private Set<String> urls = new LinkedHashSet<>();
-        /**
          * 鉴权忽略的 url 地址
          */
         private Set<String> uris = new LinkedHashSet<>();
@@ -96,14 +88,6 @@ public class SecureProp {
     @NoArgsConstructor
     public static class Black {
 
-        /**
-         * 黑名单 url 优先度比白名单高，只有黑染白，少见白染黑（已经弃用）
-         */
-        @Deprecated(
-                since = "3.2.1",
-                forRemoval = true
-        )
-        private Set<String> urls = new LinkedHashSet<>();
         /**
          * 黑名单 url 优先度比白名单高，只有黑染白，少见白染黑
          */
