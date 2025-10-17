@@ -206,6 +206,13 @@
             <version>${project.version}</version>
         </dependency>
 
+        <!--knife4j 集成 springdoc-openapi（修复兼容 springdoc-openapi 2.7.x 以上版本）-->
+        <dependency>
+            <groupId>io.github.mangocrisp</groupId>
+            <artifactId>knife4j-openapi3-jakarta-spring-boot-starter</artifactId>
+            <version>${knife4j-fix.version}</version>
+        </dependency>
+
         <!-- springdoc-openapi 核心依赖（包含 OpenAPI 3 规范生成和 Swagger UI） -->
         <dependency>
             <groupId>org.springdoc</groupId>
