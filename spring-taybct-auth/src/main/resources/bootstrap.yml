@@ -95,3 +95,9 @@ taybct:
         sort: 1
         params:
           "tenantId": "000000"
+# 如果遇到莫明其妙的错误，请尝试打开下面日志级别
+#logging:
+#  level:
+#    cn.gx.auth: DEBUG
+#    org.springframework.security: DEBUG
+#    org.springframework.jdbc.core: DEBUG
