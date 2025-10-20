@@ -377,49 +377,6 @@
                     </execution>
                 </executions>
             </plugin>
-            <!-- javadoc插件 -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-javadoc-plugin</artifactId>
-                <version>${maven-javadoc-plugin.version}</version>
-                <executions>
-                    <execution>
-                        <id>attach-javadocs</id>
-                        <goals>
-                            <goal>jar</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <!--central 发布插件-->
-            <plugin>
-                <groupId>org.sonatype.central</groupId>
-                <artifactId>central-publishing-maven-plugin</artifactId>
-                <version>${central-publishing-maven-plugin.version}</version>
-                <extensions>true</extensions>
-                <configuration>
-                    <publishingServerId>taybct</publishingServerId>
-                </configuration>
-            </plugin>
-            <!-- Gpg Signature -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-gpg-plugin</artifactId>
-                <version>${maven-gpg-plugin.version}</version>
-                <executions>
-                    <execution>
-                        <id>sign-artifacts</id>
-                        <phase>verify</phase>
-                        <goals>
-                            <goal>sign</goal>
-                        </goals>
-                        <configuration>
-                            <useAgent>true</useAgent>
-                            <!--<passphraseServerId>${gpg.keyname}</passphraseServerId>-->
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
         </plugins>
     </build>
 </project>
