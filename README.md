@@ -1,5 +1,9 @@
 # Spring TayBct
 
+[![GitHub license](https://img.shields.io/github/license/taybct/spring-taybct?style=flat)](./LICENSE)
+[![GitHub stars](https://img.shields.io/github/stars/taybct/spring-taybct?color=fa6470&style=flat)](https://github.com/taybct/spring-taybct/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/taybct/spring-taybct?style=flat)](https://github.com/taybct/spring-taybct/network/members)
+
 #### 介绍
 
 Spring TayBct 是一个 Spring 业务组件基础集成的基础业务库，对一些常用的系统管理，用户体系等基础功能做了基础的常用的简易的集成，并且提供一些业务开发过程中常用的功能模块集成，开箱即用。
