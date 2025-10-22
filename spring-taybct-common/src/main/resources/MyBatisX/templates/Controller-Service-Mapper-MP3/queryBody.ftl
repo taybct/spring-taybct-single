@@ -2,11 +2,11 @@ package ${baseInfo.packageName};
 
 import ${tableClass.fullClassName};
 import ${queryDTO.packageName}.${queryDTO.fileName};
-import io.github.mangocrisp.spring.taybct.tool.core.exception.def.BaseException;
-import io.github.mangocrisp.spring.taybct.tool.core.util.BeanUtil;
-import io.github.mangocrisp.spring.taybct.tool.core.constant.DateConstants;
+import io.github.taybct.tool.core.exception.def.BaseException;
+import io.github.taybct.tool.core.util.BeanUtil;
+import io.github.taybct.tool.core.constant.DateConstants;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import io.github.mangocrisp.spring.taybct.tool.core.bean.ModelConvertible;
+import io.github.taybct.tool.core.bean.ModelConvertible;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import io.swagger.v3.oas.annotations.Hidden;

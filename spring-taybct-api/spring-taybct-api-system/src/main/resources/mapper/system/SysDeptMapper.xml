@@ -2,9 +2,9 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="io.github.mangocrisp.spring.taybct.api.system.mapper.SysDeptMapper">
+<mapper namespace="io.github.taybct.api.system.mapper.SysDeptMapper">
 
-    <resultMap id="BaseResultMap" type="io.github.mangocrisp.spring.taybct.api.system.domain.SysDept">
+    <resultMap id="BaseResultMap" type="io.github.taybct.api.system.domain.SysDept">
         <id property="id" column="id" jdbcType="BIGINT"/>
         <result property="createUser" column="create_user" jdbcType="BIGINT"/>
         <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
@@ -40,7 +40,7 @@
         ,sd.type
     </sql>
 
-    <resultMap id="SysDeptTreeVOMap" type="io.github.mangocrisp.spring.taybct.api.system.vo.SysDeptTreeVO"
+    <resultMap id="SysDeptTreeVOMap" type="io.github.taybct.api.system.vo.SysDeptTreeVO"
                extends="BaseResultMap">
     </resultMap>
 
@@ -218,7 +218,7 @@
         </if>
     </select>
 
-    <select id="deptUserTree" resultType="io.github.mangocrisp.spring.taybct.api.system.vo.DeptUserTreeVO">
+    <select id="deptUserTree" resultType="io.github.taybct.api.system.vo.DeptUserTreeVO">
         select d.* from (
         select
         'd_' || sys_dept.id as id,

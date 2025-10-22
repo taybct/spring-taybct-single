@@ -1,6 +1,6 @@
-package io.github.mangocrisp.demo;
+package io.github.taybct.demo;
 
-import io.github.mangocrisp.spring.taybct.api.system.domain.SysOauth2Client;
+import io.github.taybct.api.system.domain.SysOauth2Client;
 import jakarta.annotation.Resource;
 import org.junit.Test;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;

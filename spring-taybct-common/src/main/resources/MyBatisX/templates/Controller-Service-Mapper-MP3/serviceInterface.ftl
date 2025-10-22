@@ -12,9 +12,9 @@ import ${tableClass.fullClassName};
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.alibaba.fastjson2.JSONObject;
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import io.github.mangocrisp.spring.taybct.tool.core.mybatis.support.SqlPageParams;
-import io.github.mangocrisp.spring.taybct.tool.core.bean.ModelConvertible;
-import io.github.mangocrisp.spring.taybct.tool.core.bean.UpdateModel;
+import io.github.taybct.tool.core.mybatis.support.SqlPageParams;
+import io.github.taybct.tool.core.bean.ModelConvertible;
+import io.github.taybct.tool.core.bean.UpdateModel;
 import java.util.Map;
 import java.util.List;
 

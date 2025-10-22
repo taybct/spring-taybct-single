@@ -2,9 +2,9 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="io.github.mangocrisp.spring.taybct.module.lf.mapper.EdgesMapper">
+<mapper namespace="io.github.taybct.module.lf.mapper.EdgesMapper">
 
-    <resultMap id="BaseResultMap" type="io.github.mangocrisp.spring.taybct.module.lf.domain.Edges">
+    <resultMap id="BaseResultMap" type="io.github.taybct.module.lf.domain.Edges">
         <id property="id" column="id" jdbcType="VARCHAR"/>
         <result property="sourceNodeId" column="source_node_id" jdbcType="VARCHAR"/>
         <result property="targetNodeId" column="target_node_id" jdbcType="VARCHAR"/>
@@ -21,7 +21,7 @@
         process_id
     </sql>
 
-    <insert id="insertSelective" parameterType="io.github.mangocrisp.spring.taybct.module.lf.domain.Edges">
+    <insert id="insertSelective" parameterType="io.github.taybct.module.lf.domain.Edges">
         insert into lf_edges
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">id,</if>

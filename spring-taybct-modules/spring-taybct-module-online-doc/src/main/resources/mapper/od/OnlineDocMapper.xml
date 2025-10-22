@@ -2,9 +2,9 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="io.github.mangocrisp.spring.taybct.module.od.mapper.OnlineDocMapper">
+<mapper namespace="io.github.taybct.module.od.mapper.OnlineDocMapper">
 
-    <resultMap id="BaseResultMap" type="io.github.mangocrisp.spring.taybct.module.od.domain.OnlineDoc">
+    <resultMap id="BaseResultMap" type="io.github.taybct.module.od.domain.OnlineDoc">
         <id property="id" column="t_online_doc_id" jdbcType="BIGINT"/>
         <result property="createUser" column="t_online_doc_create_user" jdbcType="BIGINT"/>
         <result property="createTime" column="t_online_doc_create_time" jdbcType="TIMESTAMP"/>
@@ -23,7 +23,7 @@
     </resultMap>
 
     <!--分页返回结果-->
-    <resultMap id="BasePageResultMap" type="io.github.mangocrisp.spring.taybct.module.od.vo.OnlineDocVO"
+    <resultMap id="BasePageResultMap" type="io.github.taybct.module.od.vo.OnlineDocVO"
                extends="BaseResultMap">
         <!--这里返回的是可扩展的返回结果 vo 之类的-->
         <!--<collection property="实体类里面的属性" javaType="返回的集合是什么集合的类型如：java.util.List" resultMap="指定映射集合类元素的类型的 resultMap"/>-->
@@ -31,11 +31,11 @@
         <result property="isAdmin" column="t_online_doc_vo_is_admin" jdbcType="SMALLINT"/>
     </resultMap>
 
-    <resultMap id="BaseDetailResultMap" type="io.github.mangocrisp.spring.taybct.module.od.vo.OnlineDocVO"
+    <resultMap id="BaseDetailResultMap" type="io.github.taybct.module.od.vo.OnlineDocVO"
                extends="BaseResultMap">
         <result property="isAdmin" column="t_online_doc_vo_is_admin" jdbcType="SMALLINT"/>
         <collection property="onlineDocPermitSet" javaType="java.util.Set"
-                    resultMap="io.github.mangocrisp.spring.taybct.module.od.mapper.OnlineDocPermitMapper.BaseResultMap"/>
+                    resultMap="io.github.taybct.module.od.mapper.OnlineDocPermitMapper.BaseResultMap"/>
     </resultMap>
 
     <!--表名-->
@@ -189,7 +189,7 @@
     <sql id="detail_sql">
         select t.*
         ,
-        <include refid="io.github.mangocrisp.spring.taybct.module.od.mapper.OnlineDocPermitMapper.Base_Column_List"/>
+        <include refid="io.github.taybct.module.od.mapper.OnlineDocPermitMapper.Base_Column_List"/>
         from (
         select
         <include refid="Base_Column_List"/>

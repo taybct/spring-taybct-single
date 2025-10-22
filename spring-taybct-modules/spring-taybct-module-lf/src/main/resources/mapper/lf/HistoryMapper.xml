@@ -2,9 +2,9 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="io.github.mangocrisp.spring.taybct.module.lf.mapper.HistoryMapper">
+<mapper namespace="io.github.taybct.module.lf.mapper.HistoryMapper">
 
-    <resultMap id="BaseResultMap" type="io.github.mangocrisp.spring.taybct.module.lf.domain.History">
+    <resultMap id="BaseResultMap" type="io.github.taybct.module.lf.domain.History">
         <id property="id" column="id" jdbcType="BIGINT"/>
         <result property="time" column="time" jdbcType="TIMESTAMP"/>
         <result property="userId" column="user_id" jdbcType="BIGINT"/>
@@ -26,7 +26,7 @@
         post_id,node_type
     </sql>
 
-    <resultMap id="HistoryListVOMap" type="io.github.mangocrisp.spring.taybct.module.lf.vo.HistoryListVO"
+    <resultMap id="HistoryListVOMap" type="io.github.taybct.module.lf.vo.HistoryListVO"
                extends="BaseResultMap">
         <result property="userName" column="user_name" jdbcType="VARCHAR"/>
         <result property="avatar" column="avatar" jdbcType="VARCHAR"/>

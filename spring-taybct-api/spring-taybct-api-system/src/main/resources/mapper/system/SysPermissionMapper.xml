@@ -2,9 +2,9 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="io.github.mangocrisp.spring.taybct.api.system.mapper.SysPermissionMapper">
+<mapper namespace="io.github.taybct.api.system.mapper.SysPermissionMapper">
 
-    <resultMap id="BaseResultMap" type="io.github.mangocrisp.spring.taybct.api.system.domain.SysPermission">
+    <resultMap id="BaseResultMap" type="io.github.taybct.api.system.domain.SysPermission">
         <id property="id" column="sp_id" jdbcType="BIGINT"/>
         <result property="groupId" column="sp_group_id" jdbcType="BIGINT"/>
         <result property="name" column="sp_name" jdbcType="VARCHAR"/>
@@ -17,7 +17,7 @@
         <result property="updateTime" column="sp_update_time" jdbcType="TIMESTAMP"/>
     </resultMap>
 
-    <resultMap id="RoleResultMap" type="io.github.mangocrisp.spring.taybct.api.system.domain.SysRole">
+    <resultMap id="RoleResultMap" type="io.github.taybct.api.system.domain.SysRole">
         <id property="id" column="role_id" jdbcType="BIGINT"/>
         <result property="name" column="role_name" jdbcType="VARCHAR"/>
         <result property="code" column="role_code" jdbcType="VARCHAR"/>
@@ -30,13 +30,13 @@
         <result property="isDeleted" column="role_is_deleted" jdbcType="TINYINT"/>
     </resultMap>
 
-    <resultMap id="VoResultMenu" type="io.github.mangocrisp.spring.taybct.api.system.vo.PermissionVO"
+    <resultMap id="VoResultMenu" type="io.github.taybct.api.system.vo.PermissionVO"
                extends="BaseResultMap">
         <result property="menuName" column="sm_name"/>
         <result property="groupName" column="spg_group_name"/>
     </resultMap>
 
-    <resultMap id="VoResultRole" type="io.github.mangocrisp.spring.taybct.api.system.vo.PermissionVO"
+    <resultMap id="VoResultRole" type="io.github.taybct.api.system.vo.PermissionVO"
                extends="BaseResultMap">
         <collection property="roles" javaType="java.util.Set" resultMap="RoleResultMap"/>
     </resultMap>

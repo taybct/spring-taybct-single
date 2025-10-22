@@ -2,9 +2,9 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="io.github.mangocrisp.spring.taybct.api.system.mapper.SysMenuMapper">
+<mapper namespace="io.github.taybct.api.system.mapper.SysMenuMapper">
 
-    <resultMap id="BaseResultMap" type="io.github.mangocrisp.spring.taybct.api.system.domain.SysMenu">
+    <resultMap id="BaseResultMap" type="io.github.taybct.api.system.domain.SysMenu">
         <id property="id" column="id" jdbcType="BIGINT"/>
         <result property="name" column="name" jdbcType="VARCHAR"/>
         <result property="parentId" column="parent_id" jdbcType="BIGINT"/>
@@ -29,7 +29,7 @@
     </resultMap>
 
     <!--菜单列表-->
-    <resultMap id="SysMenuVOMap" type="io.github.mangocrisp.spring.taybct.api.system.vo.SysMenuVO"
+    <resultMap id="SysMenuVOMap" type="io.github.taybct.api.system.vo.SysMenuVO"
                extends="BaseResultMap">
         <result property="hasChildren" column="has_children" jdbcType="TINYINT"/>
     </resultMap>
@@ -61,7 +61,7 @@
         sm.is_deleted
     </sql>
 
-    <resultMap id="RouterResultMap" type="io.github.mangocrisp.spring.taybct.api.system.vo.RouterVO">
+    <resultMap id="RouterResultMap" type="io.github.taybct.api.system.vo.RouterVO">
         <id property="id" column="sm_id" jdbcType="BIGINT"/>
         <result property="title" column="sm_title" jdbcType="VARCHAR"/>
         <result property="parentId" column="sm_parent_id" jdbcType="BIGINT"/>
@@ -77,7 +77,7 @@
         <result property="isBlank" column="sm_is_blank" jdbcType="TINYINT"/>
         <result property="isCache" column="sm_is_cache" jdbcType="TINYINT"/>
         <result property="menuType" column="sm_menu_type" jdbcType="VARCHAR"/>
-        <association property="meta" javaType="io.github.mangocrisp.spring.taybct.api.system.vo.RouterMeta"
+        <association property="meta" javaType="io.github.taybct.api.system.vo.RouterMeta"
                      column="sm_id" resultMap="RouterMetaResultMap"/>
         <!--这个路由（菜单）需要限制的按钮权限-->
         <collection property="permissions" javaType="java.util.Set" resultMap="RouterPermResultMap"/>
@@ -85,7 +85,7 @@
         <collection property="rolePermissions" javaType="java.util.Set" resultMap="RolePermResultMap"/>
     </resultMap>
 
-    <resultMap id="RouterMetaResultMap" type="io.github.mangocrisp.spring.taybct.api.system.vo.RouterMeta">
+    <resultMap id="RouterMetaResultMap" type="io.github.taybct.api.system.vo.RouterMeta">
         <id property="id" column="sm_id" jdbcType="BIGINT"/>
         <result property="title" column="sm_title" jdbcType="VARCHAR"/>
         <result property="icon" column="sm_icon" jdbcType="VARCHAR"/>
@@ -95,7 +95,7 @@
         <collection property="permissions" javaType="java.util.Set" resultMap="RouterPermResultMap"/>
     </resultMap>
 
-    <resultMap id="RouterPermResultMap" type="io.github.mangocrisp.spring.taybct.api.system.vo.RouterPerm">
+    <resultMap id="RouterPermResultMap" type="io.github.taybct.api.system.vo.RouterPerm">
         <id property="id" column="sp_id" jdbcType="BIGINT"/>
         <result property="menuId" column="sp_menu_id" jdbcType="BIGINT"/>
         <result property="name" column="sp_name" jdbcType="VARCHAR"/>
@@ -103,7 +103,7 @@
         <result property="btnPerm" column="sp_btn_perm" jdbcType="VARCHAR"/>
     </resultMap>
 
-    <resultMap id="RolePermResultMap" type="io.github.mangocrisp.spring.taybct.api.system.vo.RouterPerm">
+    <resultMap id="RolePermResultMap" type="io.github.taybct.api.system.vo.RouterPerm">
         <id property="id" column="role_sp_id" jdbcType="BIGINT"/>
         <result property="menuId" column="role_sp_menu_id" jdbcType="BIGINT"/>
         <result property="name" column="role_sp_name" jdbcType="VARCHAR"/>

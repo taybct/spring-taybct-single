@@ -2,9 +2,9 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="io.github.mangocrisp.spring.taybct.api.system.mapper.SysRoleMenuMapper">
+<mapper namespace="io.github.taybct.api.system.mapper.SysRoleMenuMapper">
 
-    <resultMap id="BaseResultMap" type="io.github.mangocrisp.spring.taybct.api.system.domain.SysRoleMenu">
+    <resultMap id="BaseResultMap" type="io.github.taybct.api.system.domain.SysRoleMenu">
         <result property="roleId" column="role_id" jdbcType="BIGINT"/>
         <result property="menuId" column="menu_id" jdbcType="BIGINT"/>
         <result property="checked" column="checked" jdbcType="TINYINT"/>
@@ -33,7 +33,7 @@
         )
     </delete>
 
-    <resultMap id="VoMap" type="io.github.mangocrisp.spring.taybct.api.system.vo.SysRoleMenuVO">
+    <resultMap id="VoMap" type="io.github.taybct.api.system.vo.SysRoleMenuVO">
 
         <id property="id" column="role_id" jdbcType="BIGINT"/>
         <result property="name" column="role_name" jdbcType="VARCHAR"/>
@@ -44,7 +44,7 @@
         <collection property="menus" javaType="java.util.Set" resultMap="MenuMap"/>
     </resultMap>
 
-    <resultMap id="MenuMap" type="io.github.mangocrisp.spring.taybct.api.system.vo.SysMenuVO">
+    <resultMap id="MenuMap" type="io.github.taybct.api.system.vo.SysMenuVO">
         <id property="id" column="menu_id" jdbcType="BIGINT"/>
         <result property="name" column="menu_name" jdbcType="VARCHAR"/>
         <result property="parentId" column="menu_parent_id" jdbcType="BIGINT"/>
