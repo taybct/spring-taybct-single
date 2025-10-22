@@ -389,7 +389,6 @@
                     <includeTransitiveDependencies>true</includeTransitiveDependencies>
                     <!-- 排除无需声明的依赖（可选） -->
                     <excludedGroups>com.yourcompany.internal</excludedGroups>
-                    <includeOrganization>true</includeOrganization>
                 </configuration>
                 <executions>
                     <execution>
