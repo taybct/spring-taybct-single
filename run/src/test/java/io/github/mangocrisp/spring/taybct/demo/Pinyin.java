@@ -1,4 +1,4 @@
-package io.github.mangocrisp.spring.taybct.demo;
+package io.github.taybct.demo;
 
 import cn.hutool.extra.pinyin.engine.pinyin4j.Pinyin4jEngine;
 import net.sourceforge.pinyin4j.format.exception.BadHanyuPinyinOutputFormatCombination;

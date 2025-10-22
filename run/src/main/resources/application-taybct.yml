@@ -46,7 +46,7 @@ taybct:
       "tenant_id": "000000"
       # 是否需要验证码登录
       "enable_captcha": false
-      # 验证码的类型，可以查看枚举：io.github.mangocrisp.spring.taybct.common.enums.CaptchaType，可选：CIRCLE，GIF，LINE，SHEAR，默认 GIF
+      # 验证码的类型，可以查看枚举：io.github.taybct.common.enums.CaptchaType，可选：CIRCLE，GIF，LINE，SHEAR，默认 GIF
       "captcha_type": GIF
   secure:
     # 黑名单
@@ -169,8 +169,8 @@ taybct:
       # 开启是否？
       enabled: true
       # 配置统一的解码器
-      decrypt-function: io.github.mangocrisp.spring.taybct.tool.core.util.sm.SM4Coder.De
+      decrypt-function: io.github.taybct.tool.core.util.sm.SM4Coder.De
       # 为每个数据源配置解码器
       decrypt-functions:
-        master: io.github.mangocrisp.spring.taybct.tool.core.util.sm.SM4Coder.De
-        slave1: io.github.mangocrisp.spring.taybct.tool.core.util.sm.SM4Coder.De
+        master: io.github.taybct.tool.core.util.sm.SM4Coder.De
+        slave1: io.github.taybct.tool.core.util.sm.SM4Coder.De

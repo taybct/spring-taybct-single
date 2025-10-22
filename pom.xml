@@ -210,49 +210,43 @@
 
             <!--运行模块-鉴权模块-->
             <dependency>
-                <groupId>io.github.mangocrisp</groupId>
+                <groupId>io.github.taybct</groupId>
                 <artifactId>spring-taybct-auth</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <!--运行模块-基础网关-->
-            <dependency>
-                <groupId>io.github.mangocrisp</groupId>
-                <artifactId>spring-taybct-gateway</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <!--运行模块-文件管理-->
             <dependency>
-                <groupId>io.github.mangocrisp</groupId>
+                <groupId>io.github.taybct</groupId>
                 <artifactId>spring-taybct-admin-file</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <!--运行模块-日志管理-->
             <dependency>
-                <groupId>io.github.mangocrisp</groupId>
+                <groupId>io.github.taybct</groupId>
                 <artifactId>spring-taybct-admin-log</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <!--运行模块-系统模块-->
             <dependency>
-                <groupId>io.github.mangocrisp</groupId>
+                <groupId>io.github.taybct</groupId>
                 <artifactId>spring-taybct-module-system</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <!--任务调度模块-->
             <dependency>
-                <groupId>io.github.mangocrisp</groupId>
+                <groupId>io.github.taybct</groupId>
                 <artifactId>spring-taybct-module-scheduling</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <!--任务调度模块-->
             <dependency>
-                <groupId>io.github.mangocrisp</groupId>
+                <groupId>io.github.taybct</groupId>
                 <artifactId>spring-taybct-module-online-doc</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <!--流程引擎-->
             <dependency>
-                <groupId>io.github.mangocrisp</groupId>
+                <groupId>io.github.taybct</groupId>
                 <artifactId>spring-taybct-module-lf</artifactId>
                 <version>${project.version}</version>
             </dependency>

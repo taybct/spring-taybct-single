@@ -1,9 +1,9 @@
-package io.github.mangocrisp.spring.taybct.demo;
+package io.github.taybct.demo;
 
-import io.github.mangocrisp.spring.taybct.tool.core.util.rsa.RSACoder;
-import io.github.mangocrisp.spring.taybct.tool.core.util.sm.SM2Coder;
-import io.github.mangocrisp.spring.taybct.tool.core.util.sm.SM3Coder;
-import io.github.mangocrisp.spring.taybct.tool.core.util.sm.SM4Coder;
+import io.github.taybct.tool.core.util.rsa.RSACoder;
+import io.github.taybct.tool.core.util.sm.SM2Coder;
+import io.github.taybct.tool.core.util.sm.SM3Coder;
+import io.github.taybct.tool.core.util.sm.SM4Coder;
 import lombok.SneakyThrows;
 import org.bouncycastle.asn1.x500.X500Name;
 import org.junit.Test;

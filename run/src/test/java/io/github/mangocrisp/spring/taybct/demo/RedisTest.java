@@ -1,7 +1,7 @@
-package io.github.mangocrisp.spring.taybct.demo;
+package io.github.taybct.demo;
 
-import io.github.mangocrisp.spring.taybct.single.RunApplication;
-import io.github.mangocrisp.spring.taybct.tool.core.constant.ISysParamsObtainService;
+import io.github.taybct.single.RunApplication;
+import io.github.taybct.tool.core.constant.ISysParamsObtainService;
 import jakarta.annotation.Resource;
 import org.junit.Test;
 import org.junit.runner.RunWith;

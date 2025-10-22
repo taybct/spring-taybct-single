@@ -1,6 +1,6 @@
-package io.github.mangocrisp.spring.taybct.demo;
+package io.github.taybct.demo;
 
-import io.github.mangocrisp.spring.taybct.tool.core.util.sm.SM4Coder;
+import io.github.taybct.tool.core.util.sm.SM4Coder;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;

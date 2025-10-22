@@ -1,4 +1,4 @@
-package io.github.mangocrisp.spring.taybct.demo;
+package io.github.taybct.demo;
 
 import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;

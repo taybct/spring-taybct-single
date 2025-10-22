@@ -1,7 +1,7 @@
-package io.github.mangocrisp.spring.taybct.demo;
+package io.github.taybct.demo;
 
-//import io.github.mangocrisp.spring.taybct.tool.rsa.config.RSAProperties;
-//import io.github.mangocrisp.spring.taybct.tool.rsa.util.RSACoder;
+//import io.github.taybct.tool.rsa.config.RSAProperties;
+//import io.github.taybct.tool.rsa.util.RSACoder;
 
 import com.alibaba.druid.filter.config.ConfigTools;
 import com.baomidou.dynamic.datasource.toolkit.CryptoUtils;

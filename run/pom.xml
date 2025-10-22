@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>io.github.mangocrisp</groupId>
+        <groupId>io.github.taybct</groupId>
         <artifactId>spring-taybct</artifactId>
         <version>3.5.0-beta.1</version>
     </parent>
@@ -25,7 +25,7 @@
 
         <!--基础模块-->
         <dependency>
-            <groupId>io.github.mangocrisp</groupId>
+            <groupId>io.github.taybct</groupId>
             <artifactId>spring-taybct-tool-core</artifactId>
             <version>${project.version}</version>
         </dependency>
@@ -61,28 +61,28 @@
 
         <!--鉴权-->
         <dependency>
-            <groupId>io.github.mangocrisp</groupId>
+            <groupId>io.github.taybct</groupId>
             <artifactId>spring-taybct-auth</artifactId>
             <version>${project.version}</version>
         </dependency>
 
         <!--系统-->
         <dependency>
-            <groupId>io.github.mangocrisp</groupId>
+            <groupId>io.github.taybct</groupId>
             <artifactId>spring-taybct-module-system</artifactId>
             <version>${project.version}</version>
         </dependency>
 
         <!--流程管理-->
         <dependency>
-            <groupId>io.github.mangocrisp</groupId>
+            <groupId>io.github.taybct</groupId>
             <artifactId>spring-taybct-module-lf</artifactId>
             <version>${project.version}</version>
         </dependency>
 
         <!--日志管理-->
         <dependency>
-            <groupId>io.github.mangocrisp</groupId>
+            <groupId>io.github.taybct</groupId>
             <artifactId>spring-taybct-admin-log</artifactId>
             <version>${project.version}</version>
         </dependency>
@@ -95,7 +95,7 @@
 
         <!--任务调度模块-->
         <dependency>
-            <groupId>io.github.mangocrisp</groupId>
+            <groupId>io.github.taybct</groupId>
             <artifactId>spring-taybct-module-scheduling</artifactId>
             <version>${project.version}</version>
         </dependency>
@@ -112,7 +112,7 @@
 
         <!--文件管理-->
         <dependency>
-            <groupId>io.github.mangocrisp</groupId>
+            <groupId>io.github.taybct</groupId>
             <artifactId>spring-taybct-admin-file</artifactId>
             <version>${project.version}</version>
         </dependency>
@@ -121,7 +121,7 @@
 
         <!--微信模块-->
         <!--<dependency>
-            <groupId>io.github.mangocrisp</groupId>
+            <groupId>io.github.taybct</groupId>
             <artifactId>spring-taybct-tool-wechat</artifactId>
         </dependency>-->
 
@@ -176,7 +176,7 @@
 
         <!--PKI 登录-->
         <dependency>
-            <groupId>io.github.mangocrisp</groupId>
+            <groupId>io.github.taybct</groupId>
             <artifactId>spring-taybct-tool-pki</artifactId>
             <version>${project.version}</version>
         </dependency>
@@ -201,7 +201,7 @@
         </dependency>
 
         <dependency>
-            <groupId>io.github.mangocrisp</groupId>
+            <groupId>io.github.taybct</groupId>
             <artifactId>spring-taybct-module-online-doc</artifactId>
             <version>${project.version}</version>
         </dependency>

@@ -1,4 +1,4 @@
-package io.github.mangocrisp.spring.taybct.demo;
+package io.github.taybct.demo;
 
 import cn.hutool.core.codec.Base64;
 import cn.hutool.crypto.asymmetric.KeyType;
@@ -6,12 +6,12 @@ import cn.hutool.crypto.asymmetric.RSA;
 import cn.hutool.crypto.asymmetric.SM2;
 import cn.hutool.crypto.symmetric.SymmetricCrypto;
 import com.baomidou.dynamic.datasource.toolkit.CryptoUtils;
-import io.github.mangocrisp.spring.taybct.tool.core.util.rsa.RSACoder;
-import io.github.mangocrisp.spring.taybct.tool.core.util.rsa.RSAProperties;
-import io.github.mangocrisp.spring.taybct.tool.core.util.sm.SM2Coder;
-import io.github.mangocrisp.spring.taybct.tool.core.util.sm.SM2Properties;
-import io.github.mangocrisp.spring.taybct.tool.core.util.sm.SM3Coder;
-import io.github.mangocrisp.spring.taybct.tool.core.util.sm.SM4Coder;
+import io.github.taybct.tool.core.util.rsa.RSACoder;
+import io.github.taybct.tool.core.util.rsa.RSAProperties;
+import io.github.taybct.tool.core.util.sm.SM2Coder;
+import io.github.taybct.tool.core.util.sm.SM2Properties;
+import io.github.taybct.tool.core.util.sm.SM3Coder;
+import io.github.taybct.tool.core.util.sm.SM4Coder;
 import lombok.SneakyThrows;
 import org.bouncycastle.asn1.gm.GMNamedCurves;
 import org.bouncycastle.asn1.x9.X9ECParameters;
