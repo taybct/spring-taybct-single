@@ -2,9 +2,9 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="io.github.mangocrisp.spring.taybct.module.lf.mapper.NodesMapper">
+<mapper namespace="io.github.taybct.module.lf.mapper.NodesMapper">
 
-    <resultMap id="BaseResultMap" type="io.github.mangocrisp.spring.taybct.module.lf.domain.Nodes">
+    <resultMap id="BaseResultMap" type="io.github.taybct.module.lf.domain.Nodes">
         <id property="id" column="id" jdbcType="VARCHAR"/>
         <result property="processId" column="process_id" jdbcType="BIGINT"/>
         <result property="properties" column="properties" jdbcType="OTHER"/>
@@ -18,7 +18,7 @@
         text,type
     </sql>
 
-    <insert id="insertSelective" parameterType="io.github.mangocrisp.spring.taybct.module.lf.domain.Nodes">
+    <insert id="insertSelective" parameterType="io.github.taybct.module.lf.domain.Nodes">
         insert into lf_nodes
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">id,</if>

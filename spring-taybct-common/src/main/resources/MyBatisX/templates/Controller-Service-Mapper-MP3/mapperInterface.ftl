@@ -4,8 +4,8 @@ import ${tableClass.fullClassName};
 <#if tableClass.pkFields??>
     <#list tableClass.pkFields as field><#assign pkName>${field.shortTypeName}</#assign></#list>
 </#if>
-import io.github.mangocrisp.spring.taybct.tool.core.mybatis.constant.Constants;
-import io.github.mangocrisp.spring.taybct.tool.core.mybatis.util.MybatisOptional;
+import io.github.taybct.tool.core.mybatis.constant.Constants;
+import io.github.taybct.tool.core.mybatis.util.MybatisOptional;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.MapKey;
 import org.apache.ibatis.annotations.Param;

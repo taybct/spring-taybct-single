@@ -1,6 +1,6 @@
-package io.github.mangocrisp.demo;
+package io.github.taybct.demo;
 
-import io.github.mangocrisp.spring.taybct.tool.core.result.R;
+import io.github.taybct.tool.core.result.R;
 import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import reactor.core.publisher.Flux;

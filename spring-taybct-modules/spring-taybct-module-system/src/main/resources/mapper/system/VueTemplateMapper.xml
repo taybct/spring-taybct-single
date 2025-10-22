@@ -2,9 +2,9 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="io.github.mangocrisp.spring.taybct.module.system.mapper.VueTemplateMapper">
+<mapper namespace="io.github.taybct.module.system.mapper.VueTemplateMapper">
 
-    <resultMap id="BaseResultMap" type="io.github.mangocrisp.spring.taybct.module.system.domain.VueTemplate">
+    <resultMap id="BaseResultMap" type="io.github.taybct.module.system.domain.VueTemplate">
         <id property="id" column="t_vue_template_id" jdbcType="BIGINT"/>
         <result property="createUser" column="t_vue_template_create_user" jdbcType="BIGINT"/>
         <result property="createTime" column="t_vue_template_create_time" jdbcType="TIMESTAMP"/>
@@ -25,7 +25,7 @@
     </resultMap>
 
     <!--分页返回结果-->
-    <resultMap id="BasePageResultMap" type="io.github.mangocrisp.spring.taybct.module.system.domain.VueTemplate"
+    <resultMap id="BasePageResultMap" type="io.github.taybct.module.system.domain.VueTemplate"
                extends="BaseResultMap">
         <!--这里返回的是可扩展的返回结果 vo 之类的-->
         <!--<collection property="实体类里面的属性" javaType="返回的集合是什么集合的类型如：java.util.List" resultMap="指定映射集合类元素的类型的 resultMap"/>-->

@@ -2,9 +2,9 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="io.github.mangocrisp.spring.taybct.module.lf.mapper.FormReleaseMapper">
+<mapper namespace="io.github.taybct.module.lf.mapper.FormReleaseMapper">
 
-    <resultMap id="BaseResultMap" type="io.github.mangocrisp.spring.taybct.module.lf.domain.FormRelease">
+    <resultMap id="BaseResultMap" type="io.github.taybct.module.lf.domain.FormRelease">
         <id property="id" column="id" jdbcType="BIGINT"/>
         <result property="createUser" column="create_user" jdbcType="BIGINT"/>
         <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>

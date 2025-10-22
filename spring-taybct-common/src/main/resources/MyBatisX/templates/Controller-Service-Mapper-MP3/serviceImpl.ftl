@@ -18,11 +18,11 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import com.alibaba.fastjson2.JSONObject;
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import io.github.mangocrisp.spring.taybct.tool.core.util.MyBatisUtil;
-import io.github.mangocrisp.spring.taybct.tool.core.mybatis.util.MybatisOptional;
-import io.github.mangocrisp.spring.taybct.tool.core.mybatis.support.SqlPageParams;
-import io.github.mangocrisp.spring.taybct.tool.core.bean.ModelConvertible;
-import io.github.mangocrisp.spring.taybct.tool.core.bean.UpdateModel;
+import io.github.taybct.tool.core.util.MyBatisUtil;
+import io.github.taybct.tool.core.mybatis.util.MybatisOptional;
+import io.github.taybct.tool.core.mybatis.support.SqlPageParams;
+import io.github.taybct.tool.core.bean.ModelConvertible;
+import io.github.taybct.tool.core.bean.UpdateModel;
 import java.util.Map;
 import java.util.List;
 

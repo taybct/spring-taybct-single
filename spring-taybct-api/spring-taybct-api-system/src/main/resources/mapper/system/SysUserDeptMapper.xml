@@ -2,9 +2,9 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="io.github.mangocrisp.spring.taybct.api.system.mapper.SysUserDeptMapper">
+<mapper namespace="io.github.taybct.api.system.mapper.SysUserDeptMapper">
 
-    <resultMap id="BaseResultMap" type="io.github.mangocrisp.spring.taybct.api.system.domain.SysUserDept">
+    <resultMap id="BaseResultMap" type="io.github.taybct.api.system.domain.SysUserDept">
         <id property="id" column="id" jdbcType="BIGINT"/>
         <result property="userId" column="user_id" jdbcType="BIGINT"/>
         <result property="deptId" column="dept_id" jdbcType="BIGINT"/>

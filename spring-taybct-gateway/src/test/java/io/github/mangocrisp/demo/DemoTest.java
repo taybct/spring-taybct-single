@@ -1,4 +1,4 @@
-package io.github.mangocrisp.demo;
+package io.github.taybct.demo;
 
 import org.junit.Test;
 import org.springframework.util.AntPathMatcher;

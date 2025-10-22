@@ -1,14 +1,14 @@
 package ${baseInfo.packageName};
 
 import ${tableClass.fullClassName};
-import io.github.mangocrisp.spring.taybct.tool.core.bean.ModelConvertible;
+import io.github.taybct.tool.core.bean.ModelConvertible;
 import com.alibaba.excel.annotation.ExcelIgnore;
 import com.alibaba.excel.annotation.ExcelProperty;
 import com.alibaba.excel.annotation.write.style.*;
 import jakarta.validation.constraints.NotBlank;
-import io.github.mangocrisp.spring.taybct.tool.core.constant.DateConstants;
-import io.github.mangocrisp.spring.taybct.tool.core.exception.def.BaseException;
-import io.github.mangocrisp.spring.taybct.tool.core.util.BeanUtil;
+import io.github.taybct.tool.core.constant.DateConstants;
+import io.github.taybct.tool.core.exception.def.BaseException;
+import io.github.taybct.tool.core.util.BeanUtil;
 import jakarta.validation.constraints.Size;
 import jakarta.validation.constraints.NotNull;
 import java.io.Serializable;

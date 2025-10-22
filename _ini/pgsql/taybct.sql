@@ -1285,7 +1285,7 @@ INSERT INTO "public"."sys_params" VALUES (1600420241626038273, 1, '2022-12-07 17
 INSERT INTO "public"."sys_params" VALUES (1600420305106829314, 1, '2022-12-07 17:21:50', 1, '2022-12-07 17:21:50', 0, 'NUMBER', '默认的游客角色 id', 'user_role_id', '5', 1, '', 0);
 INSERT INTO "public"."sys_params" VALUES (1600420365202817025, 1, '2022-12-07 17:22:04', 1, '2022-12-07 17:22:04', 0, 'NUMBER', '用户默认状态', 'user_status', '1', 1, '', 0);
 INSERT INTO "public"."sys_params" VALUES (1600420452104601602, 1, '2022-12-07 17:22:25', 1, '2022-12-07 17:22:25', 0, 'STRING', '默认租户 id', 'tenant_id', '000000', 1, '', 0);
-INSERT INTO "public"."sys_params" VALUES (1600420622523367425, 1, '2022-12-07 17:23:05', 1, '2022-12-07 17:55:42', 0, 'STRING', '验证码的类型', 'captcha_type', 'GIF', 1, '可以查看枚举：io.github.mangocrisp.spring.taybct.common.constants.CaptchaType。
+INSERT INTO "public"."sys_params" VALUES (1600420622523367425, 1, '2022-12-07 17:23:05', 1, '2022-12-07 17:55:42', 0, 'STRING', '验证码的类型', 'captcha_type', 'GIF', 1, '可以查看枚举：io.github.taybct.common.constants.CaptchaType。
 可选：CIRCLE，GIF，LINE，SHEAR，默认 GIF', 0);
 INSERT INTO "public"."sys_params" VALUES (1573217163437035523, 1, '2022-09-23 15:46:15', 1, '2023-03-01 12:14:47.857079', 0, 'BOOLEAN', '是否允许重复登录同一个客户端', 'allow_multiple_token_one_client', 'true', 1, '这个配置，如果不配置，或者是禁用，默认系统是允许重复登录同一个客户端的', 0);
 INSERT INTO "public"."sys_params" VALUES (1600420532530380801, 1, '2022-12-07 17:22:44', 1, '2023-03-09 10:12:58.866714', 0, 'BOOLEAN', '是否需要验证码登录', 'enable_captcha', 'false', 1, '', 0);
