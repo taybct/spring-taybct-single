@@ -112,7 +112,7 @@
         <dependency>
             <groupId>io.github.taybct</groupId>
             <artifactId>spring-taybct-tool-security</artifactId>
-            <version>${spring-taybct-tool.version}</version>
+            <version>${spring-taybct-tools.version}</version>
             <optional>true</optional>
             <scope>provided</scope>
         </dependency>
