@@ -64,14 +64,14 @@
         <dependency>
             <groupId>io.github.taybct</groupId>
             <artifactId>spring-taybct-tool-core</artifactId>
-            <version>${project.version}</version>
+            <version>${spring-taybct-tool.version}</version>
         </dependency>
 
         <!--启动模块-->
         <dependency>
             <groupId>io.github.taybct</groupId>
             <artifactId>spring-taybct-tool-launch</artifactId>
-            <version>${project.version}</version>
+            <version>${spring-taybct-tool.version}</version>
         </dependency>
 
         <!-- SpringCloud Gateway WebFlux -->
