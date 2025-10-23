@@ -64,13 +64,13 @@
         <dependency>
             <groupId>io.github.taybct</groupId>
             <artifactId>spring-taybct-tool-launch</artifactId>
-            <version>${project.version}</version>
+            <version>${spring-taybct-tool.version}</version>
         </dependency>
         <!--微服务依赖-->
         <dependency>
             <groupId>io.github.taybct</groupId>
             <artifactId>spring-taybct-tool-cloud</artifactId>
-            <version>${project.version}</version>
+            <version>${spring-taybct-tool.version}</version>
             <optional>true</optional>
             <scope>provided</scope>
         </dependency>
@@ -78,7 +78,7 @@
         <dependency>
             <groupId>io.github.taybct</groupId>
             <artifactId>spring-taybct-tool-file</artifactId>
-            <version>${project.version}</version>
+            <version>${spring-taybct-tool.version}</version>
             <exclusions>
                 <exclusion>
                     <artifactId>bcprov-jdk15on</artifactId>
@@ -152,7 +152,7 @@
         <dependency>
             <groupId>io.github.taybct</groupId>
             <artifactId>spring-taybct-tool-security</artifactId>
-            <version>${project.version}</version>
+            <version>${spring-taybct-tool.version}</version>
         </dependency>
 
         <!--公共模块（偏业务）-->
@@ -197,7 +197,7 @@
         <dependency>
             <groupId>io.github.taybct</groupId>
             <artifactId>spring-taybct-tool-scheduling</artifactId>
-            <version>${project.version}</version>
+            <version>${spring-taybct-tool.version}</version>
         </dependency>
         <!--Redis-->
         <dependency>
