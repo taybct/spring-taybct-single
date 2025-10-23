@@ -27,7 +27,7 @@
         <dependency>
             <groupId>io.github.taybct</groupId>
             <artifactId>spring-taybct-tool-core</artifactId>
-            <version>${project.version}</version>
+            <version>${spring-taybct-tool.version}</version>
         </dependency>
 
         <!--easyexcel poi 操作导入导出 excel-->
@@ -123,6 +123,7 @@
         <!--<dependency>
             <groupId>io.github.taybct</groupId>
             <artifactId>spring-taybct-tool-wechat</artifactId>
+            <version>${spring-taybct-tool.version}</version>
         </dependency>-->
 
         <!--jdbc 驱动-->
@@ -178,7 +179,7 @@
         <dependency>
             <groupId>io.github.taybct</groupId>
             <artifactId>spring-taybct-tool-pki</artifactId>
-            <version>${project.version}</version>
+            <version>${spring-taybct-tool.version}</version>
         </dependency>
 
         <!--mvc websocket-->
