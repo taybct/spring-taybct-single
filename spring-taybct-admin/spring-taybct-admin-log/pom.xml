@@ -70,13 +70,11 @@
         <dependency>
             <groupId>io.github.taybct</groupId>
             <artifactId>spring-taybct-tool-launch</artifactId>
-            <version>${spring-taybct-tools.version}</version>
         </dependency>
         <!--微服务依赖-->
         <dependency>
             <groupId>io.github.taybct</groupId>
             <artifactId>spring-taybct-tool-cloud</artifactId>
-            <version>${spring-taybct-tools.version}</version>
             <optional>true</optional>
             <scope>provided</scope>
         </dependency>
@@ -173,7 +171,6 @@
         <dependency>
             <groupId>io.github.taybct</groupId>
             <artifactId>spring-taybct-tool-security</artifactId>
-            <version>${spring-taybct-tools.version}</version>
         </dependency>
 
         <!--es 配置-->
