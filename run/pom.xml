@@ -6,7 +6,7 @@
     <parent>
         <groupId>io.github.taybct</groupId>
         <artifactId>spring-taybct</artifactId>
-        <version>3.5.0-beta.1</version>
+        <version>3.5.0</version>
     </parent>
 
     <artifactId>run</artifactId>
