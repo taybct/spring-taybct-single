@@ -1,6 +1,6 @@
 chcp 65001
 TITLE=%0
-set java=java
+set java=path\to\java
 set jar=%1
 set vm=-Dfile.encoding=utf-8 ^
 -Dmaven.wagon.http.ssl.insecure=true ^
