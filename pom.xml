@@ -150,7 +150,7 @@
         <!--项目打包编码设置-->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <!--基础工具版本-->
-        <spring-taybct-tool.version>3.5.0</spring-taybct-tool.version>
+        <spring-taybct-tools.version>3.5.0</spring-taybct-tools.version>
         <!-- Sentinel规则持久化至Nacos配置 -->
         <sentinel-datasource-nacos.version>1.8.9</sentinel-datasource-nacos.version>
         <!--skywalking 日志记录-->
@@ -184,7 +184,7 @@
             <dependency>
                 <groupId>io.github.taybct</groupId>
                 <artifactId>spring-taybct-tools-dependencies</artifactId>
-                <version>${spring-taybct-tool.version}</version>
+                <version>${spring-taybct-tools.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
