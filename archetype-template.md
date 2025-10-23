@@ -46,8 +46,8 @@ cd target/generated-sources/archetype
 
 如果是单体架构的，有配置文件的，在 target 目录下查找 `io.github.taybct` 勾选 '*.yml' ，看看配置里面有哪些包名是以这个开头的，
 只要不是 `io.github.taybct.tool.` 的，都替换成 `${package}`
-
-
+然后替换 `${package}.tool` 为 `io.github.taybct.tool`
+然后在实际使用的时候替换 `${package}` 为 `group id`
 
 ```bash
 # 加载到本地
