@@ -26,7 +26,7 @@ springdoc:
   # API文档的路径匹配规则
   api-docs:
     # 自定义API文档JSON路径
-    path: /v3/api-docs
+    path: v3/api-docs
     # 启用API文档
     enabled: true
   show-actuator: true
