@@ -18,9 +18,9 @@ Spring TayBct 是一个 Spring 业务组件基础集成的基础业务库，对�
 
 ### 仓库模板
 - 微服务模板
-  直接使用[微服务模板](/taybct/spring-taybct-cloud)创建仓库即可
+  直接使用[微服务模板](../../../spring-taybct-cloud)创建仓库即可
 - 多模块单体架构模板
-  直接使用[多模块单体架构模板](/taybct/spring-taybct-single)创建仓库即可
+  直接使用[多模块单体架构模板](../../../spring-taybct-single)创建仓库即可
 
 ### 本地创建
 
