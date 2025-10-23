@@ -15,7 +15,47 @@ Spring TayBct Single 是一个 Spring 业务组件基础集成的基础业务（
 - 系统管理等一些基础通用业务模块的基础简易集成
 - 本项目是单体架构，后续可以使用 `Spring Cloud Gateway` + `dubbo` 变成 [微服务](/taybct/spring-taybct-cloud)
 
-![img](img.png)
+![framework](./assets/images/framework.png)
+构架图
+
+## 演示
+
+![monitor-application-list.png](./assets/images/monitor-application-list.png)
+应用列表
+
+![api-doc.png](./assets/images/api-doc.png)
+接口文档
+
+![swagger-ui.png](./assets/images/swagger-ui.png)
+接口文档
+
+![nacos-serve-list.png](./assets/images/nacos-serve-list.png)
+Nacos 服务列表
+
+![druid-view.png](./assets/images/druid-view.png)
+Druid 数据库监控
+
+![user-role-perm.png](./assets/images/user-role-perm.png)
+基于用户角色权限管理
+
+![onlyoffice-page.png](./assets/images/onlyoffice-page.png)
+OnlyOffice 文档编辑器
+
+![scheduling.png](./assets/images/scheduling.png)
+分布式任务调度
+
+![logic-flow-design.png](./assets/images/logic-flow-design.png)
+流程设计
+
+![form-create.png](./assets/images/form-create.png)
+动态表单
+
+## 示例
+
+- [示例项目（PureAdmin）](https://mangocrisp.top/pureadmin)
+
+> 本项目为纯后端项目，以上展示的前端界面是 [vue-pure-admin（Mango Crisp）](https://github.com/mangocrisp/vue-pure-admin) 基于本项目
+> 和 [vue-pure-admin](https://github.com/pure-admin/vue-pure-admin) 开发的前端示例项目
 
 ## 安装教程
 

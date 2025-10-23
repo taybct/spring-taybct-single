@@ -1,8 +1,8 @@
-java=env/linux/jdk-17.0.5/bin/java
+java=/path/to/java
 jar=$1
 echo "" > $jar.out
 echo "*****************start begin*****************"
-oldpid=`jps | grep $jar | grep -v "prep" | awk '{print $1}'`
+oldpid=`/path/to/jps | grep $jar | grep -v "prep" | awk '{print $1}'`
 if [ x"$oldpid" != x"" ]; then
     echo "$jar was running..."
     echo "try restart"
@@ -32,5 +32,5 @@ vm="-Dfile.encoding=utf-8 \
 -XX:NativeMemoryTracking=detail"
 params="--spring.profiles.active=test"
 nohup $java $vm -jar $jar $params >$jar.out 2>&1 &
-nowpid=`jps | grep $jar | grep -v "prep" | awk '{print $1}'`
+nowpid=`/path/to/jps | grep $jar | grep -v "prep" | awk '{print $1}'`
 echo "*****************start success,new PID is $nowpid*****************"

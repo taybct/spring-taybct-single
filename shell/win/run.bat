@@ -4,10 +4,10 @@ chcp 65001
 rem "可以显示当前运行的 bat 位置到黑窗口上面，方便后续找到运行的 jar 包的位置"
 TITLE=%~dp0%1
 rem "指定jdk的 java 命令，你也可以指定对应的 jdk 版本"
-set java=env\win\jdk-17.0.5\bin\java.exe
+set java=path\to\java
 rem "打包好后的jar包名，每个服务的 jar 包名不一样"
 set jar=%1
-for /f "tokens=1-5" %%i in ('env\win\jdk-17.0.5\bin\jps ^|findstr "%jar%"') do (
+for /f "tokens=1-5" %%i in ('path\to\jps ^|findstr "%jar%"') do (
     echo kill the process %%i who use the port
     taskkill /pid %%i -t -f
     goto start

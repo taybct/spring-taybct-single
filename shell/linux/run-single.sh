@@ -1,2 +1,2 @@
 #!/bin/bash
-./run.sh run-3.5.0.jar
+./run.sh run-${application.version}.jar
