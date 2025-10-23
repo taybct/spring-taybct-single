@@ -192,8 +192,6 @@
         <maven-antrun-plugin.version>3.1.0</maven-antrun-plugin.version>
         <!--生成 archetype 模板插件-->
         <maven-archetype-plugin.version>3.4.1</maven-archetype-plugin.version>
-        <!--工具版本-->
-        <spring-taybct-tools.version>3.5.0</spring-taybct-tools.version>
     </properties>
 
     <!-- 依赖声明 -->
