@@ -1,5 +1,5 @@
 #!/bin/ash
-java=java
+java=/path/to/java
 jar=$1
 vm=-Dfile.encoding=utf-8 \
 -Dmaven.wagon.http.ssl.insecure=true \
