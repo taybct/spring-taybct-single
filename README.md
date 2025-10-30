@@ -35,6 +35,7 @@ Nacos 服务列表
 ![druid-view.png](./assets/images/druid-view.png)
 Druid 数据库监控
 
+![e-r.png](./assets/images/E-R.png)
 ![user-role-perm.png](./assets/images/user-role-perm.png)
 基于用户角色权限管理
 
