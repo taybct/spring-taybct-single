@@ -11,7 +11,7 @@ import io.github.taybct.tool.core.constant.AuthHeaderConstants;
 import io.github.taybct.tool.core.constant.ISysParamsObtainService;
 import io.github.taybct.tool.core.constant.TokenConstants;
 import io.github.taybct.tool.core.result.ResultCode;
-import io.github.taybct.tool.core.util.sm.SM4Coder;
+import io.github.taybct.tool.core.util.sm.SM2Coder;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -27,7 +27,6 @@ import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
-import java.nio.charset.StandardCharsets;
 import java.security.KeyPair;
 import java.security.interfaces.RSAPublicKey;
 import java.util.List;
@@ -123,7 +122,7 @@ public class AuthGlobalFilter implements GlobalFilter, Ordered {
 
         // 存在token且不是黑名单，request写入JWT的载体信息
         request = exchange.getRequest().mutate()
-                .header(TokenConstants.JWT_PAYLOAD_KEY, SM4Coder.getSM4().encryptBase64(jsonObject.toJSONString(), StandardCharsets.UTF_8))
+                .header(TokenConstants.JWT_PAYLOAD_KEY, SM2Coder.encryptBase64StringByPublicKey(jsonObject.toJSONString()))
                 // 在请求头把登录后的客户端 id 添加进去，方便后面验证
                 .header(AuthHeaderConstants.CLIENT_ID_KEY, jsonObject.getString(AuthHeaderConstants.CLIENT_ID_KEY))
                 .build();

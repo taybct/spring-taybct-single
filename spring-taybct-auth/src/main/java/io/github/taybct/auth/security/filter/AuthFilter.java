@@ -15,7 +15,7 @@ import io.github.taybct.tool.core.result.R;
 import io.github.taybct.tool.core.result.ResultCode;
 import io.github.taybct.tool.core.util.MutableHttpServletRequest;
 import io.github.taybct.tool.core.util.ServletUtil;
-import io.github.taybct.tool.core.util.sm.SM4Coder;
+import io.github.taybct.tool.core.util.sm.SM2Coder;
 import jakarta.annotation.Resource;
 import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;
@@ -29,7 +29,6 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.http.HttpStatus;
 
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.security.KeyPair;
 import java.security.interfaces.RSAPublicKey;
 import java.util.List;
@@ -135,7 +134,7 @@ public class AuthFilter implements Filter {
             }
 
             MutableHttpServletRequest mutableRequest = new MutableHttpServletRequest(request);
-            mutableRequest.putHeader(TokenConstants.JWT_PAYLOAD_KEY, SM4Coder.getSM4().encryptBase64(jsonObject.toJSONString(), StandardCharsets.UTF_8));
+            mutableRequest.putHeader(TokenConstants.JWT_PAYLOAD_KEY, SM2Coder.encryptBase64StringByPublicKey(jsonObject.toJSONString()));
             // 在请求头把登录后的客户端 id 添加进去，方便后面验证
             mutableRequest.putHeader(AuthHeaderConstants.CLIENT_ID_KEY, jsonObject.getString(AuthHeaderConstants.CLIENT_ID_KEY));
             chain.doFilter(mutableRequest, response);
