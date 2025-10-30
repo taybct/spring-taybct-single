@@ -51,8 +51,9 @@ public class TestNoAuthAccess {
     @Test
     public void test2() {
         SM2Coder.ini(new SM2Properties());
-        String enStr = SM2Coder.encryptBase64StringByPublicKey("123456");
-        System.out.println(enStr);
+//        String enStr = SM2Coder.encryptBase64StringByPublicKey("123456");
+//        System.out.println(enStr);
+        String enStr = "BCUu5u/uzuoSEQ7p+HFI6hjEEZv5ilKGXxTX76o7uR1IadEPjD2x9fForNweJ9209CsZnIzkvm8sLF82Sa09gtKKPuyYsZMzV7Nfd0Ek1hkoYWxqqmQqONWdnHXVppBUsUbOr/D7Fu+DW0ueG9brgc5W266Ell9wuS8lvP1BpsjW5MtVOBX/eSs/jbbtL7FRY/2WzGCIZs3Q49HcDxGiEjP2KGOZXT4yUR9VoSuvluHUHB0WNwYVBwOkknv79ORcKCN4QBJnxBMJkv1IdKOdNJeOsAjx5z0b2LVoMQYJnfrZ3DQ6rzpBv01wQKYLG6W9WzaGYhFfW7wyeePJLLNNfKkKBmt2TzOWrYn50chsoT7w1AwUPc7S3ybnjQYv5kHYtv0oi4pfSIUph5e+GRJH4ElGrCYiZT5ma+aS3vp1DJezUoLZ/QNdMZXGsU2egrsJ";
         String deStr = SM2Coder.decryptBase64StringByPrivateKey(enStr);
         System.out.println(deStr);
     }
