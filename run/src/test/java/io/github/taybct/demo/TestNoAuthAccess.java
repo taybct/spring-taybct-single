@@ -1,12 +1,11 @@
 package io.github.taybct.demo;
 
-import io.github.taybct.tool.core.util.sm.SM4Coder;
+import io.github.taybct.tool.core.util.sm.SM2Coder;
+import io.github.taybct.tool.core.util.sm.SM2Properties;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import java.nio.charset.StandardCharsets;
 
 /**
  * <pre>
@@ -38,11 +37,24 @@ public class TestNoAuthAccess {
                     "authorities":["ROOT"],
                     "tni":"000000"
                 }""";
-        String payload = SM4Coder.getSM4().encryptBase64(jsonStr, StandardCharsets.UTF_8);
+
+        SM2Coder.ini(new SM2Properties());
+        String payload = SM2Coder.encryptBase64StringByPublicKey(jsonStr);
         System.out.printf("payload:%s", payload);
 
-        //可以直接使用 SM4 加密成一个字符串，然后加入到请求头：
+        //可以直接使用 SM2 加密成一个字符串，然后加入到请求头：
 
         //payload: xxx
     }
+
+    @SneakyThrows
+    @Test
+    public void test2() {
+        SM2Coder.ini(new SM2Properties());
+        String enStr = SM2Coder.encryptBase64StringByPublicKey("123456");
+        System.out.println(enStr);
+        String deStr = SM2Coder.decryptBase64StringByPrivateKey(enStr);
+        System.out.println(deStr);
+    }
+
 }
