@@ -12,7 +12,7 @@
  Target Server Version : 150000 (150000)
  File Encoding         : 65001
 
- Date: 20/10/2025 10:56:50
+ Date: 30/10/2025 11:54:13
 */
 
 
@@ -544,7 +544,11 @@ COMMENT ON TABLE "public"."oauth2_authorization" IS '登录管理-记录各个 t
 -- ----------------------------
 -- Records of oauth2_authorization
 -- ----------------------------
-INSERT INTO "public"."oauth2_authorization" VALUES ('207b3f60-a02a-4d28-bf50-e76a11525d29', '1', 'root', 'taybct', 'all', '{"@class":"java.util.Collections$UnmodifiableMap"}', NULL, NULL, NULL, NULL, NULL, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImE2NmI3MzBiZGQwYzQ4NzZhY2NhNmYxZmZjYmMzMzUzIiwia2lkIjoiOGEyNzkyMDJkZjljNDJjZjgyNzU0NjkwMzhjNDQxMmQifQ.eyJ1aWQiOiIxIiwibmJmIjoxNzYwOTI4MjI4LCJncmFudF90eXBlIjoidGF5YmN0IiwidXNlcl9uYW1lIjoicm9vdCIsInNjb3BlIjpbImFsbCJdLCJhdG0iOiJ1c2VybmFtZSIsImV4cCI6MTc2MDkzMTgyOCwiaWF0IjoxNzYwOTI4MjI4LCJqdGkiOiJlYWU5YTUyNS1kMTY5LTQ1N2UtYWY5OC01NDIzNmQ0ODk0MTIiLCJjbGllbnRfaWQiOiJ0YXliY3RfcGMiLCJhdXRob3JpdGllcyI6WyIwMDAwMDA6Uk9PVCJdfQ.DQrmB8DWAMVzJeugOjEP6ufbxtPtQLM4cpCpnbF6dj9K84As84hg-BfWB2tX5UEWFakh_fR8eJfcJiFZ7HPQ7kRFMFA40BqP9IV7uu-haRtvQEnxmniOF5dDr0HiAy8kgrKIGzw6GqOkMzODO1P4XEJS-7-4HHx51oTJbY0xztT5ciuqDC1RrAttd0m4emUswxWwgcfO2PL2my8EHUVsVgVftAz1iNAADxIEVSGsJF3pATEjlBEMjxdQZ8193wnQuKMq-fm_ZXTVlLVbEAy7tiKxce8EH38qFsNOCuWBIPS4CyeUE_gVnEfI5yBR3MoxE9By-oO-oyjtGyFZhsYD7w', '2025-10-20 10:43:48.92217', '2025-10-20 11:43:48.92217', '{"@class":"java.util.Collections$UnmodifiableMap","metadata.token.claims":{"@class":"java.util.Collections$UnmodifiableMap","uid":"1","nbf":["java.time.Instant",1760928228.922169600],"grant_type":"taybct","user_name":"root","scope":["java.util.Collections$UnmodifiableSet",["all"]],"atm":"username","exp":["java.time.Instant",1760931828.922169600],"iat":["java.time.Instant",1760928228.922169600],"jti":"eae9a525-d169-457e-af98-54236d489412","client_id":"taybct_pc","authorities":["java.util.ArrayList",["000000:ROOT"]]},"metadata.token.invalidated":false}', 'Bearer', 'all', NULL, NULL, NULL, NULL, 'KkiYJDjN-KZJYdi98hlBktg5o6mVErNVwgACHx_XyqmUx3NfwINnlXLvP4jYtQytTTfH5_cakLF6EnsDWDXnD_h9XlNe1e4VWjfzRayjhi70vhet34nRmhwU_TFBGKdG', '2025-10-20 10:43:48.973489', '2025-10-21 10:43:48.973489', '{"@class":"java.util.Collections$UnmodifiableMap","metadata.token.invalidated":false}', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO "public"."oauth2_authorization" VALUES ('1019501a-b447-42c5-a6b4-be0958ab1528', '1', 'root', 'taybct', 'all', '{"@class":"java.util.Collections$UnmodifiableMap"}', NULL, NULL, NULL, NULL, NULL, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImM4MWFmZDYzMTkxNzQwZWM4OTA0N2FmNzVmMTJhZjJiIiwia2lkIjoiMjYzZjg2ZGFlMGExNDE1MDhjY2Y1NDgzZGUxMDkyZGMifQ.eyJ1aWQiOiIxIiwibmJmIjoxNzYxNzMxOTkzLCJncmFudF90eXBlIjoidGF5YmN0IiwidXNlcl9uYW1lIjoicm9vdCIsInNjb3BlIjpbImFsbCJdLCJhdG0iOiJ1c2VybmFtZSIsImV4cCI6MTc2MTczNTU5MywiaWF0IjoxNzYxNzMxOTkzLCJqdGkiOiIyNTlmZjZkMS1lODRlLTRhYTUtYjRjYS1hYzU0NGViYWY4ZDciLCJjbGllbnRfaWQiOiJ0YXliY3RfcGMiLCJhdXRob3JpdGllcyI6WyIwMDAwMDA6Uk9PVCJdfQ.UEr2yle-DkSI3NWbUyho88x_zF6mdAYq7xS0ojqz9TY8N84WGhx-slYyD9g2jev84szHvNE8_ZErSg-FKKlBH3RwHnzeM9iB5Qgv6dzei_k4RRxP6dWWRDVDR_gZOEQHDz7CSS9ZMVqm6ikq8s3qucOYGUIuZ14P10_k2QH5o_J86o36HrlgqCDJWQcZg2DAnqoMHaR8eFLHsTs_Rwvz2KnElLfY8sU8-j5nRpds-8tARa4jBIZQbO7f6rq5Q68P_fmkJPoAPdB73IIIaT5h0OiJeWfSgNylCudfZoolXL-oGQ2dayqS4fZzkrY4v5rMptGBoiY_8hw0n-K4MQ8BCw', '2025-10-29 17:59:53.059978', '2025-10-29 18:59:53.059978', '{"@class":"java.util.Collections$UnmodifiableMap","metadata.token.claims":{"@class":"java.util.Collections$UnmodifiableMap","uid":"1","nbf":["java.time.Instant",1761731993.059978000],"grant_type":"taybct","user_name":"root","scope":["java.util.Collections$UnmodifiableSet",["all"]],"atm":"username","exp":["java.time.Instant",1761735593.059978000],"iat":["java.time.Instant",1761731993.059978000],"jti":"259ff6d1-e84e-4aa5-b4ca-ac544ebaf8d7","client_id":"taybct_pc","authorities":["java.util.ArrayList",["000000:ROOT"]]},"metadata.token.invalidated":false}', 'Bearer', 'all', NULL, NULL, NULL, NULL, 'n_NAzGMO8H3wri7dg7cVjST1P7IGO1yRv19MiAFvHgMZdKxUawz2o5PLm8Qwh1Ge2MTEiqpQAM3cYCIVJxbuj8eFZPzvLicXjZN0vW1tCZoQawOZ4Gza8V-Sq5-wswqE', '2025-10-29 17:59:53.114344', '2025-10-30 17:59:53.114344', '{"@class":"java.util.Collections$UnmodifiableMap","metadata.token.invalidated":false}', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO "public"."oauth2_authorization" VALUES ('686d7022-ca94-45fd-a683-413db6b3ea7e', '1', 'user', 'taybct', 'all', '{"@class":"java.util.Collections$UnmodifiableMap"}', NULL, NULL, NULL, NULL, NULL, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjY4NTdlYTg0NGRjNTQ5YmVhNGUzMjY0ZThlMzRiY2ExIiwia2lkIjoiNDdiZTMxYjA2YWNmNGM0NThmNGFlZDI2NDY1ZWIwY2EifQ.eyJ1aWQiOiIxOTQ1MDU5OTI2MjcxODYwNzM3IiwibmJmIjoxNzYxNzg4ODY3LCJncmFudF90eXBlIjoidGF5YmN0IiwidXNlcl9uYW1lIjoidXNlciIsInNjb3BlIjpbImFsbCJdLCJhdG0iOiJ1c2VybmFtZSIsImV4cCI6MTc2MTc5MjQ2NywiaWF0IjoxNzYxNzg4ODY3LCJqdGkiOiI4NjM0MGY3OS01ZjMzLTRiZWMtODZhZC02Mzg3NmYzOTVmYTIiLCJjbGllbnRfaWQiOiJ0YXliY3RfcGMiLCJhdXRob3JpdGllcyI6WyIwMDAwMDA6Tk9STUFMIiwiMDAwMDAwOmNvbW1vbiJdfQ.phDl8m-SW5jtlm3MnF1UUllJbRlLi2v8MkfV6IIJzQrkeEE2L0-yVOpE73z3RxvTxyz2MKxFo4sPPey3amIkjqvMfo7DXRMnDeCS23MP6rrHLe2k-4GtlRcP3ClxC5DO1GfvoaAZiYr8QpamoVIsH853w0bIazNXl8Bc4UXBQrBNAAQ1ZK4HlgVUd6_nATLrE04QG1JX_uBvywyKNk93qrIZ6DhQYqt08K6ccjkcJFUp_U6A1NNH-9YgmXG0OGbXjR3lMJoSukWS7x3iACWCM-l0pNKnN9HIRGYWWr3ctZqh0ob0NeaJgktf0OfjweUEtjyvfR21QGu1ol1YM0kpLg', '2025-10-30 09:47:47.947748', '2025-10-30 10:47:47.947748', '{"@class":"java.util.Collections$UnmodifiableMap","metadata.token.claims":{"@class":"java.util.Collections$UnmodifiableMap","uid":"1945059926271860737","nbf":["java.time.Instant",1761788867.947748400],"grant_type":"taybct","user_name":"user","scope":["java.util.Collections$UnmodifiableSet",["all"]],"atm":"username","exp":["java.time.Instant",1761792467.947748400],"iat":["java.time.Instant",1761788867.947748400],"jti":"86340f79-5f33-4bec-86ad-63876f395fa2","client_id":"taybct_pc","authorities":["java.util.ArrayList",["000000:NORMAL","000000:common"]]},"metadata.token.invalidated":false}', 'Bearer', 'all', NULL, NULL, NULL, NULL, 'gBV559FM-EbYgMQzeAWoJ3BOKWRTOiOYrKWg5x3vB4ACP90q5f52OgPcWsuywh0UC6lNysvte-HKwv_MN-6PufNPchs6C4CBE6s6rXF78DryI3IdEwGgsOek2wwxfq9c', '2025-10-30 09:47:47.992121', '2025-10-31 09:47:47.992121', '{"@class":"java.util.Collections$UnmodifiableMap","metadata.token.invalidated":false}', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO "public"."oauth2_authorization" VALUES ('54fd3517-f74e-4ade-857b-ab72dab05527', '1', 'user', 'taybct', 'all', '{"@class":"java.util.Collections$UnmodifiableMap"}', NULL, NULL, NULL, NULL, NULL, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjU0Yzc2ZjM1Yzc1ODRlNDM4ZDE3YmViNTMzM2U3YzQ4Iiwia2lkIjoiOGY4YjZiZGEwZGI3NGNlZTk4YzQ5YzQzNTFiZDcxMjAifQ.eyJ1aWQiOiIxOTQ1MDU5OTI2MjcxODYwNzM3IiwibmJmIjoxNzYxNzI4NTYyLCJncmFudF90eXBlIjoidGF5YmN0IiwidXNlcl9uYW1lIjoidXNlciIsInNjb3BlIjpbImFsbCJdLCJhdG0iOiJ1c2VybmFtZSIsImV4cCI6MTc2MTczMjE2MiwiaWF0IjoxNzYxNzI4NTYyLCJqdGkiOiJkYjYxOWQwNS03YWEyLTRiNWQtOWY1MS02NTdlYzQyMTIwNDQiLCJjbGllbnRfaWQiOiJ0YXliY3RfcGMiLCJhdXRob3JpdGllcyI6WyIwMDAwMDA6Tk9STUFMIiwiMDAwMDAwOmNvbW1vbiJdfQ.tZxs0__0RWPGzyS-s8vR5bC0fzrfNr8pDgsw5Z4vO4DdRqKX57ppWoq9YzaWsJS5M8gJolXsRg4cqRgkjaWgSRZR4eIyEfzmnmmhi3gb1wM3Jk2vRIIwjKubt4Sfar3V13Ht0MIu3ClrzLWAUABnYdNlkb-ikhvZ9JzCrfJac3Y8KsETWAA51ViKsE74CHtNSf1BiMeEl6mRbk8xpnpmb2hAPwITer6cF4Q_ItVBkPg6RIOQi2elxzqGCI-xEsa42awkAdg9Y_3xspNWFSj9VnWaGex5FHkbmBWZeuscKngnbuzm-KaaAoOksP3l9NpDNv06NubFDEPbq3KM2O2eQw', '2025-10-29 17:02:42.394994', '2025-10-29 18:02:42.394994', '{"@class":"java.util.Collections$UnmodifiableMap","metadata.token.claims":{"@class":"java.util.Collections$UnmodifiableMap","uid":"1945059926271860737","nbf":["java.time.Instant",1761728562.394993900],"grant_type":"taybct","user_name":"user","scope":["java.util.Collections$UnmodifiableSet",["all"]],"atm":"username","exp":["java.time.Instant",1761732162.394993900],"iat":["java.time.Instant",1761728562.394993900],"jti":"db619d05-7aa2-4b5d-9f51-657ec4212044","client_id":"taybct_pc","authorities":["java.util.ArrayList",["000000:NORMAL","000000:common"]]},"metadata.token.invalidated":false}', 'Bearer', 'all', NULL, NULL, NULL, NULL, 'AqqZUHDg76QdnnJkjOGaiVP0j9eVJMO1aqsDIX9AcRa3mjPjM9SpEO2si74QCeMIQO9oXIT39giUb83pHHgaiq_Gj2vZ8kChQTfgPFuw4QPjAngoo_DoGkqTRE7562yR', '2025-10-29 17:02:42.407717', '2025-10-30 17:02:42.407717', '{"@class":"java.util.Collections$UnmodifiableMap","metadata.token.invalidated":false}', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO "public"."oauth2_authorization" VALUES ('0bbe3184-a032-4410-8e7c-8207334e4272', '1', 'admin', 'taybct', 'all', '{"@class":"java.util.Collections$UnmodifiableMap"}', NULL, NULL, NULL, NULL, NULL, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImFkYmRhNTliZTdiYzRkN2JiZDhhZDg2YjIwOGM4MjlkIiwia2lkIjoiOGY4YjZiZGEwZGI3NGNlZTk4YzQ5YzQzNTFiZDcxMjAifQ.eyJ1aWQiOiIyIiwibmJmIjoxNzYxNzI4OTkzLCJncmFudF90eXBlIjoidGF5YmN0IiwidXNlcl9uYW1lIjoiYWRtaW4iLCJzY29wZSI6WyJhbGwiXSwiYXRtIjoidXNlcm5hbWUiLCJleHAiOjE3NjE3MzI1OTMsImlhdCI6MTc2MTcyODk5MywianRpIjoiZjNhMGVkMDAtN2NlMS00MmZiLWIxOTMtOTM2YjkxYzIzMWJhIiwiY2xpZW50X2lkIjoidGF5YmN0X3BjIiwiYXV0aG9yaXRpZXMiOlsiMDAwMDAwOkFETUlOIiwiMDAwMDAwOmFkbWluIl19.mDCrCSt2o9WHrcqC6k13PHmME6gEonplTbcW42qETPeQaMjclEkHpnbitzOyGpd-Fhge06kMJMpLooEe8pZrMUPcixhHrwj37UfNU_T9FXgYW-8IbmOoWfYF5--lRfAT5U54dfyg6lYl8KEejU9pzJI90xy_EAmxBiJgX4V6L3Toqaagxg9Zb9jBbYeNqM_7vY5gbjFSGF1z6cnneSonky-l6O7_wiuHQ0Fu4fu4R9GqqwLWnw2xUEaxp9Sfd6dtr6_kyLbyQkpiWMxt_UZPWWje4uZ44ld9oeU-yzxeBaI7IMhc4cwJZn9XlxO1xtUY3cjC4ZUNaHw8OPvhf_q0aA', '2025-10-29 17:09:53.181108', '2025-10-29 18:09:53.181108', '{"@class":"java.util.Collections$UnmodifiableMap","metadata.token.claims":{"@class":"java.util.Collections$UnmodifiableMap","uid":"2","nbf":["java.time.Instant",1761728993.181108100],"grant_type":"taybct","user_name":"admin","scope":["java.util.Collections$UnmodifiableSet",["all"]],"atm":"username","exp":["java.time.Instant",1761732593.181108100],"iat":["java.time.Instant",1761728993.181108100],"jti":"f3a0ed00-7ce1-42fb-b193-936b91c231ba","client_id":"taybct_pc","authorities":["java.util.ArrayList",["000000:ADMIN","000000:admin"]]},"metadata.token.invalidated":false}', 'Bearer', 'all', NULL, NULL, NULL, NULL, 'umLC7i1Ut9AjO7R3S5nb6YqGqVSNsXQzqwx7t-oasfo69qXC2JVpYX0KB3g8fB_OUq4NKBtvNr02YTGdAgogbEDmmb8BT9nABp0YIHQWC-pl7A8VGXwt7C3U6GOPWbxA', '2025-10-29 17:09:53.192691', '2025-10-30 17:09:53.192691', '{"@class":"java.util.Collections$UnmodifiableMap","metadata.token.invalidated":false}', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO "public"."oauth2_authorization" VALUES ('f60086bd-c959-4b0b-83bf-9e263ebbff8d', '1', 'root', 'taybct', 'all', '{"@class":"java.util.Collections$UnmodifiableMap"}', NULL, NULL, NULL, NULL, NULL, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjM0NTBiNzc2MDE0MjRjMDM4MDUwOWI3N2MyODZkMWU2Iiwia2lkIjoiMmM3MzQ2ZTY0NjRhNDk3MmJkMGI5MWQ1OGM4ZTA4YTUifQ.eyJ1aWQiOiIxIiwibmJmIjoxNzYxNzkxMTUyLCJncmFudF90eXBlIjoidGF5YmN0IiwidXNlcl9uYW1lIjoicm9vdCIsInNjb3BlIjpbImFsbCJdLCJhdG0iOiJ1c2VybmFtZSIsImV4cCI6MTc2MTc5NDc1MiwiaWF0IjoxNzYxNzkxMTUyLCJqdGkiOiI3Y2ZhNTAyMS0xOWE2LTQ1OWEtOTE5NC1iYzAxYTg1ZjY3NjIiLCJjbGllbnRfaWQiOiJ0YXliY3RfcGMiLCJhdXRob3JpdGllcyI6WyIwMDAwMDA6Uk9PVCJdfQ.LJZBo9bwOhqBrjMxlY88e6Ex9zStE67x15cbElwgZUdwTNNI31xxpgmSyRjX2nUycR935N61zv8rO6eVjsgmXbV92nFHio3KK7BU4RVqk3BdY63C1wCu4F0FfTwXgiVMts1Wy_ni_FD3_VBRyUd5FY1_Epzg0wlke0n4N_NcmHjF7lCpPu08Slw_MhXbiC2v3_ihl8BByNBBXPAInbSSrv1vOx_hDIvv6qlTN84ektzkKRnxAATEgxri8Z3r3ZDxBo4fQrYbaxpJX_ZgH7EWegONskuqmJpp63dpXNg03wa6l-Mm2k0vzG_wUG4AEZC_w5NUtz2q1WsLfhtWiJ-gOw', '2025-10-30 10:25:52.30724', '2025-10-30 11:25:52.30724', '{"@class":"java.util.Collections$UnmodifiableMap","metadata.token.claims":{"@class":"java.util.Collections$UnmodifiableMap","uid":"1","nbf":["java.time.Instant",1761791152.307239800],"grant_type":"taybct","user_name":"root","scope":["java.util.Collections$UnmodifiableSet",["all"]],"atm":"username","exp":["java.time.Instant",1761794752.307239800],"iat":["java.time.Instant",1761791152.307239800],"jti":"7cfa5021-19a6-459a-9194-bc01a85f6762","client_id":"taybct_pc","authorities":["java.util.ArrayList",["000000:ROOT"]]},"metadata.token.invalidated":false}', 'Bearer', 'all', NULL, NULL, NULL, NULL, 'xMMU_PIPjlTrfd8-h1J1iFWZ4h-wTSRbzT_OvRE2tY5jaRJWnwNXU13eZ2Abh9WCsK4hNz7nAXEhrkNEOE_PWRH3hEzChDHGBxWNDqSk5ReGh5gn2Y-Oxhr2jwHZInHY', '2025-10-30 10:25:52.321479', '2025-10-31 10:25:52.321479', '{"@class":"java.util.Collections$UnmodifiableMap","metadata.token.invalidated":false}', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- ----------------------------
 -- Table structure for oauth2_authorization_consent
@@ -903,6 +907,7 @@ INSERT INTO "public"."sys_file" VALUES (1968197430646771713, '/2025/09/17/7cde32
 INSERT INTO "public"."sys_file" VALUES (1968197620992675841, '/2025/09/17/3f3d0e9ea16b40ea90543e85dfa2b7fa.png', '2025-09-17 14:17:34.848572', 1, '2025-09-17 14:17:34.848572', 0, NULL, NULL, 0, 'local', 'png', 1, NULL);
 INSERT INTO "public"."sys_file" VALUES (1969954430866968578, '/2025/09/22/559ee50d2d3640ddbb2f468612d22323.docx', '2025-09-22 10:38:30.973013', 1, '2025-09-22 10:38:30.977184', 0, NULL, NULL, 0, 'local', NULL, 1, NULL);
 INSERT INTO "public"."sys_file" VALUES (1969958015533072385, '/2025/09/22/68b86331dd154e22a0cf98562838abb0.docx', '2025-09-22 10:52:45.619617', 1, '2025-09-22 10:52:45.619617', 0, NULL, NULL, 0, 'local', 'zip', 1, NULL);
+INSERT INTO "public"."sys_file" VALUES (1980928625595760641, '/2025/10/22/b885903c47934d2d9761acc1fd3a463f.png', '2025-10-22 17:26:02.880162', 1, '2025-10-22 17:26:02.881673', 0, NULL, NULL, 0, 'local', 'png', 1, NULL);
 
 -- ----------------------------
 -- Table structure for sys_history_record
@@ -1285,7 +1290,7 @@ INSERT INTO "public"."sys_params" VALUES (1600420241626038273, 1, '2022-12-07 17
 INSERT INTO "public"."sys_params" VALUES (1600420305106829314, 1, '2022-12-07 17:21:50', 1, '2022-12-07 17:21:50', 0, 'NUMBER', '默认的游客角色 id', 'user_role_id', '5', 1, '', 0);
 INSERT INTO "public"."sys_params" VALUES (1600420365202817025, 1, '2022-12-07 17:22:04', 1, '2022-12-07 17:22:04', 0, 'NUMBER', '用户默认状态', 'user_status', '1', 1, '', 0);
 INSERT INTO "public"."sys_params" VALUES (1600420452104601602, 1, '2022-12-07 17:22:25', 1, '2022-12-07 17:22:25', 0, 'STRING', '默认租户 id', 'tenant_id', '000000', 1, '', 0);
-INSERT INTO "public"."sys_params" VALUES (1600420622523367425, 1, '2022-12-07 17:23:05', 1, '2022-12-07 17:55:42', 0, 'STRING', '验证码的类型', 'captcha_type', 'GIF', 1, '可以查看枚举：io.github.taybct.common.constants.CaptchaType。
+INSERT INTO "public"."sys_params" VALUES (1600420622523367425, 1, '2022-12-07 17:23:05', 1, '2022-12-07 17:55:42', 0, 'STRING', '验证码的类型', 'captcha_type', 'GIF', 1, '可以查看枚举：io.github.mangocrisp.spring.taybct.common.constants.CaptchaType。
 可选：CIRCLE，GIF，LINE，SHEAR，默认 GIF', 0);
 INSERT INTO "public"."sys_params" VALUES (1573217163437035523, 1, '2022-09-23 15:46:15', 1, '2023-03-01 12:14:47.857079', 0, 'BOOLEAN', '是否允许重复登录同一个客户端', 'allow_multiple_token_one_client', 'true', 1, '这个配置，如果不配置，或者是禁用，默认系统是允许重复登录同一个客户端的', 0);
 INSERT INTO "public"."sys_params" VALUES (1600420532530380801, 1, '2022-12-07 17:22:44', 1, '2023-03-09 10:12:58.866714', 0, 'BOOLEAN', '是否需要验证码登录', 'enable_captcha', 'false', 1, '', 0);
@@ -1325,62 +1330,68 @@ COMMENT ON TABLE "public"."sys_permission" IS '权限管理表';
 -- ----------------------------
 -- Records of sys_permission
 -- ----------------------------
-INSERT INTO "public"."sys_permission" VALUES (1572153139278434305, NULL, '角色新增', 6, 'POST:/system/role', 'system:role:add', NULL, NULL, 1, '2023-01-13 17:03:10');
-INSERT INTO "public"."sys_permission" VALUES (1572153139278434306, NULL, '角色编辑', 6, 'PUT:/system/role', 'system:role:edit', NULL, NULL, 1, '2023-01-13 17:03:10');
-INSERT INTO "public"."sys_permission" VALUES (1572155394710884354, 1580491239876640770, '菜单新增', 5, 'POST:/system/menu', 'system:menu:add', NULL, NULL, 1, '2022-10-13 17:31:20');
-INSERT INTO "public"."sys_permission" VALUES (1572155394710884355, 1580491239876640770, '菜单删除', 5, 'DELETE:/system/menu', 'system:menu:del', NULL, NULL, 1, '2022-10-13 17:31:28');
-INSERT INTO "public"."sys_permission" VALUES (1572155394710884356, 1580491239876640770, '菜单关联权限', 5, 'POST:/system/permission/batch', 'system:menuPerm:batch', NULL, NULL, 1, '2022-10-13 17:31:33');
-INSERT INTO "public"."sys_permission" VALUES (1572155394710884357, 1580491239876640770, '菜单关联角色', 5, 'POST:/system/roleMenu/batch', 'system:menuRole:batch', NULL, NULL, 1, '2022-10-13 17:31:40');
-INSERT INTO "public"."sys_permission" VALUES (1572155394710884358, 1580491239876640770, '菜单编辑', 5, 'PUT:/system/menu', 'system:menu:edit', NULL, NULL, 1, '2022-10-13 17:30:58');
-INSERT INTO "public"."sys_permission" VALUES (1572158818093420546, NULL, '权限关联角色', 1475111131305844738, 'POST:/system/rolePerm/batch', 'system:permRole:batch', NULL, NULL, 1, '2022-09-22 13:47:18');
-INSERT INTO "public"."sys_permission" VALUES (1572824840752533505, NULL, '权限批量删除', 1475111131305844738, 'DELETE:/system/permission/{ids}/batch', 'system:permission:del:batch', 1, '2022-09-22 13:47:18', 1, '2022-09-22 13:47:18');
-INSERT INTO "public"."sys_permission" VALUES (1572825466106482689, NULL, '字典类型删除', 1537320455847165953, 'DELETE:/system/dictType', 'system:dict-type:del', 1, '2022-09-22 13:49:47', 1, '2022-09-22 13:49:47');
-INSERT INTO "public"."sys_permission" VALUES (1572825466106482690, NULL, '字典类型批量删除', 1537320455847165953, 'DELETE:/system/dictType/{ids}/batch', 'system:dict-type:del:batch', 1, '2022-09-22 13:49:47', 1, '2022-09-22 13:49:47');
-INSERT INTO "public"."sys_permission" VALUES (1572825466114871297, NULL, '字典类型编辑', 1537320455847165953, 'PUT:/system/dictType', 'system:dict-type:edit', 1, '2022-09-22 13:49:47', 1, '2022-09-22 13:49:47');
-INSERT INTO "public"."sys_permission" VALUES (1572825466114871298, NULL, '字典类型新增', 1537320455847165953, 'POST:/system/dictType', 'system:dict-type:add', 1, '2022-09-22 13:49:47', 1, '2022-09-22 13:49:47');
-INSERT INTO "public"."sys_permission" VALUES (1572826445522604033, NULL, '参数编辑', 1537625854055940097, 'PUT:/system/params', 'system:params:edit', 1, '2022-09-22 13:53:41', 1, '2022-09-22 13:53:41');
-INSERT INTO "public"."sys_permission" VALUES (1572826445522604034, NULL, '参数删除', 1537625854055940097, 'DELETE:/system/params', 'system:params:del', 1, '2022-09-22 13:53:41', 1, '2022-09-22 13:53:41');
-INSERT INTO "public"."sys_permission" VALUES (1572826445522604035, NULL, '参数批量删除', 1537625854055940097, 'DELETE:/system/params/{ids}/batch', 'system:params:del:batch', 1, '2022-09-22 13:53:41', 1, '2022-09-22 13:53:41');
-INSERT INTO "public"."sys_permission" VALUES (1572826445522604036, NULL, '参数新增', 1537625854055940097, 'POST:/system/params', 'system:params:add', 1, '2022-09-22 13:53:41', 1, '2022-09-22 13:53:41');
-INSERT INTO "public"."sys_permission" VALUES (1572827171908947969, NULL, '客户端新增', 1475197863846027266, 'POST:/system/oauth2Client', 'system:client:add', 1, '2022-09-22 13:56:34', 1, '2022-09-22 13:56:34');
-INSERT INTO "public"."sys_permission" VALUES (1572827171917336578, NULL, '客户端设置密钥', 1475197863846027266, 'PATCH:/system/oauth2Client', 'system:client:secret', 1, '2022-09-22 13:56:34', 1, '2022-09-22 13:56:34');
-INSERT INTO "public"."sys_permission" VALUES (1572827171917336579, NULL, '客户端删除', 1475197863846027266, 'DELETE:/system/oauth2Client', 'system:client:del', 1, '2022-09-22 13:56:34', 1, '2022-09-22 13:56:34');
-INSERT INTO "public"."sys_permission" VALUES (1572827171917336580, NULL, '客户端批量删除', 1475197863846027266, 'DELETE:/system/oauth2Client/{ids}/batch', 'system:client:del:batch', 1, '2022-09-22 13:56:34', 1, '2022-09-22 13:56:34');
-INSERT INTO "public"."sys_permission" VALUES (1572827171917336581, NULL, '客户端编辑', 1475197863846027266, 'PUT:/system/oauth2Client', 'system:client:edit', 1, '2022-09-22 13:56:34', 1, '2022-09-22 13:56:34');
-INSERT INTO "public"."sys_permission" VALUES (1572827421113520129, NULL, '用户强制下线', 1537698325769674753, 'PUT:/system/user/forceAll', 'system:user:force-all', 1, '2022-09-22 13:57:34', 1, '2022-09-22 13:57:34');
-INSERT INTO "public"."sys_permission" VALUES (1572827619025948673, NULL, '清空日志', 1563061288516792322, 'DELETE:/admin-log/apiLog/all', 'admin-log:api-log:del:all', 1, '2022-09-22 13:58:21', 1, '2022-09-23 17:26:50');
-INSERT INTO "public"."sys_permission" VALUES (1578999516344270849, NULL, '租户批量删除', 1575299088586797058, 'DELETE:/system/tenant/{ids}/batch', 'system:tenant:del:batch', 1, '2022-10-09 14:43:16', 1, '2022-10-13 17:28:26');
-INSERT INTO "public"."sys_permission" VALUES (1578999516344270850, NULL, '租户编辑', 1575299088586797058, 'PUT:/system/tenant', 'system:tenant:edit', 1, '2022-10-09 14:43:16', 1, '2022-10-13 17:28:26');
-INSERT INTO "public"."sys_permission" VALUES (1578999516344270851, NULL, '租户新增', 1575299088586797058, 'POST:/system/tenant', 'system:tenant:add', 1, '2022-10-09 14:43:16', 1, '2022-10-13 17:28:26');
-INSERT INTO "public"."sys_permission" VALUES (1578999516344270852, NULL, '租户删除', 1575299088586797058, 'DELETE:/system/tenant', 'system:tenant:del', 1, '2022-10-09 14:43:16', 1, '2022-10-13 17:28:26');
-INSERT INTO "public"."sys_permission" VALUES (1580490637109018626, NULL, '租户分配到用户', 1575299088586797058, 'POST:/system/tenant/user', 'system:tenant:user:allot', 1, '2022-10-13 17:28:26', 1, '2022-10-13 17:28:26');
-INSERT INTO "public"."sys_permission" VALUES (1631122862690881537, 1631121175154610177, '启动', 1627485430827397122, 'PUT:/scheduling/{v}/scheduling/start', 'scheduling:task:start', 1, '2023-03-02 10:42:49.901605', 1, '2023-03-02 10:42:49.901605');
-INSERT INTO "public"."sys_permission" VALUES (1631122862690881538, 1631121175154610177, '新增', 1627485430827397122, 'POST:/scheduling/{v}/scheduling', 'scheduling:task:add', 1, '2023-03-02 10:42:49.901605', 1, '2023-03-02 10:42:49.901605');
-INSERT INTO "public"."sys_permission" VALUES (1631122862690881539, 1631121175154610177, '重启', 1627485430827397122, 'PUT:/scheduling/{v}/scheduling/restart', 'scheduling:task:restart', 1, '2023-03-02 10:42:49.901605', 1, '2023-03-02 10:42:49.901605');
-INSERT INTO "public"."sys_permission" VALUES (1631122862690881540, 1631121175154610177, '编辑', 1627485430827397122, 'PATCH:/scheduling/{v}/scheduling', 'scheduling:task:edit', 1, '2023-03-02 10:42:49.901605', 1, '2023-03-02 10:42:49.901605');
-INSERT INTO "public"."sys_permission" VALUES (1631122862690881541, 1631121175154610177, '批量删除', 1627485430827397122, 'DELETE:/scheduling/{v}/scheduling/batch', 'scheduling:task:del:batch', 1, '2023-03-02 10:42:49.901605', 1, '2023-03-02 10:42:49.901605');
-INSERT INTO "public"."sys_permission" VALUES (1631122862690881542, 1631121175154610177, '删除', 1627485430827397122, 'DELETE:/scheduling/{v}/scheduling/{id}', 'scheduling:task:del', 1, '2023-03-02 10:42:49.901605', 1, '2023-03-02 10:42:49.901605');
-INSERT INTO "public"."sys_permission" VALUES (1631122862690881543, 1631121175154610177, '停止', 1627485430827397122, 'PUT:/scheduling/{v}/scheduling/stop', 'scheduling:task:stop', 1, '2023-03-02 10:42:49.901605', 1, '2023-03-02 10:42:49.901605');
-INSERT INTO "public"."sys_permission" VALUES (1633718324323414018, 1633718264189677569, '测试权限', NULL, 'GET:/system/permDemo/test1', 'aaa:bbb:ccc', 1, '2023-03-09 14:36:16.193', 1, '2023-03-09 14:36:16.193');
-INSERT INTO "public"."sys_permission" VALUES (1633718704742592514, 1633718264189677569, '测试权限2', NULL, 'GET:/system/permDemo/test1', 'ddd:eee:fff', 1, '2023-03-09 14:37:46.893', 1, '2023-03-09 14:37:46.893');
-INSERT INTO "public"."sys_permission" VALUES (1633718821759479809, 1633718264189677569, '测试权限3', NULL, 'GET:/system/permDemo/test1', 'ggg:hhh:iii', 1, '2023-03-09 14:38:14.791', 1, '2023-03-09 14:38:14.791');
-INSERT INTO "public"."sys_permission" VALUES (1572825926288740354, NULL, '字典信息删除', 1572500323467444226, 'DELETE:/system/dict', 'system:dict:del', 1, '2023-06-02 16:51:28.675', 1660854347478024193, '2023-06-02 16:51:28.68');
-INSERT INTO "public"."sys_permission" VALUES (1572825926288740353, NULL, '字典信息新增', 1572500323467444226, 'POST:/system/dict', 'system:dict:add', 1, '2023-06-02 16:51:28.675', 1660854347478024193, '2023-06-02 16:51:28.68');
-INSERT INTO "public"."sys_permission" VALUES (1572141139009785861, NULL, '用户重置密码', 7, 'PUT:/system/user/passwd', 'system:user:passwd', NULL, '2023-06-02 17:03:02.515', 1660854347478024193, '2023-06-02 17:03:02.52');
-INSERT INTO "public"."sys_permission" VALUES (1572825926288740356, NULL, '字典信息批量删除', 1572500323467444226, 'DELETE:/system/dict/{ids}/batch', 'system:dict:del:batch', 1, '2023-06-02 16:51:28.675', 1660854347478024193, '2023-06-02 16:51:28.68');
-INSERT INTO "public"."sys_permission" VALUES (1572825926288740355, NULL, '字典信息编辑', 1572500323467444226, 'PUT:/system/dict', 'system:dict:edit', 1, '2023-06-02 16:51:28.675', 1660854347478024193, '2023-06-02 16:51:28.68');
-INSERT INTO "public"."sys_permission" VALUES (1572141139009785859, NULL, '用户新增', 7, 'POST:/system/user', 'system:user:add', NULL, '2023-06-02 17:03:02.515', 1660854347478024193, '2023-06-02 17:03:02.52');
-INSERT INTO "public"."sys_permission" VALUES (1572141139009785860, NULL, '用户编辑', 7, 'PUT:/system/user', 'system:user:edit', NULL, '2023-06-02 17:03:02.515', 1660854347478024193, '2023-06-02 17:03:02.52');
+INSERT INTO "public"."sys_permission" VALUES (1572824840752533505, NULL, '权限批量删除', 1475111131305844738, 'DELETE:/system/{version}/permission/{ids}/batch', 'system:permission:del:batch', 1, '2022-09-22 13:47:18', 1, '2022-09-22 13:47:18');
+INSERT INTO "public"."sys_permission" VALUES (1572155394710884355, 1580491239876640770, '菜单删除', 5, 'DELETE:/system/{version}/menu', 'system:menu:del', NULL, NULL, 1, '2022-10-13 17:31:28');
+INSERT INTO "public"."sys_permission" VALUES (1572153139278434306, NULL, '角色编辑', 6, 'PUT:/system/{version}/role', 'system:role:edit', NULL, NULL, 1, '2023-01-13 17:03:10');
+INSERT INTO "public"."sys_permission" VALUES (1572155394710884354, 1580491239876640770, '菜单新增', 5, 'POST:/system/{version}/menu', 'system:menu:add', NULL, NULL, 1, '2022-10-13 17:31:20');
+INSERT INTO "public"."sys_permission" VALUES (1572155394710884356, 1580491239876640770, '菜单关联权限', 5, 'POST:/system/{version}/permission/batch', 'system:menuPerm:batch', NULL, NULL, 1, '2022-10-13 17:31:33');
+INSERT INTO "public"."sys_permission" VALUES (1572155394710884357, 1580491239876640770, '菜单关联角色', 5, 'POST:/system/{version}/roleMenu/batch', 'system:menuRole:batch', NULL, NULL, 1, '2022-10-13 17:31:40');
 INSERT INTO "public"."sys_permission" VALUES (1572141139009785858, NULL, '用户删除', 7, 'DELETE:/system/user', 'system:user:del', NULL, '2023-06-02 17:03:02.515', 1660854347478024193, '2023-06-02 17:03:02.52');
-INSERT INTO "public"."sys_permission" VALUES (1572417317352460289, NULL, '不关联菜单', NULL, 'GET:/asdf', 'bbb:aaa:ccc', 1, '2022-09-21 10:47:57', 1664579188647510018, '2023-06-02 18:54:20.35');
-INSERT INTO "public"."sys_permission" VALUES (1572157879118778371, 1633718264189677569, '权限删除', 1475111131305844738, 'DELETE:/system/permission', 'system:permission:del', NULL, NULL, 1664579188647510018, '2023-06-02 18:55:37.807');
-INSERT INTO "public"."sys_permission" VALUES (1572157879118778369, NULL, '权限新增', 1475111131305844738, 'POST:/system/permission', 'system:permission:add', NULL, NULL, 1660854347478024193, '2023-06-05 09:57:44.901');
-INSERT INTO "public"."sys_permission" VALUES (1572157879118778370, NULL, '权限编辑', 1475111131305844738, 'PUT:/system/permission', 'system:permission:edit', NULL, NULL, 1660854347478024193, '2023-06-05 09:58:03.626');
-INSERT INTO "public"."sys_permission" VALUES (1572824375696494593, NULL, '用户批量删除', 7, 'DELETE:/system/user/{ids}/batch', 'system:user:del:batch', 1, '2023-06-02 17:03:02.515', 1660854347478024193, '2023-06-02 17:03:02.52');
-INSERT INTO "public"."sys_permission" VALUES (1665540128268255233, 1633718264189677569, 'asdf', NULL, 'GET:/asdf', '', 1660854347478024193, '2023-06-05 10:04:45.475', 1660854347478024193, '2023-06-05 10:04:45.475');
-INSERT INTO "public"."sys_permission" VALUES (1572824564767330306, NULL, '角色批量删除', 6, 'DELETE:/system/role/{ids}/batch', 'system:role:del:batch', 1, '2022-09-22 13:46:13', 1, '2023-01-13 17:03:10');
-INSERT INTO "public"."sys_permission" VALUES (1773170931628363777, 1633718264189677569, 'hell添加', 1563061288516792322, 'POST:/hell/add', 'hell:add', 1, '2024-03-28 11:27:40.859', 1, '2024-03-28 11:27:40.859');
-INSERT INTO "public"."sys_permission" VALUES (1572153139278434307, NULL, '角色删除', 6, 'DELETE:/system/role', 'system:role:del', NULL, NULL, 1, '2023-01-13 17:03:10');
+INSERT INTO "public"."sys_permission" VALUES (1572141139009785859, NULL, '用户新增', 7, 'POST:/system/{version}/user', 'system:user:add', NULL, '2023-06-02 17:03:02.515', 1660854347478024193, '2023-06-02 17:03:02.52');
+INSERT INTO "public"."sys_permission" VALUES (1572141139009785860, NULL, '用户编辑', 7, 'PUT:/system/{version}/user', 'system:user:edit', NULL, '2023-06-02 17:03:02.515', 1660854347478024193, '2023-06-02 17:03:02.52');
+INSERT INTO "public"."sys_permission" VALUES (1572141139009785861, NULL, '用户重置密码', 7, 'PUT:/system/{version}/user/passwd', 'system:user:passwd', NULL, '2023-06-02 17:03:02.515', 1660854347478024193, '2023-06-02 17:03:02.52');
+INSERT INTO "public"."sys_permission" VALUES (1572153139278434305, NULL, '角色新增', 6, 'POST:/system/{version}/role', 'system:role:add', NULL, NULL, 1, '2023-01-13 17:03:10');
+INSERT INTO "public"."sys_permission" VALUES (1572155394710884358, 1580491239876640770, '菜单编辑', 5, 'PUT:/system/{version}/menu', 'system:menu:edit', NULL, NULL, 1, '2022-10-13 17:30:58');
+INSERT INTO "public"."sys_permission" VALUES (1572157879118778369, NULL, '权限新增', 1475111131305844738, 'POST:/system/{version}/permission', 'system:permission:add', NULL, NULL, 1660854347478024193, '2023-06-05 09:57:44.901');
+INSERT INTO "public"."sys_permission" VALUES (1572157879118778370, NULL, '权限编辑', 1475111131305844738, 'PUT:/system/{version}/permission', 'system:permission:edit', NULL, NULL, 1660854347478024193, '2023-06-05 09:58:03.626');
+INSERT INTO "public"."sys_permission" VALUES (1572157879118778371, 1633718264189677569, '权限删除', 1475111131305844738, 'DELETE:/system/{version}/permission', 'system:permission:del', NULL, NULL, 1664579188647510018, '2023-06-02 18:55:37.807');
+INSERT INTO "public"."sys_permission" VALUES (1572158818093420546, NULL, '权限关联角色', 1475111131305844738, 'POST:/system/{version}/rolePerm/batch', 'system:permRole:batch', NULL, NULL, 1, '2022-09-22 13:47:18');
+INSERT INTO "public"."sys_permission" VALUES (1572824375696494593, NULL, '用户批量删除', 7, 'DELETE:/system/{version}/user/{ids}/batch', 'system:user:del:batch', 1, '2023-06-02 17:03:02.515', 1660854347478024193, '2023-06-02 17:03:02.52');
+INSERT INTO "public"."sys_permission" VALUES (1572824564767330306, NULL, '角色批量删除', 6, 'DELETE:/system/{version}/role/{ids}/batch', 'system:role:del:batch', 1, '2022-09-22 13:46:13', 1, '2023-01-13 17:03:10');
+INSERT INTO "public"."sys_permission" VALUES (1572825466106482689, NULL, '字典类型删除', 1537320455847165953, 'DELETE:/system/{version}/dictType', 'system:dict-type:del', 1, '2022-09-22 13:49:47', 1, '2022-09-22 13:49:47');
+INSERT INTO "public"."sys_permission" VALUES (1572825466106482690, NULL, '字典类型批量删除', 1537320455847165953, 'DELETE:/system/{version}/dictType/{ids}/batch', 'system:dict-type:del:batch', 1, '2022-09-22 13:49:47', 1, '2022-09-22 13:49:47');
+INSERT INTO "public"."sys_permission" VALUES (1572825466114871297, NULL, '字典类型编辑', 1537320455847165953, 'PUT:/system/{version}/dictType', 'system:dict-type:edit', 1, '2022-09-22 13:49:47', 1, '2022-09-22 13:49:47');
+INSERT INTO "public"."sys_permission" VALUES (1572825466114871298, NULL, '字典类型新增', 1537320455847165953, 'POST:/system/{version}/dictType', 'system:dict-type:add', 1, '2022-09-22 13:49:47', 1, '2022-09-22 13:49:47');
+INSERT INTO "public"."sys_permission" VALUES (1572825926288740353, NULL, '字典信息新增', 1572500323467444226, 'POST:/system/{version}/dict', 'system:dict:add', 1, '2023-06-02 16:51:28.675', 1660854347478024193, '2023-06-02 16:51:28.68');
+INSERT INTO "public"."sys_permission" VALUES (1572825926288740354, NULL, '字典信息删除', 1572500323467444226, 'DELETE:/system/{version}/dict', 'system:dict:del', 1, '2023-06-02 16:51:28.675', 1660854347478024193, '2023-06-02 16:51:28.68');
+INSERT INTO "public"."sys_permission" VALUES (1572825926288740355, NULL, '字典信息编辑', 1572500323467444226, 'PUT:/system/{version}/dict', 'system:dict:edit', 1, '2023-06-02 16:51:28.675', 1660854347478024193, '2023-06-02 16:51:28.68');
+INSERT INTO "public"."sys_permission" VALUES (1572825926288740356, NULL, '字典信息批量删除', 1572500323467444226, 'DELETE:/system/{version}/dict/{ids}/batch', 'system:dict:del:batch', 1, '2023-06-02 16:51:28.675', 1660854347478024193, '2023-06-02 16:51:28.68');
+INSERT INTO "public"."sys_permission" VALUES (1572826445522604033, NULL, '参数编辑', 1537625854055940097, 'PUT:/system/{version}/params', 'system:params:edit', 1, '2022-09-22 13:53:41', 1, '2022-09-22 13:53:41');
+INSERT INTO "public"."sys_permission" VALUES (1572826445522604034, NULL, '参数删除', 1537625854055940097, 'DELETE:/system/{version}/params', 'system:params:del', 1, '2022-09-22 13:53:41', 1, '2022-09-22 13:53:41');
+INSERT INTO "public"."sys_permission" VALUES (1572826445522604035, NULL, '参数批量删除', 1537625854055940097, 'DELETE:/system/{version}/params/{ids}/batch', 'system:params:del:batch', 1, '2022-09-22 13:53:41', 1, '2022-09-22 13:53:41');
+INSERT INTO "public"."sys_permission" VALUES (1572826445522604036, NULL, '参数新增', 1537625854055940097, 'POST:/system/{version}/params', 'system:params:add', 1, '2022-09-22 13:53:41', 1, '2022-09-22 13:53:41');
+INSERT INTO "public"."sys_permission" VALUES (1572827171908947969, NULL, '客户端新增', 1475197863846027266, 'POST:/system/{version}/oauth2Client', 'system:client:add', 1, '2022-09-22 13:56:34', 1, '2022-09-22 13:56:34');
+INSERT INTO "public"."sys_permission" VALUES (1572827171917336578, NULL, '客户端设置密钥', 1475197863846027266, 'PATCH:/system/{version}/oauth2Client', 'system:client:secret', 1, '2022-09-22 13:56:34', 1, '2022-09-22 13:56:34');
+INSERT INTO "public"."sys_permission" VALUES (1572827171917336579, NULL, '客户端删除', 1475197863846027266, 'DELETE:/system/{version}/oauth2Client', 'system:client:del', 1, '2022-09-22 13:56:34', 1, '2022-09-22 13:56:34');
+INSERT INTO "public"."sys_permission" VALUES (1572827171917336580, NULL, '客户端批量删除', 1475197863846027266, 'DELETE:/system/{version}/oauth2Client/{ids}/batch', 'system:client:del:batch', 1, '2022-09-22 13:56:34', 1, '2022-09-22 13:56:34');
+INSERT INTO "public"."sys_permission" VALUES (1572827171917336581, NULL, '客户端编辑', 1475197863846027266, 'PUT:/system/{version}/oauth2Client', 'system:client:edit', 1, '2022-09-22 13:56:34', 1, '2022-09-22 13:56:34');
+INSERT INTO "public"."sys_permission" VALUES (1572827421113520129, NULL, '用户强制下线', 1537698325769674753, 'PUT:/system/{version}/user/forceAll', 'system:user:force-all', 1, '2022-09-22 13:57:34', 1, '2022-09-22 13:57:34');
+INSERT INTO "public"."sys_permission" VALUES (1572827619025948673, NULL, '清空日志', 1563061288516792322, 'DELETE:/admin/{version}-log/apiLog/all', 'admin-log:api-log:del:all', 1, '2022-09-22 13:58:21', 1, '2022-09-23 17:26:50');
+INSERT INTO "public"."sys_permission" VALUES (1578999516344270849, NULL, '租户批量删除', 1575299088586797058, 'DELETE:/system/{version}/tenant/{ids}/batch', 'system:tenant:del:batch', 1, '2022-10-09 14:43:16', 1, '2022-10-13 17:28:26');
+INSERT INTO "public"."sys_permission" VALUES (1578999516344270850, NULL, '租户编辑', 1575299088586797058, 'PUT:/system/{version}/tenant', 'system:tenant:edit', 1, '2022-10-09 14:43:16', 1, '2022-10-13 17:28:26');
+INSERT INTO "public"."sys_permission" VALUES (1578999516344270851, NULL, '租户新增', 1575299088586797058, 'POST:/system/{version}/tenant', 'system:tenant:add', 1, '2022-10-09 14:43:16', 1, '2022-10-13 17:28:26');
+INSERT INTO "public"."sys_permission" VALUES (1578999516344270852, NULL, '租户删除', 1575299088586797058, 'DELETE:/system/{version}/tenant', 'system:tenant:del', 1, '2022-10-09 14:43:16', 1, '2022-10-13 17:28:26');
+INSERT INTO "public"."sys_permission" VALUES (1631122862690881537, 1631121175154610177, '启动', 1627485430827397122, 'PUT:/scheduling/{version}/scheduling/start', 'scheduling:task:start', 1, '2023-03-02 10:42:49.901605', 1, '2023-03-02 10:42:49.901605');
+INSERT INTO "public"."sys_permission" VALUES (1631122862690881538, 1631121175154610177, '新增', 1627485430827397122, 'POST:/scheduling/{version}/scheduling', 'scheduling:task:add', 1, '2023-03-02 10:42:49.901605', 1, '2023-03-02 10:42:49.901605');
+INSERT INTO "public"."sys_permission" VALUES (1631122862690881539, 1631121175154610177, '重启', 1627485430827397122, 'PUT:/scheduling/{version}/scheduling/restart', 'scheduling:task:restart', 1, '2023-03-02 10:42:49.901605', 1, '2023-03-02 10:42:49.901605');
+INSERT INTO "public"."sys_permission" VALUES (1631122862690881540, 1631121175154610177, '编辑', 1627485430827397122, 'PATCH:/scheduling/{version}/scheduling', 'scheduling:task:edit', 1, '2023-03-02 10:42:49.901605', 1, '2023-03-02 10:42:49.901605');
+INSERT INTO "public"."sys_permission" VALUES (1631122862690881541, 1631121175154610177, '批量删除', 1627485430827397122, 'DELETE:/scheduling/{version}/scheduling/batch', 'scheduling:task:del:batch', 1, '2023-03-02 10:42:49.901605', 1, '2023-03-02 10:42:49.901605');
+INSERT INTO "public"."sys_permission" VALUES (1631122862690881542, 1631121175154610177, '删除', 1627485430827397122, 'DELETE:/scheduling/{version}/scheduling/{id}', 'scheduling:task:del', 1, '2023-03-02 10:42:49.901605', 1, '2023-03-02 10:42:49.901605');
+INSERT INTO "public"."sys_permission" VALUES (1631122862690881543, 1631121175154610177, '停止', 1627485430827397122, 'PUT:/scheduling/{version}/scheduling/stop', 'scheduling:task:stop', 1, '2023-03-02 10:42:49.901605', 1, '2023-03-02 10:42:49.901605');
+INSERT INTO "public"."sys_permission" VALUES (1572153139278434307, NULL, '角色删除', 6, 'DELETE:/system/{version}/role', 'system:role:del', NULL, NULL, 1, '2023-01-13 17:03:10');
+INSERT INTO "public"."sys_permission" VALUES (1983377231607078913, NULL, '查看权限', 7, 'GET:/system/{version}/user/page', 'system:user:view', 1, '2025-10-29 11:35:56.052505', 1, '2025-10-29 11:35:56.052505');
+INSERT INTO "public"."sys_permission" VALUES (1983455586268340225, NULL, '查看权限', 6, 'GET:/system/{version}/role/page', 'system:role:view', 1, '2025-10-29 16:47:17.252401', 1, '2025-10-29 16:47:17.252401');
+INSERT INTO "public"."sys_permission" VALUES (1983455959573979137, NULL, '查看权限', 5, 'GET:/system/{version}/menu/page', 'system:menu:view', 1, '2025-10-29 16:48:46.251938', 1, '2025-10-29 16:48:46.251938');
+INSERT INTO "public"."sys_permission" VALUES (1983456190478802945, NULL, '查看权限', 1475111131305844738, 'GET:/system/{version}/permission/page', 'system:permission:view', 1, '2025-10-29 16:49:41.304908', 1, '2025-10-29 16:49:41.304908');
+INSERT INTO "public"."sys_permission" VALUES (1983456367839141890, NULL, '查看权限', 1537320455847165953, 'GET:/system/{version}/dictType/page', 'system:dict-type:view', 1, '2025-10-29 16:50:23.592954', 1, '2025-10-29 16:50:23.592954');
+INSERT INTO "public"."sys_permission" VALUES (1983456528782974978, NULL, '查看权限', 1572500323467444226, 'GET:/system/{version}/dict/page', 'system:dict:view', 1, '2025-10-29 16:51:01.972585', 1, '2025-10-29 16:51:01.972585');
+INSERT INTO "public"."sys_permission" VALUES (1983456654364631042, NULL, '查看权限', 1537625854055940097, 'GET:/system/{version}/params/page', 'system:params:view', 1, '2025-10-29 16:51:31.913435', 1, '2025-10-29 16:51:31.913435');
+INSERT INTO "public"."sys_permission" VALUES (1983456775877812225, NULL, '查看权限', 1475197863846027266, 'GET:/system/{version}/oauth2Client/page', 'system:client:view', 1, '2025-10-29 16:52:00.873565', 1, '2025-10-29 16:52:00.873565');
+INSERT INTO "public"."sys_permission" VALUES (1983456905938984961, NULL, '查看权限', 1575299088586797058, 'GET:/system/{version}/tenant/page', 'system:tenant:view', 1, '2025-10-29 16:52:31.888094', 1, '2025-10-29 16:52:31.888094');
+INSERT INTO "public"."sys_permission" VALUES (1983457171165798401, NULL, '查看权限', 1627485430827397122, 'GET:/scheduling/{version}/scheduling/page', 'scheduling:task:view', 1, '2025-10-29 16:53:35.130466', 1, '2025-10-29 16:53:35.130466');
+INSERT INTO "public"."sys_permission" VALUES (1983457516885499906, NULL, '查看权限', 1537698325769674753, 'GET:/system/{version}/user/online/page', 'system:user-online:view', 1, '2025-10-29 16:54:57.549062', 1, '2025-10-29 16:54:57.549062');
+INSERT INTO "public"."sys_permission" VALUES (1983457782821150721, NULL, '查看权限', 1563061288516792322, 'GET:/admin/{version}-log/apiLog/page', 'admin-log:api-log:view', 1, '2025-10-29 16:56:00.946591', 1, '2025-10-29 16:56:00.946591');
+INSERT INTO "public"."sys_permission" VALUES (1580490637109018626, NULL, '租户分配到用户', 7, 'POST:/system/{version}/tenant/user', 'system:tenant:user:allot', 1, '2022-10-13 17:28:26', 1, '2022-10-13 17:28:26');
 
 -- ----------------------------
 -- Table structure for sys_permission_group
@@ -1452,6 +1463,8 @@ INSERT INTO "public"."sys_role" VALUES (2, '管理员', 'ADMIN', 0, 1, 1, '2022-
 INSERT INTO "public"."sys_role" VALUES (5, '游客', 'TOURIST', 5, 1, 1, '2022-12-15 14:01:22', 1, '2022-10-19 15:37:36', 0, '000000', 0);
 INSERT INTO "public"."sys_role" VALUES (4, '普通用户', 'NORMAL', 4, 1, 1, '2022-12-15 14:01:22', 1, '2023-06-05 14:18:08', 0, '000000', 0);
 INSERT INTO "public"."sys_role" VALUES (1963080442572177409, '流程角色1', 'FLOW_1', 6, 1, 1, '2025-09-03 11:23:44.450037', 1, '2025-09-03 11:23:59.502755', 0, '000000', 0);
+INSERT INTO "public"."sys_role" VALUES (1983103536934162433, '管理员（示例）', 'admin', 0, 1, 1, '2025-10-28 17:28:22.147276', 1, '2025-10-29 10:11:55.681358', 0, '000000', 0);
+INSERT INTO "public"."sys_role" VALUES (1983103578566823938, '普通用户（示例）', 'common', 0, 1, 1, '2025-10-28 17:28:32.080979', 1, '2025-10-29 10:12:03.275069', 0, '000000', 0);
 
 -- ----------------------------
 -- Table structure for sys_role_dept
@@ -1490,23 +1503,6 @@ COMMENT ON TABLE "public"."sys_role_menu" IS '角色菜单关联表';
 -- ----------------------------
 -- Records of sys_role_menu
 -- ----------------------------
-INSERT INTO "public"."sys_role_menu" VALUES (5, 1537320455847165953, 1);
-INSERT INTO "public"."sys_role_menu" VALUES (5, 0, 1);
-INSERT INTO "public"."sys_role_menu" VALUES (5, 1572500323467444226, 1);
-INSERT INTO "public"."sys_role_menu" VALUES (5, 4, 0);
-INSERT INTO "public"."sys_role_menu" VALUES (2, 0, 1);
-INSERT INTO "public"."sys_role_menu" VALUES (2, 6, 1);
-INSERT INTO "public"."sys_role_menu" VALUES (2, 4, 0);
-INSERT INTO "public"."sys_role_menu" VALUES (2, 7, 1);
-INSERT INTO "public"."sys_role_menu" VALUES (4, 4, 0);
-INSERT INTO "public"."sys_role_menu" VALUES (4, 1572502356924743682, 1);
-INSERT INTO "public"."sys_role_menu" VALUES (4, 1627485035375833090, 0);
-INSERT INTO "public"."sys_role_menu" VALUES (4, 1631227390958325768, 1);
-INSERT INTO "public"."sys_role_menu" VALUES (4, 1537698325769674753, 1);
-INSERT INTO "public"."sys_role_menu" VALUES (4, 1529380639935463426, 1);
-INSERT INTO "public"."sys_role_menu" VALUES (4, 1627485430827397122, 1);
-INSERT INTO "public"."sys_role_menu" VALUES (4, 0, 1);
-INSERT INTO "public"."sys_role_menu" VALUES (4, 1563061288516792322, 1);
 INSERT INTO "public"."sys_role_menu" VALUES (1963080442572177409, 1961000320654487554, 1);
 INSERT INTO "public"."sys_role_menu" VALUES (1963080442572177409, 1963544670945005572, 1);
 INSERT INTO "public"."sys_role_menu" VALUES (1963080442572177409, 1964010182879223809, 1);
@@ -1524,6 +1520,83 @@ INSERT INTO "public"."sys_role_menu" VALUES (1963080442572177409, 19640101828792
 INSERT INTO "public"."sys_role_menu" VALUES (1963080442572177409, 1962731950251192333, 1);
 INSERT INTO "public"."sys_role_menu" VALUES (1963080442572177409, 1964010182879223811, 1);
 INSERT INTO "public"."sys_role_menu" VALUES (1963080442572177409, 1963542266031755265, 1);
+INSERT INTO "public"."sys_role_menu" VALUES (4, 1572502356924743682, 1);
+INSERT INTO "public"."sys_role_menu" VALUES (4, 1631227390958325768, 1);
+INSERT INTO "public"."sys_role_menu" VALUES (4, 1963542266031755265, 1);
+INSERT INTO "public"."sys_role_menu" VALUES (4, 1963544670945005570, 1);
+INSERT INTO "public"."sys_role_menu" VALUES (4, 1944928279526395906, 1);
+INSERT INTO "public"."sys_role_menu" VALUES (4, 1547835699233173505, 1);
+INSERT INTO "public"."sys_role_menu" VALUES (4, 1963544670945005571, 1);
+INSERT INTO "public"."sys_role_menu" VALUES (4, 1547835850341363713, 1);
+INSERT INTO "public"."sys_role_menu" VALUES (4, 1963450958801895426, 1);
+INSERT INTO "public"."sys_role_menu" VALUES (4, 1969941885586255873, 1);
+INSERT INTO "public"."sys_role_menu" VALUES (4, 1969942162087358465, 1);
+INSERT INTO "public"."sys_role_menu" VALUES (4, 0, 1);
+INSERT INTO "public"."sys_role_menu" VALUES (4, 1547818807554617346, 1);
+INSERT INTO "public"."sys_role_menu" VALUES (4, 1963450958801895427, 1);
+INSERT INTO "public"."sys_role_menu" VALUES (4, 1968222484428328962, 1);
+INSERT INTO "public"."sys_role_menu" VALUES (4, 4, 0);
+INSERT INTO "public"."sys_role_menu" VALUES (4, 1961000320654487554, 0);
+INSERT INTO "public"."sys_role_menu" VALUES (4, 1963544670945005569, 1);
+INSERT INTO "public"."sys_role_menu" VALUES (4, 1547787400883089410, 1);
+INSERT INTO "public"."sys_role_menu" VALUES (4, 1529380639935463426, 1);
+INSERT INTO "public"."sys_role_menu" VALUES (4, 1963544670945005572, 1);
+INSERT INTO "public"."sys_role_menu" VALUES (4, 1963450958801895425, 1);
+INSERT INTO "public"."sys_role_menu" VALUES (4, 1964010182879223810, 1);
+INSERT INTO "public"."sys_role_menu" VALUES (2, 1547787400883089410, 1);
+INSERT INTO "public"."sys_role_menu" VALUES (2, 1963450958801895425, 1);
+INSERT INTO "public"."sys_role_menu" VALUES (2, 1963544670945005572, 1);
+INSERT INTO "public"."sys_role_menu" VALUES (2, 1475197863846027266, 1);
+INSERT INTO "public"."sys_role_menu" VALUES (2, 1963544670945005570, 1);
+INSERT INTO "public"."sys_role_menu" VALUES (2, 1795660210988138497, 1);
+INSERT INTO "public"."sys_role_menu" VALUES (2, 1963542266031755265, 1);
+INSERT INTO "public"."sys_role_menu" VALUES (2, 7, 0);
+INSERT INTO "public"."sys_role_menu" VALUES (2, 1547818807554617346, 1);
+INSERT INTO "public"."sys_role_menu" VALUES (2, 1572502356924743682, 1);
+INSERT INTO "public"."sys_role_menu" VALUES (2, 1572500323467444226, 1);
+INSERT INTO "public"."sys_role_menu" VALUES (2, 1547835699233173505, 1);
+INSERT INTO "public"."sys_role_menu" VALUES (2, 1963544670945005571, 1);
+INSERT INTO "public"."sys_role_menu" VALUES (2, 1563061288516792322, 1);
+INSERT INTO "public"."sys_role_menu" VALUES (2, 6, 1);
+INSERT INTO "public"."sys_role_menu" VALUES (2, 1963544670945005569, 1);
+INSERT INTO "public"."sys_role_menu" VALUES (2, 1631227390958325768, 1);
+INSERT INTO "public"."sys_role_menu" VALUES (5, 0, 1);
+INSERT INTO "public"."sys_role_menu" VALUES (5, 1944928279526395906, 1);
+INSERT INTO "public"."sys_role_menu" VALUES (5, 1547818807554617346, 1);
+INSERT INTO "public"."sys_role_menu" VALUES (5, 1572502356924743682, 1);
+INSERT INTO "public"."sys_role_menu" VALUES (5, 1547835699233173505, 1);
+INSERT INTO "public"."sys_role_menu" VALUES (5, 1631227390958325768, 1);
+INSERT INTO "public"."sys_role_menu" VALUES (5, 1547787400883089410, 1);
+INSERT INTO "public"."sys_role_menu" VALUES (5, 1529380639935463426, 1);
+INSERT INTO "public"."sys_role_menu" VALUES (5, 1968222484428328962, 1);
+INSERT INTO "public"."sys_role_menu" VALUES (5, 1547835850341363713, 1);
+INSERT INTO "public"."sys_role_menu" VALUES (5, 4, 0);
+INSERT INTO "public"."sys_role_menu" VALUES (2, 5, 1);
+INSERT INTO "public"."sys_role_menu" VALUES (2, 1537698325769674753, 1);
+INSERT INTO "public"."sys_role_menu" VALUES (2, 1968222484428328962, 1);
+INSERT INTO "public"."sys_role_menu" VALUES (2, 1529380639935463426, 1);
+INSERT INTO "public"."sys_role_menu" VALUES (2, 4, 0);
+INSERT INTO "public"."sys_role_menu" VALUES (2, 1961000320654487554, 1);
+INSERT INTO "public"."sys_role_menu" VALUES (2, 1627485430827397122, 1);
+INSERT INTO "public"."sys_role_menu" VALUES (2, 1964010182879223809, 1);
+INSERT INTO "public"."sys_role_menu" VALUES (2, 1537625854055940097, 1);
+INSERT INTO "public"."sys_role_menu" VALUES (2, 1962731950251192333, 1);
+INSERT INTO "public"."sys_role_menu" VALUES (2, 1964010182879223810, 1);
+INSERT INTO "public"."sys_role_menu" VALUES (2, 1964010182879223811, 1);
+INSERT INTO "public"."sys_role_menu" VALUES (2, 1627485035375833090, 1);
+INSERT INTO "public"."sys_role_menu" VALUES (2, 1944928279526395906, 1);
+INSERT INTO "public"."sys_role_menu" VALUES (2, 1963450958801895426, 1);
+INSERT INTO "public"."sys_role_menu" VALUES (2, 1631227390958325762, 1);
+INSERT INTO "public"."sys_role_menu" VALUES (2, 1475111131305844738, 1);
+INSERT INTO "public"."sys_role_menu" VALUES (2, 0, 1);
+INSERT INTO "public"."sys_role_menu" VALUES (2, 1962731950251192321, 1);
+INSERT INTO "public"."sys_role_menu" VALUES (2, 1961001205065428993, 1);
+INSERT INTO "public"."sys_role_menu" VALUES (2, 1547835850341363713, 1);
+INSERT INTO "public"."sys_role_menu" VALUES (2, 1537320455847165953, 1);
+INSERT INTO "public"."sys_role_menu" VALUES (2, 1962440040961822722, 1);
+INSERT INTO "public"."sys_role_menu" VALUES (2, 1963450958801895427, 1);
+INSERT INTO "public"."sys_role_menu" VALUES (2, 1969942162087358465, 1);
+INSERT INTO "public"."sys_role_menu" VALUES (2, 1969941885586255873, 1);
 
 -- ----------------------------
 -- Table structure for sys_role_permission
@@ -1541,29 +1614,62 @@ COMMENT ON TABLE "public"."sys_role_permission" IS '角色权限关联表';
 -- ----------------------------
 -- Records of sys_role_permission
 -- ----------------------------
-INSERT INTO "public"."sys_role_permission" VALUES (2, 1572141139009785860);
-INSERT INTO "public"."sys_role_permission" VALUES (2, 1572824375696494593);
+INSERT INTO "public"."sys_role_permission" VALUES (2, 1572826445522604036);
+INSERT INTO "public"."sys_role_permission" VALUES (2, 1572826445522604035);
+INSERT INTO "public"."sys_role_permission" VALUES (2, 1572826445522604034);
+INSERT INTO "public"."sys_role_permission" VALUES (2, 1572158818093420546);
 INSERT INTO "public"."sys_role_permission" VALUES (2, 1572824564767330306);
-INSERT INTO "public"."sys_role_permission" VALUES (2, 1572141139009785858);
-INSERT INTO "public"."sys_role_permission" VALUES (2, 1572141139009785859);
-INSERT INTO "public"."sys_role_permission" VALUES (2, 1572155394710884356);
-INSERT INTO "public"."sys_role_permission" VALUES (2, 1572155394710884354);
-INSERT INTO "public"."sys_role_permission" VALUES (2, 1572155394710884355);
+INSERT INTO "public"."sys_role_permission" VALUES (2, 1983456367839141890);
 INSERT INTO "public"."sys_role_permission" VALUES (2, 1572153139278434307);
-INSERT INTO "public"."sys_role_permission" VALUES (2, 1572153139278434306);
-INSERT INTO "public"."sys_role_permission" VALUES (2, 1572157879118778369);
+INSERT INTO "public"."sys_role_permission" VALUES (2, 1983455586268340225);
+INSERT INTO "public"."sys_role_permission" VALUES (2, 1983457516885499906);
+INSERT INTO "public"."sys_role_permission" VALUES (2, 1572157879118778370);
+INSERT INTO "public"."sys_role_permission" VALUES (2, 1983456654364631042);
+INSERT INTO "public"."sys_role_permission" VALUES (2, 1572155394710884358);
+INSERT INTO "public"."sys_role_permission" VALUES (2, 1631122862690881537);
 INSERT INTO "public"."sys_role_permission" VALUES (2, 1572155394710884357);
+INSERT INTO "public"."sys_role_permission" VALUES (2, 1983455959573979137);
+INSERT INTO "public"."sys_role_permission" VALUES (2, 1983377231607078913);
+INSERT INTO "public"."sys_role_permission" VALUES (2, 1572155394710884354);
+INSERT INTO "public"."sys_role_permission" VALUES (2, 1572157879118778371);
+INSERT INTO "public"."sys_role_permission" VALUES (2, 1572155394710884356);
+INSERT INTO "public"."sys_role_permission" VALUES (2, 1572155394710884355);
+INSERT INTO "public"."sys_role_permission" VALUES (2, 1572157879118778369);
+INSERT INTO "public"."sys_role_permission" VALUES (2, 1572141139009785860);
+INSERT INTO "public"."sys_role_permission" VALUES (2, 1631122862690881542);
+INSERT INTO "public"."sys_role_permission" VALUES (2, 1631122862690881543);
+INSERT INTO "public"."sys_role_permission" VALUES (2, 1631122862690881540);
+INSERT INTO "public"."sys_role_permission" VALUES (2, 1572826445522604033);
+INSERT INTO "public"."sys_role_permission" VALUES (2, 1572141139009785859);
+INSERT INTO "public"."sys_role_permission" VALUES (2, 1631122862690881541);
+INSERT INTO "public"."sys_role_permission" VALUES (2, 1631122862690881538);
+INSERT INTO "public"."sys_role_permission" VALUES (2, 1572141139009785861);
+INSERT INTO "public"."sys_role_permission" VALUES (2, 1631122862690881539);
+INSERT INTO "public"."sys_role_permission" VALUES (2, 1572141139009785858);
+INSERT INTO "public"."sys_role_permission" VALUES (2, 1572824840752533505);
+INSERT INTO "public"."sys_role_permission" VALUES (2, 1983456528782974978);
+INSERT INTO "public"."sys_role_permission" VALUES (2, 1572825926288740353);
+INSERT INTO "public"."sys_role_permission" VALUES (2, 1572825926288740354);
+INSERT INTO "public"."sys_role_permission" VALUES (2, 1572825926288740355);
+INSERT INTO "public"."sys_role_permission" VALUES (2, 1572825926288740356);
+INSERT INTO "public"."sys_role_permission" VALUES (2, 1572827619025948673);
+INSERT INTO "public"."sys_role_permission" VALUES (2, 1983457171165798401);
+INSERT INTO "public"."sys_role_permission" VALUES (2, 1572824375696494593);
+INSERT INTO "public"."sys_role_permission" VALUES (2, 1572825466106482690);
+INSERT INTO "public"."sys_role_permission" VALUES (2, 1572825466114871298);
+INSERT INTO "public"."sys_role_permission" VALUES (2, 1572825466114871297);
+INSERT INTO "public"."sys_role_permission" VALUES (2, 1572825466106482689);
+INSERT INTO "public"."sys_role_permission" VALUES (2, 1572827421113520129);
+INSERT INTO "public"."sys_role_permission" VALUES (2, 1572827171917336578);
 INSERT INTO "public"."sys_role_permission" VALUES (2, 1572153139278434305);
-INSERT INTO "public"."sys_role_permission" VALUES (4, 1631122862690881542);
-INSERT INTO "public"."sys_role_permission" VALUES (4, 1631122862690881543);
-INSERT INTO "public"."sys_role_permission" VALUES (4, 1631122862690881540);
-INSERT INTO "public"."sys_role_permission" VALUES (4, 1631122862690881541);
-INSERT INTO "public"."sys_role_permission" VALUES (4, 1631122862690881538);
-INSERT INTO "public"."sys_role_permission" VALUES (4, 1631122862690881539);
-INSERT INTO "public"."sys_role_permission" VALUES (4, 1631122862690881537);
-INSERT INTO "public"."sys_role_permission" VALUES (4, 1572827619025948673);
-INSERT INTO "public"."sys_role_permission" VALUES (4, 1572827421113520129);
-INSERT INTO "public"."sys_role_permission" VALUES (4, 1773170931628363777);
+INSERT INTO "public"."sys_role_permission" VALUES (2, 1572153139278434306);
+INSERT INTO "public"."sys_role_permission" VALUES (2, 1983457782821150721);
+INSERT INTO "public"."sys_role_permission" VALUES (2, 1572827171917336580);
+INSERT INTO "public"."sys_role_permission" VALUES (2, 1572827171917336581);
+INSERT INTO "public"."sys_role_permission" VALUES (2, 1572827171917336579);
+INSERT INTO "public"."sys_role_permission" VALUES (2, 1572827171908947969);
+INSERT INTO "public"."sys_role_permission" VALUES (2, 1983456775877812225);
+INSERT INTO "public"."sys_role_permission" VALUES (2, 1983456190478802945);
 
 -- ----------------------------
 -- Table structure for sys_tenant
@@ -1663,12 +1769,12 @@ COMMENT ON TABLE "public"."sys_user" IS '用户';
 -- ----------------------------
 -- Records of sys_user
 -- ----------------------------
+INSERT INTO "public"."sys_user" VALUES (1963080001398505474, 'leader2', '', '小组长', '1', 'G1l7pDflJ8GyWTm5BzsMY/I0ZBHtY+J7mqfKNuCD4Ub9v5rPZUhCtW2zotJBjsKH39CXjvjC8ysGg/bukgtF35XEJczveNHI8+q2hpuOvDQ=', NULL, '13888880001', NULL, '00', ' ', NULL, 1, 1, '2025-09-03 11:21:59.261628', 1, '2025-09-17 14:17:34.874101', 0, NULL, 0, NULL, '2025-09-03 11:21:59.260117');
+INSERT INTO "public"."sys_user" VALUES (1945059926271860737, 'user', '用户', '普通用户', '1', 'G1l7pDflJ8GyWTm5BzsMY/I0ZBHtY+J7mqfKNuCD4Ub9v5rPZUhCtW2zotJBjsKH39CXjvjC8ysGg/bukgtF35XEJczveNHI8+q2hpuOvDQ=', NULL, '13636360636', 'user@taybct.com', '00', ' ', NULL, 1, 1, '2025-07-15 17:56:38.553154', 1, '2025-10-22 17:26:02.975257', 0, NULL, 0, NULL, '2025-07-16 11:38:36.340245');
 INSERT INTO "public"."sys_user" VALUES (2, 'admin', '管*员', 'Admin', '1', 'G1l7pDflJ8GyWTm5BzsMY/I0ZBHtY+J7mqfKNuCD4Ub9v5rPZUhCtW2zotJBjsKH39CXjvjC8ysGg/bukgtF35XEJczveNHI8+q2hpuOvDQ=', NULL, '13737370337', 'admin@taybct.com', '00', NULL, NULL, 1, 0, '2022-01-02 10:50:06', 1, '2025-07-16 11:36:24.517958', 0, NULL, 0, NULL, '2022-01-02 10:50:06');
-INSERT INTO "public"."sys_user" VALUES (1945059926271860737, 'user', '用户', '普通用户', '1', 'G1l7pDflJ8GyWTm5BzsMY/I0ZBHtY+J7mqfKNuCD4Ub9v5rPZUhCtW2zotJBjsKH39CXjvjC8ysGg/bukgtF35XEJczveNHI8+q2hpuOvDQ=', NULL, '13636360636', 'user@taybct.com', '00', ' ', NULL, 1, 1, '2025-07-15 17:56:38.553154', 1, '2025-07-16 11:38:43.368999', 0, NULL, 0, NULL, '2025-07-16 11:38:36.340245');
 INSERT INTO "public"."sys_user" VALUES (1, 'root', '艾米', 'Amy', '2', 'G1l7pDflJ8GyWTm5BzsMY/I0ZBHtY+J7mqfKNuCD4Ub9v5rPZUhCtW2zotJBjsKH39CXjvjC8ysGg/bukgtF35XEJczveNHI8+q2hpuOvDQ=', NULL, '13838380438', 'amy@taybct.com', '00', NULL, NULL, 1, 0, '2022-01-02 10:50:06', 1, '2025-09-06 00:07:01.252278', 0, NULL, 0, NULL, '2025-07-24 17:33:13.933135');
 INSERT INTO "public"."sys_user" VALUES (1963085401439076353, 'boos', NULL, '总经理', '1', 'G1l7pDflJ8GyWTm5BzsMY/I0ZBHtY+J7mqfKNuCD4Ub9v5rPZUhCtW2zotJBjsKH39CXjvjC8ysGg/bukgtF35XEJczveNHI8+q2hpuOvDQ=', NULL, '13888880003', NULL, '00', ' ', NULL, 1, 1, '2025-09-03 11:43:26.736085', 1, '2025-09-03 11:43:59.675314', 0, NULL, 0, NULL, '2025-09-03 11:43:26.736085');
 INSERT INTO "public"."sys_user" VALUES (1963084850613714945, 'leader1', NULL, '部门领导', '1', 'G1l7pDflJ8GyWTm5BzsMY/I0ZBHtY+J7mqfKNuCD4Ub9v5rPZUhCtW2zotJBjsKH39CXjvjC8ysGg/bukgtF35XEJczveNHI8+q2hpuOvDQ=', NULL, '13888880002', NULL, '00', ' ', NULL, 1, 1, '2025-09-03 11:41:15.407096', 1, '2025-09-03 11:43:35.200496', 0, NULL, 0, NULL, '2025-09-03 11:41:15.405578');
-INSERT INTO "public"."sys_user" VALUES (1963080001398505474, 'leader2', '', '小组长', '1', 'G1l7pDflJ8GyWTm5BzsMY/I0ZBHtY+J7mqfKNuCD4Ub9v5rPZUhCtW2zotJBjsKH39CXjvjC8ysGg/bukgtF35XEJczveNHI8+q2hpuOvDQ=', NULL, '13888880001', NULL, '00', ' ', NULL, 1, 1, '2025-09-03 11:21:59.261628', 1, '2025-09-17 14:17:34.874101', 0, NULL, 0, NULL, '2025-09-03 11:21:59.260117');
 
 -- ----------------------------
 -- Table structure for sys_user_dept
@@ -1740,7 +1846,9 @@ COMMENT ON TABLE "public"."sys_user_online" IS '在线用户';
 -- ----------------------------
 -- Records of sys_user_online
 -- ----------------------------
-INSERT INTO "public"."sys_user_online" VALUES (1980102625458774018, 'a66b730bdd0c4876acca6f1ffcbc3353', '127.0.0.1', 'taybct_pc', 'root', '2025-10-20 10:43:49.092918', 1760931828000, '2025-10-20 11:43:48.014014', 1, 1, '2025-10-20 10:43:49.092918', 1, '2025-10-20 10:43:49.092918', '000000', 'username', 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImE2NmI3MzBiZGQwYzQ4NzZhY2NhNmYxZmZjYmMzMzUzIiwia2lkIjoiOGEyNzkyMDJkZjljNDJjZjgyNzU0NjkwMzhjNDQxMmQifQ.eyJ1aWQiOiIxIiwibmJmIjoxNzYwOTI4MjI4LCJncmFudF90eXBlIjoidGF5YmN0IiwidXNlcl9uYW1lIjoicm9vdCIsInNjb3BlIjpbImFsbCJdLCJhdG0iOiJ1c2VybmFtZSIsImV4cCI6MTc2MDkzMTgyOCwiaWF0IjoxNzYwOTI4MjI4LCJqdGkiOiJlYWU5YTUyNS1kMTY5LTQ1N2UtYWY5OC01NDIzNmQ0ODk0MTIiLCJjbGllbnRfaWQiOiJ0YXliY3RfcGMiLCJhdXRob3JpdGllcyI6WyIwMDAwMDA6Uk9PVCJdfQ.DQrmB8DWAMVzJeugOjEP6ufbxtPtQLM4cpCpnbF6dj9K84As84hg-BfWB2tX5UEWFakh_fR8eJfcJiFZ7HPQ7kRFMFA40BqP9IV7uu-haRtvQEnxmniOF5dDr0HiAy8kgrKIGzw6GqOkMzODO1P4XEJS-7-4HHx51oTJbY0xztT5ciuqDC1RrAttd0m4emUswxWwgcfO2PL2my8EHUVsVgVftAz1iNAADxIEVSGsJF3pATEjlBEMjxdQZ8193wnQuKMq-fm_ZXTVlLVbEAy7tiKxce8EH38qFsNOCuWBIPS4CyeUE_gVnEfI5yBR3MoxE9By-oO-oyjtGyFZhsYD7w');
+INSERT INTO "public"."sys_user_online" VALUES (1983721987981828098, '3450b77601424c0380509b77c286d1e6', '127.0.0.1', 'taybct_pc', 'root', '2025-10-30 10:25:52.367206', 1761794752000, '2025-10-30 11:25:52.361624', 1, 1, '2025-10-30 10:25:52.367206', 1, '2025-10-30 10:25:52.367206', '000000', 'username', 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjM0NTBiNzc2MDE0MjRjMDM4MDUwOWI3N2MyODZkMWU2Iiwia2lkIjoiMmM3MzQ2ZTY0NjRhNDk3MmJkMGI5MWQ1OGM4ZTA4YTUifQ.eyJ1aWQiOiIxIiwibmJmIjoxNzYxNzkxMTUyLCJncmFudF90eXBlIjoidGF5YmN0IiwidXNlcl9uYW1lIjoicm9vdCIsInNjb3BlIjpbImFsbCJdLCJhdG0iOiJ1c2VybmFtZSIsImV4cCI6MTc2MTc5NDc1MiwiaWF0IjoxNzYxNzkxMTUyLCJqdGkiOiI3Y2ZhNTAyMS0xOWE2LTQ1OWEtOTE5NC1iYzAxYTg1ZjY3NjIiLCJjbGllbnRfaWQiOiJ0YXliY3RfcGMiLCJhdXRob3JpdGllcyI6WyIwMDAwMDA6Uk9PVCJdfQ.LJZBo9bwOhqBrjMxlY88e6Ex9zStE67x15cbElwgZUdwTNNI31xxpgmSyRjX2nUycR935N61zv8rO6eVjsgmXbV92nFHio3KK7BU4RVqk3BdY63C1wCu4F0FfTwXgiVMts1Wy_ni_FD3_VBRyUd5FY1_Epzg0wlke0n4N_NcmHjF7lCpPu08Slw_MhXbiC2v3_ihl8BByNBBXPAInbSSrv1vOx_hDIvv6qlTN84ektzkKRnxAATEgxri8Z3r3ZDxBo4fQrYbaxpJX_ZgH7EWegONskuqmJpp63dpXNg03wa6l-Mm2k0vzG_wUG4AEZC_w5NUtz2q1WsLfhtWiJ-gOw');
+INSERT INTO "public"."sys_user_online" VALUES (1983712406912208898, '6857ea844dc549bea4e3264e8e34bca1', '172.29.224.1', 'taybct_pc', 'user', '2025-10-30 09:47:48.055684', 1761792467000, '2025-10-30 10:47:47.050623', 1945059926271860737, 1945059926271860737, '2025-10-30 09:47:48.055684', 1945059926271860737, '2025-10-30 09:47:48.055684', '000000', 'username', 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjY4NTdlYTg0NGRjNTQ5YmVhNGUzMjY0ZThlMzRiY2ExIiwia2lkIjoiNDdiZTMxYjA2YWNmNGM0NThmNGFlZDI2NDY1ZWIwY2EifQ.eyJ1aWQiOiIxOTQ1MDU5OTI2MjcxODYwNzM3IiwibmJmIjoxNzYxNzg4ODY3LCJncmFudF90eXBlIjoidGF5YmN0IiwidXNlcl9uYW1lIjoidXNlciIsInNjb3BlIjpbImFsbCJdLCJhdG0iOiJ1c2VybmFtZSIsImV4cCI6MTc2MTc5MjQ2NywiaWF0IjoxNzYxNzg4ODY3LCJqdGkiOiI4NjM0MGY3OS01ZjMzLTRiZWMtODZhZC02Mzg3NmYzOTVmYTIiLCJjbGllbnRfaWQiOiJ0YXliY3RfcGMiLCJhdXRob3JpdGllcyI6WyIwMDAwMDA6Tk9STUFMIiwiMDAwMDAwOmNvbW1vbiJdfQ.phDl8m-SW5jtlm3MnF1UUllJbRlLi2v8MkfV6IIJzQrkeEE2L0-yVOpE73z3RxvTxyz2MKxFo4sPPey3amIkjqvMfo7DXRMnDeCS23MP6rrHLe2k-4GtlRcP3ClxC5DO1GfvoaAZiYr8QpamoVIsH853w0bIazNXl8Bc4UXBQrBNAAQ1ZK4HlgVUd6_nATLrE04QG1JX_uBvywyKNk93qrIZ6DhQYqt08K6ccjkcJFUp_U6A1NNH-9YgmXG0OGbXjR3lMJoSukWS7x3iACWCM-l0pNKnN9HIRGYWWr3ctZqh0ob0NeaJgktf0OfjweUEtjyvfR21QGu1ol1YM0kpLg');
+INSERT INTO "public"."sys_user_online" VALUES (1983717101563121665, 'b9aea831ea114857922c0b5caee788f4', '172.29.224.1', 'taybct_pc', 'root', '2025-10-30 10:06:27.350336', 1761793587000, '2025-10-30 11:06:27.347307', 1, 1, '2025-10-30 10:06:27.350336', 1, '2025-10-30 10:06:27.350336', '000000', 'username', 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImI5YWVhODMxZWExMTQ4NTc5MjJjMGI1Y2FlZTc4OGY0Iiwia2lkIjoiNDdiZTMxYjA2YWNmNGM0NThmNGFlZDI2NDY1ZWIwY2EifQ.eyJ1aWQiOiIxIiwibmJmIjoxNzYxNzg5OTg3LCJncmFudF90eXBlIjoidGF5YmN0IiwidXNlcl9uYW1lIjoicm9vdCIsInNjb3BlIjpbImFsbCJdLCJhdG0iOiJ1c2VybmFtZSIsImV4cCI6MTc2MTc5MzU4NywiaWF0IjoxNzYxNzg5OTg3LCJqdGkiOiI5NDcxZmJlNi1jZWFjLTQ5MjYtYTQ2Ny00ZWFkMjllZTkzYzQiLCJjbGllbnRfaWQiOiJ0YXliY3RfcGMiLCJhdXRob3JpdGllcyI6WyIwMDAwMDA6Uk9PVCJdfQ.sMdRPcqUR0VAhdhz81RE4r_MCD0ePWegQGf_WCcLoHTAkJTEgY5mYLabTgfmrOssfBolQBO3xdOP_h0fmYc403MQY7JhLh4d2QZO2pu_eQQbHflIJIWSK1h85pO_A9r0Mdsr5T_Wkqn3KAdm2z-nhwojdU2oh0cih1VGj8sf6xVXQStLL2aJ3uo734fRB1W1GHPOB2dWaX8F9-O2Foq_zy5wp8ivz_BGRumeeBNw8CPUd1fZyE_YQvPY4Crsgp971rghYTxaYy5-nFvcIxcKUIMf4hdsZ9SkcjlFRHXMrBJ0NeKhdSWv6-8pk3jdyqTDjZp-mo63DY8o4vtdn5l_CA');
 
 -- ----------------------------
 -- Table structure for sys_user_role
@@ -1759,11 +1867,13 @@ COMMENT ON TABLE "public"."sys_user_role" IS '用户角色关联表';
 -- Records of sys_user_role
 -- ----------------------------
 INSERT INTO "public"."sys_user_role" VALUES (1, 1);
-INSERT INTO "public"."sys_user_role" VALUES (1945059926271860737, 4);
-INSERT INTO "public"."sys_user_role" VALUES (2, 2);
 INSERT INTO "public"."sys_user_role" VALUES (1963080001398505474, 1963080442572177409);
 INSERT INTO "public"."sys_user_role" VALUES (1963084850613714945, 1963080442572177409);
 INSERT INTO "public"."sys_user_role" VALUES (1963085401439076353, 1963080442572177409);
+INSERT INTO "public"."sys_user_role" VALUES (1945059926271860737, 4);
+INSERT INTO "public"."sys_user_role" VALUES (1945059926271860737, 1983103578566823938);
+INSERT INTO "public"."sys_user_role" VALUES (2, 2);
+INSERT INTO "public"."sys_user_role" VALUES (2, 1983103536934162433);
 
 -- ----------------------------
 -- Table structure for sys_user_tenant
@@ -1832,8 +1942,8 @@ COMMENT ON TABLE "public"."t_online_doc" IS '在线文档';
 -- ----------------------------
 -- Records of t_online_doc
 -- ----------------------------
-INSERT INTO "public"."t_online_doc" VALUES (1969953734679613442, 1, '2025-09-22 10:35:45.157617', 1, '2025-09-22 10:35:45.157617', 0, 0, 'xxx', 0, NULL, NULL, NULL, NULL, '{"url": "/2025/09/22/68b86331dd154e22a0cf98562838abb0.docx", "title": "docker 相关操作.docx", "fileType": "docx", "originalUrl": "/2025/09/22/68b86331dd154e22a0cf98562838abb0.docx", "documentType": "word"}', '艾米', '艾米');
 INSERT INTO "public"."t_online_doc" VALUES (1970036619021402113, 1, '2025-09-22 16:05:06.310317', 1, '2025-09-22 16:05:06.311836', 0, 0, 'cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc', 0, NULL, NULL, NULL, NULL, '{"url": "/2025/09/22/28989f3e3d4743bbb36787293ac1d389.xlsx", "title": "test.xlsx", "fileType": "xlsx", "originalUrl": "/2025/09/22/28989f3e3d4743bbb36787293ac1d389.xlsx", "documentType": "cell"}', '艾米', '艾米');
+INSERT INTO "public"."t_online_doc" VALUES (1969953734679613442, 1, '2025-09-22 10:35:45.157617', 1, '2025-10-23 11:02:42.994048', 0, 0, 'xxx', 0, NULL, NULL, NULL, NULL, '{"url": "/2025/10/23/45b9162d8def49b084a6ccb159b47d99.docx", "title": "docker 相关操作.docx", "fileType": "docx", "historyData": [{"key": "1969953734679613442_1758508545000", "url": "/2025/10/23/45b9162d8def49b084a6ccb159b47d99.docx", "error": null, "token": "", "version": "20251023110242", "fileType": "docx", "previous": {"key": "1969953734679613442_1758508545000", "url": "/2025/10/23/45b9162d8def49b084a6ccb159b47d99.docx", "fileType": "docx"}, "changesUrl": null}], "originalUrl": "/2025/09/22/68b86331dd154e22a0cf98562838abb0.docx", "documentType": "word", "refreshHistoryDTO": {"error": null, "history": [{"key": "1969953734679613442_1758508545000", "user": {"id": "1", "name": "艾米"}, "changes": null, "created": "2025-10-23 11:02:42", "version": "20251023110242", "serverVersion": null}], "currentVersion": "20251023110242"}}', '艾米', '艾米');
 
 -- ----------------------------
 -- Table structure for t_online_doc_permit
