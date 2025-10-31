@@ -58,7 +58,11 @@ OnlyOffice 文档编辑器
 > 本项目为纯后端项目，以上展示的前端界面是 [vue-pure-admin（Mango Crisp）](https://github.com/mangocrisp/vue-pure-admin) 基于本项目
 > 和 [vue-pure-admin](https://github.com/pure-admin/vue-pure-admin) 开发的前端示例项目
 
-## 安装教程
+## JavaDoc 口文档
+
+<a href="https://mangocrisp.top/javadoc/spring-taybct-tools-doc/index.html" target="_blank" >spring-taybct-tools 接口文档</a>
+
+<a href="https://mangocrisp.top/javadoc/spring-taybct-doc/index.html" target="_blank" >spring-taybct 接口文档</a>
 
 ### 仓库模板
 
