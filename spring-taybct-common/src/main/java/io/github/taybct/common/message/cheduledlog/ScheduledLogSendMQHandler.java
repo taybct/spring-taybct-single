@@ -8,6 +8,7 @@ import io.github.taybct.tool.core.mq.BindingEQ;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.lang.NonNull;
 
 /**
  * <pre>
@@ -26,6 +27,7 @@ public class ScheduledLogSendMQHandler implements IMessageSendHandler {
     final RabbitTemplate rabbitTemplate;
 
     @Override
+    @NonNull
     public MessageType getMessageType() {
         return TypeConstant.SCHEDULED_LOG;
     }

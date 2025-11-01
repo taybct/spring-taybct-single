@@ -14,6 +14,7 @@ import io.github.taybct.api.system.mapper.SysUserMapper;
 import io.github.taybct.api.system.vo.SysNoticeVO;
 import io.github.taybct.common.constants.SysDictConstants;
 import io.github.taybct.common.dict.SysDict;
+import io.github.taybct.common.message.websocket.WebSocketMessageApi;
 import io.github.taybct.module.system.service.ISysDictService;
 import io.github.taybct.module.system.service.ISysNoticeService;
 import io.github.taybct.module.system.service.ISysNoticeUserService;
@@ -40,7 +41,7 @@ import java.util.stream.Collectors;
  */
 @Transactional(rollbackFor = Exception.class)
 public class SysNoticeServiceImpl extends BaseServiceImpl<SysNoticeMapper, SysNotice>
-        implements ISysNoticeService {
+        implements ISysNoticeService, WebSocketMessageApi {
 
     @Autowired(required = false)
     protected ISysDictService sysDictService;
@@ -183,6 +184,20 @@ public class SysNoticeServiceImpl extends BaseServiceImpl<SysNoticeMapper, SysNo
 
     }
 
+    @Override
+    public boolean sendCurrentUser(String message) {
+        return sendCurrentUserMessage(message);
+    }
+
+    @Override
+    public boolean send(WSR<?> message) {
+        return sendMessage(message);
+    }
+
+    @Override
+    public boolean sendAll(WSR<?> message) {
+        return sendAllMessage(message);
+    }
 }
 
 
