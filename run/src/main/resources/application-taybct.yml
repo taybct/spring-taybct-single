@@ -1,7 +1,7 @@
 taybct:
   message:
     # 文件夹
-    folder: temp/${spring.application.name}/log
+    folder: temp/${spring.application.name}/message
     # 最多存储多少天的数据，默认 15 天
     max-history: 15
     # 检查日志本地文件延迟
