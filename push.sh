@@ -1,1 +1,3 @@
-docker push 139.9.74.180:5050/data/dev/taybct/docker-registry:3.1.0-beta.7
+IMAGE_NAME=spring-taybct-single
+VERSION=3.5.0
+docker push ghcr.io/taybct/$IMAGE_NAME:$VERSION

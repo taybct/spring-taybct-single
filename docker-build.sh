@@ -21,7 +21,7 @@ build() {
   docker rmi $docker_image
   echo "---- build image ----"
   echo "docker image name $docker_image"
-  docker build -f ./Dockerfile -t $docker_image --build-arg JAR_FILE=target/$image_name.jar .
+  docker build -f ./Dockerfile -t $docker_image --build-arg JAR_FILE=target/$image_name-$image_version.jar .
 }
 # 镜像仓库地址
 registry_url=

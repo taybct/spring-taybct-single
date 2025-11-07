@@ -431,7 +431,7 @@
                     <contextDirectory>${maven.multiModuleProjectDirectory}</contextDirectory>
                     <useMavenSettingsForAuth>true</useMavenSettingsForAuth>
                     <!--仓库地址/项目名/模块名-->
-                    <repository>${docker.repository.url}/${docker.registry.name}/${project.build.finalName}</repository>
+                    <repository>${docker.repository.url}/${docker.registry.name}/${project.artifactId}</repository>
                     <!--用户名-->
                     <username>${docker.registry.username}</username>
                     <!--用户密码-->
