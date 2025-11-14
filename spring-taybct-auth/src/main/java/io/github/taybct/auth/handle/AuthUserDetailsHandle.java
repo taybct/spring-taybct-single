@@ -7,16 +7,16 @@ import io.github.taybct.auth.security.handle.IUserDetailsHandle;
 import io.github.taybct.common.constants.CacheConstants;
 import io.github.taybct.tool.core.annotation.CacheTimeOut;
 import io.github.taybct.tool.core.result.R;
+import org.springframework.core.task.SimpleAsyncTaskExecutor;
+import org.springframework.core.task.TaskExecutor;
 
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 public class AuthUserDetailsHandle implements IUserDetailsHandle {
 
     private final IUserClient userClient;
 
-    ExecutorService cachedThreadPool = Executors.newCachedThreadPool();
+    TaskExecutor executor = new SimpleAsyncTaskExecutor("authUserTask");
 
     public AuthUserDetailsHandle(IUserClient userClient) {
         this.userClient = userClient;
@@ -58,13 +58,13 @@ public class AuthUserDetailsHandle implements IUserDetailsHandle {
 
     @Override
     public boolean login(JSONObject dto) {
-        cachedThreadPool.execute(() -> userClient.login(dto));
+        executor.execute(() -> userClient.login(dto));
         return true;
     }
 
     @Override
     public boolean logoff(JSONObject dto) {
-        cachedThreadPool.execute(() -> userClient.logoff(dto));
+        executor.execute(() -> userClient.logoff(dto));
         return true;
     }
 

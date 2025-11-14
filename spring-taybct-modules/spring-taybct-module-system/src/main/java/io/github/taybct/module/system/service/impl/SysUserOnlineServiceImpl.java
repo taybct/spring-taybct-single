@@ -37,6 +37,8 @@ import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
+import org.springframework.core.task.SimpleAsyncTaskExecutor;
+import org.springframework.core.task.TaskExecutor;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.lang.Nullable;
@@ -46,8 +48,6 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 import java.time.LocalDateTime;
 import java.util.*;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -111,7 +111,8 @@ public class SysUserOnlineServiceImpl extends ServiceImpl<SysUserOnlineMapper, S
 
     @Value("${spring.application.name}")
     private String module;
-    ExecutorService cachedThreadPool = Executors.newCachedThreadPool();
+
+    TaskExecutor executor = new SimpleAsyncTaskExecutor("SysUserOnlineServiceTask");
 
     @Override
     public boolean chooseTenant(String tenantId) {
@@ -389,7 +390,7 @@ public class SysUserOnlineServiceImpl extends ServiceImpl<SysUserOnlineMapper, S
     public void forceAllClientUsers(String message, String clientId) {
         // 这里考虑到，用户量如果比较多，所以这里新开一个线程去删除
         // 客户端被删除后，所有在登录的客户端的状态都需要掉线
-        cachedThreadPool.execute(() -> sysUserMapper.selectList(Wrappers.lambdaQuery()).stream().parallel()
+        executor.execute(() -> sysUserMapper.selectList(Wrappers.lambdaQuery()).stream().parallel()
                 .map(SysUser::getUsername).forEach(uname -> force(message, clientId, uname)));
     }
 
@@ -401,7 +402,7 @@ public class SysUserOnlineServiceImpl extends ServiceImpl<SysUserOnlineMapper, S
         }
         // 这里考虑到，用户量如果比较多，所以这里新开一个线程去删除
         // 这里已经不用关心是否会被退掉，直接新开一个线程去处理
-        cachedThreadPool.execute(() -> sysUserRoleMapper.selectList(Wrappers.<SysUserRole>lambdaQuery()
+        executor.execute(() -> sysUserRoleMapper.selectList(Wrappers.<SysUserRole>lambdaQuery()
                         .in(SysUserRole::getRoleId, Arrays.asList(roleId)))
                 .stream().map(SysUserRole::getUserId).forEach(userId -> this.forceAllClientUserById(message, userId)));
     }
@@ -424,7 +425,7 @@ public class SysUserOnlineServiceImpl extends ServiceImpl<SysUserOnlineMapper, S
     @Override
     public void forceAllClientUser(String username, String message) {
         // 用户被删除后，所有在登录的客户端的状态都需要掉线
-        cachedThreadPool.execute(() -> sysOauth2ClientMapper.selectList(Wrappers.lambdaQuery()).stream()
+        executor.execute(() -> sysOauth2ClientMapper.selectList(Wrappers.lambdaQuery()).stream()
                 .map(SysOauth2Client::getClientId).forEach(clientId -> force(message, clientId, username)));
     }
 

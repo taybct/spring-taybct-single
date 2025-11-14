@@ -45,8 +45,6 @@ import java.util.stream.Collectors;
 public class ProcessServiceImpl extends BaseServiceImpl<ProcessMapper, Process>
         implements IProcessService {
 
-//    private final ExecutorService cachedThreadPool = Executors.newCachedThreadPool();
-
     @Override
     @Transactional(rollbackFor = Exception.class)
     public boolean newProcess(ProcessNewDTO dto
