@@ -49,6 +49,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
 import org.springframework.core.annotation.Order;
+import org.springframework.core.env.Environment;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.lang.Nullable;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -134,7 +135,7 @@ public class AuthorizationServerConfig {
             , IGlobalExceptionReporter globalExceptionReporter
             , IGlobalPrinter globalPrinter
             , IUserDetailsHandle userDetailsHandle
-            , IEncryptedPassable encryptedPassable
+            , Environment environment
             , CorsConfigurationSource corsConfigurationSource)
             throws Exception {
 
@@ -257,7 +258,7 @@ public class AuthorizationServerConfig {
         // 配置异常处理 // Redirect to the login page when not authenticated from the authorization endpoint
         http.exceptionHandling((exceptions) -> exceptions.authenticationEntryPoint(
                 new JsonExceptionAuthenticationEntryPoint("/login"
-                        , globalExceptionReporter, globalPrinter))
+                        , globalExceptionReporter, globalPrinter, environment))
         );
 
 

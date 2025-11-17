@@ -73,6 +73,7 @@ public class DefaultCustomizeTokenEndpointConfigurer implements ICustomizeTokenE
      * 你还可以自定义一些对端点的配置
      */
     @NonNull
+    @Builder.Default
     private IOtherTokenEndpointConfigurer otherTokenEndpointConfigurer = tokenEndpoint -> {
     };
     /**
