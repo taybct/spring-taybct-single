@@ -2,7 +2,6 @@ package io.github.taybct.demo;
 
 import io.github.taybct.tool.core.result.R;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
@@ -13,7 +12,6 @@ import java.util.concurrent.CountDownLatch;
 /**
  * @author XiJieYin <br> 2023/8/10 14:58
  */
-@SpringBootTest
 public class MonoTest {
 
     @Test
