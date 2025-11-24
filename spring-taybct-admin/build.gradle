@@ -1,0 +1,5 @@
+description = "管理模块"
+
+// 自身作为父模块，无需打包（如果没有代码的话）
+jar.enabled = false // 禁用自身打包（可选，若模块无代码）
+bootJar.enabled = false

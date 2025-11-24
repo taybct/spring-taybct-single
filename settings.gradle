@@ -1,0 +1,28 @@
+pluginManagement {
+    repositories {
+        // Maven本地仓库
+        mavenLocal()
+        // 阿里云Gradle插件仓库（用于下载Gradle插件）
+        maven { url 'https://maven.aliyun.com/repository/gradle-plugin' }
+        // Spring 插件仓库
+        maven { url 'https://repo.spring.io/plugins-release/' }
+        // Gradle 插件官方仓库（必须添加，否则可能找不到插件）
+        gradlePluginPortal()
+    }
+    plugins {
+        id 'org.springframework.boot' version getProperty('taybct-project.spring-boot.version') as String
+        id 'io.spring.dependency-management' version getProperty('taybct-project.io.spring.dependency-management.version') as String
+    }
+}
+
+rootProject.name = 'spring-taybct'
+include ':spring-taybct-common'
+include ':spring-taybct-api:spring-taybct-api-system'
+include ':spring-taybct-auth'
+include ':spring-taybct-gateway'
+include ':spring-taybct-modules:spring-taybct-module-system'
+include ':spring-taybct-modules:spring-taybct-module-scheduling'
+include ':spring-taybct-modules:spring-taybct-module-online-doc'
+include ':spring-taybct-modules:spring-taybct-module-lf'
+include ':spring-taybct-admin:spring-taybct-admin-file'
+include ':spring-taybct-admin:spring-taybct-admin-log'

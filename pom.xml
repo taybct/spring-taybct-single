@@ -6,7 +6,7 @@
 
     <groupId>io.github.taybct</groupId>
     <artifactId>spring-taybct</artifactId>
-    <version>3.5.0</version>
+    <version>3.5.1</version>
     <name>Spring TayBct</name>
     <description>Spring TayBct</description>
     <url>https://github.com/taybct/spring-taybct</url>

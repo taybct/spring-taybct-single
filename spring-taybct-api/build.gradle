@@ -1,0 +1,31 @@
+description = "系统接口"
+
+// 自身作为父模块，无需打包（如果没有代码的话）
+jar.enabled = false // 禁用自身打包（可选，若模块无代码）
+
+// 配置其下所有子模块（api-system、api-file、api-log）的通用设置
+subprojects {
+    // 通用插件：比如api模块可能需要web支持（接口定义）
+    apply plugin: 'org.springframework.boot' // 注意：根配置已禁用bootJar，这里仅用依赖管理
+    apply plugin: 'java-library'
+
+    dependencies {
+        // 基础模块（内部模块，使用项目依赖）
+        api project(':spring-taybct-common')  
+
+        // SpringCloud Openfeign 服务调用
+        api "org.springframework.cloud:spring-cloud-starter-openfeign:${findProperty('taybct-project.spring-cloud-build.version')}"
+        api "io.github.openfeign:feign-httpclient:${findProperty('taybct-project.feign-httpclient.version')}"
+        api "io.github.openfeign:feign-okhttp:${findProperty('taybct-project.feign-okhttp.version')}"
+
+        // SpringCloud Alibaba Sentinel
+        api "com.alibaba.cloud:spring-cloud-starter-alibaba-sentinel:${findProperty('taybct-project.spring-cloud-alibaba.version')}"
+
+        // 如果要使用 dubbo 就引入这个依赖
+        api "org.apache.dubbo:dubbo-spring-boot-starter:${findProperty('taybct-project.dubbo.version')}"
+
+        // dubbo nacos 注册中心
+        api "com.alibaba.nacos:nacos-client:${findProperty('taybct-project.nacos-client.version')}"
+
+    }
+}

@@ -1,0 +1,15 @@
+description = "公共模块（偏业务）"
+
+dependencies {
+    // 基础模块（内部模块，使用项目依赖）
+    api 'io.github.taybct:spring-taybct-tool-core'
+
+    // rabbit-mq（optional=true + scope=provided 对应 compileOnly）
+    compileOnly "org.springframework.boot:spring-boot-starter-amqp:${findProperty('taybct-project.spring-boot.version')}"
+
+    // Redis（optional=true + scope=provided 对应 compileOnly）
+    compileOnly "org.springframework.boot:spring-boot-starter-data-redis:${findProperty('taybct-project.spring-boot.version')}"
+
+    // mvc 依赖（optional=true + scope=provided 对应 compileOnly）
+    compileOnly "org.springframework:spring-webmvc:${findProperty('taybct-project.spring.version')}"
+}
