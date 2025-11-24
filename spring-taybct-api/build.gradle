@@ -10,7 +10,7 @@ subprojects {
     apply plugin: 'java-library'
 
     dependencies {
-        // 基础模块（内部模块，使用项目依赖）
+        // 基础模块
         api project(':spring-taybct-common')  
 
         // SpringCloud Openfeign 服务调用

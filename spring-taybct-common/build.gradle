@@ -1,7 +1,7 @@
 description = "公共模块（偏业务）"
 
 dependencies {
-    // 基础模块（内部模块，使用项目依赖）
+    // 基础模块
     api 'io.github.taybct:spring-taybct-tool-core'
 
     // rabbit-mq（optional=true + scope=provided 对应 compileOnly）

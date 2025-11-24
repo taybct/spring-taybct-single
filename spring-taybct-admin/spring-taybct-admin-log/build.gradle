@@ -5,13 +5,13 @@ jar.enabled = true // 禁用自身打包（可选，若模块无代码）
 bootJar.enabled = true
 
 dependencies {
-    // 日志 api 接口（内部模块，使用项目依赖）
+    // 日志 api 接口
     implementation project(':spring-taybct-api:spring-taybct-api-system')
 
-    // 启动模块（内部模块，使用项目依赖）
+    // 启动模块
     implementation 'io.github.taybct:spring-taybct-tool-launch'
 
-    // 微服务依赖（内部模块，使用项目依赖）
+    // 微服务依赖
     implementation 'io.github.taybct:spring-taybct-tool-cloud'
 
     // 通用工具（内部模块，使用项目依赖，去重）
@@ -47,7 +47,7 @@ dependencies {
     // rabbit-mq
     implementation "org.springframework.boot:spring-boot-starter-amqp:${findProperty('taybct-project.spring-boot.version')}"
 
-    // 安全模块（内部模块，使用项目依赖）
+    // 安全模块
     implementation 'io.github.taybct:spring-taybct-tool-security'
 
     // es 配置（optional=true + scope=provided 对应 compileOnly）

@@ -5,19 +5,19 @@ jar.enabled = true // 禁用自身打包（可选，若模块无代码）
 bootJar.enabled = true
 
 dependencies {
-    // 启动模块（内部模块，使用项目依赖）
+    // 启动模块
     implementation 'io.github.taybct:spring-taybct-tool-launch'  
 
-    // 微服务依赖（内部模块，使用项目依赖）
+    // 微服务依赖
     implementation 'io.github.taybct:spring-taybct-tool-cloud'  
 
     // 缓存配置 - Redis
     implementation "org.springframework.boot:spring-boot-starter-data-redis:${findProperty('taybct-project.spring-boot.version')}"
 
-    // 常量工具（内部模块，使用项目依赖）
+    // 常量工具
     implementation project(':spring-taybct-common')
 
-    // 系统接口（内部模块，使用项目依赖）
+    // 系统接口
     implementation project(':spring-taybct-api:spring-taybct-api-system')
 
     // mybatis-plus 依赖配置
@@ -41,10 +41,10 @@ dependencies {
     // Dynamic DataSource 多数据源
     implementation "com.baomidou:dynamic-datasource-spring-boot3-starter:${findProperty('taybct-project.dynamic-datasource.version')}"
 
-    // 安全模块（内部模块，使用项目依赖）
+    // 安全模块
     implementation 'io.github.taybct:spring-taybct-tool-security'
 
-    // 任务调度（内部模块，使用项目依赖）
+    // 任务调度
     implementation 'io.github.taybct:spring-taybct-tool-scheduling'
 
     // rabbit-mq
