@@ -6,7 +6,7 @@
 
     <groupId>io.github.taybct</groupId>
     <artifactId>spring-taybct</artifactId>
-    <version>3.5.0</version>
+    <version>3.5.1</version>
     <name>Spring TayBct Single</name>
     <description>Spring TayBct Single</description>
     <url>https://github.com/taybct/spring-taybct</url>
@@ -103,7 +103,7 @@
         <jdk18on.version>1.78.1</jdk18on.version>
         <bcprov-ext-jdk18on.version>1.78.1</bcprov-ext-jdk18on.version>
         <!--junit 测试-->
-        <junit.version>4.13.2</junit.version>
+        <junit.version>5.13.4</junit.version>
         <!--poi 导出依赖-->
         <jxls-core.version>1.0.6</jxls-core.version>
         <!--knife4j-->
@@ -151,7 +151,7 @@
         <!--项目打包编码设置-->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <!--基础工具版本-->
-        <spring-taybct-tools.version>3.5.0</spring-taybct-tools.version>
+        <spring-taybct-tools.version>3.5.1.1</spring-taybct-tools.version>
         <!-- Sentinel规则持久化至Nacos配置 -->
         <sentinel-datasource-nacos.version>1.8.9</sentinel-datasource-nacos.version>
         <!--skywalking 日志记录-->

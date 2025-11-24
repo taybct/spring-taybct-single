@@ -1,0 +1,211 @@
+plugins {
+    id 'io.spring.dependency-management'
+    id 'org.springframework.boot'
+}
+
+description = 'Spring TayBct'
+
+// 定义不需要打bootJar的模块名称列表（按需添加）
+def nonBootModules = [
+        'spring-taybct-common',
+        'spring-taybct-api',
+        'laboratory'
+]
+
+// 所有项目的通用配置
+allprojects { it ->
+    group = findProperty('taybct-project.groupId') ?: 'io.github.taybct'
+    version = findProperty('taybct-project.version')
+
+    repositories {
+        mavenLocal()
+        maven {
+            url 'https://maven.aliyun.com/repository/public'
+            name = 'AliyunMaven'
+        }
+        mavenCentral()
+    }
+}
+
+// 所有项目通用配置
+subprojects { subproject ->
+
+    apply plugin: 'io.spring.dependency-management'
+    apply plugin: 'java'
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'java-library'
+
+    // 依赖管理配置
+    dependencyManagement {
+        imports {
+            mavenBom "io.github.taybct:spring-taybct-tools-dependencies:${findProperty('taybct-project.spring-taybct-tools.version')}"
+        }
+    }
+
+    // 依赖声明优化
+    dependencies {
+        // 编译时依赖
+        implementation 'org.springframework.boot:spring-boot-configuration-processor'
+        implementation 'org.projectlombok:lombok'
+        implementation 'net.dreamlu:mica-auto'
+
+        // 注解处理器
+        annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+        annotationProcessor 'org.projectlombok:lombok'
+        annotationProcessor 'net.dreamlu:mica-auto'
+
+        // 测试代码的配置
+        testCompileOnly("org.springframework.boot:spring-boot-configuration-processor")
+        testCompileOnly("org.projectlombok:lombok")
+        testCompileOnly("net.dreamlu:mica-auto")
+
+        testAnnotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
+        testAnnotationProcessor("org.projectlombok:lombok")
+        testAnnotationProcessor("net.dreamlu:mica-auto")
+
+        // Hutool - 作为工具库的一部分传递
+        implementation 'cn.hutool:hutool-all'
+    }
+
+    sourceSets {
+        main {
+            resources {
+                // 包含标准资源目录
+//                srcDir 'src/main/resources'
+//                include '**/**'
+//                include 'META-INF/dubbo/org.apache.dubbo.rpc.Filter'
+//                include 'banner.txt'
+//                include 'static/**'
+//                include 'templates/**'
+//                include '**/*.jks'
+//                include '**/*.cer'
+//                include '**/*.key'
+//                // 包含 java 目录中的特定文件
+//                srcDir 'src/main/java'
+//                include '**/*.properties'
+//                include '**/*.yml'
+//                include '**/*.xml'
+//                include '**/*.java'
+            }
+        }
+    }
+
+    // 源码集配置
+    java {
+        sourceCompatibility = JavaVersion.toVersion(findProperty('maven.compiler.source') ?: '21')
+        targetCompatibility = JavaVersion.toVersion(findProperty('maven.compiler.target') ?: '21')
+    }
+
+    // 配置资源处理
+    tasks.named('processResources') {
+//        exclude '**/*.jks'
+//        exclude '**/*.cer'
+//        exclude '**/*.key'
+        duplicatesStrategy = DuplicatesStrategy.INCLUDE
+    }
+
+    // 打包设置
+    tasks.withType(JavaCompile).configureEach {
+        options.encoding = findProperty('taybct-project.build.sourceEncoding') ?: 'UTF-8'
+        options.compilerArgs.add("-parameters")
+    }
+
+    // 源码打包任务
+    tasks.register('sourceJar', Jar) {
+        description = '生成源码 JAR 包'
+        //from sourceSets.main.allJava
+        from sourceSets.main.allSource
+        archiveClassifier = 'sources'
+        // exclude '**/*.properties', '**/*.yml', '**/*.xml'
+        duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    }
+
+    tasks.withType(Test).configureEach {
+        enabled = false
+    }
+
+    // 配置构建任务依赖
+    build {
+        dependsOn 'sourceJar'
+    }
+
+    // 判断：模块自身在列表中，或其父模块在列表中 → 均为非运行模块
+    boolean isNonBootModule = nonBootModules.contains(subproject.name) ||
+            (subproject.parent != null && nonBootModules.contains(subproject.parent.name))
+    if (isNonBootModule) {
+        if (plugins.hasPlugin('org.springframework.boot')) {
+            bootJar.enabled = false
+            jar.enabled = true
+        }
+    } else {
+
+        jar {
+            duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+        }
+
+        // Spring Boot 打包配置 - 简化配置
+        bootJar {
+            archiveFileName = "${project.name}-${project.version}.jar"
+            // 打包源码
+            from(sourceSets.main.allJava) {
+                into 'BOOT-INF/classes'
+                include '**/*.java'
+            }
+            // 移除可能有问题的 manifest 配置
+        }
+
+        // Spring Boot 运行配置
+        bootRun {
+            jvmArgs = ['-Dfile.encoding=UTF-8'
+                       , '-Dmaven.wagon.http.ssl.insecure=true'
+                       , '-Dmaven.wagon.http.ssl.allowall=true'
+                       , '-Dmaven.wagon.http.ssl.allowall=true'
+                       , '--add-opens java.base/java.lang=ALL-UNNAMED'
+                       , '--add-opens java.base/java.util=ALL-UNNAMED'
+                       , '--add-opens java.base/java.nio=ALL-UNNAMED'
+                       , '--add-opens java.base/sun.nio.ch=ALL-UNNAMED'
+                       , '--add-opens java.base/java.lang.reflect=ALL-UNNAMED'
+            ]
+            systemProperties = [
+                    'spring.profiles.active': 'test'
+            ]
+        }
+
+        // 复制 JAR 到根目录 target 文件夹 - 修复版本
+        tasks.register('copyJarToRootTarget', Copy) {
+            description = '复制构建的 JAR 到根目录 target 文件夹'
+            // 明确依赖 bootJar 任务
+            dependsOn tasks.named('bootJar')
+            // 使用 bootJar 任务的输出
+            from(tasks.bootJar.outputs.files)
+            // 使用固定的相对路径
+            into "${rootProject.projectDir}/target"
+            duplicatesStrategy = DuplicatesStrategy.INCLUDE
+            doLast {
+                logger.lifecycle("已将 JAR 文件复制到根目录 target 文件夹")
+            }
+        }
+
+        // 构建后任务链
+        bootJar.finalizedBy 'sourceJar', 'copyJarToRootTarget'
+
+        // 任务配置
+        test {
+            useJUnitPlatform()
+            testLogging {
+                events 'passed', 'failed', 'skipped'
+                showStandardStreams = true
+            }
+        }
+
+        // 清理任务
+        tasks.register('cleanTarget', Delete) {
+            delete file("${rootProject.projectDir}/target")
+        }
+
+        clean {
+            dependsOn 'cleanTarget'
+        }
+
+    }
+}

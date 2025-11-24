@@ -7,6 +7,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.core.env.Environment;
 import org.springframework.security.authentication.AccountStatusException;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
@@ -25,6 +26,7 @@ public class JsonExceptionAuthenticationEntryPoint extends LoginUrlAuthenticatio
 
     private final IGlobalExceptionReporter globalExceptionReporter;
     private final IGlobalPrinter globalPrinter;
+    private final Environment environment;
 
     /**
      * @param loginFormUrl            URL where the login page can be found. Should either be
@@ -35,10 +37,11 @@ public class JsonExceptionAuthenticationEntryPoint extends LoginUrlAuthenticatio
      */
     public JsonExceptionAuthenticationEntryPoint(String loginFormUrl
             , IGlobalExceptionReporter globalExceptionReporter
-            , IGlobalPrinter globalPrinter) {
+            , IGlobalPrinter globalPrinter, Environment environment) {
         super(loginFormUrl);
         this.globalExceptionReporter = globalExceptionReporter;
         this.globalPrinter = globalPrinter;
+        this.environment = environment;
     }
 
     @Override
@@ -60,7 +63,8 @@ public class JsonExceptionAuthenticationEntryPoint extends LoginUrlAuthenticatio
         if (UrlUtils.isAbsoluteUrl(loginForm)) {
             return loginForm;
         }
-        int serverPort = getPortResolver().getServerPort(request);
+        //int serverPort = getPortResolver().getServerPort(request);
+        int serverPort = environment.getProperty("server.port", Integer.class, 9000);
         String scheme = request.getScheme();
         RedirectUrlBuilder urlBuilder = new RedirectUrlBuilder();
         urlBuilder.setScheme(scheme);

@@ -7,16 +7,26 @@ import io.github.taybct.auth.security.handle.IUserDetailsHandle;
 import io.github.taybct.common.constants.CacheConstants;
 import io.github.taybct.tool.core.annotation.CacheTimeOut;
 import io.github.taybct.tool.core.result.R;
+import org.springframework.boot.system.JavaVersion;
+import org.springframework.core.task.SimpleAsyncTaskExecutor;
+import org.springframework.core.task.TaskExecutor;
 
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
+import java.util.function.Supplier;
 
 public class AuthUserDetailsHandle implements IUserDetailsHandle {
 
     private final IUserClient userClient;
 
-    ExecutorService cachedThreadPool = Executors.newCachedThreadPool();
+    /**
+     * 任务执行器
+     */
+    Supplier<TaskExecutor> executor = ()->{
+        SimpleAsyncTaskExecutor simpleAsyncTaskExecutor = new SimpleAsyncTaskExecutor("authUserTask");
+        // 如果是 JDK 21 可以设置 true 来开启虚拟线程，如果是 JDK 17 以下，需要设置成 false
+        simpleAsyncTaskExecutor.setVirtualThreads(JavaVersion.getJavaVersion().isEqualOrNewerThan(JavaVersion.TWENTY_ONE));
+        return simpleAsyncTaskExecutor;
+    };
 
     public AuthUserDetailsHandle(IUserClient userClient) {
         this.userClient = userClient;
@@ -58,13 +68,13 @@ public class AuthUserDetailsHandle implements IUserDetailsHandle {
 
     @Override
     public boolean login(JSONObject dto) {
-        cachedThreadPool.execute(() -> userClient.login(dto));
+        executor.get().execute(() -> userClient.login(dto));
         return true;
     }
 
     @Override
     public boolean logoff(JSONObject dto) {
-        cachedThreadPool.execute(() -> userClient.logoff(dto));
+        executor.get().execute(() -> userClient.logoff(dto));
         return true;
     }
 

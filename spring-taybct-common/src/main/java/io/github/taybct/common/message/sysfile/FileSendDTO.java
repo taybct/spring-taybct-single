@@ -21,7 +21,7 @@ public class FileSendDTO implements Message {
     @Serial
     private static final long serialVersionUID = 1L;
 
-    @Singular("addLinks")
+    @Builder.Default
     public List<FileLinkDTO> links = new ArrayList<>();
 
     @Override
