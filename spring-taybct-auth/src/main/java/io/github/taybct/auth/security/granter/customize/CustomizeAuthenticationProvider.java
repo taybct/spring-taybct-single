@@ -143,7 +143,7 @@ public class CustomizeAuthenticationProvider implements AuthenticationProvider {
     /**
      * The password used to perform {@link PasswordEncoder#matches(CharSequence, String)}
      * on when the user is not found to avoid SEC-2056. This is necessary, because some
-     * {@link PasswordEncoder} implementations will short circuit if the password is not
+     * {@link PasswordEncoder} api s will short circuit if the password is not
      * in a valid format.
      */
     private volatile String userNotFoundEncodedPassword;

@@ -348,7 +348,7 @@ public class ResponseHandler implements AuthenticationFailureHandler
      * session identifier to prevent session fixation attacks.
      * </pre>
      *
-     * @param sessionStrategy the implementation to use. If not set a null implementation
+     * @param sessionStrategy the api  to use. If not set a null api 
      *                        is used.
      */
     public void setSessionAuthenticationStrategy(SessionAuthenticationStrategy sessionStrategy) {

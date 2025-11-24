@@ -2,80 +2,80 @@ description = "认证，授权服务"
 
 // 自身作为父模块，无需打包（如果没有代码的话）
 jar.enabled = true // 禁用自身打包（可选，若模块无代码）
-bootJar.enabled = true
+bootJar.enabled = false
 
 dependencies {
     // 启动模块
-    implementation 'io.github.taybct:spring-taybct-tool-launch'  
+    api  'io.github.taybct:spring-taybct-tool-launch'  
 
     // 微服务依赖
-    implementation 'io.github.taybct:spring-taybct-tool-cloud'  
+    api  'io.github.taybct:spring-taybct-tool-cloud'  
 
     // 系统接口
-    implementation project(':spring-taybct-api:spring-taybct-api-system')  
+    api  project(':spring-taybct-api:spring-taybct-api-system')  
 
     // Redis
-    implementation "org.springframework.boot:spring-boot-starter-data-redis:${findProperty('taybct-project.spring-boot.version')}"
+    api  "org.springframework.boot:spring-boot-starter-data-redis:${findProperty('taybct-project.spring-boot.version')}"
 
     // 常量工具
-    implementation project(':spring-taybct-common')
+    api  project(':spring-taybct-common')
 
     // 必须引入的spring-security
-    implementation "org.springframework.boot:spring-boot-starter-security:${findProperty('taybct-project.spring-boot.version')}"
+    api  "org.springframework.boot:spring-boot-starter-security:${findProperty('taybct-project.spring-boot.version')}"
 
     // OAuth2 认证服务器
-    implementation "org.springframework.security:spring-security-oauth2-authorization-server:${findProperty('taybct-project.spring-security-oauth2-authorization-server.version')}"
+    api  "org.springframework.security:spring-security-oauth2-authorization-server:${findProperty('taybct-project.spring-security-oauth2-authorization-server.version')}"
 
     // OAuth2 相关依赖
-    implementation "org.springframework.security:spring-security-oauth2-resource-server:${findProperty('taybct-project.spring-security-core.version')}"
-    implementation "org.springframework.security:spring-security-oauth2-client:${findProperty('taybct-project.spring-security-core.version')}"
-    implementation "org.springframework.security:spring-security-oauth2-jose:${findProperty('taybct-project.spring-security-core.version')}"
+    api  "org.springframework.security:spring-security-oauth2-resource-server:${findProperty('taybct-project.spring-security-core.version')}"
+    api  "org.springframework.security:spring-security-oauth2-client:${findProperty('taybct-project.spring-security-core.version')}"
+    api  "org.springframework.security:spring-security-oauth2-jose:${findProperty('taybct-project.spring-security-core.version')}"
 
     // 安全工具
-    implementation 'io.github.taybct:spring-taybct-tool-security'
+    api  'io.github.taybct:spring-taybct-tool-security'
 
     // thymeleaf 模板引擎
-    implementation "org.springframework.boot:spring-boot-starter-thymeleaf:${findProperty('taybct-project.spring-boot.version')}"
+    api  "org.springframework.boot:spring-boot-starter-thymeleaf:${findProperty('taybct-project.spring-boot.version')}"
 
     // jdbc 驱动
-    implementation "org.springframework.boot:spring-boot-starter-jdbc:${findProperty('taybct-project.spring-boot.version')}"
+    api  "org.springframework.boot:spring-boot-starter-jdbc:${findProperty('taybct-project.spring-boot.version')}"
 
     // postgresql 驱动
-    implementation "org.postgresql:postgresql:${findProperty('taybct-project.postgresql.version')}"
+    api  "org.postgresql:postgresql:${findProperty('taybct-project.postgresql.version')}"
 
     // Mysql 驱动
-    implementation "com.mysql:mysql-connector-j:${findProperty('taybct-project.mysql-connector-j.version')}"
+    api  "com.mysql:mysql-connector-j:${findProperty('taybct-project.mysql-connector-j.version')}"
 
     // oracle驱动
-    implementation "com.oracle.database.jdbc:ojdbc11:${findProperty('taybct-project.ojdbc.version')}"
+    api  "com.oracle.database.jdbc:ojdbc11:${findProperty('taybct-project.ojdbc.version')}"
 
     // oracle字符集支持
-    implementation "com.oracle.database.nls:orai18n:${findProperty('taybct-project.orai18n.version')}"
+    api  "com.oracle.database.nls:orai18n:${findProperty('taybct-project.orai18n.version')}"
 
     // Druid 连接池
-    implementation "com.alibaba:druid-spring-boot-3-starter:${findProperty('taybct-project.druid.version')}"
+    api  "com.alibaba:druid-spring-boot-3-starter:${findProperty('taybct-project.druid.version')}"
 
     // Dynamic DataSource 多数据源
-    implementation "com.baomidou:dynamic-datasource-spring-boot3-starter:${findProperty('taybct-project.dynamic-datasource.version')}"
+    api  "com.baomidou:dynamic-datasource-spring-boot3-starter:${findProperty('taybct-project.dynamic-datasource.version')}"
 
     // rabbit-mq（去重，保留一个）
-    implementation "org.springframework.boot:spring-boot-starter-amqp:${findProperty('taybct-project.spring-boot.version')}"
+    api  "org.springframework.boot:spring-boot-starter-amqp:${findProperty('taybct-project.spring-boot.version')}"
 
     // 任务调度（用于清除刷新 token 超时的鉴权，内部模块）
-    implementation 'io.github.taybct:spring-taybct-tool-scheduling'
+    api  'io.github.taybct:spring-taybct-tool-scheduling'
 
     // PKI 登录（内部模块）
-    implementation 'io.github.taybct:spring-taybct-tool-pki'
+    api  'io.github.taybct:spring-taybct-tool-pki'
 
     // knife4j 集成 springdoc-openapi（修复兼容）
-    implementation "io.github.mangocrisp:knife4j-openapi3-jakarta-spring-boot-starter:${findProperty('taybct-project.knife4j-fix.version')}"
+    api  "io.github.mangocrisp:knife4j-openapi3-jakarta-spring-boot-starter:${findProperty('taybct-project.knife4j-fix.version')}"
 
     // springdoc-openapi 核心依赖
-    implementation "org.springdoc:springdoc-openapi-starter-webmvc-ui:${findProperty('taybct-project.springdoc-openapi.version')}"
+    api  "org.springdoc:springdoc-openapi-starter-webmvc-ui:${findProperty('taybct-project.springdoc-openapi.version')}"
 
     // SpringBoot Actuator
-    implementation "org.springframework.boot:spring-boot-starter-actuator:${findProperty('taybct-project.spring-boot.version')}"
+    api  "org.springframework.boot:spring-boot-starter-actuator:${findProperty('taybct-project.spring-boot.version')}"
 
     // SpringBoot Admin Client 客户端
-    implementation "de.codecentric:spring-boot-admin-starter-client:${findProperty('taybct-project.spring-boot-admin.version')}"
+    api  "de.codecentric:spring-boot-admin-starter-client:${findProperty('taybct-project.spring-boot-admin.version')}"
 }
