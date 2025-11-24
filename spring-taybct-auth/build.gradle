@@ -5,19 +5,19 @@ jar.enabled = true // 禁用自身打包（可选，若模块无代码）
 bootJar.enabled = true
 
 dependencies {
-    // 启动模块（内部模块，使用项目依赖）
+    // 启动模块
     implementation 'io.github.taybct:spring-taybct-tool-launch'  
 
-    // 微服务依赖（内部模块，使用项目依赖）
+    // 微服务依赖
     implementation 'io.github.taybct:spring-taybct-tool-cloud'  
 
-    // 系统接口（内部模块，使用项目依赖）
+    // 系统接口
     implementation project(':spring-taybct-api:spring-taybct-api-system')  
 
     // Redis
     implementation "org.springframework.boot:spring-boot-starter-data-redis:${findProperty('taybct-project.spring-boot.version')}"
 
-    // 常量工具（内部模块，使用项目依赖）
+    // 常量工具
     implementation project(':spring-taybct-common')
 
     // 必须引入的spring-security
@@ -31,7 +31,7 @@ dependencies {
     implementation "org.springframework.security:spring-security-oauth2-client:${findProperty('taybct-project.spring-security-core.version')}"
     implementation "org.springframework.security:spring-security-oauth2-jose:${findProperty('taybct-project.spring-security-core.version')}"
 
-    // 安全工具（内部模块，使用项目依赖）
+    // 安全工具
     implementation 'io.github.taybct:spring-taybct-tool-security'
 
     // thymeleaf 模板引擎
