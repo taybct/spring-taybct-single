@@ -5,76 +5,66 @@ jar.enabled = true // 禁用自身打包（可选，若模块无代码）
 bootJar.enabled = true
 
 dependencies {
-    // 启动模块
-    implementation 'io.github.taybct:spring-taybct-tool-launch'  
+    // 启动模块（内部模块，核心依赖）
+    api ('io.github.taybct:spring-taybct-tool-launch')
 
     // 微服务依赖
-    implementation 'io.github.taybct:spring-taybct-tool-cloud'  
+    compileOnly ('io.github.taybct:spring-taybct-tool-cloud')
 
-    // 常量工具（内部模块，使用项目依赖，去重）
-    implementation project(':spring-taybct-common')  
+    // 常量工具（内部模块，核心依赖）
+    api project(':spring-taybct-common')
 
-    // 系统接口
-    implementation project(':spring-taybct-api:spring-taybct-api-system')  
+    // 系统接口（内部模块，核心依赖）
+    api project(':spring-taybct-api:spring-taybct-api-system')
 
-    // Redis
-    implementation "org.springframework.boot:spring-boot-starter-data-redis:${findProperty('taybct-project.spring-boot.version')}"
+    // Redis（核心依赖）
+    api "org.springframework.boot:spring-boot-starter-data-redis:${findProperty('taybct-project.spring-boot.version')}"
 
-    // mybatis-plus 依赖配置
-    implementation "com.baomidou:mybatis-plus-spring-boot3-starter:${findProperty('taybct-project.mybatis-plus.version')}"
+    // mybatis-plus 依赖配置（核心依赖）
+    api "com.baomidou:mybatis-plus-spring-boot3-starter:${findProperty('taybct-project.mybatis-plus.version')}"
 
-    // postgresql 驱动
-    implementation "org.postgresql:postgresql:${findProperty('taybct-project.postgresql.version')}"
+    // 数据库驱动
+    compileOnly "org.postgresql:postgresql:${findProperty('taybct-project.postgresql.version')}"
+    compileOnly "com.mysql:mysql-connector-j:${findProperty('taybct-project.mysql-connector-j.version')}"
+    compileOnly "com.oracle.database.jdbc:ojdbc11:${findProperty('taybct-project.ojdbc.version')}"
+    compileOnly "com.oracle.database.nls:orai18n:${findProperty('taybct-project.orai18n.version')}"
 
-    // Mysql 驱动
-    implementation "com.mysql:mysql-connector-j:${findProperty('taybct-project.mysql-connector-j.version')}"
+    // 连接池与多数据源
+    compileOnly "com.alibaba:druid-spring-boot-3-starter:${findProperty('taybct-project.druid.version')}"
+    compileOnly "com.baomidou:dynamic-datasource-spring-boot3-starter:${findProperty('taybct-project.dynamic-datasource.version')}"
 
-    // oracle驱动
-    implementation "com.oracle.database.jdbc:ojdbc11:${findProperty('taybct-project.ojdbc.version')}"
+    // 安全模块（内部模块，核心依赖）
+    api ('io.github.taybct:spring-taybct-tool-security')
 
-    // oracle字符集支持
-    implementation "com.oracle.database.nls:orai18n:${findProperty('taybct-project.orai18n.version')}"
+    // 任务调度（内部模块，核心依赖）
+    api ('io.github.taybct:spring-taybct-tool-scheduling')
 
-    // Druid 连接池
-    implementation "com.alibaba:druid-spring-boot-3-starter:${findProperty('taybct-project.druid.version')}"
+    // 如果要使用 dubbo 就引入这个依赖
+    compileOnly "org.apache.dubbo:dubbo-spring-boot-starter:${findProperty('taybct-project.dubbo.version')}"
 
-    // Dynamic DataSource 多数据源
-    implementation "com.baomidou:dynamic-datasource-spring-boot3-starter:${findProperty('taybct-project.dynamic-datasource.version')}"
-
-    // 安全模块
-    implementation 'io.github.taybct:spring-taybct-tool-security'
-
-    // 任务调度
-    implementation 'io.github.taybct:spring-taybct-tool-scheduling'
-
-    // rabbit-mq
-    implementation "org.springframework.boot:spring-boot-starter-amqp:${findProperty('taybct-project.spring-boot.version')}"
-
-    // mvc websocket（排除tomcat，使用undertow）
-    implementation("org.springframework.boot:spring-boot-starter-websocket:${findProperty('taybct-project.spring-boot.version')}") {
+    // mvc websocket（optional=true + scope=provided，对应 compileOnly，排除 tomcat 依赖）
+    compileOnly("org.springframework.boot:spring-boot-starter-websocket:${findProperty('taybct-project.spring-boot.version')}") {
+        // 原注释：使用 undertow 替代 tomcat
         exclude group: 'org.springframework.boot', module: 'spring-boot-starter-tomcat'
     }
 
+    // Excel 操作相关
     // easyexcel poi 操作导入导出 excel
-    implementation "com.alibaba:easyexcel:${findProperty('taybct-project.easyexcel.version')}"
-
+    compileOnly "com.alibaba:easyexcel:${findProperty('taybct-project.easyexcel.version')}"
     // easypoi的支持
-    implementation "cn.afterturn:easypoi-base:${findProperty('taybct-project.easypoi.version')}"
-    implementation "cn.afterturn:easypoi-web:${findProperty('taybct-project.easypoi.version')}"
-    implementation "cn.afterturn:easypoi-annotation:${findProperty('taybct-project.easypoi.version')}"
+    compileOnly "cn.afterturn:easypoi-base:${findProperty('taybct-project.easypoi.version')}"
+    compileOnly "cn.afterturn:easypoi-web:${findProperty('taybct-project.easypoi.version')}"
+    compileOnly "cn.afterturn:easypoi-annotation:${findProperty('taybct-project.easypoi.version')}"
 
-    // excel模板导出
-    implementation "net.sf.jxls:jxls-core:${findProperty('taybct-project.jxls-core.version')}"
-
+    // API 文档相关
     // knife4j 集成 springdoc-openapi（修复兼容 springdoc-openapi 2.7.x 以上版本）
-    implementation "io.github.mangocrisp:knife4j-openapi3-jakarta-spring-boot-starter:${findProperty('taybct-project.knife4j-fix.version')}"
-
+    compileOnly "io.github.mangocrisp:knife4j-openapi3-jakarta-spring-boot-starter:${findProperty('taybct-project.knife4j-fix.version')}"
     // springdoc-openapi 核心依赖（包含 OpenAPI 3 规范生成和 Swagger UI）
-    implementation "org.springdoc:springdoc-openapi-starter-webmvc-ui:${findProperty('taybct-project.springdoc-openapi.version')}"
+    compileOnly "org.springdoc:springdoc-openapi-starter-webmvc-ui:${findProperty('taybct-project.springdoc-openapi.version')}"
 
+    // 监控相关
     // SpringBoot Actuator 端点通过 JMX 和HTTP 公开暴露给外界访问
-    implementation "org.springframework.boot:spring-boot-starter-actuator:${findProperty('taybct-project.spring-boot.version')}"
-
+    compileOnly "org.springframework.boot:spring-boot-starter-actuator:${findProperty('taybct-project.spring-boot.version')}"
     // SpringBoot Admin Client 客户端
-    implementation "de.codecentric:spring-boot-admin-starter-client:${findProperty('taybct-project.spring-boot-admin.version')}"
+    compileOnly "de.codecentric:spring-boot-admin-starter-client:${findProperty('taybct-project.spring-boot-admin.version')}"
 }

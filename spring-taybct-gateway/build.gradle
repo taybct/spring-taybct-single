@@ -5,62 +5,63 @@ jar.enabled = true // 禁用自身打包（可选，若模块无代码）
 bootJar.enabled = true
 
 dependencies {
-    // 公共基础模块
-    implementation 'io.github.taybct:spring-taybct-tool-core'  
+    // 公共基础模块（内部模块，核心依赖）
+    api ('io.github.taybct:spring-taybct-tool-core')
 
-    // 启动模块
-    implementation 'io.github.taybct:spring-taybct-tool-launch'  
+    // 启动模块（内部模块，核心依赖）
+    api ('io.github.taybct:spring-taybct-tool-launch')
 
-    // SpringCloud Gateway WebFlux
-    implementation "org.springframework.cloud:spring-cloud-gateway-server-webflux:${findProperty('taybct-project.spring-cloud-build.version')}"
+    // SpringCloud Gateway WebFlux（核心依赖）
+    api "org.springframework.cloud:spring-cloud-gateway-server-webflux:${findProperty('taybct-project.spring-cloud-build.version')}"
 
-    // 补充webflux依赖（原依赖中为optional，需手动引入）
-    implementation "org.springframework.boot:spring-boot-starter-webflux:${findProperty('taybct-project.spring-boot.version')}"
+    // 补充 WebFlux 依赖（原注释：gateway 自带的 webflux 是 optional，需手动引入）
+    api "org.springframework.boot:spring-boot-starter-webflux:${findProperty('taybct-project.spring-boot.version')}"
 
-    // OAuth2资源服务器相关 - security依赖
-    implementation "org.springframework.security:spring-security-config:${findProperty('taybct-project.spring-security-core.version')}"
-    implementation "org.springframework.security:spring-security-oauth2-resource-server:${findProperty('taybct-project.spring-security-core.version')}"
-    implementation "org.springframework.security:spring-security-oauth2-client:${findProperty('taybct-project.spring-security-core.version')}"
-    implementation "org.springframework.security:spring-security-oauth2-jose:${findProperty('taybct-project.spring-security-core.version')}"
+    // OAuth2 资源服务器 & 安全配置（核心依赖，统一使用 spring-security-core 版本）
+    api "org.springframework.security:spring-security-config:${findProperty('taybct-project.spring-security-core.version')}"
+    api "org.springframework.security:spring-security-oauth2-resource-server:${findProperty('taybct-project.spring-security-core.version')}"
+    api "org.springframework.security:spring-security-oauth2-client:${findProperty('taybct-project.spring-security-core.version')}"
+    api "org.springframework.security:spring-security-oauth2-jose:${findProperty('taybct-project.spring-security-core.version')}"
 
-    // spring 客户端负载均衡器
-    implementation "org.springframework.cloud:spring-cloud-starter-loadbalancer:${findProperty('taybct-project.spring-cloud-build.version')}"
+    // Spring 客户端负载均衡器（核心依赖）
+    api "org.springframework.cloud:spring-cloud-starter-loadbalancer:${findProperty('taybct-project.spring-cloud-build.version')}"
 
-    // SpringCloud Alibaba Nacos
-    implementation "com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-discovery:${findProperty('taybct-project.spring-cloud-alibaba.version')}"
-    implementation "com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-config:${findProperty('taybct-project.spring-cloud-alibaba.version')}"
+    // SpringCloud Alibaba Nacos（注册中心 + 配置中心，核心依赖）
+    api "com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-discovery:${findProperty('taybct-project.spring-cloud-alibaba.version')}"
+    api "com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-config:${findProperty('taybct-project.spring-cloud-alibaba.version')}"
 
-    // dubbo nacos 注册中心
-    implementation "com.alibaba.nacos:nacos-client:${findProperty('taybct-project.nacos-client.version')}"
+    // Dubbo Nacos 注册中心客户端（核心依赖）
+    api "com.alibaba.nacos:nacos-client:${findProperty('taybct-project.nacos-client.version')}"
 
-    // Sentinel流量控制、熔断降级 - sentinel gateway
-    implementation "com.alibaba.cloud:spring-cloud-alibaba-sentinel-gateway:${findProperty('taybct-project.spring-cloud-alibaba.version')}"
-
-    // SpringCloud Alibaba Sentinel（排除fastjson2，解决与nacos冲突）
-    implementation("com.alibaba.cloud:spring-cloud-starter-alibaba-sentinel:${findProperty('taybct-project.spring-cloud-alibaba.version')}") {
+    // Sentinel 流量控制、熔断降级（核心依赖）
+    // Sentinel Gateway 适配（核心依赖）
+    api "com.alibaba.cloud:spring-cloud-alibaba-sentinel-gateway:${findProperty('taybct-project.spring-cloud-alibaba.version')}"
+    // Sentinel 核心（排除 fastjson2，解决与 Nacos 的版本冲突，原注释：避免 nacos 配置 sentinel 规则不生效）
+    api("com.alibaba.cloud:spring-cloud-starter-alibaba-sentinel:${findProperty('taybct-project.spring-cloud-alibaba.version')}") {
         exclude group: 'com.alibaba.fastjson2', module: 'fastjson2'
     }
 
-    // 让sentinel的配置可以从nacos上获取
-    implementation "com.alibaba.csp:sentinel-datasource-nacos:${findProperty('taybct-project.sentinel-datasource-nacos.version')}"
+    // Sentinel 规则持久化到 Nacos（核心依赖，原注释：让 sentinel 配置从 nacos 读取）
+    api "com.alibaba.csp:sentinel-datasource-nacos:${findProperty('taybct-project.sentinel-datasource-nacos.version')}"
 
-    // Sentinel网关限流规则会转换为热点规则 天坑呀！（保留原注释，不引入依赖）
-    // implementation "com.alibaba.csp:sentinel-parameter-flow-control:${findProperty('taybct-project.sentinel-parameter-flow-control.version')}"
+    // Sentinel 网关限流规则转换热点规则（原注释：天坑！可选，按需启用）
+    // compileOnly "com.alibaba.csp:sentinel-parameter-flow-control"  // 按需启用时取消注释
 
-    // Redis
-    implementation "org.springframework.boot:spring-boot-starter-data-redis:${findProperty('taybct-project.spring-boot.version')}"
+    // Redis（核心依赖）
+    api "org.springframework.boot:spring-boot-starter-data-redis:${findProperty('taybct-project.spring-boot.version')}"
 
-    implementation "com.nimbusds:nimbus-jose-jwt:${findProperty('taybct-project.nimbus-jose-jwt.version')}"
+    // JWT 工具（核心依赖）
+    api "com.nimbusds:nimbus-jose-jwt:${findProperty('taybct-project.nimbus-jose-jwt.version')}"
 
-    // 公共模块（偏业务，内部模块）
-    implementation project(':spring-taybct-common')
+    // 公共模块（偏业务，内部模块，核心依赖）
+    api project(':spring-taybct-common')
 
-    // knife4j 集成 springdoc-openapi Gateway网关聚合
-    implementation "com.github.xiaoymin:knife4j-gateway-spring-boot-starter:${findProperty('taybct-project.knife4j.version')}"
+    // Knife4j Gateway 网关聚合文档（可选依赖，provided 对应 compileOnly）
+    compileOnly "com.github.xiaoymin:knife4j-gateway-spring-boot-starter:${findProperty('taybct-project.knife4j.version')}"
 
-    // SpringBoot Actuator 端点通过 JMX 和HTTP 公开暴露给外界访问
-    implementation "org.springframework.boot:spring-boot-starter-actuator:${findProperty('taybct-project.spring-boot.version')}"
+    // SpringBoot Actuator 监控（可选依赖，provided 对应 compileOnly）
+    compileOnly "org.springframework.boot:spring-boot-starter-actuator:${findProperty('taybct-project.spring-boot.version')}"
 
-    // SpringBoot Admin Client 客户端
-    implementation "de.codecentric:spring-boot-admin-starter-client:${findProperty('taybct-project.spring-boot-admin.version')}"
+    // SpringBoot Admin 客户端（可选依赖，provided 对应 compileOnly）
+    compileOnly "de.codecentric:spring-boot-admin-starter-client:${findProperty('taybct-project.spring-boot-admin.version')}"
 }

@@ -3,24 +3,20 @@ description = "系统模块接口"
 jar.enabled = true
 
 dependencies {
-
-    // 基础模块
-    api project(':spring-taybct-common')  
-
-    // easyexcel poi 操作导入导出 excel（optional=true + scope=provided 对应 compileOnly）
+    // easyexcel poi 操作导入导出 excel
     compileOnly "com.alibaba:easyexcel:${findProperty('taybct-project.easyexcel.version')}"
 
-    // easypoi的支持（optional=true + scope=provided 对应 compileOnly）
+    // easypoi的支持
     compileOnly "cn.afterturn:easypoi-base:${findProperty('taybct-project.easypoi.version')}"
     compileOnly "cn.afterturn:easypoi-web:${findProperty('taybct-project.easypoi.version')}"
     compileOnly "cn.afterturn:easypoi-annotation:${findProperty('taybct-project.easypoi.version')}"
 
-    // excel模板导出（optional=true + scope=provided 对应 compileOnly）
+    // excel模板导出
     compileOnly "net.sf.jxls:jxls-core:${findProperty('taybct-project.jxls-core.version')}"
 
-    // mybatis-plus 依赖配置（无特殊scope，用api）
-    api "com.baomidou:mybatis-plus-spring-boot3-starter:${findProperty('taybct-project.mybatis-plus.version')}"
+    // mybatis-plus 依赖配置
+    compileOnly "com.baomidou:mybatis-plus-spring-boot3-starter:${findProperty('taybct-project.mybatis-plus.version')}"
 
     // 安全模块
-    api 'io.github.taybct:spring-taybct-tool-security'
+    compileOnly ('io.github.taybct:spring-taybct-tool-security')
 }
