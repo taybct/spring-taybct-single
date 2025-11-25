@@ -45,9 +45,9 @@ subprojects { subproject ->
     // 依赖声明优化
     dependencies {
         // 编译时依赖
-        implementation 'org.springframework.boot:spring-boot-configuration-processor'
-        implementation 'org.projectlombok:lombok'
-        implementation 'net.dreamlu:mica-auto'
+        compileOnly 'org.springframework.boot:spring-boot-configuration-processor'
+        compileOnly 'org.projectlombok:lombok'
+        compileOnly 'net.dreamlu:mica-auto'
 
         // 注解处理器
         annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
@@ -64,7 +64,7 @@ subprojects { subproject ->
         testAnnotationProcessor("net.dreamlu:mica-auto")
 
         // Hutool - 作为工具库的一部分传递
-        implementation 'cn.hutool:hutool-all'
+        api  'cn.hutool:hutool-all'
     }
 
     sourceSets {
