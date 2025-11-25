@@ -2,7 +2,7 @@ description = "任务调度模块"
 
 // 自身作为父模块，无需打包（如果没有代码的话）
 jar.enabled = true // 禁用自身打包（可选，若模块无代码）
-bootJar.enabled = true
+bootJar.enabled = false
 
 dependencies {
     // 启动模块（内部模块，核心依赖）
