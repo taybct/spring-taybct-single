@@ -22,6 +22,10 @@ server:
     context-path: /
 # Spring
 spring:
+  threads:
+    virtual:
+      # Spring Boot 会自动检测到 JDK 21+ 将应用中所有的异步任务（@Async）和定时任务（@Scheduled）切换到使用虚拟线程执行
+      enabled: true
   main:
     #springCloud 的2.1.0以上版本的，将不再默认支持 FeignClient 的name属性 的相同名字。
     #即 ：多个接口上的@FeignClient(“相同服务名”)会报错，overriding is disabled(覆盖 是 禁止的/关闭的)。
