@@ -4,8 +4,7 @@ import io.github.taybct.tool.core.util.sm.SM2Coder;
 import io.github.taybct.tool.core.util.sm.SM2Properties;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
-import org.junit.Test;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.junit.jupiter.api.Test;
 
 /**
  * <pre>
@@ -15,7 +14,6 @@ import org.springframework.boot.test.context.SpringBootTest;
  * @author XiJieYin
  * @since 2024/12/2 15:05
  */
-@SpringBootTest
 @Slf4j
 public class TestNoAuthAccess {
 

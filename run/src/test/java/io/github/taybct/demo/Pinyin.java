@@ -2,7 +2,7 @@ package io.github.taybct.demo;
 
 import cn.hutool.extra.pinyin.engine.pinyin4j.Pinyin4jEngine;
 import net.sourceforge.pinyin4j.format.exception.BadHanyuPinyinOutputFormatCombination;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 /**

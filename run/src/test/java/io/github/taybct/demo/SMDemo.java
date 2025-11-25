@@ -4,7 +4,7 @@ import io.github.taybct.tool.core.util.sm.SM2Coder;
 import io.github.taybct.tool.core.util.sm.SM3Coder;
 import io.github.taybct.tool.core.util.sm.SM4Coder;
 import lombok.SneakyThrows;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 /**

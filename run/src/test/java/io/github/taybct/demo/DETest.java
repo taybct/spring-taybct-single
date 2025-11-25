@@ -5,11 +5,9 @@ import com.alibaba.fastjson2.JSONObject;
 import io.github.taybct.single.RunApplication;
 import io.github.taybct.single.domain.EDDemo;
 import io.github.taybct.single.service.IEDDemoService;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.*;
 
@@ -17,7 +15,6 @@ import java.util.*;
  * @author XiJieYin <br> 2024/4/24 11:33
  */
 @SpringBootTest(classes = RunApplication.class)
-@RunWith(SpringRunner.class)
 public class DETest {
 
     @Autowired

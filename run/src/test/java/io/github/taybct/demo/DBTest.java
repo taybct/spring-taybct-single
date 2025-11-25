@@ -6,7 +6,7 @@ package io.github.taybct.demo;
 import com.alibaba.druid.filter.config.ConfigTools;
 import com.baomidou.dynamic.datasource.toolkit.CryptoUtils;
 import lombok.SneakyThrows;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 /**

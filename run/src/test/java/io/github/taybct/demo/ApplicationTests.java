@@ -3,8 +3,7 @@ package io.github.taybct.demo;
 import io.github.taybct.api.system.domain.SysOauth2Client;
 import io.github.taybct.single.RunApplication;
 import jakarta.annotation.Resource;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.core.AuthorizationGrantType;
@@ -13,7 +12,6 @@ import org.springframework.security.oauth2.server.authorization.client.Registere
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClientRepository;
 import org.springframework.security.oauth2.server.authorization.settings.ClientSettings;
 import org.springframework.security.oauth2.server.authorization.settings.TokenSettings;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import java.time.Duration;
 import java.util.Arrays;
@@ -24,7 +22,6 @@ import java.util.Optional;
  *
  * @author xijieyin
  */
-@RunWith(SpringRunner.class)
 @SpringBootTest(classes = RunApplication.class)
 public class ApplicationTests {
 
