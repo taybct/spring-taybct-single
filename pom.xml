@@ -47,6 +47,10 @@
     </scm>
 
     <properties>
+
+        <!-- 默认跳过测试执行（等价于命令行 -DskipTests） -->
+        <skipTests>true</skipTests>
+
         <!--central 发布插件-->
         <central-publishing-maven-plugin.version>0.5.0</central-publishing-maven-plugin.version>
         <!-- Collection 增强Java集合框架 -->
@@ -373,6 +377,43 @@
                         <phase>compile</phase>
                         <goals>
                             <goal>jar-no-fork</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <!-- javadoc插件 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>${maven-javadoc-plugin.version}</version>
+                <configuration>
+                    <outputDirectory>D:\dev\projects\gitee\javadoc\3.5.1\spring-taybct-doc</outputDirectory>
+                    <charset>UTF-8</charset>
+                    <encoding>UTF-8</encoding>
+                    <docencoding>UTF-8</docencoding>
+                    <source>21</source>
+                    <!-- 包含作者、版本注释 -->
+                    <author>true</author>
+                    <version>true</version>
+                    <!-- 文档标题配置 -->
+                    <windowtitle>Spring Taybct 3.5.1 API文档</windowtitle>
+                    <doctitle><![CDATA[<h1>Spring Taybct 3.5.1 官方API文档</h1>]]></doctitle>
+                    <header><![CDATA[<b>Spring Taybct</b> v3.5.1]]></header>
+                    <!-- 聚合所有模块的文档（关键参数）
+                    <aggregate>true</aggregate>
+                     -->
+                    <!-- 忽略Javadoc警告（可选，避免因注释不完整导致构建失败） -->
+                    <failOnWarnings>false</failOnWarnings>
+                    <additionalJOptions>
+                        <additionalJOption>-Xdoclint:none</additionalJOption>
+                    </additionalJOptions>
+                    <useStandardDocletOptions>true</useStandardDocletOptions>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
                         </goals>
                     </execution>
                 </executions>
