@@ -48,6 +48,12 @@
 
     <properties>
 
+        <!-- 默认跳过测试执行（等价于命令行 -DskipTests） -->
+        <skipTests>true</skipTests>
+
+        <!--central 发布插件-->
+        <central-publishing-maven-plugin.version>0.5.0</central-publishing-maven-plugin.version>
+
         <!--框架依赖-->
 
         <!-- Collection 增强Java集合框架 -->
