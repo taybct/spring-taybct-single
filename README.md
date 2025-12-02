@@ -24,7 +24,7 @@ Spring TayBct 是一个 Spring 业务组件基础集成的基础业务库，对�
 
 ### 本地创建
 
-[快速开始](https://mangocrisp.top/code/taybct/get-started/)
+[快速开始](https://mangocrisp.top/code/taybct/3.5.x/get-started/)
 
 ## 使用说明
 
@@ -46,7 +46,7 @@ Spring TayBct 是一个 Spring 业务组件基础集成的基础业务库，对�
 
 ## 历史发行版本
 
-[Release](https://mangocrisp.top/code/taybct/release/)
+[Release](https://mangocrisp.top/code/taybct/3.5.x/release/)
 
 ## 免责声明
 
