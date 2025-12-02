@@ -70,7 +70,7 @@ OnlyOffice 文档编辑器
 
 ### 本地创建
 
-[快速开始](https://mangocrisp.top/code/taybct/get-started/)
+[快速开始](https://mangocrisp.top/code/taybct/3.5.x/get-started/)
 
 ### Fork 本仓库
 
